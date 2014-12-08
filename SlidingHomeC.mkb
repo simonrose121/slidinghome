@@ -3,6 +3,7 @@
 subprojects
 {
     iw2d
+	modules/SoundEngine
 }
 
 files
@@ -10,10 +11,15 @@ files
     [source]
     (source)
     main.cpp
+	input.h
+	input.cpp
+	audio.h
+	audio.cpp
 }
 
 assets
 {
     (data)
     textures
+	audio
 }
