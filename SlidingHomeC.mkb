@@ -3,6 +3,8 @@
 subprojects
 {
     iw2d
+	iw2dscenegraph
+	iw2dscenegraphcore
 	modules/SoundEngine
 }
 
@@ -15,6 +17,16 @@ files
 	input.cpp
 	audio.h
 	audio.cpp
+	scene.h
+	scene.cpp
+	game.h
+	game.cpp
+	mainMenu.h
+	mainMenu.cpp
+	pauseMenu.h
+	pauseMenu.cpp
+	resources.h
+	resources.cpp
 }
 
 assets
@@ -22,4 +34,8 @@ assets
     (data)
     textures
 	audio
+	fonts
+
+	(data-ram/data-gles1, data)
+    .
 }
