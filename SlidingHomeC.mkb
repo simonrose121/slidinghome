@@ -3,6 +3,9 @@
 subprojects
 {
     iw2d
+	iw2dscenegraph
+	iw2dscenegraphcore
+	iwtween
 	modules/SoundEngine
 }
 
@@ -10,16 +13,53 @@ files
 {
     [source]
     (source)
-    main.cpp
-	input.h
-	input.cpp
-	audio.h
+
 	audio.cpp
+	game.cpp
+	gameObjects.cpp
+	grid.cpp
+	home.cpp
+	input.cpp
+	levelSelect.cpp
+	main.cpp
+	mainMenu.cpp
+	pauseMenu.cpp
+	player.cpp
+	resources.cpp
+	rock.cpp
+	scene.cpp
+
+	audio.h
+	game.h
+	gameObjects.h
+	grid.h
+	home.h
+	input.h
+	levelSelect.h
+	main.h
+	mainMenu.h
+	pauseMenu.h
+	player.h
+	resources.h
+	rock.h
+	scene.h
 }
 
 assets
 {
     (data)
+    .
+    audio
     textures
-	audio
+    fonts
+
+    (data-ram/data-gles1, data)
+    .
+
 }
+
+deployments
+{
+    version-revision = "0"
+}
+
