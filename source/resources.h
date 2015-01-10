@@ -33,10 +33,16 @@ using namespace Iw2DSceneGraph;
 class Resources
 {
 protected:
-	//Images
+	//backgrounds
+	CIw2DImage*		MainMenuBG;
+
+	CIw2DImage*		PlayButton;
 
 public:
 	//Image pointers
+	CIw2DImage*		GetPlayButton()		{ return PlayButton; }
+
+	CIw2DImage*		GetMainMenuBG()		{ return MainMenuBG; }
 
 public:
 	Resources();

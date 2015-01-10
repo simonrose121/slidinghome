@@ -7,6 +7,8 @@ class MainMenu : public Scene
 {
 protected:
 	// UI components
+	CSprite*	playButton;
+	CSprite*	playText;
 
 public:
 	MainMenu() {}
@@ -22,7 +24,7 @@ public:
 	void            Render();
 
 	// Button callbacks
-
+	static void		startGame(CTween* pTween);
 };
 
 #endif  // __MAINEMENU_H__

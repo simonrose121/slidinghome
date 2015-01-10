@@ -15,3 +15,24 @@
 #
 # Some conditional operations are also permitted, see the
 # S3E documentation for details.
+
+[S3E]
+MemSize=40000000
+MemSizeDebug=40000000
+SysGlesVersion=2
+WinPosX=64
+WinPosY=16
+DispFixRot=FixedPortrait
+
+[GL]
+AllowNegativeUniformLocation=1
+#VirtualWidth=320
+#VirtualHeight=480
+#VirtualResolution=1
+#VirtualLetterbox=1
+
+[GX]
+DataCacheSize=100000
+
+[SOUND]
+MaxChannels=16
