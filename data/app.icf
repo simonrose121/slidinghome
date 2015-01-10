@@ -32,7 +32,7 @@ AllowNegativeUniformLocation=1
 #VirtualLetterbox=1
 
 [GX]
-DataCacheSize=100000
+DataCacheSize=65536
 
 [SOUND]
 MaxChannels=16
