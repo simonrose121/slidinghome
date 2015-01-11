@@ -14,9 +14,10 @@ protected:
 public:
 	float	getGraphicsScale()		{ return graphicsScale; }
 
-
 	~Game();
 	void	Init(int grid_width, int grid_height);
+
+	void	newGame();
 };
 
 #endif

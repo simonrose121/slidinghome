@@ -17,6 +17,7 @@ void MainMenu::startGame(CTween* pTween)
 	//start game music
 
 	//create game
+	game->NewGame();
 }
 
 void MainMenu::Update(float deltaTime, float alphaMul) 
@@ -70,16 +71,17 @@ void MainMenu::Init()
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	float y_pos = (float)IwGxGetScreenHeight() * 0.66f;
+	float x_pos = (float)IwGxGetScreenWidth() / 2;
+	float y_pos = (float)IwGxGetScreenHeight() / 3;
 	playButton = new CSprite();
 	playButton->SetImage(g_pResources->GetPlayButton());
-	playButton->m_X = IwGxGetScreenWidth() / 2.0f;
+	playButton->m_X = x_pos;
 	playButton->m_Y = y_pos;
 	playButton->m_W = playButton->GetImage()->GetWidth();
 	playButton->m_H = playButton->GetImage()->GetHeight();
-	playButton->m_AnchorX = 0.5f;
-	playButton->m_AnchorY = 0.5f;
-	playButton->m_ScaleX = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH * 1.5f;
-	playButton->m_ScaleY = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH * 1.5f;
+	playButton->m_AnchorX = 1;
+	playButton->m_AnchorY = 1;
+	playButton->m_ScaleX = game->getGraphicsScale();
+	playButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(playButton);
 }

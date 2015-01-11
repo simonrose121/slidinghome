@@ -1,6 +1,7 @@
 #include "Iw2D.h"
 #include "IwTween.h"
 #include "input.h"
+#include "audio.h"
 #include "scene.h"
 #include "game.h"
 #include "levelSelect.h"
@@ -20,12 +21,13 @@ int main()
 
 	g_pResources = new Resources();
 	g_pInput = new Input();
+	g_pAudio = new Audio();
 	g_pSceneManager = new SceneManager();
 
-	//Game* game = new Game();
-	//game->SetName("game");
-	//game->Init();
-	//g_pSceneManager->Add(game);
+	Game* game = new Game();
+	game->SetName("game");
+	game->Init(8, 8);
+	g_pSceneManager->Add(game);
 
 	MainMenu* main_menu = new MainMenu();
 	main_menu->SetName("mainmenu");
@@ -36,6 +38,12 @@ int main()
 
 	while (!s3eDeviceCheckQuitRequest())
 	{
+		uint64 new_time = s3eTimerGetMs();
+
+		g_pInput->Update();
+
+		g_pAudio->Update();
+
 		g_pSceneManager->Update(FRAME_TIME);
 
 		Iw2DSurfaceClear(0xff000000);
@@ -44,11 +52,17 @@ int main()
 
 		Iw2DSurfaceShow();
 
+		int yield = (int)(FRAME_TIME * 1000 - (s3eTimerGetMs() - new_time));
+		if (yield < 0)
+			yield = 0;
+
 		s3eDeviceYield();
 	}
 
-	delete g_pResources;
+	delete g_pAudio;
+	delete g_pInput;
 	delete g_pSceneManager;
+	delete g_pResources;
 	Iw2DTerminate();
 
 	return 0;
