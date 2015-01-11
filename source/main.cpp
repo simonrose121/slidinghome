@@ -1,3 +1,6 @@
+#include "Iw2D.h"
+#include "IwTween.h"
+#include "input.h"
 #include "scene.h"
 #include "game.h"
 #include "levelSelect.h"
@@ -16,6 +19,7 @@ int main()
 	Iw2DInit();
 
 	g_pResources = new Resources();
+	g_pInput = new Input();
 	g_pSceneManager = new SceneManager();
 
 	//Game* game = new Game();
