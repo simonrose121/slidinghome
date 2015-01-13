@@ -4,7 +4,7 @@
 #include "scene.h"
 #include "grid.h"
 #include "game.h"
-#
+#include <fstream>
 #include "resources.h"
 #include "main.h"
 
@@ -18,7 +18,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -42,18 +42,29 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 	{
 		for (int x = 0; x < num_columns; x++)
 		{
-			if (map[x][y] == 1) 
+			switch (map[x][y])
 			{
+			case 1:
 				GameObjects[index] = new Rock();
 				GameObjects[index]->init((float)x * GemSize + GridOriginX, GridOriginY + (float)y * GemSize, g_pResources->GetRock());
 				GameObjects[index]->m_ScaleX = gem_scale;
 				GameObjects[index]->m_ScaleY = gem_scale;
 				scene->AddChild(GameObjects[index]);
 				index++;
+				break;
+
+			case 2:
+				GameObjects[index] = new Player();
+				GameObjects[index]->init((float)x * GemSize + GridOriginX, GridOriginY + (float)y * GemSize, g_pResources->GetPlayer());
+				GameObjects[index]->m_ScaleX = gem_scale;
+				GameObjects[index]->m_ScaleY = gem_scale;
+				scene->AddChild(GameObjects[index]);
+				index++;
+				break;
 			}
 		}
 	}
-	// We fill extra row with 1 to give lowest line of blocks something solid to rest on
+
 	for (int x = 0; x < num_columns; x++)
 		GameObjects[index++] = (GameObject*)1;
 }
