@@ -9,15 +9,12 @@ MainMenu::~MainMenu()
 {
 }
 
-void MainMenu::startGame(CTween* pTween) 
+void MainMenu::startGame() 
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	g_pSceneManager->SwitchTo(game);
 
-	//start game music
-
-	//create game
-	//game->NewGame();
+	game->newGame();
 }
 
 void MainMenu::Update(float deltaTime, float alphaMul) 
@@ -33,17 +30,7 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 		g_pInput->Reset();
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			// Animate the play button
-			m_Tweener.Tween(0.5f,
-				FLOAT, &playText->m_Angle, 360.0f,
-				FLOAT, &playText->m_Alpha, 0.3f,
-				END);
-			m_Tweener.Tween(0.2f,
-				FLOAT, &playButton->m_Alpha, 0.3f,
-				DELAY, 0.25f,
-				EASING, Ease::powIn,
-				ONCOMPLETE, startGame,
-				END);
+			startGame();
 		}
 	}
 }

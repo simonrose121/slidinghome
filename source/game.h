@@ -3,19 +3,26 @@
 
 #include "grid.h"
 #include "scene.h"
+#include "player.h"
 
 #define GRAPHIC_DESIGN_WIDTH	768
 
 class Game : public Scene 
 {
 protected:
+	Player* player;
+
 	float	graphicsScale;
 
 public:
+	Game() {}
+	~Game();
+
 	float	getGraphicsScale()		{ return graphicsScale; }
 
-	~Game();
 	void	Init(int grid_width, int grid_height);
+	void	Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
+	void	Render();
 
 	void	newGame();
 };

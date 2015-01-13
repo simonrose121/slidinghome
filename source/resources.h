@@ -35,14 +35,18 @@ class Resources
 protected:
 	//backgrounds
 	CIw2DImage*		MainMenuBG;
-
+	CIw2DImage*		GameBG;
 	CIw2DImage*		PlayButton;
+
+	CIw2DImage*		Player;
 
 public:
 	//Image pointers
+	CIw2DImage*		GetMainMenuBG()		{ return MainMenuBG; }
+	CIw2DImage*		GetGameBG()			{ return GameBG;  }
 	CIw2DImage*		GetPlayButton()		{ return PlayButton; }
 
-	CIw2DImage*		GetMainMenuBG()		{ return MainMenuBG; }
+	CIw2DImage*		GetPlayer()			{ return Player; }
 
 public:
 	Resources();

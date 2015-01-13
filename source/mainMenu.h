@@ -24,7 +24,7 @@ public:
 	void            Render();
 
 	// Button callbacks
-	static void		startGame(CTween* pTween);
+	static void		startGame();
 };
 
 #endif  // __MAINEMENU_H__

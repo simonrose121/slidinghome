@@ -20,6 +20,7 @@ int main()
 	Iw2DInit();
 
 	g_pResources = new Resources();
+	g_pTweener = new CTweenManager();
 	g_pInput = new Input();
 	g_pAudio = new Audio();
 	g_pSceneManager = new SceneManager();
@@ -28,6 +29,7 @@ int main()
 	game->SetName("game");
 	game->Init(8, 8);
 	g_pSceneManager->Add(game);
+	game->newGame();
 
 	MainMenu* main_menu = new MainMenu();
 	main_menu->SetName("mainmenu");
@@ -44,6 +46,8 @@ int main()
 
 		g_pAudio->Update();
 
+		g_pTweener->Update(FRAME_TIME);
+
 		g_pSceneManager->Update(FRAME_TIME);
 
 		Iw2DSurfaceClear(0xff000000);
@@ -52,9 +56,9 @@ int main()
 
 		Iw2DSurfaceShow();
 
-		int yield = (int)(FRAME_TIME * 1000 - (s3eTimerGetMs() - new_time));
-		if (yield < 0)
-			yield = 0;
+		//int yield = (int)(FRAME_TIME * 1000 - (s3eTimerGetMs() - new_time));
+		//if (yield < 0)
+		//	yield = 0;
 
 		s3eDeviceYield();
 	}
@@ -62,6 +66,7 @@ int main()
 	delete g_pAudio;
 	delete g_pInput;
 	delete g_pSceneManager;
+	delete g_pTweener;
 	delete g_pResources;
 	Iw2DTerminate();
 
