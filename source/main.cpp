@@ -27,7 +27,7 @@ int main()
 
 	Game* game = new Game();
 	game->SetName("game");
-	game->Init(8, 8);
+	game->Init(11, 17);
 	g_pSceneManager->Add(game);
 
 	MainMenu* main_menu = new MainMenu();

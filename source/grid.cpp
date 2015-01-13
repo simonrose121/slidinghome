@@ -12,6 +12,20 @@ using namespace IwTween;
 
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
+	int map[11][17] = {
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+	};
+
 	Width = num_columns;
 	Height = num_rows;
 	GameObjects = new GameObject* [num_columns * (num_rows + 1)];
@@ -28,14 +42,15 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 	{
 		for (int x = 0; x < num_columns; x++)
 		{
-			// Init gem
-			GameObjects[index] = new Rock();
-			GameObjects[index]->init((float)x * GemSize + GridOriginX, GridOriginY + (float)y * GemSize, g_pResources->GetRock());
-			GameObjects[index]->m_ScaleX = gem_scale;
-			GameObjects[index]->m_ScaleY = gem_scale;
-			// Add to scene
-			scene->AddChild(GameObjects[index]);
-			index++;
+			if (map[x][y] == 1) 
+			{
+				GameObjects[index] = new Rock();
+				GameObjects[index]->init((float)x * GemSize + GridOriginX, GridOriginY + (float)y * GemSize, g_pResources->GetRock());
+				GameObjects[index]->m_ScaleX = gem_scale;
+				GameObjects[index]->m_ScaleY = gem_scale;
+				scene->AddChild(GameObjects[index]);
+				index++;
+			}
 		}
 	}
 	// We fill extra row with 1 to give lowest line of blocks something solid to rest on
