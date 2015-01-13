@@ -11,14 +11,10 @@
 #define GRID_OFFSET_X		41
 #define GRID_OFFSET_Y		37
 
-Game::Game()
-{
-	player = new Player();
-}
-
 Game::~Game()
 {
-	delete player;
+	if (grid != 0)
+		delete grid;
 }
 
 void Game::Init(int grid_width, int grid_height)
@@ -38,6 +34,8 @@ void Game::Init(int grid_width, int grid_height)
 	background->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
+
+	grid = new Grid(this, grid_width, grid_height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -55,6 +53,5 @@ void Game::Render()
 
 void Game::newGame()
 {
-	player->init((float)IwGxGetScreenWidth() / 2,(float)IwGxGetScreenHeight() / 2, g_pResources->GetPlayer());
-	AddChild(player);
+
 }

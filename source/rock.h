@@ -7,10 +7,10 @@
 using namespace Iw2DSceneGraphCore;
 using namespace Iw2DSceneGraph;
 
-class Rock : public GameObject, CSprite
+class Rock : public GameObject
 {
 public:
-	Rock() : GameObject() {}
+	Rock() {}
 	~Rock();
 };
 

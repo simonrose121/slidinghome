@@ -10,14 +10,15 @@
 class Game : public Scene 
 {
 protected:
-	GameObject* player;
+	Grid*	grid;
 
 	float	graphicsScale;
 
 public:
-	Game();
+	Game() : grid(0) {}
 	~Game();
 
+	Grid*	getGrid();
 	float	getGraphicsScale()		{ return graphicsScale; }
 
 	void	Init(int grid_width, int grid_height);
