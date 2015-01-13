@@ -9,10 +9,10 @@ GameObject::~GameObject()
 }
 
 
-void GameObject::init(float x, float y, CAtlas* atlas)
+void GameObject::init(float x, float y, CIw2DImage* image)
 {
 	m_X = x;
 	m_Y = y;
-	SetAtlas(atlas);
+	SetImage(image);
 }
 

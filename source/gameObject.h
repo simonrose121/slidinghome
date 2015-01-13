@@ -17,7 +17,7 @@ public:
 	GameObject() { }
 	~GameObject();
 
-	void	init(float x, float y, CAtlas* atlas);
+	void	init(float x, float y, CIw2DImage* image);
 };
 
 #endif

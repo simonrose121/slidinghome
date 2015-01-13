@@ -13,10 +13,8 @@ class Player : public GameObject
 protected:
 
 public:
-	Player();
+	Player() {}
 	~Player();
-
-	void init(float x, float y, CIw2DImage* image);
 };
 
 #endif

@@ -11,9 +11,14 @@
 #define GRID_OFFSET_X		41
 #define GRID_OFFSET_Y		37
 
+Game::Game()
+{
+	player = new Player();
+}
+
 Game::~Game()
 {
-	
+	delete player;
 }
 
 void Game::Init(int grid_width, int grid_height)
@@ -51,5 +56,5 @@ void Game::Render()
 void Game::newGame()
 {
 	//create player
-	//player->init(50,50,g_pResources->GetPlayer());
+	player->init((float)IwGxGetScreenWidth() / 2,(float)IwGxGetScreenHeight() / 2, g_pResources->GetPlayer());
 }

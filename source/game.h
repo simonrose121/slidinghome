@@ -10,12 +10,12 @@
 class Game : public Scene 
 {
 protected:
-	Player* player;
+	GameObject* player;
 
 	float	graphicsScale;
 
 public:
-	Game() {}
+	Game();
 	~Game();
 
 	float	getGraphicsScale()		{ return graphicsScale; }
