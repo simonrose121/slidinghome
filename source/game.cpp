@@ -55,6 +55,6 @@ void Game::Render()
 
 void Game::newGame()
 {
-	//create player
 	player->init((float)IwGxGetScreenWidth() / 2,(float)IwGxGetScreenHeight() / 2, g_pResources->GetPlayer());
+	AddChild(player);
 }
