@@ -20,6 +20,7 @@ files
 	grid.cpp
 	home.cpp
 	input.cpp
+	level.cpp
 	levelSelect.cpp
 	main.cpp
 	mainMenu.cpp
@@ -35,6 +36,7 @@ files
 	grid.h
 	home.h
 	input.h
+	level.h
 	levelSelect.h
 	main.h
 	mainMenu.h
