@@ -1,14 +1,15 @@
-#include "gameObjects.h"
+#include "gameObject.h"
 #include "game.h"
 #include "resources.h"
 #include "main.h"
 
-GameObjects::~GameObjects()
+GameObject::~GameObject()
 {
 
 }
 
-void GameObjects::init(float x, float y, CAtlas* atlas)
+
+void GameObject::init(float x, float y, CAtlas* atlas)
 {
 	m_X = x;
 	m_Y = y;

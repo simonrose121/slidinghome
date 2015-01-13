@@ -13,8 +13,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 {
 	Width = num_columns;
 	Height = num_rows;
-
-	GameObjects = new GameObjects* [num_columns * (num_rows + 1)];
+	GameObjects = new GameObject* [num_columns * (num_rows + 1)];
 
 	//create gems
 }

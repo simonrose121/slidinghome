@@ -3,7 +3,7 @@
 #include "input.h"
 #include "audio.h"
 #include "resources.h"
-#include "game.h";
+#include "game.h"
 
 MainMenu::~MainMenu()
 {
@@ -17,7 +17,7 @@ void MainMenu::startGame(CTween* pTween)
 	//start game music
 
 	//create game
-	game->NewGame();
+	//game->NewGame();
 }
 
 void MainMenu::Update(float deltaTime, float alphaMul) 
