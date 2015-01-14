@@ -44,6 +44,16 @@ void Game::Update(float deltaTime, float alphaMul)
 		return;
 
 	Scene::Update(deltaTime, alphaMul);
+
+	if (m_IsInputActive && m_Manager->GetCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
+	{
+		g_pInput->Reset();
+
+		if (g_pInput->m_Y >= grid->getGridOriginY())
+		{
+			IwTrace(Output, ("input"));
+		}
+	}
 }
 
 void Game::Render()

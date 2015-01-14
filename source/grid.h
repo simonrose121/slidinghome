@@ -13,17 +13,21 @@ class Grid
 protected:
 	GameObject**	GameObjects;
 	int				Width, Height;
-	int				GemSize;
+	int				GameObjectSize;
 	int				GridOriginX;
 	int				GridOriginY;
 
 public:
-	GameObject*		getGameObject(int x, int y);
+	int				getWidth() const			{ return Width; }
+	int				getHeight() const			{ return Height; }
+	int				getGridOriginX() const		{ return GridOriginX; }
+	int				getGridOriginY() const		{ return GridOriginY; }
+	int				getGameObjectSize() const	{ return GameObjectSize; }
 
 	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
 	~Grid();
 
-	GameObject*		getGemScreen(int screen_x, int screen_y);
+	void			screenToGrid(int x, int y, int& out_x, int& out_y);
 };
 
 #endif

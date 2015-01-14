@@ -31,13 +31,13 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 	GameObjects = new GameObject* [num_columns * (num_rows + 1)];
 
 	int bm_width = (int)g_pResources->GetRock()->GetWidth();
-	GemSize = (IwGxGetScreenWidth() * bm_width) / GRAPHIC_DESIGN_WIDTH;
+	GameObjectSize = (IwGxGetScreenWidth() * bm_width) / GRAPHIC_DESIGN_WIDTH;
 
-	float gem_scale = (float)GemSize / bm_width;
+	float gem_scale = (float)GameObjectSize / bm_width;
 
 	int index = 0;
 	GridOriginX = offset_x;
-	GridOriginY = IwGxGetScreenHeight() - (num_rows * GemSize) - offset_y;
+	GridOriginY = IwGxGetScreenHeight() - (num_rows * GameObjectSize) - offset_y;
 	for (int y = 0; y < num_rows; y++)
 	{
 		for (int x = 0; x < num_columns; x++)
@@ -46,7 +46,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 			{
 			case 1:
 				GameObjects[index] = new Rock();
-				GameObjects[index]->init((float)x * GemSize + GridOriginX, GridOriginY + (float)y * GemSize, g_pResources->GetRock());
+				GameObjects[index]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetRock());
 				GameObjects[index]->m_ScaleX = gem_scale;
 				GameObjects[index]->m_ScaleY = gem_scale;
 				scene->AddChild(GameObjects[index]);
@@ -55,7 +55,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 
 			case 2:
 				GameObjects[index] = new Player();
-				GameObjects[index]->init((float)x * GemSize + GridOriginX, GridOriginY + (float)y * GemSize, g_pResources->GetPlayer());
+				GameObjects[index]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetPlayer());
 				GameObjects[index]->m_ScaleX = gem_scale;
 				GameObjects[index]->m_ScaleY = gem_scale;
 				scene->AddChild(GameObjects[index]);
@@ -73,4 +73,10 @@ Grid::~Grid()
 {
 	if (GameObjects != 0)
 		delete[] GameObjects;
+}
+
+void Grid::screenToGrid(int x, int y, int& out_x, int& out_y)
+{
+	out_x = (x - GridOriginX) / GameObjectSize;
+	out_y = (y - GridOriginY) / GameObjectSize;
 }
