@@ -7,9 +7,12 @@
 #include "audio.h"
 #include "resources.h"
 #include "pauseMenu.h"
+#include "stringExtensions.h"
 
 #define GRID_OFFSET_X		41
 #define GRID_OFFSET_Y		37
+#define MINIMUM_SWIPE		100
+#define SWIPE_OFFSET		200
 
 Game::~Game()
 {
@@ -49,9 +52,25 @@ void Game::Update(float deltaTime, float alphaMul)
 	{
 		g_pInput->Reset();
 
+		//if input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
-			IwTrace(Output, ("input"));
+			IwTrace(Output, ("input detected"));
+
+			//record start position of movement
+			int start_x = g_pInput->m_X;
+			int start_y = g_pInput->m_Y;
+
+			StringExtensions strEx;
+			std::string s = strEx.to_string<int>(start_x);
+			char const *pchar = s.c_str();
+			IwTrace(Output, (pchar)); 
+
+			//detect swipe
+			if (g_pInput->m_X < start_x - MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y < start_y - SWIPE_OFFSET)
+			{
+				IwTrace(Output, ("swipe detected"));
+			}
 		}
 	}
 }
