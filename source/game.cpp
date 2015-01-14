@@ -62,12 +62,17 @@ void Game::Update(float deltaTime, float alphaMul)
 			int start_y = g_pInput->m_Y;
 
 			StringExtensions strEx;
-			std::string s = strEx.to_string<int>(start_x);
-			char const *pchar = s.c_str();
-			IwTrace(Output, (pchar)); 
+
+			s = strEx.to_string<int>(start_x);
+			char const *x = s.c_str();
+			IwTrace(Output, (x)); 
+
+			s = strEx.to_string<int>(start_y);
+			char const *y = s.c_str();
+			IwTrace(Output, (y));
 
 			//detect swipe
-			if (g_pInput->m_X < start_x - MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y < start_y - SWIPE_OFFSET)
+			if (g_pInput->m_X < (start_x - MINIMUM_SWIPE) && g_pInput->m_Y < (start_y + SWIPE_OFFSET) && g_pInput->m_Y < (start_y - SWIPE_OFFSET))
 			{
 				IwTrace(Output, ("swipe detected"));
 			}

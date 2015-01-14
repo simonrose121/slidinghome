@@ -26,6 +26,9 @@ public:
 	void	Render();
 
 	void	newGame();
+
+private:
+	std::string s;
 };
 
 #endif
