@@ -71,7 +71,18 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					IwTrace(APP, ("move left"));
 				}
-
+				if (g_pInput->m_Y < start_y - MINIMUM_SWIPE && g_pInput->m_X < start_x + SWIPE_OFFSET && g_pInput->m_X > start_x - SWIPE_OFFSET)
+				{
+					IwTrace(APP, ("move up"));
+				}
+				if (g_pInput->m_X > start_x + MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
+				{
+					IwTrace(APP, ("move right"));
+				}
+				if (g_pInput->m_Y > start_y + MINIMUM_SWIPE && g_pInput->m_X < start_x + SWIPE_OFFSET && g_pInput->m_X > start_x - SWIPE_OFFSET)
+				{
+					IwTrace(APP, ("move down"));
+				}
 				g_pInput->Reset();
 			}
 		}
