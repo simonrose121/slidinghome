@@ -48,33 +48,31 @@ void Game::Update(float deltaTime, float alphaMul)
 
 	Scene::Update(deltaTime, alphaMul);
 
-	if (m_IsInputActive && m_Manager->GetCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
+	if (m_IsInputActive && m_Manager->GetCurrent() == this)
 	{
-		g_pInput->Reset();
-
 		//if input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
-			IwTrace(Output, ("input detected"));
-
-			//record start position of movement
-			int start_x = g_pInput->m_X;
-			int start_y = g_pInput->m_Y;
-
-			StringExtensions strEx;
-
-			s = strEx.to_string<int>(start_x);
-			char const *x = s.c_str();
-			IwTrace(Output, (x)); 
-
-			s = strEx.to_string<int>(start_y);
-			char const *y = s.c_str();
-			IwTrace(Output, (y));
-
-			//detect swipe
-			if (g_pInput->m_X < (start_x - MINIMUM_SWIPE) && g_pInput->m_Y < (start_y + SWIPE_OFFSET) && g_pInput->m_Y < (start_y - SWIPE_OFFSET))
+			if (!g_pInput->m_Touched && !g_pInput->m_PrevTouched)
 			{
-				IwTrace(Output, ("swipe detected"));
+				//record start position of movement
+				start_x = g_pInput->m_X;
+				start_y = g_pInput->m_Y;
+			}
+			else if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
+			{
+				IwTrace(APP, ("currently pressing down"));
+
+				IwTrace(APP, ("start x,y = %d,%d current x,y = %d,%d", start_x, start_y, g_pInput->m_X, g_pInput->m_Y));
+			}
+			else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
+			{
+				if (g_pInput->m_X < start_x - MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
+				{
+					IwTrace(APP, ("move left"));
+				}
+
+				g_pInput->Reset();
 			}
 		}
 	}

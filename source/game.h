@@ -13,6 +13,8 @@ protected:
 	Grid*	grid;
 
 	float	graphicsScale;
+	int		start_x;
+	int		start_y;
 
 public:
 	Game() : grid(0) {}

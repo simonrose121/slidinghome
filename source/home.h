@@ -7,7 +7,7 @@
 using namespace Iw2DSceneGraphCore;
 using namespace Iw2DSceneGraph;
 
-class Home : public GameObject, CSprite
+class Home : public GameObject
 {
 
 };

@@ -10,7 +10,8 @@
 * EULA and have agreed to be bound by its terms.
 */
 
-#include "Input.h"
+#include "IwHashString.h"
+#include "input.h"
 
 Input* g_pInput = 0;
 
