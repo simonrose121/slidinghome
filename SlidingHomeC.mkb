@@ -45,6 +45,7 @@ files
 	resources.h
 	rock.h
 	scene.h
+	stringExtensions.h
 }
 
 assets
