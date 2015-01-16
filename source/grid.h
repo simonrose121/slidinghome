@@ -27,7 +27,7 @@ public:
 	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
 	~Grid();
 
-	void			screenToGrid(int x, int y, int& out_x, int& out_y);
+	void			movePlayerLeft();
 };
 
 #endif

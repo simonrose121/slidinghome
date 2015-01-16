@@ -54,7 +54,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				break;
 
 			case 2:
-				GameObjects[index] = new Player();
+				GameObjects[index] = new Player(x, y);
 				GameObjects[index]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetPlayer());
 				GameObjects[index]->m_ScaleX = gem_scale;
 				GameObjects[index]->m_ScaleY = gem_scale;
@@ -75,8 +75,15 @@ Grid::~Grid()
 		delete[] GameObjects;
 }
 
-void Grid::screenToGrid(int x, int y, int& out_x, int& out_y)
+void Grid::movePlayerLeft()
 {
-	out_x = (x - GridOriginX) / GameObjectSize;
-	out_y = (y - GridOriginY) / GameObjectSize;
+	//get current player location
+
+
+	//check grid location to the left
+
+	//get distance that player can move
+
+	//move the player to that spot using a tween (call method on player)
+
 }
