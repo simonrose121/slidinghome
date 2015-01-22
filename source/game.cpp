@@ -20,7 +20,7 @@ Game::~Game()
 		delete grid;
 }
 
-void Game::Init(int grid_width, int grid_height)
+void Game::Init()
 {
 	Scene::Init();
 
@@ -38,7 +38,7 @@ void Game::Init(int grid_width, int grid_height)
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	grid = new Grid(this, grid_width, grid_height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
+	grid = new Grid<GameObject, 11, 17>(this, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
