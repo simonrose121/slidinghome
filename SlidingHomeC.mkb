@@ -16,6 +16,7 @@ files
 
 	audio.cpp
 	game.cpp
+	gameGrid.cpp
 	gameObject.cpp
 	grid.cpp
 	home.cpp
@@ -32,6 +33,7 @@ files
 
 	audio.h
 	game.h
+	gameGrid.h
 	gameObject.h
 	grid.h
 	home.h
