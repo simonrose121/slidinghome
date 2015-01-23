@@ -9,10 +9,13 @@ using namespace Iw2DSceneGraph;
 class GameObject : public CSprite
 {
 protected:
+	std::string name;
 
 public:
 	GameObject() { }
 	~GameObject();
+
+	void	setName(std::string name);
 
 	void	init(float x, float y, CIw2DImage* image);
 };

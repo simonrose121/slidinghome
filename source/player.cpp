@@ -5,13 +5,7 @@ Player::~Player()
 
 }
 
-void Player::moveLeft()
+void Player::moveLeft(int distance)
 {
 
-}
-
-void Player::setPlayerCoordinates(int x, int y)
-{
-	PlayerX = x;
-	PlayerY = y;
 }

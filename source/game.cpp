@@ -20,7 +20,7 @@ Game::~Game()
 		delete grid;
 }
 
-void Game::Init()
+void Game::Init(int width, int height)
 {
 	Scene::Init();
 
@@ -38,7 +38,7 @@ void Game::Init()
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	grid = new Grid<GameObject, 11, 17>(this, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
+	grid = new Grid(this, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -70,6 +70,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				if (g_pInput->m_X < start_x - MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
 				{
 					IwTrace(APP, ("move left"));
+					grid->movePlayerLeft();
 				}
 				if (g_pInput->m_Y < start_y - MINIMUM_SWIPE && g_pInput->m_X < start_x + SWIPE_OFFSET && g_pInput->m_X > start_x - SWIPE_OFFSET)
 				{

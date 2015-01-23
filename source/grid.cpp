@@ -4,7 +4,6 @@
 #include "scene.h"
 #include "grid.h"
 #include "game.h"
-#include <fstream>
 #include "resources.h"
 #include "main.h"
 
@@ -46,6 +45,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 			{
 			case 1:
 				GameObjects[index] = new Rock();
+				GameObjects[index]->setName("Rock");
 				GameObjects[index]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetRock());
 				GameObjects[index]->m_ScaleX = gem_scale;
 				GameObjects[index]->m_ScaleY = gem_scale;
@@ -54,7 +54,8 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				break;
 
 			case 2:
-				GameObjects[index] = new Player(x, y);
+				GameObjects[index] = new Player();
+				PlayerIndex = index;
 				GameObjects[index]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetPlayer());
 				GameObjects[index]->m_ScaleX = gem_scale;
 				GameObjects[index]->m_ScaleY = gem_scale;
@@ -77,13 +78,16 @@ Grid::~Grid()
 
 void Grid::movePlayerLeft()
 {
-	//get current player location
+	int distance = 0;
 
+	//get current player location
+	Player* player = (Player*)GameObjects[PlayerIndex];
 
 	//check grid location to the left
+	IwTrace(APP, ("to the left is %d", GameObjects[PlayerIndex - 1]));
 
 	//get distance that player can move
 
 	//move the player to that spot using a tween (call method on player)
-
+	player->moveLeft(distance);
 }

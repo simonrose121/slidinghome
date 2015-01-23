@@ -11,19 +11,12 @@ using namespace Iw2DSceneGraph;
 class Player : public GameObject
 {
 private:
-	int				PlayerX;
-	int				PlayerY;
 
 public:
-	Player(int x, int y) : PlayerX(x), PlayerY(y) {}
+	Player() {}
 	~Player();
 
-	void			moveLeft();
-
-	void			setPlayerCoordinates(int x, int y);
-
-	int				getPlayerX()		{ return PlayerX; }
-	int				getPlayerY()		{ return PlayerY; }
+	void			moveLeft(int distance);
 };
 
 #endif

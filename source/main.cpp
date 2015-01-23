@@ -27,7 +27,7 @@ int main()
 
 	Game* game = new Game();
 	game->SetName("game");
-	game->Init();
+	game->Init(11, 17);
 	g_pSceneManager->Add(game);
 
 	MainMenu* main_menu = new MainMenu();
@@ -58,7 +58,6 @@ int main()
 		//int yield = (int)(FRAME_TIME * 1000 - (s3eTimerGetMs() - new_time));
 		//if (yield < 0)
 		//	yield = 0;
-
 		s3eDeviceYield();
 	}
 

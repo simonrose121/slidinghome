@@ -2,7 +2,6 @@
 #define __GRID_H__
 
 #include "gameObject.h"
-#include "gameGrid.h"
 #include "rock.h"
 #include "Iw2DSceneGraph.h"
 
@@ -12,11 +11,12 @@ using namespace Iw2DSceneGraph;
 class Grid
 {
 protected:
-	GameGrid*		GameGrid;
+	GameObject**	GameObjects;
 	int				Width, Height;
 	int				GameObjectSize;
 	int				GridOriginX;
 	int				GridOriginY;
+	int				PlayerIndex;
 
 public:
 	int				getWidth() const			{ return Width; }
@@ -25,7 +25,7 @@ public:
 	int				getGridOriginY() const		{ return GridOriginY; }
 	int				getGameObjectSize() const	{ return GameObjectSize; }
 
-	Grid(CNode* scene, int offset_x, int offset_y, int grid_width);
+	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
 	~Grid();
 
 	void			movePlayerLeft();
