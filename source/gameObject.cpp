@@ -8,7 +8,6 @@ GameObject::~GameObject()
 
 }
 
-
 void GameObject::init(float x, float y, CIw2DImage* image)
 {
 	m_X = x;

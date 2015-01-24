@@ -15,6 +15,7 @@ files
     (source)
 
 	audio.cpp
+	blankObject.cpp
 	game.cpp
 	gameObject.cpp
 	grid.cpp
@@ -31,6 +32,7 @@ files
 	scene.cpp
 
 	audio.h
+	blankObject.h
 	game.h
 	gameObject.h
 	grid.h

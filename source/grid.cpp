@@ -4,8 +4,10 @@
 #include "scene.h"
 #include "grid.h"
 #include "game.h"
+#include "blankObject.h"
 #include "resources.h"
 #include "main.h"
+#include <memory>
 
 using namespace IwTween;
 
@@ -43,6 +45,13 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 		{
 			switch (map[x][y])
 			{
+			case 0:
+				//Currently causing heap exceptions on app close, not sure why
+				GameObjects[index] = new BlankObject();
+				GameObjects[index]->setId(0);
+				index++;
+				break;
+
 			case 1:
 				GameObjects[index] = new Rock();
 				GameObjects[index]->setId(1);
@@ -73,6 +82,11 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 
 Grid::~Grid()
 {
+	for (int i = 0; i < sizeof(GameObjects) / sizeof(GameObject); i++)
+	{
+		delete GameObjects[i];
+	}
+		 
 	if (GameObjects != 0)
 		delete[] GameObjects;
 }
@@ -81,22 +95,32 @@ void Grid::movePlayerLeft()
 {
 	int distance = 0;
 
-	//get current player location
+	//get player
 	Player* player = (Player*)GameObjects[PlayerIndex];
 
 	//get distance that player can move
 
-	int i = GameObjects[PlayerIndex]->getId();
+	IwTrace(APP, ("player is at %d", PlayerIndex));
 
-	if (i != 1)
-	{
-		distance++;
-	}
+	//check space to the left
+	int i = GameObjects[PlayerIndex - 1]->getId();
 
-	IwTrace(APP, ("I am %d", i));
+	IwTrace(APP, ("to the left is %d", i));
 
-	
+	//if (i == 0)
+	//{
+	//	while (i != 1)
+	//	{
+	//		distance++;
+	//		if (GameObjects[PlayerIndex - distance]->getId() != NULL) 
+	//		{
+	//			i = GameObjects[PlayerIndex - distance]->getId();
+	//		}
+	//		IwTrace(APP, ("distance is %d", distance));
+	//	}
+
+	//	player->moveLeft(distance);
+	//}
 
 	//move the player to that spot using a tween (call method on player)
-	player->moveLeft(distance);
 }
