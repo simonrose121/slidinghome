@@ -55,10 +55,10 @@ int main()
 
 		Iw2DSurfaceShow();
 
-		//int yield = (int)(FRAME_TIME * 1000 - (s3eTimerGetMs() - new_time));
-		//if (yield < 0)
-		//	yield = 0;
-		s3eDeviceYield();
+		int yield = (int)(FRAME_TIME * 1000 - (s3eTimerGetMs() - new_time));
+		if (yield < 0)
+			yield = 0;
+		s3eDeviceYield(yield);
 	}
 
 	delete g_pAudio;

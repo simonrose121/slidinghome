@@ -16,3 +16,13 @@ void GameObject::init(float x, float y, CIw2DImage* image)
 	SetImage(image);
 }
 
+void GameObject::setId(int id)
+{
+	IwTrace(APP, ("setting name to %d", id));
+	objId = id;
+}
+
+int GameObject::getId()
+{
+	return objId;
+}
