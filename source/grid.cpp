@@ -46,9 +46,9 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 			switch (map[x][y])
 			{
 			case 0:
-				//Currently causing heap exceptions on app close, not sure why
 				GameObjects[index] = new BlankObject();
 				GameObjects[index]->setId(0);
+				scene->AddChild(GameObjects[index]);
 				index++;
 				break;
 
