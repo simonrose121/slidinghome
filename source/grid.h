@@ -18,6 +18,13 @@ protected:
 	int				GridOriginY;
 	int				PlayerIndex;
 
+	enum Direction {
+		LEFT,
+		RIGHT,
+		UP,
+		DOWN
+	};
+
 public:
 	int				getWidth() const			{ return Width; }
 	int				getHeight() const			{ return Height; }
@@ -28,7 +35,11 @@ public:
 	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
 	~Grid();
 
+	int				getDistance(Grid::Direction dir);
+
 	void			movePlayerLeft();
+
+
 };
 
 #endif

@@ -82,19 +82,12 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 
 Grid::~Grid()
 {
-	for (int i = 0; i < sizeof(GameObjects) / sizeof(GameObject); i++)
-	{
-		delete GameObjects[i];
-	}
-		 
 	if (GameObjects != 0)
 		delete[] GameObjects;
 }
 
 void Grid::movePlayerLeft()
 {
-	int distance = 0;
-
 	//get player
 	Player* player = (Player*)GameObjects[PlayerIndex];
 
@@ -102,25 +95,45 @@ void Grid::movePlayerLeft()
 
 	IwTrace(APP, ("player is at %d", PlayerIndex));
 
-	//check space to the left
-	int i = GameObjects[PlayerIndex - 1]->getId();
-
-	IwTrace(APP, ("to the left is %d", i));
-
-	//if (i == 0)
-	//{
-	//	while (i != 1)
-	//	{
-	//		distance++;
-	//		if (GameObjects[PlayerIndex - distance]->getId() != NULL) 
-	//		{
-	//			i = GameObjects[PlayerIndex - distance]->getId();
-	//		}
-	//		IwTrace(APP, ("distance is %d", distance));
-	//	}
-
-	//	player->moveLeft(distance);
-	//}
-
+	int distance = getDistance(LEFT);
+	
+	player->moveLeft(distance);
 	//move the player to that spot using a tween (call method on player)
+}
+
+int Grid::getDistance(Grid::Direction dir)
+{
+	int distance = 0;
+
+	switch (dir)
+	{
+	case LEFT:
+			{
+				 int i = GameObjects[PlayerIndex - 1]->getId();
+				 IwTrace(APP, ("to the left is %d", i));
+
+				 if (i == 0)
+				 {
+					 while (i != 1)
+					 {
+						 distance++;
+
+						 if (GameObjects[PlayerIndex - distance]->getId() != NULL)
+						 {
+							 i = GameObjects[PlayerIndex - distance]->getId();
+						 }
+						 IwTrace(APP, ("distance is %d", distance));
+					 }
+
+					 return distance - 1;
+				 }
+				 break;
+			}
+	case RIGHT:
+		break;
+	case UP:
+		break;
+	case DOWN:
+		break;
+	}
 }
