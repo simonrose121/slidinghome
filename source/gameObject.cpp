@@ -25,3 +25,9 @@ int GameObject::getId()
 {
 	return objId;
 }
+
+void GameObject::updatePosition(float x, float y)
+{
+	m_X = x;
+	m_Y = y;
+}

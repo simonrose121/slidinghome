@@ -87,10 +87,7 @@ Grid::~Grid()
 
 void Grid::movePlayerLeft()
 {
-	//get player
 	Player* player = (Player*)GameObjects[PlayerIndex];
-
-	//get distance that player can move
 
 	IwTrace(APP, ("player is at %d", PlayerIndex));
 
@@ -98,13 +95,58 @@ void Grid::movePlayerLeft()
 	
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
-	float new_X = player->m_Y - (distance * GameObjectSize);
+	float new_X = player->m_X - (distance * GameObjectSize);
+
+	PlayerIndex = PlayerIndex - (distance - 1);
+
+	IwTrace(APP, ("player index is %d", PlayerIndex));
+
+	IwTrace(APP, ("new x is %d", new_X));
 
 	game->GetTweener().Tween(0.5f,
 						FLOAT, &new_X, player->m_Y,
 						FLOAT, &player->m_X, player->m_Y,
 						EASING, Ease::sineInOut,
 						END);
+
+	player->updatePosition(new_X, player->m_Y);
+}
+
+void Grid::movePlayerRight()
+{
+	IwTrace(APP, ("player is at %d", PlayerIndex));
+
+	int distance = getDistance(RIGHT);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	IwTrace(APP, ("x = %d", GameObjects[PlayerIndex]->m_X));
+
+	float new_X = GameObjects[PlayerIndex]->m_X + (distance * GameObjectSize);
+
+	IwTrace(APP, ("new x is %d", new_X));
+
+	game->GetTweener().Tween(0.5f,
+		FLOAT, &new_X, GameObjects[PlayerIndex]->m_Y,
+		FLOAT, &GameObjects[PlayerIndex]->m_X, GameObjects[PlayerIndex]->m_Y,
+		EASING, Ease::sineInOut,
+		END);
+
+	PlayerIndex = PlayerIndex + (distance - 1);
+
+	IwTrace(APP, ("player index is %d", PlayerIndex));
+
+	GameObjects[PlayerIndex]->updatePosition(new_X, GameObjects[PlayerIndex]->m_Y);
+}
+
+void Grid::movePlayerUp()
+{
+
+}
+
+void Grid::movePlayerDown()
+{
+
 }
 
 int Grid::getDistance(Grid::Direction dir)
@@ -115,28 +157,45 @@ int Grid::getDistance(Grid::Direction dir)
 	{
 	case LEFT:
 			{
-				 int i = GameObjects[PlayerIndex - 1]->getId();
-				 IwTrace(APP, ("to the left is %d", i));
+				int i = GameObjects[PlayerIndex - 1]->getId();
+				IwTrace(APP, ("to the left is %d", i));
 
-				 if (i == 0)
-				 {
-					 while (i != 1)
-					 {
-						 distance++;
+				if (i == 0)
+				{
+					while (i != 1)
+					{
+						distance++;
 
-						 if (GameObjects[PlayerIndex - distance]->getId() != NULL)
-						 {
-							 i = GameObjects[PlayerIndex - distance]->getId();
-						 }
-						 IwTrace(APP, ("distance is %d", distance));
-					 }
-
-					 return distance - 1;
-				 }
-				 break;
+						if (GameObjects[PlayerIndex - distance]->getId() != NULL)
+						{
+							i = GameObjects[PlayerIndex - distance]->getId();
+						}
+						IwTrace(APP, ("distance is %d", distance));
+					}
+					return distance - 1;
+				}
+				break;
 			}
 	case RIGHT:
-		break;
+			{
+				int i = GameObjects[PlayerIndex + 1]->getId();
+				IwTrace(APP, ("to the right is %d", i));
+
+				if (i == 0)
+				{
+					while (i != 1)
+					{
+						distance++;
+
+						if (GameObjects[PlayerIndex + distance]->getId() != NULL)
+						{
+							i = GameObjects[PlayerIndex + distance]->getId();
+						}
+						IwTrace(APP, ("distance is %d", distance));
+					}
+					return distance;
+				}
+			}
 	case UP:
 		break;
 	case DOWN:

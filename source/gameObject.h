@@ -16,10 +16,9 @@ public:
 	~GameObject();
 
 	void		init(float x, float y, CIw2DImage* image);
-
 	void		setId(int id);
-	
 	int			getId();
+	void		updatePosition(float x, float y);
 };
 
 #endif
