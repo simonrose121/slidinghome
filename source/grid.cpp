@@ -7,7 +7,6 @@
 #include "blankObject.h"
 #include "resources.h"
 #include "main.h"
-#include <memory>
 
 using namespace IwTween;
 
@@ -97,8 +96,15 @@ void Grid::movePlayerLeft()
 
 	int distance = getDistance(LEFT);
 	
-	player->moveLeft(distance);
-	//move the player to that spot using a tween (call method on player)
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	float new_X = player->m_Y - (distance * GameObjectSize);
+
+	game->GetTweener().Tween(0.5f,
+						FLOAT, &new_X, player->m_Y,
+						FLOAT, &player->m_X, player->m_Y,
+						EASING, Ease::sineInOut,
+						END);
 }
 
 int Grid::getDistance(Grid::Direction dir)
