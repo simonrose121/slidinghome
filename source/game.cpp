@@ -27,8 +27,8 @@ void Game::Init(int width, int height)
 	graphicsScale = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH;
 
 	CSprite* background = new CSprite();
-	background->m_X = (float)IwGxGetScreenWidth() / 2;
-	background->m_Y = (float)IwGxGetScreenHeight() / 2;
+	background->m_X = IwGxGetScreenWidth() / 2;
+	background->m_Y = IwGxGetScreenHeight() / 2;
 	background->SetImage(g_pResources->GetGameBG());
 	background->m_W = background->GetImage()->GetWidth();
 	background->m_H = background->GetImage()->GetHeight();

@@ -38,6 +38,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 	int index = 0;
 	GridOriginX = offset_x;
 	GridOriginY = IwGxGetScreenHeight() - (num_rows * GameObjectSize) - offset_y;
+
 	for (int y = 0; y < num_rows; y++)
 	{
 		for (int x = 0; x < num_columns; x++)
@@ -88,55 +89,49 @@ Grid::~Grid()
 void Grid::movePlayerLeft()
 {
 	Player* player = (Player*)GameObjects[PlayerIndex];
+	Game* game = (Game*)g_pSceneManager->Find("game");
 
-	IwTrace(APP, ("player is at %d", PlayerIndex));
+	IwTrace(APP, ("player is at %f, %f", player->m_X, player->m_Y));
 
 	int distance = getDistance(LEFT);
-	
-	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	float speed = (float)(distance / 8);
 
 	float new_X = player->m_X - (distance * GameObjectSize);
 
-	PlayerIndex = PlayerIndex - (distance - 1);
+	PlayerIndex = PlayerIndex - distance;
 
-	IwTrace(APP, ("player index is %d", PlayerIndex));
-
-	IwTrace(APP, ("new x is %d", new_X));
-
-	game->GetTweener().Tween(0.5f,
-						FLOAT, &new_X, player->m_Y,
-						FLOAT, &player->m_X, player->m_Y,
+	game->GetTweener().Tween(speed,
+						FLOAT, &player->m_X, new_X,
 						EASING, Ease::sineInOut,
 						END);
 
 	player->updatePosition(new_X, player->m_Y);
+
+	IwTrace(APP, ("player is now at %f, %f", player->m_X, player->m_Y));
 }
 
 void Grid::movePlayerRight()
 {
-	IwTrace(APP, ("player is at %d", PlayerIndex));
+	Player* player = (Player*)GameObjects[PlayerIndex];
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	IwTrace(APP, ("player is at %f, %f", player->m_X, player->m_Y));
 
 	int distance = getDistance(RIGHT);
 
-	Game* game = (Game*)g_pSceneManager->Find("game");
+	float speed = (float)(distance / 8);
 
-	IwTrace(APP, ("x = %d", GameObjects[PlayerIndex]->m_X));
+	float new_X = player->m_X + (distance * GameObjectSize);
 
-	float new_X = GameObjects[PlayerIndex]->m_X + (distance * GameObjectSize);
-
-	IwTrace(APP, ("new x is %d", new_X));
-
-	game->GetTweener().Tween(0.5f,
-		FLOAT, &new_X, GameObjects[PlayerIndex]->m_Y,
-		FLOAT, &GameObjects[PlayerIndex]->m_X, GameObjects[PlayerIndex]->m_Y,
+	game->GetTweener().Tween(speed,
+		FLOAT, &player->m_X, new_X,
 		EASING, Ease::sineInOut,
 		END);
 
-	PlayerIndex = PlayerIndex + (distance - 1);
+	player->updatePosition(new_X, player->m_Y);
 
-	IwTrace(APP, ("player index is %d", PlayerIndex));
-
-	GameObjects[PlayerIndex]->updatePosition(new_X, GameObjects[PlayerIndex]->m_Y);
+	IwTrace(APP, ("player is now at %f, %f", player->m_X, player->m_Y));
 }
 
 void Grid::movePlayerUp()
@@ -193,7 +188,7 @@ int Grid::getDistance(Grid::Direction dir)
 						}
 						IwTrace(APP, ("distance is %d", distance));
 					}
-					return distance;
+					return distance - 1;
 				}
 			}
 	case UP:

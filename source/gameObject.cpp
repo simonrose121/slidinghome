@@ -12,12 +12,14 @@ void GameObject::init(float x, float y, CIw2DImage* image)
 {
 	m_X = x;
 	m_Y = y;
+
+	IwTrace(APP, ("object set coordinates %f, %f", m_X, m_Y));
+
 	SetImage(image);
 }
 
 void GameObject::setId(int id)
 {
-	IwTrace(APP, ("setting name to %d", id));
 	objId = id;
 }
 

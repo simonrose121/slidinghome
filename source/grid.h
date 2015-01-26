@@ -13,10 +13,8 @@ class Grid
 protected:
 	GameObject**	GameObjects;
 	int				Width, Height;
-	int				GameObjectSize;
 	int				GridOriginX;
 	int				GridOriginY;
-	int				PlayerIndex;
 
 	enum Direction {
 		LEFT,
@@ -33,6 +31,9 @@ public:
 	int				getGridOriginX() const		{ return GridOriginX; }
 	int				getGridOriginY() const		{ return GridOriginY; }
 	int				getGameObjectSize() const	{ return GameObjectSize; }
+
+	int				PlayerIndex;
+	int				GameObjectSize;
 
 	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
 	~Grid();

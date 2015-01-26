@@ -17,6 +17,7 @@ public:
 	~Player();
 
 	void			moveLeft(int distance);
+	void			moveRight(int distance);
 };
 
 #endif
