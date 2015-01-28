@@ -15,6 +15,7 @@ protected:
 	int				Width, Height;
 	int				GridOriginX;
 	int				GridOriginY;
+	int**			Map;
 
 	enum Direction {
 		LEFT,
