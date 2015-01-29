@@ -8,6 +8,8 @@
 #include "resources.h"
 #include "main.h"
 
+#include <iostream>
+
 using namespace IwTween;
 
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
@@ -77,6 +79,8 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 			}
 		}
 	}
+
+	PrintGrid();
 }
 
 Grid::~Grid()
@@ -129,17 +133,28 @@ void Grid::UpdatePosition(int index, int distance, Grid::Direction dir)
 	int x = coords.first;
 	int y = coords.second;
 
-	if (dir == LEFT)
+	switch (dir)
+	{
+	case LEFT:
 		gameObjects[index]->setGridCoords(x - distance, y);
-	if (dir == RIGHT)
+		gameObjects[index - distance]->setId(2);
+		break;
+	case RIGHT:
 		gameObjects[index]->setGridCoords(x + distance, y);
-	if (dir == UP)
+		gameObjects[index + distance]->setId(2);
+		break;
+	case UP:
 		gameObjects[index]->setGridCoords(x, y + distance);
-	if (dir == DOWN)
+		//gameObjects[index + distance]->setId(2);
+		break;
+	case DOWN:
 		gameObjects[index]->setGridCoords(x, y - distance);
+		//gameObjects[index + distance]->setId(2);
+		break;
+	}
 
 	gameObjects[index]->setId(0);
-	gameObjects[index + distance]->setId(2);
+	PrintGrid();
 }
 
 int Grid::getIndex()
@@ -203,4 +218,16 @@ int Grid::getDistance(Grid::Direction dir, int index)
 	IwTrace(APP, ("distance is %d", distance));
 
 	return distance;
+}
+
+void Grid::PrintGrid()
+{
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			std::cout << gameObjects[x + width * y]->getId();
+		}
+		std::cout << "\n";
+	}
 }

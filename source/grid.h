@@ -28,6 +28,7 @@ public:
 	void MovePlayerUp();
 	void MovePlayerDown();
 	void UpdatePosition(int index, int distance, Grid::Direction dir);
+	void PrintGrid();
 
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
