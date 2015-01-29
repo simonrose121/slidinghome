@@ -93,14 +93,14 @@ void Grid::movePlayerLeft()
 
 	float new_X = GameObjects[index]->m_X - (distance * GameObjectSize);
 
-	std::pair<int, int> coords = GameObjects[index]->getCoords();
-	int x = coords.first;
-	int y = coords.second;
+	//std::pair<int, int> coords = GameObjects[index]->getCoords();
+	//int x = coords.first;
+	//int y = coords.second;
 
-	GameObjects[index]->updatePosition(new_X, GameObjects[index]->m_Y);
-	GameObjects[index]->setGridCoords(x - distance, y);
-	GameObjects[index]->setId(0);
-	GameObjects[index - distance]->setId(2);
+	//GameObjects[index]->updatePosition(new_X, GameObjects[index]->m_Y);
+	//GameObjects[index]->setGridCoords(x - distance, y);
+	//GameObjects[index]->setId(0);
+	//GameObjects[index - distance]->setId(2);
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
@@ -118,14 +118,14 @@ void Grid::movePlayerRight()
 
 	float new_X = GameObjects[index]->m_X + (distance * GameObjectSize);
 
-	std::pair<int, int> coords = GameObjects[index]->getCoords();
-	int x = coords.first;
-	int y = coords.second;
+	//std::pair<int, int> coords = GameObjects[index]->getCoords();
+	//int x = coords.first;
+	//int y = coords.second;
 
-	GameObjects[index]->updatePosition(new_X, GameObjects[index]->m_Y);
-	GameObjects[index]->setGridCoords(x + distance, y);
-	GameObjects[index]->setId(0);
-	GameObjects[index + distance]->setId(2);
+	//GameObjects[index]->updatePosition(new_X, GameObjects[index]->m_Y);
+	//GameObjects[index]->setGridCoords(x + distance, y);
+	//GameObjects[index]->setId(0);
+	//GameObjects[index + distance]->setId(2);
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 

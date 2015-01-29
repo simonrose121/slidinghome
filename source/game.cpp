@@ -98,5 +98,5 @@ void Game::Render()
 
 void Game::newGame()
 {
-
+	//will be used in future to set map number etc
 }

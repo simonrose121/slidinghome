@@ -9,13 +9,13 @@ MainMenu::~MainMenu()
 {
 }
 
-//void MainMenu::startGame() 
-//{
-//	Game* game = (Game*)g_pSceneManager->Find("game");
-//	g_pSceneManager->SwitchTo(game);
-//
-//	game->newGame();
-//}
+void MainMenu::startGame() 
+{
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	g_pSceneManager->SwitchTo(game);
+
+	//game->newGame();
+}
 
 void MainMenu::Update(float deltaTime, float alphaMul) 
 {
@@ -30,9 +30,7 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 		g_pInput->Reset();
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			// Switch to game scene
-			Game* game = (Game*)g_pSceneManager->Find("game");
-			g_pSceneManager->SwitchTo(game);
+			startGame();
 
 			// Start playing game music here
 			//Audio::PlayMusic("audio/in_game.mp3", true);
@@ -79,15 +77,4 @@ void MainMenu::Init()
 	playButton->m_ScaleX = game->getGraphicsScale();
 	playButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(playButton);
-
-	// Create Start Game button text
-	playText = new CSprite();
-	playText->SetImage(g_pResources->GetPlayButton());
-	playText->m_X = (float)IwGxGetScreenWidth() / 2;
-	playText->m_Y = y_pos;
-	playText->m_W = playText->GetImage()->GetWidth();
-	playText->m_H = playText->GetImage()->GetHeight();
-	playText->m_AnchorX = 0.5f;
-	playText->m_AnchorY = 0.5f;
-	AddChild(playText);
 }
