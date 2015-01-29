@@ -1,14 +1,3 @@
-/*
-* (C) 2001-2012 Marmalade. All Rights Reserved.
-*
-* This document is protected by copyright, and contains information
-* proprietary to Marmalade.
-*
-* This file consists of source code released by Marmalade under
-* the terms of the accompanying End User License Agreement (EULA).
-* Please do not use this program/source code before you have read the
-* EULA and have agreed to be bound by its terms.
-*/
 
 #if !defined(__RESOURCES_H__)
 #define __RESOURCES_H__
@@ -40,15 +29,17 @@ protected:
 	CIw2DImage*		Player;
 	CIw2DImage*		Rock;
 	CIw2DImage*		Blank;
+	CIw2DFont*      Font;
 
 public:
 	CIw2DImage*		GetMainMenuBG()		{ return MainMenuBG; }
-	CIw2DImage*		GetGameBG()			{ return GameBG;  }
-	CIw2DImage*		GetPlayButton()		{ return PlayButton; }
+	CIw2DImage*		GetGameBG()			{ return GameBG; }
 
 	CIw2DImage*		GetPlayer()			{ return Player; }
 	CIw2DImage*		GetRock()			{ return Rock; }
 	CIw2DImage*		GetBlank()			{ return Blank; }
+	CIw2DImage*		GetPlayButton()		{ return PlayButton; }
+	CIw2DFont*      GetFont()           { return Font; }
 
 public:
 	Resources();

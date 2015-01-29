@@ -9,13 +9,13 @@ MainMenu::~MainMenu()
 {
 }
 
-void MainMenu::startGame() 
-{
-	Game* game = (Game*)g_pSceneManager->Find("game");
-	g_pSceneManager->SwitchTo(game);
-
-	game->newGame();
-}
+//void MainMenu::startGame() 
+//{
+//	Game* game = (Game*)g_pSceneManager->Find("game");
+//	g_pSceneManager->SwitchTo(game);
+//
+//	game->newGame();
+//}
 
 void MainMenu::Update(float deltaTime, float alphaMul) 
 {
@@ -30,7 +30,12 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 		g_pInput->Reset();
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			startGame();
+			// Switch to game scene
+			Game* game = (Game*)g_pSceneManager->Find("game");
+			g_pSceneManager->SwitchTo(game);
+
+			// Start playing game music here
+			//Audio::PlayMusic("audio/in_game.mp3", true);
 		}
 	}
 }
@@ -46,6 +51,7 @@ void MainMenu::Init()
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
+	// Create menu background
 	CSprite* background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
 	background->m_Y = (float)IwGxGetScreenHeight() / 2;
@@ -54,10 +60,12 @@ void MainMenu::Init()
 	background->m_H = background->GetImage()->GetHeight();
 	background->m_AnchorX = 0.5;
 	background->m_AnchorY = 0.5;
+	// Fit background to screen size
 	background->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
+	// Create Start Game button
 	float x_pos = (float)IwGxGetScreenWidth() / 2;
 	float y_pos = (float)IwGxGetScreenHeight() / 3;
 	playButton = new CSprite();
@@ -71,4 +79,15 @@ void MainMenu::Init()
 	playButton->m_ScaleX = game->getGraphicsScale();
 	playButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(playButton);
+
+	// Create Start Game button text
+	playText = new CSprite();
+	playText->SetImage(g_pResources->GetPlayButton());
+	playText->m_X = (float)IwGxGetScreenWidth() / 2;
+	playText->m_Y = y_pos;
+	playText->m_W = playText->GetImage()->GetWidth();
+	playText->m_H = playText->GetImage()->GetHeight();
+	playText->m_AnchorX = 0.5f;
+	playText->m_AnchorY = 0.5f;
+	AddChild(playText);
 }
