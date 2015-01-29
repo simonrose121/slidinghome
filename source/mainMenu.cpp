@@ -9,40 +9,6 @@ MainMenu::~MainMenu()
 {
 }
 
-void MainMenu::startGame() 
-{
-	Game* game = (Game*)g_pSceneManager->Find("game");
-	g_pSceneManager->SwitchTo(game);
-
-	//game->newGame();
-}
-
-void MainMenu::Update(float deltaTime, float alphaMul) 
-{
-	if (!m_IsActive)
-		return;
-
-	Scene::Update(deltaTime, alphaMul);
-
-	// Detect screen tap
-	if (m_IsInputActive && m_Manager->GetCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
-	{
-		g_pInput->Reset();
-		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-		{
-			startGame();
-
-			// Start playing game music here
-			//Audio::PlayMusic("audio/in_game.mp3", true);
-		}
-	}
-}
-
-void MainMenu::Render()
-{
-	Scene::Render();
-}
-
 void MainMenu::Init()
 {
 	Scene::Init();
@@ -53,7 +19,7 @@ void MainMenu::Init()
 	CSprite* background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
 	background->m_Y = (float)IwGxGetScreenHeight() / 2;
-	background->SetImage(g_pResources->GetMainMenuBG());
+	background->SetImage(g_pResources->getMainMenuBG());
 	background->m_W = background->GetImage()->GetWidth();
 	background->m_H = background->GetImage()->GetHeight();
 	background->m_AnchorX = 0.5;
@@ -67,7 +33,7 @@ void MainMenu::Init()
 	float x_pos = (float)IwGxGetScreenWidth() / 2;
 	float y_pos = (float)IwGxGetScreenHeight() / 3;
 	playButton = new CSprite();
-	playButton->SetImage(g_pResources->GetPlayButton());
+	playButton->SetImage(g_pResources->getPlayButton());
 	playButton->m_X = x_pos;
 	playButton->m_Y = y_pos;
 	playButton->m_W = playButton->GetImage()->GetWidth();
@@ -77,4 +43,38 @@ void MainMenu::Init()
 	playButton->m_ScaleX = game->getGraphicsScale();
 	playButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(playButton);
+}
+
+void MainMenu::Update(float deltaTime, float alphaMul)
+{
+	if (!m_IsActive)
+		return;
+
+	Scene::Update(deltaTime, alphaMul);
+
+	// Detect screen tap
+	if (m_IsInputActive && m_Manager->getCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
+	{
+		g_pInput->Reset();
+		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			StartGame();
+
+			// Start playing game music here
+			//Audio::PlayMusic("audio/in_game.mp3", true);
+		}
+	}
+}
+
+void MainMenu::Render()
+{
+	Scene::Render();
+}
+
+void MainMenu::StartGame() 
+{
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	g_pSceneManager->SwitchTo(game);
+
+	//game->newGame();
 }

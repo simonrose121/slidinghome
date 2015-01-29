@@ -9,28 +9,25 @@
 
 class Game : public Scene 
 {
-protected:
-	Grid*	grid;
-
-	float	graphicsScale;
-	int		start_x;
-	int		start_y;
-
 public:
+	// Constructor & Destructor
 	Game() : grid(0) {}
 	~Game();
 
-	Grid*	getGrid();
-	float	getGraphicsScale()		{ return graphicsScale; }
+	// Member functions
+	Grid* GetGrid(); // Not currently used
+	void Init(int grid_width, int grid_height);
+	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
+	void Render();
+	void NewGame();
+	float getGraphicsScale() { return graphicsScale; }
 
-	void	Init(int grid_width, int grid_height);
-	void	Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
-	void	Render();
-
-	void	newGame();
-
-private:
-	std::string s;
+protected:
+	// Member variables
+	Grid* grid;
+	float graphicsScale;
+	int start_x;
+	int	start_y;
 };
 
 #endif

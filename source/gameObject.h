@@ -8,25 +8,25 @@ using namespace Iw2DSceneGraph;
 
 class GameObject : public CSprite
 {
-protected:
-	int			objId;
-	int			gridX;
-	int			gridY;
-
 public:
+	// Constructor & Destructor
 	GameObject() { }
 	~GameObject();
 
-	void		init(float x, float y, CIw2DImage* image);
+	// Member functions
+	void Init(float x, float y, CIw2DImage* image);
+	void UpdatePosition(float x, float y);
 
-
-	void		updatePosition(float x, float y);
-
-	void		setId(int id);
-	void		setGridCoords(int x, int y);
-
-	int			getId();
+	void setId(int id);
+	void setGridCoords(int x, int y);
+	int	getId() { return objId; }
 	std::pair<int, int> getCoords();
+
+protected:
+	// Member variables
+	int	objId;
+	int	gridX;
+	int	gridY;
 };
 
 #endif

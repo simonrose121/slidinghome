@@ -21,29 +21,30 @@ using namespace Iw2DSceneGraph;
 */
 class Resources
 {
-protected:
-	CIw2DImage*		MainMenuBG;
-	CIw2DImage*		GameBG;
-	CIw2DImage*		PlayButton;
-
-	CIw2DImage*		Player;
-	CIw2DImage*		Rock;
-	CIw2DImage*		Blank;
-	CIw2DFont*      Font;
-
 public:
-	CIw2DImage*		GetMainMenuBG()		{ return MainMenuBG; }
-	CIw2DImage*		GetGameBG()			{ return GameBG; }
-
-	CIw2DImage*		GetPlayer()			{ return Player; }
-	CIw2DImage*		GetRock()			{ return Rock; }
-	CIw2DImage*		GetBlank()			{ return Blank; }
-	CIw2DImage*		GetPlayButton()		{ return PlayButton; }
-	CIw2DFont*      GetFont()           { return Font; }
-
-public:
+	// Constructor & Destructor
 	Resources();
 	~Resources();
+
+	// Member functions
+	CIw2DImage*	getMainMenuBG()	{ return mainMenuBG; }
+	CIw2DImage*	getGameBG() { return gameBG; }
+	CIw2DImage*	getPlayButton() { return playButton; }
+	CIw2DImage*	getPlayer() { return player; }
+	CIw2DImage*	getRock() { return rock; }
+	CIw2DImage*	getBlank() { return blank; }
+	CIw2DFont*  getFont() { return font; }
+
+protected:
+	// Member variables
+	CIw2DImage*	mainMenuBG;
+	CIw2DImage*	gameBG;
+	CIw2DImage*	playButton;
+	CIw2DImage*	player;
+	CIw2DImage*	rock;
+	CIw2DImage*	blank;
+	CIw2DFont*  font;
+
 };
 
 extern Resources* g_pResources;

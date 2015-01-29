@@ -9,10 +9,10 @@
 #include "pauseMenu.h"
 #include "stringExtensions.h"
 
-#define GRID_OFFSET_X		41
-#define GRID_OFFSET_Y		37
-#define MINIMUM_SWIPE		100
-#define SWIPE_OFFSET		200
+#define GRID_OFFSET_X 41
+#define GRID_OFFSET_Y 37
+#define MINIMUM_SWIPE 100
+#define SWIPE_OFFSET 200
 
 Game::~Game()
 {
@@ -29,7 +29,7 @@ void Game::Init(int width, int height)
 	CSprite* background = new CSprite();
 	background->m_X = IwGxGetScreenWidth() / 2;
 	background->m_Y = IwGxGetScreenHeight() / 2;
-	background->SetImage(g_pResources->GetGameBG());
+	background->SetImage(g_pResources->getGameBG());
 	background->m_W = background->GetImage()->GetWidth();
 	background->m_H = background->GetImage()->GetHeight();
 	background->m_AnchorX = 0.5;
@@ -48,7 +48,7 @@ void Game::Update(float deltaTime, float alphaMul)
 
 	Scene::Update(deltaTime, alphaMul);
 
-	if (m_IsInputActive && m_Manager->GetCurrent() == this)
+	if (m_IsInputActive && m_Manager->getCurrent() == this)
 	{
 		//if input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
@@ -70,7 +70,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				if (g_pInput->m_X < start_x - MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
 				{
 					IwTrace(APP, ("move left"));
-					grid->movePlayerLeft();
+					grid->MovePlayerLeft();
 				}
 				if (g_pInput->m_Y < start_y - MINIMUM_SWIPE && g_pInput->m_X < start_x + SWIPE_OFFSET && g_pInput->m_X > start_x - SWIPE_OFFSET)
 				{
@@ -79,7 +79,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				if (g_pInput->m_X > start_x + MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
 				{
 					IwTrace(APP, ("move right"));
-					grid->movePlayerRight();
+					grid->MovePlayerRight();
 				}
 				if (g_pInput->m_Y > start_y + MINIMUM_SWIPE && g_pInput->m_X < start_x + SWIPE_OFFSET && g_pInput->m_X > start_x - SWIPE_OFFSET)
 				{
@@ -96,7 +96,7 @@ void Game::Render()
 	Scene::Render();
 }
 
-void Game::newGame()
+void Game::NewGame()
 {
 	//will be used in future to set map number etc
 }

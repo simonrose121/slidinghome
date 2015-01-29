@@ -10,13 +10,7 @@ using namespace Iw2DSceneGraph;
 
 class Grid
 {
-protected:
-	GameObject**	GameObjects;
-	int				Width, Height;
-	int				GridOriginX;
-	int				GridOriginY;
-	int**			Map;
-
+public:
 	enum Direction {
 		LEFT,
 		RIGHT,
@@ -24,27 +18,33 @@ protected:
 		DOWN
 	};
 
-	int				getDistance(Grid::Direction dir, int index);
-
-public:
-	int				getWidth() const			{ return Width; }
-	int				getHeight() const			{ return Height; }
-	int				getGridOriginX() const		{ return GridOriginX; }
-	int				getGridOriginY() const		{ return GridOriginY; }
-	int				getGameObjectSize() const	{ return GameObjectSize; }
-	int				getIndex();
-
-	int				GameObjectSize;
-
+	// Constructor & Destruction
 	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
 	~Grid();
 
+	// Member functions
+	void MovePlayerLeft();
+	void MovePlayerRight();
+	void MovePlayerUp();
+	void MovePlayerDown();
+	void UpdatePosition(int index, float new_x, int distance);
 
-	void			movePlayerLeft();
-	void			movePlayerRight();
-	void			movePlayerUp();
-	void			movePlayerDown();
-	void updatePosition(int index, float new_x, int distance);
+	int	getWidth() const { return width; }
+	int	getHeight() const { return height; }
+	int	getGridOriginX() const { return gridOriginX; }
+	int	getGridOriginY() const { return gridOriginY; }
+	int	getGameObjectSize() const { return gameObjectSize; }
+	int	getIndex();
+	int	getDistance(Grid::Direction dir, int index);
+
+protected:
+	// Member variables
+	GameObject** gameObjects;
+	int	width;
+	int height;
+	int	gridOriginX;
+	int	gridOriginY;
+	int	gameObjectSize;
 };
 
 #endif

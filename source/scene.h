@@ -25,56 +25,58 @@ class SceneManager;
 
 class Scene : public CNode
 {
-protected:
-	unsigned int        m_NameHash;                     // Hash string representation of scene name
-	bool                m_IsActive;                     // Active state
-	bool                m_IsInputActive;                // Input active state
-	SceneManager*       m_Manager;                      // Scene manager
-	CTweenManager       m_Tweener;                      // Scene local tween manager
-
 public:
-	bool                IsActive() const                    { return m_IsActive; }
-	void                SetActive(bool active)              { m_IsActive = active; }
-	void                SetName(const char* name);
-	unsigned int        GetNameHash() const                 { return m_NameHash; }
-	void                SetManager(SceneManager* manager)   { m_Manager = manager; }
-	void                SetInputActive(bool active)         { m_IsInputActive = active; }
-	CTweenManager&      GetTweener()                        { return m_Tweener; }
-
-public:
+	// Constructor & Destructor
 	Scene();
 	virtual ~Scene();
 
-	virtual void    Init();
-	virtual void    Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
-	virtual void    Render();
+	// Member functions
+	virtual void Init();
+	virtual void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
+	virtual void Render();
+	bool IsActive() const { return m_IsActive; }
+
+	void setActive(bool active) { m_IsActive = active; }
+	void setName(const char* name);
+	void setManager(SceneManager* manager) { m_Manager = manager; }
+	void setInputActive(bool active) { m_IsInputActive = active; }
+	CTweenManager& getTweener() { return m_Tweener; }
+	unsigned int getNameHash() const { return m_NameHash; }
+
+protected:
+	unsigned int m_NameHash; // Hash string representation of scene name
+	bool m_IsActive; // Active state
+	bool m_IsInputActive; // Input active state
+	SceneManager* m_Manager; // Scene manager
+	CTweenManager m_Tweener; // Scene local tween manager
 };
 
 
 class SceneManager
 {
-protected:
-	Scene*              m_Current;              // Currently active scene
-	Scene*              m_Next;                 // Next scene (scene that is being switched to)
-	std::list<Scene*>   m_Scenes;               // Scenes list
 public:
-	Scene*  GetCurrent()                { return m_Current; }
-
-public:
-	SceneManager();
+	// Constructors & Destructors
+	SceneManager() : m_Current(0), m_Next(0) {};
 	~SceneManager();
 
-	void    SwitchTo(Scene* scene);
-	void    Update(float deltaTime = 0.0f);
-	void    Render();
-	void    Add(Scene* scene);
-	void    Remove(Scene* scene);
-	Scene*  Find(const char* name);
+	// Member functions
+	Scene* getCurrent() { return m_Current; }
+	void SwitchTo(Scene* scene);
+	void Update(float deltaTime = 0.0f);
+	void Render();
+	void Add(Scene* scene);
+	void Remove(Scene* scene);
+	Scene* Find(const char* name);
 
 	// Internal
 	static void OnSwitchComplete(CTween* pTween);
-	void    FinishSwitch();
+	void FinishSwitch();
 
+protected:
+	// Member variables
+	Scene* m_Current; // Currently active scene
+	Scene* m_Next; // Next scene (scene that is being switched to)
+	std::list<Scene*> m_Scenes; // Scenes list
 };
 
 extern SceneManager* g_pSceneManager;

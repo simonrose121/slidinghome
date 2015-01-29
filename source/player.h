@@ -10,14 +10,14 @@ using namespace Iw2DSceneGraph;
 
 class Player : public GameObject
 {
-private:
-
 public:
+	// Constructor & Destructor
 	Player() {}
 	~Player();
 
-	void			moveLeft(int distance);
-	void			moveRight(int distance);
+	// Member functions
+	void MoveLeft(int distance);
+	void MoveRight(int distance);
 };
 
 #endif

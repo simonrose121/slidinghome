@@ -10,6 +10,7 @@ using namespace Iw2DSceneGraph;
 class BlankObject : public GameObject
 {
 public:
+	// Constructor & Destructor
 	BlankObject() {}
 	~BlankObject();
 };

@@ -8,7 +8,7 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::init(float x, float y, CIw2DImage* image)
+void GameObject::Init(float x, float y, CIw2DImage* image)
 {
 	m_X = x;
 	m_Y = y;
@@ -16,22 +16,17 @@ void GameObject::init(float x, float y, CIw2DImage* image)
 	SetImage(image);
 }
 
-void GameObject::setId(int id)
-{
-	objId = id;
-}
-
-int GameObject::getId()
-{
-	return objId;
-}
-
-void GameObject::updatePosition(float x, float y)
+void GameObject::UpdatePosition(float x, float y)
 {
 	IwTrace(APP, ("set position to [%f][%f]", x, y));
 
 	m_X = x;
 	m_Y = y;
+}
+
+void GameObject::setId(int id)
+{
+	objId = id;
 }
 
 void GameObject::setGridCoords(int x, int y)

@@ -19,28 +19,37 @@
 class AudioSound
 {
 public:
+	// Constructor & Destructor
     AudioSound() : m_SoundData(0), m_SoundSpec(0) {}
     ~AudioSound();
+
+	// Member functions
+	bool Load(const char* filename);
+
+	// Member variables
     unsigned int    m_NameHash;         // Hashed string name of sound effect
     CIwSoundData*   m_SoundData;        // Sound effect data
     CIwSoundSpec*   m_SoundSpec;        // Sound effect specification
-    bool            Load(const char* filename);
 };
 
 class Audio
 {
 protected:
 public:
+	// Constructor & Destructor
     Audio();
     ~Audio();
 
-    std::list<AudioSound*> m_Sounds;                // List of sound effects
+	// Member functions
     AudioSound* findSound(unsigned int name_hash);
-    void        Update();
+	AudioSound* PreloadSound(const char* filename);
+    void Update();
+	void PlaySound(const char* filename);
     static void PlayMusic(const char* filename, bool repeat = true);
     static void StopMusic();
-    AudioSound* PreloadSound(const char* filename);
-    void        PlaySound(const char* filename);
+
+	// Member variables
+	std::list<AudioSound*> m_Sounds;                // List of sound effects
 };
 
 extern Audio*   g_pAudio;

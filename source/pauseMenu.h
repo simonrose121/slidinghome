@@ -5,24 +5,20 @@
 
 class PauseMenu : public Scene
 {
-protected:
-	// UI components
-
 public:
+	// Constructor & Destructor
 	PauseMenu() {}
 	~PauseMenu();
 
-	// initialise the menu
-	void            Init();
-
-	// Update the menu
-	void            Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
-
-	// Render the menu
-	void            Render();
+	// Member functions
+	void Init();
+	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
+	void Render();
 
 	// Button callbacks
 
+protected:
+	// UI components
 };
 
 #endif  // __MAINEMENU_H__

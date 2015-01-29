@@ -26,12 +26,12 @@ int main()
 	g_pSceneManager = new SceneManager();
 
 	Game* game = new Game();
-	game->SetName("game");
+	game->setName("game");
 	game->Init(11, 17);
 	g_pSceneManager->Add(game);
 
 	MainMenu* main_menu = new MainMenu();
-	main_menu->SetName("mainmenu");
+	main_menu->setName("mainmenu");
 	main_menu->Init();
 	g_pSceneManager->Add(main_menu);
 

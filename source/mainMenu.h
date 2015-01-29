@@ -5,26 +5,21 @@
 
 class MainMenu : public Scene
 {
-protected:
-	// UI components
-	CSprite*	playButton;
-	CSprite*	playText;
-
 public:
+	// Constructor & Destructor
 	MainMenu() {}
 	~MainMenu();
 
-	// initialise the menu
-	void            Init();
+	// Member functions
+	void Init();
+	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
+	void Render();
+	static void	StartGame();
 
-	// Update the menu
-	void            Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
-
-	// Render the menu
-	void            Render();
-
-	// Button callbacks
-	static void		startGame();
+protected:
+	// Member variables
+	CSprite* playButton;
+	CSprite* playText;
 };
 
 #endif  // __MAINEMENU_H__

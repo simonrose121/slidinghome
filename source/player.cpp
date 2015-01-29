@@ -5,7 +5,7 @@ Player::~Player()
 
 }
 
-void Player::moveLeft(int distance)
+void Player::MoveLeft(int distance)
 {
 	//Game* game = (Game*)g_pSceneManager->Find("game");
 	//Grid* grid = game->getGrid();
@@ -23,7 +23,7 @@ void Player::moveLeft(int distance)
 	//updatePosition(new_X, m_Y);
 }
 
-void Player::moveRight(int distance)
+void Player::MoveRight(int distance)
 {
 
 }

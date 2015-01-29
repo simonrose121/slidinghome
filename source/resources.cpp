@@ -3,26 +3,25 @@
 
 Resources::Resources()
 {
-	MainMenuBG = Iw2DCreateImage("textures/menu.png");
-	GameBG = Iw2DCreateImage("textures/background.png");
-
-	PlayButton = Iw2DCreateImage("textures/play_button.png");
-	Player = Iw2DCreateImage("textures/character.png");
-	Rock = Iw2DCreateImage("textures/rock.png");
-	Blank = Iw2DCreateImage("textures/blank.png");
+	mainMenuBG = Iw2DCreateImage("textures/menu.png");
+	gameBG = Iw2DCreateImage("textures/background.png");
+	playButton = Iw2DCreateImage("textures/play_button.png");
+	player = Iw2DCreateImage("textures/character.png");
+	rock = Iw2DCreateImage("textures/rock.png");
+	blank = Iw2DCreateImage("textures/blank.png");
 	// Load fonts
-	Font = Iw2DCreateFont("fonts/arial8.gxfont");
+	font = Iw2DCreateFont("fonts/arial8.gxfont");
 }
 
 Resources::~Resources()
 {
-	delete MainMenuBG;
-	delete PlayButton;
-	delete Player;
-	delete GameBG;
-	delete Rock;
-	delete Blank;
-	delete Font;
+	delete mainMenuBG;
+	delete playButton;
+	delete player;
+	delete gameBG;
+	delete rock;
+	delete blank;
+	delete font;
 }
 
 Resources* g_pResources = 0;

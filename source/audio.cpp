@@ -16,6 +16,14 @@
 
 Audio*  g_pAudio;
 
+AudioSound::~AudioSound()
+{
+	if (m_SoundSpec != 0)
+		delete m_SoundSpec;
+	if (m_SoundData != 0)
+		delete m_SoundData;
+}
+
 bool AudioSound::Load(const char* filename)
 {
     m_NameHash = IwHashString(filename);
@@ -26,14 +34,6 @@ bool AudioSound::Load(const char* filename)
     m_SoundSpec->SetData(m_SoundData);
 
     return true;
-}
-
-AudioSound::~AudioSound()
-{
-    if (m_SoundSpec != 0)
-        delete m_SoundSpec;
-    if (m_SoundData != 0)
-        delete m_SoundData;
 }
 
 //
@@ -60,9 +60,33 @@ AudioSound* Audio::findSound(unsigned int name_hash)
     return 0;
 }
 
+AudioSound* Audio::PreloadSound(const char* filename)
+{
+	AudioSound* sound = findSound(IwHashString(filename));
+	if (sound == 0)
+	{
+		sound = new AudioSound();
+		if (!sound->Load(filename))
+		{
+			delete sound;
+			return 0;
+		}
+		m_Sounds.push_back(sound);
+	}
+
+	return sound;
+}
+
 void Audio::Update()
 {
     IwGetSoundManager()->Update();
+}
+
+void Audio::PlaySound(const char* filename)
+{
+	AudioSound* sound = PreloadSound(filename);
+	if (sound != 0)
+		sound->m_SoundSpec->Play();
 }
 
 void Audio::PlayMusic(const char* filename, bool repeat)
@@ -74,31 +98,7 @@ void Audio::PlayMusic(const char* filename, bool repeat)
 
 void Audio::StopMusic()
 {
-    s3eAudioStop();
-}
-
-AudioSound* Audio::PreloadSound(const char* filename)
-{
-    AudioSound* sound = findSound(IwHashString(filename));
-    if (sound == 0)
-    {
-        sound = new AudioSound();
-        if (!sound->Load(filename))
-        {
-            delete sound;
-            return 0;
-        }
-        m_Sounds.push_back(sound);
-    }
-
-    return sound;
-}
-
-void Audio::PlaySound(const char* filename)
-{
-    AudioSound* sound = PreloadSound(filename);
-    if (sound != 0)
-        sound->m_SoundSpec->Play();
+	s3eAudioStop();
 }
 
 

@@ -13,13 +13,13 @@ public:
 	~LevelSelect();
 
 	// initialise the menu
-	void            Init();
+	void Init();
 
 	// Update the menu
-	void            Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
+	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 
 	// Render the menu
-	void            Render();
+	void Render();
 
 	// Button callbacks
 

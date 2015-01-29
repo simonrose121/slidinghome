@@ -1,5 +1,5 @@
-#if !defined(__PLAYER_H__)
-#define __PLAYED_H__
+#if !defined(__LEVEL_H__)
+#define __LEVEL_H__
 
 class Level
 {
