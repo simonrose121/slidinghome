@@ -88,22 +88,12 @@ Grid::~Grid()
 void Grid::MovePlayerLeft()
 {
 	int index = getIndex();
-
 	int distance = getDistance(LEFT, index);
-
 	float new_X = gameObjects[index]->m_X - (distance * gameObjectSize);
 
-	//std::pair<int, int> coords = gameObjects[index]->getCoords();
-	//int x = coords.first;
-	//int y = coords.second;
-
-	//gameObjects[index]->updatePosition(new_X, gameObjects[index]->m_Y);
-	//gameObjects[index]->setGridCoords(x - distance, y);
-	//gameObjects[index]->setId(0);
-	//gameObjects[index - distance]->setId(2);
+	UpdatePosition(index, distance, LEFT);
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
-
 	game->getTweener().Tween(0.5f,
 		FLOAT, &gameObjects[index]->m_X, new_X,
 		EASING, Ease::sineInOut,
@@ -113,22 +103,12 @@ void Grid::MovePlayerLeft()
 void Grid::MovePlayerRight()
 {
 	int index = getIndex();
-
 	int distance = getDistance(RIGHT, index);
-
 	float new_X = gameObjects[index]->m_X + (distance * gameObjectSize);
 
-	//std::pair<int, int> coords = gameObjects[index]->getCoords();
-	//int x = coords.first;
-	//int y = coords.second;
-
-	//gameObjects[index]->updatePosition(new_X, gameObjects[index]->m_Y);
-	//gameObjects[index]->setGridCoords(x + distance, y);
-	//gameObjects[index]->setId(0);
-	//gameObjects[index + distance]->setId(2);
+	UpdatePosition(index, distance, RIGHT);
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
-
 	game->getTweener().Tween(0.5f,
 		FLOAT, &gameObjects[index]->m_X, new_X,
 		EASING, Ease::sineInOut,
@@ -143,9 +123,23 @@ void Grid::MovePlayerDown()
 {
 }
 
-void Grid::UpdatePosition(int index, float new_x, int distance)
+void Grid::UpdatePosition(int index, int distance, Grid::Direction dir)
 {
+	std::pair<int, int> coords = gameObjects[index]->getCoords();
+	int x = coords.first;
+	int y = coords.second;
 
+	if (dir == LEFT)
+		gameObjects[index]->setGridCoords(x - distance, y);
+	if (dir == RIGHT)
+		gameObjects[index]->setGridCoords(x + distance, y);
+	if (dir == UP)
+		gameObjects[index]->setGridCoords(x, y + distance);
+	if (dir == DOWN)
+		gameObjects[index]->setGridCoords(x, y - distance);
+
+	gameObjects[index]->setId(0);
+	gameObjects[index + distance]->setId(2);
 }
 
 int Grid::getIndex()

@@ -27,7 +27,7 @@ public:
 	void MovePlayerRight();
 	void MovePlayerUp();
 	void MovePlayerDown();
-	void UpdatePosition(int index, float new_x, int distance);
+	void UpdatePosition(int index, int distance, Grid::Direction dir);
 
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
