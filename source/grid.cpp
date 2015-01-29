@@ -93,13 +93,6 @@ void Grid::movePlayerLeft()
 
 	float new_X = GameObjects[index]->m_X - (distance * GameObjectSize);
 
-	Game* game = (Game*)g_pSceneManager->Find("game");
-
-	game->GetTweener().Tween(0.5f,
-		FLOAT, &GameObjects[index]->m_X, new_X,
-		EASING, Ease::sineInOut,
-		END);
-
 	std::pair<int, int> coords = GameObjects[index]->getCoords();
 	int x = coords.first;
 	int y = coords.second;
@@ -108,6 +101,13 @@ void Grid::movePlayerLeft()
 	GameObjects[index]->setGridCoords(x - distance, y);
 	GameObjects[index]->setId(0);
 	GameObjects[index - distance]->setId(2);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	game->GetTweener().Tween(0.5f,
+		FLOAT, &GameObjects[index]->m_X, new_X,
+		EASING, Ease::sineInOut,
+		END);
 }
 
 void Grid::movePlayerRight()
@@ -118,13 +118,6 @@ void Grid::movePlayerRight()
 
 	float new_X = GameObjects[index]->m_X + (distance * GameObjectSize);
 
-	Game* game = (Game*)g_pSceneManager->Find("game");
-
-	game->GetTweener().Tween(0.5f,
-		FLOAT, &GameObjects[index]->m_X, new_X,
-		EASING, Ease::sineInOut,
-		END);
-
 	std::pair<int, int> coords = GameObjects[index]->getCoords();
 	int x = coords.first;
 	int y = coords.second;
@@ -133,6 +126,13 @@ void Grid::movePlayerRight()
 	GameObjects[index]->setGridCoords(x + distance, y);
 	GameObjects[index]->setId(0);
 	GameObjects[index + distance]->setId(2);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	game->GetTweener().Tween(0.5f,
+		FLOAT, &GameObjects[index]->m_X, new_X,
+		EASING, Ease::sineInOut,
+		END);
 }
 
 void Grid::movePlayerUp()
