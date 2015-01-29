@@ -9,6 +9,9 @@ Resources::Resources()
 	PlayButton = Iw2DCreateImage("textures/play_button.png");
 	Player = Iw2DCreateImage("textures/character.png");
 	Rock = Iw2DCreateImage("textures/rock.png");
+	PlayButton = Iw2DCreateImage("textures/play_button.png");
+	// Load fonts
+	Font = Iw2DCreateFont("fonts/arial8.gxfont");
 }
 
 Resources::~Resources()
@@ -18,6 +21,8 @@ Resources::~Resources()
 	delete Player;
 	delete GameBG;
 	delete Rock;
+	delete PlayButton;
+	delete Font;
 }
 
 Resources* g_pResources = 0;
