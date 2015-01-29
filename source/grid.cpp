@@ -113,8 +113,15 @@ void Grid::movePlayerLeft()
 	}
 
 	IwTrace(APP, ("distance = %d", distance));
-	
-	//cleanup
+
+	float new_X = GameObjects[index]->m_X - (distance * GameObjectSize);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	game->GetTweener().Tween(0.5f,
+		FLOAT, &GameObjects[index]->m_X, new_X,
+		EASING, Ease::sineInOut,
+		END);
 }
 
 void Grid::movePlayerRight()
