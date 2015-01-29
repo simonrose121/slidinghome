@@ -28,6 +28,8 @@ int GameObject::getId()
 
 void GameObject::updatePosition(float x, float y)
 {
+	IwTrace(APP, ("set position to [%f][%f]", x, y));
+
 	m_X = x;
 	m_Y = y;
 }

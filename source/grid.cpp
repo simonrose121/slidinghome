@@ -99,10 +99,40 @@ void Grid::movePlayerLeft()
 		FLOAT, &GameObjects[index]->m_X, new_X,
 		EASING, Ease::sineInOut,
 		END);
+
+	std::pair<int, int> coords = GameObjects[index]->getCoords();
+	int x = coords.first;
+	int y = coords.second;
+
+	GameObjects[index]->updatePosition(new_X, GameObjects[index]->m_Y);
+	GameObjects[index]->setGridCoords(x - distance, y);
+	GameObjects[index]->setId(0);
+	GameObjects[index - distance]->setId(2);
 }
 
 void Grid::movePlayerRight()
 {
+	int index = getIndex();
+
+	int distance = getDistance(RIGHT, index);
+
+	float new_X = GameObjects[index]->m_X + (distance * GameObjectSize);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	game->GetTweener().Tween(0.5f,
+		FLOAT, &GameObjects[index]->m_X, new_X,
+		EASING, Ease::sineInOut,
+		END);
+
+	std::pair<int, int> coords = GameObjects[index]->getCoords();
+	int x = coords.first;
+	int y = coords.second;
+
+	GameObjects[index]->updatePosition(new_X, GameObjects[index]->m_Y);
+	GameObjects[index]->setGridCoords(x + distance, y);
+	GameObjects[index]->setId(0);
+	GameObjects[index + distance]->setId(2);
 }
 
 void Grid::movePlayerUp()
@@ -127,6 +157,8 @@ int Grid::getIndex()
 			}
 		}
 	}
+
+	IwTrace(APP, ("index =  %d", index));
 
 	return index;
 }
@@ -168,6 +200,8 @@ int Grid::getDistance(Grid::Direction dir, int index)
 		}
 		break;
 	}
+
+	IwTrace(APP, ("distance is %d", distance));
 
 	return distance;
 }
