@@ -87,32 +87,9 @@ Grid::~Grid()
 
 void Grid::movePlayerLeft()
 {
-	int index = 0;
+	int index = getIndex();
 
-	for (int y = 0; y < Height; y++)
-	{
-		for (int x = 0; x < Width; x++)
-		{
-			if (GameObjects[x + Width * y]->getId() == 2)
-			{
-				index = x + Width * y;
-			}
-		}
-	}
-
-	std::pair<int, int> coords = GameObjects[index]->getCoords();
-	int x = coords.first;
-	int y = coords.second;
-
-	IwTrace(APP, ("coords [%d][%d]", x, y));
-
-	int distance = 0;
-
-	while (GameObjects[(x - (distance + 1)) + Width*y]->getId() == 0) {
-		distance++;
-	}
-
-	IwTrace(APP, ("distance = %d", distance));
+	int distance = getDistance(LEFT, index);
 
 	float new_X = GameObjects[index]->m_X - (distance * GameObjectSize);
 
@@ -136,21 +113,61 @@ void Grid::movePlayerDown()
 {
 }
 
-int Grid::getDistance(Grid::Direction dir)
+int Grid::getIndex()
 {
+	int index = 0;
+
+	for (int y = 0; y < Height; y++)
+	{
+		for (int x = 0; x < Width; x++)
+		{
+			if (GameObjects[x + Width * y]->getId() == 2)
+			{
+				index = x + Width * y;
+			}
+		}
+	}
+
+	return index;
+}
+
+int Grid::getDistance(Grid::Direction dir, int index)
+{
+	std::pair<int, int> coords = GameObjects[index]->getCoords();
+	int x = coords.first;
+	int y = coords.second;
+
+	IwTrace(APP, ("coords [%d][%d]", x, y));
+
 	int distance = 0;
 
 	switch (dir)
 	{
 	case LEFT:
+		while (GameObjects[(x - (distance + 1)) + Width*y]->getId() == 0) 
+		{
+			distance++;
+		}
 		break;
 	case RIGHT:
+		while (GameObjects[(x + (distance + 1)) + Width*y]->getId() == 0) 
+		{
+			distance++;
+		}
 		break;
 	case UP:
+		while (GameObjects[(x + (Width*y - (distance + 1)))]->getId() == 0)
+		{
+			distance++;
+		}
 		break;
 	case DOWN:
+		while (GameObjects[(x + (Width*y - (distance - 1)))]->getId() == 0)
+		{
+			distance++;
+		}
 		break;
 	}
 
-	return 0;
+	return distance;
 }

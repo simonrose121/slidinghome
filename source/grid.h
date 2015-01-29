@@ -24,7 +24,7 @@ protected:
 		DOWN
 	};
 
-	int				getDistance(Grid::Direction dir);
+	int				getDistance(Grid::Direction dir, int index);
 
 public:
 	int				getWidth() const			{ return Width; }
@@ -32,6 +32,7 @@ public:
 	int				getGridOriginX() const		{ return GridOriginX; }
 	int				getGridOriginY() const		{ return GridOriginY; }
 	int				getGameObjectSize() const	{ return GameObjectSize; }
+	int				getIndex();
 
 	int				GameObjectSize;
 
