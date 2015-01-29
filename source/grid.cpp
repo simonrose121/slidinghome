@@ -48,6 +48,8 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				IwTrace(APP, ("GameObject[%d], Id(%d)", x + Width*y, 0));
 				GameObjects[x + Width*y] = new BlankObject();
 				GameObjects[x + Width*y]->setId(0);
+				GameObjects[x + Width*y]->setGridCoords(x, y);
+				GameObjects[x + Width*y]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetBlank());
 				scene->AddChild(GameObjects[x + Width*y]);
 				break;
 
@@ -55,6 +57,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				IwTrace(APP, ("GameObject[%d], Id(%d)", x + Width*y, 1));
 				GameObjects[x + Width*y] = new Rock();
 				GameObjects[x + Width*y]->setId(1);
+				GameObjects[x + Width*y]->setGridCoords(x, y);
 				GameObjects[x + Width*y]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetRock());
 				GameObjects[x + Width*y]->m_ScaleX = gem_scale;
 				GameObjects[x + Width*y]->m_ScaleY = gem_scale;
@@ -65,6 +68,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				IwTrace(APP, ("GameObject[%d], Id(%d)", x + Width*y, 2));
 				GameObjects[x + Width*y] = new Player();
 				GameObjects[x + Width*y]->setId(2);
+				GameObjects[x + Width*y]->setGridCoords(x, y);
 				GameObjects[x + Width*y]->init((float)x * GameObjectSize + GridOriginX, GridOriginY + (float)y * GameObjectSize, g_pResources->GetPlayer());
 				GameObjects[x + Width*y]->m_ScaleX = gem_scale;
 				GameObjects[x + Width*y]->m_ScaleY = gem_scale;
@@ -83,60 +87,46 @@ Grid::~Grid()
 
 void Grid::movePlayerLeft()
 {
-	Player* player = (Player*)GameObjects[PlayerIndex];
-	Game* game = (Game*)g_pSceneManager->Find("game");
+	int index = 0;
 
-	IwTrace(APP, ("player is at %f, %f", player->m_X, player->m_Y));
+	for (int y = 0; y < Height; y++)
+	{
+		for (int x = 0; x < Width; x++)
+		{
+			if (GameObjects[x + Width * y]->getId() == 2)
+			{
+				index = x + Width * y;
+			}
+		}
+	}
 
-	int distance = getDistance(LEFT);
+	std::pair<int, int> coords = GameObjects[index]->getCoords();
+	int x = coords.first;
+	int y = coords.second;
 
-	float speed = (float)(distance / 8);
+	IwTrace(APP, ("coords [%d][%d]", x, y));
 
-	float new_X = player->m_X - (distance * GameObjectSize);
+	int distance = 0;
 
-	PlayerIndex = PlayerIndex - distance;
+	while (GameObjects[(x - (distance + 1)) + Width*y]->getId() == 0) {
+		distance++;
+	}
 
-	game->GetTweener().Tween(speed,
-						FLOAT, &player->m_X, new_X,
-						EASING, Ease::sineInOut,
-						END);
-
-	player->updatePosition(new_X, player->m_Y);
-
-	IwTrace(APP, ("player is now at %f, %f", player->m_X, player->m_Y));
+	IwTrace(APP, ("distance = %d", distance));
+	
+	//cleanup
 }
 
 void Grid::movePlayerRight()
 {
-	Player* player = (Player*)GameObjects[PlayerIndex];
-	Game* game = (Game*)g_pSceneManager->Find("game");
-
-	IwTrace(APP, ("player is at %f, %f", player->m_X, player->m_Y));
-
-	int distance = getDistance(RIGHT);
-
-	float speed = (float)(distance / 8);
-
-	float new_X = player->m_X + (distance * GameObjectSize);
-
-	game->GetTweener().Tween(speed,
-		FLOAT, &player->m_X, new_X,
-		EASING, Ease::sineInOut,
-		END);
-
-	player->updatePosition(new_X, player->m_Y);
-
-	IwTrace(APP, ("player is now at %f, %f", player->m_X, player->m_Y));
 }
 
 void Grid::movePlayerUp()
 {
-
 }
 
 void Grid::movePlayerDown()
 {
-
 }
 
 int Grid::getDistance(Grid::Direction dir)
@@ -146,49 +136,14 @@ int Grid::getDistance(Grid::Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-			{
-				int i = GameObjects[PlayerIndex - 1]->getId();
-				IwTrace(APP, ("to the left is %d", i));
-
-				if (i == 0)
-				{
-					while (i != 1)
-					{
-						distance++;
-
-						if (GameObjects[PlayerIndex - distance]->getId() != NULL)
-						{
-							i = GameObjects[PlayerIndex - distance]->getId();
-						}
-						IwTrace(APP, ("distance is %d", distance));
-					}
-					return distance - 1;
-				}
-				break;
-			}
+		break;
 	case RIGHT:
-			{
-				int i = GameObjects[PlayerIndex + 1]->getId();
-				IwTrace(APP, ("to the right is %d", i));
-
-				if (i == 0)
-				{
-					while (i != 1)
-					{
-						distance++;
-
-						if (GameObjects[PlayerIndex + distance]->getId() != NULL)
-						{
-							i = GameObjects[PlayerIndex + distance]->getId();
-						}
-						IwTrace(APP, ("distance is %d", distance));
-					}
-					return distance - 1;
-				}
-			}
+		break;
 	case UP:
 		break;
 	case DOWN:
 		break;
 	}
+
+	return 0;
 }

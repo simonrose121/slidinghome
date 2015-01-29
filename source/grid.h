@@ -33,7 +33,6 @@ public:
 	int				getGridOriginY() const		{ return GridOriginY; }
 	int				getGameObjectSize() const	{ return GameObjectSize; }
 
-	int				PlayerIndex;
 	int				GameObjectSize;
 
 	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);

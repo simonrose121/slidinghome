@@ -10,15 +10,23 @@ class GameObject : public CSprite
 {
 protected:
 	int			objId;
+	int			gridX;
+	int			gridY;
 
 public:
 	GameObject() { }
 	~GameObject();
 
 	void		init(float x, float y, CIw2DImage* image);
-	void		setId(int id);
-	int			getId();
+
+
 	void		updatePosition(float x, float y);
+
+	void		setId(int id);
+	void		setGridCoords(int x, int y);
+
+	int			getId();
+	std::pair<int, int> getCoords();
 };
 
 #endif

@@ -39,6 +39,7 @@ protected:
 
 	CIw2DImage*		Player;
 	CIw2DImage*		Rock;
+	CIw2DImage*		Blank;
 
 public:
 	CIw2DImage*		GetMainMenuBG()		{ return MainMenuBG; }
@@ -47,6 +48,7 @@ public:
 
 	CIw2DImage*		GetPlayer()			{ return Player; }
 	CIw2DImage*		GetRock()			{ return Rock; }
+	CIw2DImage*		GetBlank()			{ return Blank; }
 
 public:
 	Resources();

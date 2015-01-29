@@ -9,6 +9,7 @@ Resources::Resources()
 	PlayButton = Iw2DCreateImage("textures/play_button.png");
 	Player = Iw2DCreateImage("textures/character.png");
 	Rock = Iw2DCreateImage("textures/rock.png");
+	Blank = Iw2DCreateImage("textures/blank.png");
 }
 
 Resources::~Resources()
@@ -18,6 +19,7 @@ Resources::~Resources()
 	delete Player;
 	delete GameBG;
 	delete Rock;
+	delete Blank;
 }
 
 Resources* g_pResources = 0;
