@@ -163,6 +163,11 @@ int Grid::getIndex()
 	return index;
 }
 
+void Grid::updatePosition(int index, float new_x, int distance)
+{
+	
+}
+
 int Grid::getDistance(Grid::Direction dir, int index)
 {
 	std::pair<int, int> coords = GameObjects[index]->getCoords();

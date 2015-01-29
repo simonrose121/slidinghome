@@ -44,6 +44,7 @@ public:
 	void			movePlayerRight();
 	void			movePlayerUp();
 	void			movePlayerDown();
+	void updatePosition(int index, float new_x, int distance);
 };
 
 #endif
