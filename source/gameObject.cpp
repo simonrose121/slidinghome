@@ -37,6 +37,6 @@ void GameObject::setGridCoords(int x, int y)
 
 std::pair<int, int> GameObject::getCoords()
 {
-	std::pair<int, int> coords = { gridX, gridY };
+	std::pair<int, int> coords(gridX, gridY);
 	return coords;
 }
