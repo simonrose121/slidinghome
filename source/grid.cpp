@@ -66,6 +66,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(2);
 				player = gameObjects[x + width*y];
+				IwTrace(APP, ("player position at %d, %d", x, y));
 				break;
 			}
 			scene->AddChild(gameObjects[x + width*y]);
@@ -87,7 +88,6 @@ void Grid::MovePlayerLeft()
 	int distance = getDistance(LEFT, index);
 	float new_X = gameObjects[index]->m_X - (distance * gameObjectSize);
 
-	// Game objects is never pointing in the correct array position
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->getTweener().Tween(0.5f,
 		FLOAT, &player->m_X, new_X,
@@ -103,7 +103,6 @@ void Grid::MovePlayerRight()
 	int distance = getDistance(RIGHT, index);
 	float new_X = gameObjects[index]->m_X + (distance * gameObjectSize);
 
-	// For some reason game objects[index] is a rock at this point on the second tween?
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->getTweener().Tween(0.5f,
 		FLOAT, &player->m_X, new_X,
@@ -116,10 +115,34 @@ void Grid::MovePlayerRight()
 
 void Grid::MovePlayerUp()
 {
+	int index = getIndex();
+	int distance = getDistance(UP, index);
+	float new_Y = gameObjects[index]->m_Y - (distance * gameObjectSize);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	game->getTweener().Tween(0.5f,
+		FLOAT, &player->m_Y, new_Y,
+		EASING, Ease::sineInOut,
+		END);
+
+	// Update position in grid
+	UpdatePosition(index, distance, UP);
 }
 
 void Grid::MovePlayerDown()
 {
+	int index = getIndex();
+	int distance = getDistance(DOWN, index);
+	float new_Y = gameObjects[index]->m_Y + (distance * gameObjectSize);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	game->getTweener().Tween(0.5f,
+		FLOAT, &player->m_Y, new_Y,
+		EASING, Ease::sineInOut,
+		END);
+
+	// Update position in grid
+	UpdatePosition(index, distance, DOWN);
 }
 
 void Grid::UpdatePosition(int index, int distance, Grid::Direction dir)
@@ -133,24 +156,23 @@ void Grid::UpdatePosition(int index, int distance, Grid::Direction dir)
 	case LEFT:
 		gameObjects[index]->setGridCoords(x - distance, y);
 		gameObjects[index - distance]->setId(2);
-		IwTrace(APP, ("index is %d", index - distance));
 		break;
 	case RIGHT:
 		gameObjects[index]->setGridCoords(x + distance, y);
 		gameObjects[index + distance]->setId(2);
-		IwTrace(APP, ("index is %d", index + distance));
 		break;
 	case UP:
-		//gameObjects[index]->setGridCoords(x, y + distance);
-		//gameObjects[index + distance]->setId(2);
+		gameObjects[index]->setGridCoords(x, y + distance);
+		gameObjects[index - (distance * width)]->setId(2);
 		break;
 	case DOWN:
-		//gameObjects[index]->setGridCoords(x, y - distance);
-		//gameObjects[index + distance]->setId(2);
+		gameObjects[index]->setGridCoords(x, y - distance);
+		gameObjects[index + (distance * width)]->setId(2);
 		break;
 	}
 
-	gameObjects[index]->setId(0);
+	if (distance > 0)
+		gameObjects[index]->setId(0);
 
 	PrintGrid();
 }
@@ -196,13 +218,13 @@ int Grid::getDistance(Grid::Direction dir, int index)
 		}
 		break;
 	case UP:
-		while (gameObjects[(x + (width*y - (distance + 1)))]->getId() == 0)
+		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == 0)
 		{
 			distance++;
 		}
 		break;
 	case DOWN:
-		while (gameObjects[(x + (width*y - (distance - 1)))]->getId() == 0)
+		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == 0)
 		{
 			distance++;
 		}
