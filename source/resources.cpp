@@ -9,6 +9,7 @@ Resources::Resources()
 	player = Iw2DCreateImage("textures/character.png");
 	rock = Iw2DCreateImage("textures/rock.png");
 	blank = Iw2DCreateImage("textures/blank.png");
+	home = Iw2DCreateImage("textures/igloo.png");
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
 }
@@ -21,6 +22,7 @@ Resources::~Resources()
 	delete gameBG;
 	delete rock;
 	delete blank;
+	delete home;
 	delete font;
 }
 

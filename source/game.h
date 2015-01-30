@@ -3,7 +3,6 @@
 
 #include "grid.h"
 #include "scene.h"
-#include "player.h"
 
 #define GRAPHIC_DESIGN_WIDTH	768
 

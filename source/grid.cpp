@@ -68,11 +68,10 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				player = gameObjects[x + width*y];
 				break;
 			case 3:
-				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayer());
+				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getHome());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
-				gameObjects[x + width*y]->setId(2);
-				player = gameObjects[x + width*y];
+				gameObjects[x + width*y]->setId(3);
 			}
 			scene->AddChild(gameObjects[x + width*y]);
 		}

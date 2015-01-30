@@ -33,6 +33,7 @@ public:
 	CIw2DImage*	getPlayer() { return player; }
 	CIw2DImage*	getRock() { return rock; }
 	CIw2DImage*	getBlank() { return blank; }
+	CIw2DImage* getHome() { return home; }
 	CIw2DFont*  getFont() { return font; }
 
 protected:
@@ -43,6 +44,7 @@ protected:
 	CIw2DImage*	player;
 	CIw2DImage*	rock;
 	CIw2DImage*	blank;
+	CIw2DImage*	home;
 	CIw2DFont*  font;
 
 };
