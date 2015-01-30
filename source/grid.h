@@ -41,6 +41,7 @@ public:
 protected:
 	// Member variables
 	GameObject** gameObjects;
+	GameObject* player;
 	int	width;
 	int height;
 	int	gridOriginX;
