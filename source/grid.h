@@ -2,7 +2,6 @@
 #define __GRID_H__
 
 #include "gameObject.h"
-#include "rock.h"
 #include "Iw2DSceneGraph.h"
 
 using namespace Iw2DSceneGraphCore;

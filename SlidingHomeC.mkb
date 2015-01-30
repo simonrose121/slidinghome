@@ -19,16 +19,13 @@ files
 	game.cpp
 	gameObject.cpp
 	grid.cpp
-	home.cpp
 	input.cpp
 	level.cpp
 	levelSelect.cpp
 	main.cpp
 	mainMenu.cpp
 	pauseMenu.cpp
-	player.cpp
 	resources.cpp
-	rock.cpp
 	scene.cpp
 
 	audio.h
@@ -36,16 +33,13 @@ files
 	game.h
 	gameObject.h
 	grid.h
-	home.h
 	input.h
 	level.h
 	levelSelect.h
 	main.h
 	mainMenu.h
 	pauseMenu.h
-	player.h
 	resources.h
-	rock.h
 	scene.h
 	stringExtensions.h
 }
