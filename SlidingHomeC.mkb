@@ -59,6 +59,6 @@ assets
 
 deployments
 {
-    version-revision = "0"
+    version-revision = "0.2"
 }
 
