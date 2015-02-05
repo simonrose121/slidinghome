@@ -12,6 +12,8 @@
 
 using namespace IwTween;
 
+#define SPEED 8
+
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
 	int map[11][16] = {
@@ -91,12 +93,14 @@ void Grid::MovePlayerLeft()
 {
 	int index = getIndex();
 	int distance = getDistance(LEFT, index);
-	float new_X = gameObjects[index]->m_X - (distance * gameObjectSize);
-
+	
 	if (distance > 0)
 	{
+		float speed = distance / speedVal;
+		float new_X = gameObjects[index]->m_X - (distance * gameObjectSize);
+
 		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(0.5f,
+		game->getTweener().Tween(speed,
 			FLOAT, &player->m_X, new_X,
 			EASING, Ease::sineInOut,
 			END);
@@ -110,12 +114,14 @@ void Grid::MovePlayerRight()
 {
 	int index = getIndex();
 	int distance = getDistance(RIGHT, index);
-	float new_X = gameObjects[index]->m_X + (distance * gameObjectSize);
 
 	if (distance > 0)
 	{
+		float speed = distance / speedVal;
+		float new_X = gameObjects[index]->m_X + (distance * gameObjectSize);
+
 		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(0.5f,
+		game->getTweener().Tween(speed,
 			FLOAT, &player->m_X, new_X,
 			EASING, Ease::sineInOut,
 			END);
@@ -130,12 +136,14 @@ void Grid::MovePlayerUp()
 {
 	int index = getIndex();
 	int distance = getDistance(UP, index);
-	float new_Y = gameObjects[index]->m_Y - (distance * gameObjectSize);
 
 	if (distance > 0)
 	{
+		float speed = distance / speedVal;
+		float new_Y = gameObjects[index]->m_Y - (distance * gameObjectSize);
+
 		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(0.5f,
+		game->getTweener().Tween(speed,
 			FLOAT, &player->m_Y, new_Y,
 			EASING, Ease::sineInOut,
 			END);
@@ -150,12 +158,14 @@ void Grid::MovePlayerDown()
 {
 	int index = getIndex();
 	int distance = getDistance(DOWN, index);
+
 	if (distance > 0)
 	{
+		float speed = distance / speedVal;
 		float new_Y = gameObjects[index]->m_Y + (distance * gameObjectSize);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(0.5f,
+		game->getTweener().Tween(speed,
 			FLOAT, &player->m_Y, new_Y,
 			EASING, Ease::sineInOut,
 			END);

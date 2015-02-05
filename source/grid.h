@@ -49,6 +49,8 @@ protected:
 	int	gridOriginX;
 	int	gridOriginY;
 	int	gameObjectSize;
+
+	const float speedVal = 8.0;
 };
 
 #endif
