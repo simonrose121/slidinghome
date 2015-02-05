@@ -28,6 +28,8 @@ public:
 	void MovePlayerDown();
 	void UpdatePosition(int index, int distance, Grid::Direction dir);
 	void PrintGrid();
+	void WinningState();
+	void TestMap(Grid::Direction dir, int index);
 
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
@@ -41,6 +43,7 @@ protected:
 	// Member variables
 	GameObject** gameObjects;
 	GameObject* player;
+	int	homeIndex;
 	int	width;
 	int height;
 	int	gridOriginX;

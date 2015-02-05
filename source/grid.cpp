@@ -20,7 +20,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 1 },
+		{ 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -72,6 +72,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(3);
+				homeIndex = x + width * y;
 			}
 			scene->AddChild(gameObjects[x + width*y]);
 		}
@@ -101,6 +102,7 @@ void Grid::MovePlayerLeft()
 			END);
 
 		UpdatePosition(index, distance, LEFT);
+		TestMap(LEFT, index);
 	}
 }
 
@@ -120,6 +122,7 @@ void Grid::MovePlayerRight()
 
 		// Update position in grid
 		UpdatePosition(index, distance, RIGHT);
+		TestMap(RIGHT, index);
 	}
 }
 
@@ -139,6 +142,7 @@ void Grid::MovePlayerUp()
 
 		// Update position in grid
 		UpdatePosition(index, distance, UP);
+		TestMap(UP, index);
 	}
 }
 
@@ -158,6 +162,7 @@ void Grid::MovePlayerDown()
 
 		// Update position in grid
 		UpdatePosition(index, distance, DOWN);
+		TestMap(DOWN, index);
 	}
 }
 
@@ -263,4 +268,46 @@ void Grid::PrintGrid()
 		}
 		std::cout << "\n";
 	}
+}
+
+void Grid::TestMap(Grid::Direction dir, int index)
+{
+	std::pair<int, int> coords = gameObjects[index]->getCoords();
+	int x = coords.first;
+	int y = coords.second;
+
+	switch (dir)
+	{
+	case LEFT:
+		if (gameObjects[(x - 1) + width*y]->getId() == 3)
+		{
+			WinningState();
+		}
+		break;
+	case RIGHT:
+		if (gameObjects[(x + 1) + width*y]->getId() == 3)
+		{
+			WinningState();
+		}
+		break;
+	case UP:
+		if (gameObjects[(x + width*y) - width]->getId() == 3)
+		{
+			WinningState();
+		}
+		break;
+	case DOWN:
+		if (gameObjects[(x + width*y) + width]->getId() == 3)
+		{
+			WinningState();
+		}
+		break;
+	}
+}
+
+void Grid::WinningState() 
+{
+	/*Game* main_menu = (Game*)g_pSceneManager->Find("mainmenu");
+	g_pSceneManager->SwitchTo(main_menu);*/
+	IwTrace(APP, ("win"));
 }
