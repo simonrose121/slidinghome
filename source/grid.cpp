@@ -12,8 +12,6 @@
 
 using namespace IwTween;
 
-#define SPEED 8
-
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
 	int map[11][16] = {
