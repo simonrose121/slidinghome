@@ -174,7 +174,7 @@ void Grid::MovePlayerDown()
 	}
 }
 
-void Grid::UpdatePosition(int index, int distance, Grid::Direction dir)
+void Grid::UpdatePosition(int index, int distance, Direction dir)
 {
 	std::pair<int, int> coords = gameObjects[index]->getCoords();
 	int x = coords.first;
@@ -185,10 +185,12 @@ void Grid::UpdatePosition(int index, int distance, Grid::Direction dir)
 	case LEFT:
 		gameObjects[index]->setGridCoords(x - distance, y);
 		gameObjects[index - distance]->setId(2);
+		IwTrace(APP, ("my index is now %d", index - distance));
 		break;
 	case RIGHT:
 		gameObjects[index]->setGridCoords(x + distance, y);
 		gameObjects[index + distance]->setId(2);
+		IwTrace(APP, ("my index is now %d", index + distance));
 		break;
 	case UP:
 		gameObjects[index]->setGridCoords(x, y - distance);
@@ -220,10 +222,12 @@ int Grid::getIndex()
 		}
 	}
 
+	IwTrace(APP, ("player found at %d", index));
+
 	return index;
 }
 
-int Grid::getDistance(Grid::Direction dir, int index)
+int Grid::getDistance(Direction dir, int index)
 {
 	int distance = 0;
 
@@ -231,7 +235,7 @@ int Grid::getDistance(Grid::Direction dir, int index)
 	int x = coords.first;
 	int y = coords.second;
 
-	IwTrace(APP, ("current position %d, %d", x, y));
+	IwTrace(APP, ("i am at %d, %d", x, y));
 
 	switch (dir)
 	{
@@ -278,7 +282,7 @@ void Grid::PrintGrid()
 	}
 }
 
-void Grid::TestMap(Grid::Direction dir, int index)
+void Grid::TestMap(Direction dir, int index)
 {
 	std::pair<int, int> coords = gameObjects[index]->getCoords();
 	int x = coords.first;

@@ -18,8 +18,6 @@ void GameObject::Init(float x, float y, CIw2DImage* image)
 
 void GameObject::UpdatePosition(float x, float y)
 {
-	IwTrace(APP, ("set position to [%f][%f]", x, y));
-
 	m_X = x;
 	m_Y = y;
 }
@@ -33,10 +31,14 @@ void GameObject::setGridCoords(int x, int y)
 {
 	gridX = x;
 	gridY = y;
+
+	IwTrace(APP, ("i have been set to %d, %d", gridX, gridY));
 }
 
 std::pair<int, int> GameObject::getCoords()
 {
+	// This is returning incorrect grid coordinates despite being set after each movement.
 	std::pair<int, int> coords(gridX, gridY);
+
 	return coords;
 }

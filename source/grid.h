@@ -26,10 +26,10 @@ public:
 	void MovePlayerRight();
 	void MovePlayerUp();
 	void MovePlayerDown();
-	void UpdatePosition(int index, int distance, Grid::Direction dir);
+	void UpdatePosition(int index, int distance, Direction dir);
 	void PrintGrid();
 	void WinningState();
-	void TestMap(Grid::Direction dir, int index);
+	void TestMap(Direction dir, int index);
 
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
@@ -37,7 +37,7 @@ public:
 	int	getGridOriginY() const { return gridOriginY; }
 	int	getGameObjectSize() const { return gameObjectSize; }
 	int	getIndex();
-	int	getDistance(Grid::Direction dir, int index);
+	int	getDistance(Direction dir, int index);
 
 protected:
 	// Member variables
