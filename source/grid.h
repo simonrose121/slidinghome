@@ -51,7 +51,7 @@ protected:
 	int	gridOriginY;
 	int	gameObjectSize;
 
-	const float speedVal = 8.0;
+	float speedVal;
 };
 
 #endif

@@ -1,5 +1,5 @@
-#if !defined(__LEVELSELECT_H_)
-#define __LEVELSELECT_H_
+#if !defined(__LEVEL_SELECT_H_)
+#define __LEVEL_SELECT_H_
 
 #include "scene.h"
 

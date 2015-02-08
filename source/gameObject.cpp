@@ -37,7 +37,6 @@ void GameObject::setGridCoords(int x, int y)
 
 std::pair<int, int> GameObject::getCoords()
 {
-	// This is returning incorrect grid coordinates despite being set after each movement.
 	std::pair<int, int> coords(gridX, gridY);
 
 	return coords;

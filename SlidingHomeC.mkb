@@ -1,4 +1,8 @@
 #!/usr/bin/env mkb
+options
+{
+    module_path="modules"
+}
 
 subprojects
 {
@@ -13,7 +17,6 @@ files
 {
     [source]
     (source)
-
 	audio.cpp
 	blankObject.cpp
 	game.cpp

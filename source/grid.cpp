@@ -34,6 +34,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 
 	int bm_width = (int)g_pResources->getRock()->GetWidth();
 	gameObjectSize = (IwGxGetScreenWidth() * bm_width) / GRAPHIC_DESIGN_WIDTH;
+	speedVal = 8.0;
 
 	float gem_scale = (float)gameObjectSize / bm_width;
 

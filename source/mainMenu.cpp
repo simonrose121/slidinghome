@@ -4,6 +4,7 @@
 #include "audio.h"
 #include "resources.h"
 #include "game.h"
+#include "main.h"
 
 MainMenu::~MainMenu()
 {

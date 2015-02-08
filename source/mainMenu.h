@@ -1,5 +1,5 @@
-#if !defined(__MAINEMENU_H__)
-#define __MAINEMENU_H__
+#if !defined(__MAIN_MENU_H__)
+#define __MAIN_MENU_H__
 
 #include "scene.h"
 
@@ -22,4 +22,4 @@ protected:
 	CSprite* playText;
 };
 
-#endif  // __MAINEMENU_H__
+#endif  // __MAIN_MENU_H__
