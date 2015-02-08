@@ -66,6 +66,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(2);
 				player = gameObjects[x + width*y];
+				playerIndex = x + width * y;
 				break;
 			case 3:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getHome());
@@ -89,13 +90,12 @@ Grid::~Grid()
 
 void Grid::MovePlayerLeft()
 {
-	int index = getIndex();
-	int distance = getDistance(LEFT, index);
+	int distance = getDistance(LEFT);
 	
 	if (distance > 0)
 	{
 		float speed = distance / speedVal;
-		float new_X = gameObjects[index]->m_X - (distance * gameObjectSize);
+		float new_X = gameObjects[playerIndex]->m_X - (distance * gameObjectSize);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
 		game->getTweener().Tween(speed,
@@ -103,20 +103,19 @@ void Grid::MovePlayerLeft()
 			EASING, Ease::sineInOut,
 			END);
 
-		UpdatePosition(index, distance, LEFT);
-		TestMap(LEFT, index);
+		UpdatePosition(distance, LEFT);
+		TestMap(LEFT);
 	}
 }
 
 void Grid::MovePlayerRight()
 {
-	int index = getIndex();
-	int distance = getDistance(RIGHT, index);
+	int distance = getDistance(RIGHT);
 
 	if (distance > 0)
 	{
 		float speed = distance / speedVal;
-		float new_X = gameObjects[index]->m_X + (distance * gameObjectSize);
+		float new_X = gameObjects[playerIndex]->m_X + (distance * gameObjectSize);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
 		game->getTweener().Tween(speed,
@@ -125,20 +124,19 @@ void Grid::MovePlayerRight()
 			END);
 
 		// Update position in grid
-		UpdatePosition(index, distance, RIGHT);
-		TestMap(RIGHT, index);
+		UpdatePosition(distance, RIGHT);
+		TestMap(RIGHT);
 	}
 }
 
 void Grid::MovePlayerUp()
 {
-	int index = getIndex();
-	int distance = getDistance(UP, index);
+	int distance = getDistance(UP);
 
 	if (distance > 0)
 	{
 		float speed = distance / speedVal;
-		float new_Y = gameObjects[index]->m_Y - (distance * gameObjectSize);
+		float new_Y = gameObjects[playerIndex]->m_Y - (distance * gameObjectSize);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
 		game->getTweener().Tween(speed,
@@ -147,20 +145,19 @@ void Grid::MovePlayerUp()
 			END);
 
 		// Update position in grid
-		UpdatePosition(index, distance, UP);
-		TestMap(UP, index);
+		UpdatePosition(distance, UP);
+		TestMap(UP);
 	}
 }
 
 void Grid::MovePlayerDown()
 {
-	int index = getIndex();
-	int distance = getDistance(DOWN, index);
+	int distance = getDistance(DOWN);
 
 	if (distance > 0)
 	{
 		float speed = distance / speedVal;
-		float new_Y = gameObjects[index]->m_Y + (distance * gameObjectSize);
+		float new_Y = gameObjects[playerIndex]->m_Y + (distance * gameObjectSize);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
 		game->getTweener().Tween(speed,
@@ -169,40 +166,48 @@ void Grid::MovePlayerDown()
 			END);
 
 		// Update position in grid
-		UpdatePosition(index, distance, DOWN);
-		TestMap(DOWN, index);
+		UpdatePosition(distance, DOWN);
+		TestMap(DOWN);
 	}
 }
 
-void Grid::UpdatePosition(int index, int distance, Direction dir)
+void Grid::UpdatePosition(int distance, Direction dir)
 {
-	std::pair<int, int> coords = gameObjects[index]->getCoords();
+	std::pair<int, int> coords = gameObjects[playerIndex]->getCoords();
 	int x = coords.first;
 	int y = coords.second;
 
 	switch (dir)
 	{
 	case LEFT:
-		gameObjects[index]->setGridCoords(x - distance, y);
-		gameObjects[index - distance]->setId(2);
-		IwTrace(APP, ("my index is now %d", index - distance));
+		gameObjects[playerIndex]->setGridCoords(x - distance, y);
+		gameObjects[playerIndex - distance]->setId(2);
+		gameObjects[playerIndex]->setId(0);
+		playerIndex = playerIndex - distance;
+		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case RIGHT:
-		gameObjects[index]->setGridCoords(x + distance, y);
-		gameObjects[index + distance]->setId(2);
-		IwTrace(APP, ("my index is now %d", index + distance));
+		gameObjects[playerIndex]->setGridCoords(x + distance, y);
+		gameObjects[playerIndex + distance]->setId(2);
+		gameObjects[playerIndex]->setId(0);
+		playerIndex = playerIndex + distance;
+		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case UP:
-		gameObjects[index]->setGridCoords(x, y - distance);
-		gameObjects[index - (distance * width)]->setId(2);
+		gameObjects[playerIndex]->setGridCoords(x, y - distance);
+		gameObjects[playerIndex - (distance * width)]->setId(2);
+		gameObjects[playerIndex]->setId(0);
+		playerIndex = playerIndex - (distance * width);
 		break;
 	case DOWN:
-		gameObjects[index]->setGridCoords(x, y + distance);
-		gameObjects[index + (distance * width)]->setId(2);
+		gameObjects[playerIndex]->setGridCoords(x, y + distance);
+		gameObjects[playerIndex + (distance * width)]->setId(2);
+		gameObjects[playerIndex]->setId(0);
+		playerIndex = playerIndex + (distance * width);
 		break;
 	}
 
-	gameObjects[index]->setId(0);
+	IwTrace(APP, ("updated to %d, %d", gameObjects[playerIndex]->gridX, gameObjects[playerIndex]->gridY));
 
 	PrintGrid();
 }
@@ -227,11 +232,11 @@ int Grid::getIndex()
 	return index;
 }
 
-int Grid::getDistance(Direction dir, int index)
+int Grid::getDistance(Direction dir)
 {
 	int distance = 0;
 
-	std::pair<int, int> coords = gameObjects[index]->getCoords();
+	std::pair<int, int> coords = gameObjects[playerIndex]->getCoords();
 	int x = coords.first;
 	int y = coords.second;
 
@@ -282,9 +287,9 @@ void Grid::PrintGrid()
 	}
 }
 
-void Grid::TestMap(Direction dir, int index)
+void Grid::TestMap(Direction dir)
 {
-	std::pair<int, int> coords = gameObjects[index]->getCoords();
+	std::pair<int, int> coords = gameObjects[playerIndex]->getCoords();
 	int x = coords.first;
 	int y = coords.second;
 
