@@ -180,14 +180,14 @@ void Grid::UpdatePosition(int distance, Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-		gameObjects[playerIndex]->setGridCoords(x - distance, y);
+		gameObjects[playerIndex - distance]->setGridCoords(x - distance, y);
 		gameObjects[playerIndex - distance]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex - distance;
 		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case RIGHT:
-		gameObjects[playerIndex]->setGridCoords(x + distance, y);
+		gameObjects[playerIndex + distance]->setGridCoords(x + distance, y);
 		gameObjects[playerIndex + distance]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex + distance;
