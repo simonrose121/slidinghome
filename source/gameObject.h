@@ -22,7 +22,7 @@ public:
 	int	getId() { return objId; }
 	std::pair<int, int> getCoords();
 
-public:
+private:
 	// Member variables
 	int	objId;
 	int	gridX;

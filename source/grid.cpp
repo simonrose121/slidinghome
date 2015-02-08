@@ -194,20 +194,18 @@ void Grid::UpdatePosition(int distance, Direction dir)
 		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case UP:
-		gameObjects[playerIndex]->setGridCoords(x, y - distance);
+		gameObjects[playerIndex - (distance * width)]->setGridCoords(x, y - distance);
 		gameObjects[playerIndex - (distance * width)]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex - (distance * width);
 		break;
 	case DOWN:
-		gameObjects[playerIndex]->setGridCoords(x, y + distance);
+		gameObjects[playerIndex + (distance * width)]->setGridCoords(x, y + distance);
 		gameObjects[playerIndex + (distance * width)]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex + (distance * width);
 		break;
 	}
-
-	IwTrace(APP, ("updated to %d, %d", gameObjects[playerIndex]->gridX, gameObjects[playerIndex]->gridY));
 
 	PrintGrid();
 }
