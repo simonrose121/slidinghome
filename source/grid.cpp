@@ -9,6 +9,7 @@
 #include "main.h"
 
 #include <iostream>
+#include <unistd.h>
 
 using namespace IwTween;
 
@@ -20,11 +21,11 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 1 },
+		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 	};
 
@@ -74,7 +75,6 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(3);
-				homeIndex = x + width * y;
 			}
 			scene->AddChild(gameObjects[x + width*y]);
 		}
@@ -92,20 +92,25 @@ Grid::~Grid()
 void Grid::MovePlayerLeft()
 {
 	int distance = getDistance(LEFT);
-	
+
 	if (distance > 0)
 	{
 		float speed = distance / speedVal;
 		float new_X = gameObjects[playerIndex]->m_X - (distance * gameObjectSize);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(speed,
+		CTween* tween(game->getTweener().Tween(speed,
 			FLOAT, &player->m_X, new_X,
 			EASING, Ease::sineInOut,
-			END);
+			END));
+
+		if (!tween->IsAnimating())
+			IwTrace(APP, ("i am animating"));
 
 		UpdatePosition(distance, LEFT);
-		TestMap(LEFT);
+		// This needs to be called once the tween has finished
+		
+		//TestMap(LEFT);
 	}
 }
 
@@ -244,13 +249,13 @@ int Grid::getDistance(Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == 0) 
+		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == 0)
 		{
 			distance++;
 		}
 		break;
 	case RIGHT:
-		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == 0) 
+		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == 0)
 		{
 			distance++;
 		}
@@ -321,9 +326,9 @@ void Grid::TestMap(Direction dir)
 	}
 }
 
-void Grid::WinningState() 
+void Grid::WinningState()
 {
-	/*Game* main_menu = (Game*)g_pSceneManager->Find("mainmenu");
-	g_pSceneManager->SwitchTo(main_menu);*/
+	Game* main_menu = (Game*)g_pSceneManager->Find("mainmenu");
+	g_pSceneManager->SwitchTo(main_menu);
 	IwTrace(APP, ("win"));
 }

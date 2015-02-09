@@ -43,7 +43,6 @@ protected:
 	// Member variables
 	GameObject** gameObjects;
 	GameObject* player;
-	int	homeIndex;
 	int playerIndex;
 	int	width;
 	int height;
