@@ -99,18 +99,15 @@ void Grid::MovePlayerLeft()
 		float new_X = gameObjects[playerIndex]->m_X - (distance * gameObjectSize);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
-		CTween* tween(game->getTweener().Tween(speed,
+		game->getTweener().Tween(speed,
 			FLOAT, &player->m_X, new_X,
 			EASING, Ease::sineInOut,
-			END));
+			ONCOMPLETE, TestMapLeft,
+			END);
 
-		if (!tween->IsAnimating())
-			IwTrace(APP, ("i am animating"));
-
-		UpdatePosition(distance, LEFT);
 		// This needs to be called once the tween has finished
-		
-		//TestMap(LEFT);
+		UpdatePosition(distance, LEFT);
+
 	}
 }
 
@@ -289,6 +286,11 @@ void Grid::PrintGrid()
 		}
 		std::cout << "\n";
 	}
+}
+
+void Grid::TestMapLeft(CTween* pTween)
+{
+	IwTrace(APP, ("this has worked"));
 }
 
 void Grid::TestMap(Direction dir)

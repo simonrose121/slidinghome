@@ -1,6 +1,7 @@
 #if !defined(__GRID_H__)
 #define __GRID_H__
 
+#include "scene.h"
 #include "gameObject.h"
 #include "Iw2DSceneGraph.h"
 
@@ -30,6 +31,7 @@ public:
 	void PrintGrid();
 	void WinningState();
 	void TestMap(Direction dir);
+	static void TestMapLeft(CTween* pTween);
 
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
