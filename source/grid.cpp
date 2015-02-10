@@ -21,11 +21,11 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 1 },
+		{ 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 1 },
+		{ 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 	};
 
@@ -127,15 +127,23 @@ void Grid::MovePlayerRight()
 		float speed = distance / speedVal;
 		float new_X = gameObjects[playerIndex]->m_X + (distance * gameObjectSize);
 
-		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(speed,
-			FLOAT, &player->m_X, new_X,
-			EASING, Ease::sineInOut,
-			END);
-
-		// Update position in grid
 		UpdatePosition(distance, RIGHT);
-		TestMap(RIGHT);
+		bool hasWon = TestMap(RIGHT);
+
+		Game* game = (Game*)g_pSceneManager->Find("game");
+		if (hasWon) {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_X, new_X,
+				EASING, Ease::sineInOut,
+				ONCOMPLETE, WinningState,
+				END);
+		}
+		else {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_X, new_X,
+				EASING, Ease::sineInOut,
+				END);
+		}
 	}
 }
 
@@ -148,15 +156,23 @@ void Grid::MovePlayerUp()
 		float speed = distance / speedVal;
 		float new_Y = gameObjects[playerIndex]->m_Y - (distance * gameObjectSize);
 
-		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(speed,
-			FLOAT, &player->m_Y, new_Y,
-			EASING, Ease::sineInOut,
-			END);
-
-		// Update position in grid
 		UpdatePosition(distance, UP);
-		TestMap(UP);
+		bool hasWon = TestMap(UP);
+
+		Game* game = (Game*)g_pSceneManager->Find("game");
+		if (hasWon) {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_Y, new_Y,
+				EASING, Ease::sineInOut,
+				ONCOMPLETE, WinningState,
+				END);
+		}
+		else {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_Y, new_Y,
+				EASING, Ease::sineInOut,
+				END);
+		}
 	}
 }
 
@@ -169,15 +185,23 @@ void Grid::MovePlayerDown()
 		float speed = distance / speedVal;
 		float new_Y = gameObjects[playerIndex]->m_Y + (distance * gameObjectSize);
 
-		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(speed,
-			FLOAT, &player->m_Y, new_Y,
-			EASING, Ease::sineInOut,
-			END);
-
-		// Update position in grid
 		UpdatePosition(distance, DOWN);
-		TestMap(DOWN);
+		bool hasWon = TestMap(DOWN);
+
+		Game* game = (Game*)g_pSceneManager->Find("game");
+		if (hasWon) {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_Y, new_Y,
+				EASING, Ease::sineInOut,
+				ONCOMPLETE, WinningState,
+				END);
+		}
+		else {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_Y, new_Y,
+				EASING, Ease::sineInOut,
+				END);
+		}
 	}
 }
 
