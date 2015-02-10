@@ -15,7 +15,7 @@ using namespace IwTween;
 
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
-	int map[16][11] = {
+	int map[15][11] = {
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		{ 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -67,7 +67,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				break;
 
 			case 2:
-				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayer());
+				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayerDownAtlas());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(2);
@@ -222,14 +222,12 @@ void Grid::UpdatePosition(int distance, Direction dir)
 		gameObjects[playerIndex - distance]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex - distance;
-		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case RIGHT:
 		gameObjects[playerIndex + distance]->setGridCoords(x + distance, y);
 		gameObjects[playerIndex + distance]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex + distance;
-		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case UP:
 		gameObjects[playerIndex - (distance * width)]->setGridCoords(x, y - distance);

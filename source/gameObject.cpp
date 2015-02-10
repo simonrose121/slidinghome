@@ -16,6 +16,15 @@ void GameObject::Init(float x, float y, CIw2DImage* image)
 	SetImage(image);
 }
 
+void GameObject::Init(float x, float y, CAtlas* atlas)
+{
+	m_X = x;
+	m_Y = y;
+
+	SetAtlas(atlas);
+}
+
+
 void GameObject::UpdatePosition(float x, float y)
 {
 	m_X = x;
