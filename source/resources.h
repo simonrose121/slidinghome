@@ -28,8 +28,10 @@ public:
 
 	// Member functions
 	CIw2DImage*	getMainMenuBG()	{ return mainMenuBG; }
+	CIw2DImage*	getEndScreenBG()	{ return endScreenBG; }
 	CIw2DImage*	getGameBG() { return gameBG; }
 	CIw2DImage*	getPlayButton() { return playButton; }
+	CIw2DImage*	getExitButton() { return exitButton; }
 	CIw2DImage*	getPlayer() { return player; }
 	CIw2DImage*	getRock() { return rock; }
 	CIw2DImage*	getBlank() { return blank; }
@@ -39,8 +41,10 @@ public:
 protected:
 	// Member variables
 	CIw2DImage*	mainMenuBG;
+	CIw2DImage*	endScreenBG;
 	CIw2DImage*	gameBG;
 	CIw2DImage*	playButton;
+	CIw2DImage*	exitButton;
 	CIw2DImage*	player;
 	CIw2DImage*	rock;
 	CIw2DImage*	blank;

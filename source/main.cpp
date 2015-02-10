@@ -7,6 +7,7 @@
 #include "levelSelect.h"
 #include "mainMenu.h"
 #include "pauseMenu.h"
+#include "endScreen.h"
 #include "resources.h"
 
 using namespace IwTween;
@@ -27,13 +28,18 @@ int main()
 
 	Game* game = new Game();
 	game->setName("game");
-	game->Init(11, 16);
+	game->Init(11, 15);
 	g_pSceneManager->Add(game);
 
 	MainMenu* main_menu = new MainMenu();
 	main_menu->setName("mainmenu");
 	main_menu->Init();
 	g_pSceneManager->Add(main_menu);
+
+	EndScreen* end_screen = new EndScreen();
+	end_screen->setName("endscreen");
+	end_screen->Init();
+	g_pSceneManager->Add(end_screen);
 
 	g_pSceneManager->SwitchTo(main_menu);
 

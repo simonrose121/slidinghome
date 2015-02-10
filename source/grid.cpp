@@ -15,7 +15,7 @@ using namespace IwTween;
 
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
-	int map[16][11] = {
+	int map[15][11] = {
 		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		{ 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -325,7 +325,7 @@ void Grid::PrintGrid()
 
 void Grid::WinningState(CTween* pTween)
 {
-	Game* main_menu = (Game*)g_pSceneManager->Find("mainmenu");
+	Game* main_menu = (Game*)g_pSceneManager->Find("endscreen");
 	g_pSceneManager->SwitchTo(main_menu);
 	IwTrace(APP, ("win"));
 }

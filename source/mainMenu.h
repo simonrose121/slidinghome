@@ -15,9 +15,11 @@ public:
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
 	static void	StartGame();
+	float getGraphicsScale() { return graphicsScale; }
 
 protected:
 	// Member variables
+	float graphicsScale;
 	CSprite* playButton;
 	CSprite* playText;
 };
