@@ -97,17 +97,24 @@ void Grid::MovePlayerLeft()
 	{
 		float speed = distance / speedVal;
 		float new_X = gameObjects[playerIndex]->m_X - (distance * gameObjectSize);
+		
+		UpdatePosition(distance, LEFT);
+		bool hasWon = TestMap(LEFT);
 
 		Game* game = (Game*)g_pSceneManager->Find("game");
-		game->getTweener().Tween(speed,
-			FLOAT, &player->m_X, new_X,
-			EASING, Ease::sineInOut,
-			ONCOMPLETE, TestMapLeft,
-			END);
-
-		// This needs to be called once the tween has finished
-		UpdatePosition(distance, LEFT);
-
+		if (hasWon) {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_X, new_X,
+				EASING, Ease::sineInOut,
+				ONCOMPLETE, WinningState,
+				END);
+		}
+		else {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_X, new_X,
+				EASING, Ease::sineInOut,
+				END);
+		}
 	}
 }
 
@@ -288,12 +295,14 @@ void Grid::PrintGrid()
 	}
 }
 
-void Grid::TestMapLeft(CTween* pTween)
+void Grid::WinningState(CTween* pTween)
 {
-	IwTrace(APP, ("this has worked"));
+	Game* main_menu = (Game*)g_pSceneManager->Find("mainmenu");
+	g_pSceneManager->SwitchTo(main_menu);
+	IwTrace(APP, ("win"));
 }
 
-void Grid::TestMap(Direction dir)
+bool Grid::TestMap(Direction dir)
 {
 	std::pair<int, int> coords = gameObjects[playerIndex]->getCoords();
 	int x = coords.first;
@@ -304,33 +313,27 @@ void Grid::TestMap(Direction dir)
 	case LEFT:
 		if (gameObjects[(x - 1) + width*y]->getId() == 3)
 		{
-			WinningState();
+			return true;
 		}
 		break;
 	case RIGHT:
 		if (gameObjects[(x + 1) + width*y]->getId() == 3)
 		{
-			WinningState();
+			return true;
 		}
 		break;
 	case UP:
 		if (gameObjects[(x + width*y) - width]->getId() == 3)
 		{
-			WinningState();
+			return true;
 		}
 		break;
 	case DOWN:
 		if (gameObjects[(x + width*y) + width]->getId() == 3)
 		{
-			WinningState();
+			return true;
 		}
 		break;
 	}
-}
-
-void Grid::WinningState()
-{
-	Game* main_menu = (Game*)g_pSceneManager->Find("mainmenu");
-	g_pSceneManager->SwitchTo(main_menu);
-	IwTrace(APP, ("win"));
+	return false;
 }

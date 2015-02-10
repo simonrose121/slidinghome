@@ -29,9 +29,8 @@ public:
 	void MovePlayerDown();
 	void UpdatePosition(int distance, Direction dir);
 	void PrintGrid();
-	void WinningState();
-	void TestMap(Direction dir);
-	static void TestMapLeft(CTween* pTween);
+	bool TestMap(Direction dir);
+	static void WinningState(CTween* pTween);
 
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
