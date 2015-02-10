@@ -119,6 +119,7 @@ void Grid::MovePlayerLeft()
 				EASING, Ease::sineInOut,
 				END);
 		}
+		player->SetAnimDuration(distance);
 	}
 }
 

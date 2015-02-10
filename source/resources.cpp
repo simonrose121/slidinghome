@@ -21,7 +21,6 @@ Resources::Resources()
 	playerRightAtlas = new CAtlas(frame_w, frame_h, 3, playerRight);
 	playerUpAtlas = new CAtlas(frame_w, frame_h, 3, playerUp);
 	playerDownAtlas = new CAtlas(frame_w, frame_h, 3, playerDown);
-
 }
 
 Resources::~Resources()
