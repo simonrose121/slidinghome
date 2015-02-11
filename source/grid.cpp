@@ -21,29 +21,19 @@ using namespace IwTween;
 
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
-	//ifstream fstrm("maps/level1.txt");
-	//int map[SIZEY][SIZEX];
-	//int row = 0;
-	//while (fstrm.getline(map[row], SIZEX + 1)) {
-	//	++row;
-	//};	
-	int map[SIZEY][SIZEX] = {
-		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 },
-		{ 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-		{ 1, 0, 0, 0, 1, 3, 0, 0, 0, 0, 1 },
-		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-	};
+	ifstream file("maps/level1.txt");
+	int map[SIZEY][SIZEX];
+	for (int y = 0; y < num_rows; y++)
+	{
+		for (int x = 0; x < num_columns; x++)
+		{
+			if (!(file >> map[y][x]))
+			{
+				break;
+			}
+		}
+		if (!file) break;
+	}
 
 	width = num_columns;
 	height = num_rows;
