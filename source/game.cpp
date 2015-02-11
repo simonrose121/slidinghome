@@ -64,16 +64,16 @@ void Game::Update(float deltaTime, float alphaMul)
 	Scene::Update(deltaTime, alphaMul);
 
 	// Detect screen tap
-	if (m_IsInputActive && m_Manager->getCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
-	{
-		g_pInput->Reset();
-		if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-		{
-			pauseMenu();
-		}
-	}
 	if (m_IsInputActive && m_Manager->getCurrent() == this)
 	{
+		if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
+		{
+			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				pauseMenu();
+			}
+		}
+
 		//if input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
