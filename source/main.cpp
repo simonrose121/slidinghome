@@ -36,6 +36,11 @@ int main()
 	main_menu->Init();
 	g_pSceneManager->Add(main_menu);
 
+	PauseMenu* pause_menu = new PauseMenu();
+	pause_menu->setName("pausemenu");
+	pause_menu->Init();
+	g_pSceneManager->Add(pause_menu);
+
 	EndScreen* end_screen = new EndScreen();
 	end_screen->setName("endscreen");
 	end_screen->Init();

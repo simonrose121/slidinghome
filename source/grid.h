@@ -39,7 +39,7 @@ public:
 	int	getGameObjectSize() const { return gameObjectSize; }
 	int	getIndex();
 	int	getDistance(Direction dir);
-
+	
 protected:
 	// Member variables
 	GameObject** gameObjects;

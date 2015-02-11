@@ -31,7 +31,7 @@ void EndScreen::Init()
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	// Create Start Game button
+	// Create End Game button
 	float x_pos = (float)IwGxGetScreenWidth() / 2;
 	float y_pos = (float)IwGxGetScreenHeight() / 3;
 	exitButton = new CSprite();
@@ -78,5 +78,4 @@ void EndScreen::mainMenu()
 	MainMenu* mainmenu = (MainMenu*)g_pSceneManager->Find("mainmenu");
 	g_pSceneManager->SwitchTo(mainmenu);
 
-	//game->newGame();
 }

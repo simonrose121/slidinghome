@@ -9,14 +9,26 @@
 #include "main.h"
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <unistd.h>
 
+#define SIZEY 15
+#define SIZEX 11
+
+using namespace std;
 using namespace IwTween;
 
 Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
-	int map[15][11] = {
-		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+		ifstream fstrm("maps/level1.txt");
+		int map[SIZEY][SIZEX];
+		int row = 0;
+		while (fstrm.getline(map[row], SIZEX + 1)) {
+			++row;
+		};	
+	//int map[SIZEY][SIZEX] = {
+		/*{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 		{ 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -30,8 +42,8 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 		{ 1, 0, 0, 0, 1, 3, 0, 0, 0, 0, 1 },
-		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-	};
+		{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }*/
+	//};
 
 	width = num_columns;
 	height = num_rows;

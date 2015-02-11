@@ -1,5 +1,5 @@
-#if !defined(__MAINEMENU_H__)
-#define __MAINEMENU_H__
+#if !defined(__PAUSEMENU_H__)
+#define __PAUSEMENU_H__
 
 #include "scene.h"
 
@@ -14,11 +14,16 @@ public:
 	void Init();
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
+	static void	mainMenu();
+	static void	StartGame();
 
 	// Button callbacks
 
 protected:
 	// UI components
+	CSprite* exitButton;
+	CSprite* playButton;
+	CSprite* playText;
 };
 
-#endif  // __MAINEMENU_H__
+#endif  // __PAUSEMENU_H__

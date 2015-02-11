@@ -1,0 +1,2 @@
+^C:\USERS\USER\DESKTOP\SLIDINGHOME\SLIDINGHOMEC.MKB
+"C:\Marmalade\7.4\s3e\python\python.exe" "C:\Marmalade\7.4\s3e\makefile_builder\mkb.py" "c:/Users/User/Desktop/SlidingHome/SlidingHomeC.mkb" "--buildenv=VC11" "--default-buildenv=vc11" --msvc-project

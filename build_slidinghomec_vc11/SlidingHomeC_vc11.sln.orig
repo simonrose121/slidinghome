@@ -1,0 +1,51 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SlidingHomeC_vc11", "SlidingHomeC_vc11.vcxproj", "{F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}"
+
+EndProject
+Global
+    GlobalSection(ExtensibilityGlobals) = postSolution
+    EndGlobalSection
+    GlobalSection(ExtensibilityAddIns) = postSolution
+    EndGlobalSection
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        x86 Debug|Win32 = x86 Debug|Win32
+        x86 Release|Win32 = x86 Release|Win32
+        GCC ARM Debug|Win32 = GCC ARM Debug|Win32
+        GCC ARM Release|Win32 = GCC ARM Release|Win32
+        RVCT ARM Debug|Win32 = RVCT ARM Debug|Win32
+        RVCT ARM Release|Win32 = RVCT ARM Release|Win32
+        GCC MIPS Debug|Win32 = GCC MIPS Debug|Win32
+        GCC MIPS Release|Win32 = GCC MIPS Release|Win32
+        GCC X86 ANDROID Debug|Win32 = GCC X86 ANDROID Debug|Win32
+        GCC X86 ANDROID Release|Win32 = GCC X86 ANDROID Release|Win32
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.x86 Debug|Win32.ActiveCfg = x86 Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.x86 Debug|Win32.Build.0 = x86 Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.x86 Release|Win32.ActiveCfg = x86 Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.x86 Release|Win32.Build.0 = x86 Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC ARM Debug|Win32.ActiveCfg = GCC ARM Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC ARM Debug|Win32.Build.0 = GCC ARM Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC ARM Release|Win32.ActiveCfg = GCC ARM Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC ARM Release|Win32.Build.0 = GCC ARM Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.RVCT ARM Debug|Win32.ActiveCfg = RVCT ARM Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.RVCT ARM Debug|Win32.Build.0 = RVCT ARM Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.RVCT ARM Release|Win32.ActiveCfg = RVCT ARM Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.RVCT ARM Release|Win32.Build.0 = RVCT ARM Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC MIPS Debug|Win32.ActiveCfg = GCC MIPS Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC MIPS Debug|Win32.Build.0 = GCC MIPS Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC MIPS Release|Win32.ActiveCfg = GCC MIPS Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC MIPS Release|Win32.Build.0 = GCC MIPS Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 ANDROID Debug|Win32.ActiveCfg = GCC X86 ANDROID Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 ANDROID Debug|Win32.Build.0 = GCC X86 ANDROID Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 ANDROID Release|Win32.ActiveCfg = GCC X86 ANDROID Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 ANDROID Release|Win32.Build.0 = GCC X86 ANDROID Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 TIZEN Debug|Win32.ActiveCfg = GCC X86 TIZEN Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 TIZEN Debug|Win32.Build.0 = GCC X86 TIZEN Debug|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 TIZEN Release|Win32.ActiveCfg = GCC X86 TIZEN Release|Win32
+        {F4BA7D23-3CE7-8EE9-BD7C-558DE1540328}.GCC X86 TIZEN Release|Win32.Build.0 = GCC X86 TIZEN Release|Win32
+    EndGlobalSection
+    GlobalSection(SolutionProperties) = preSolution
+        HideSolutionNode = FALSE
+    EndGlobalSection
+EndGlobal

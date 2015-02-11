@@ -19,11 +19,13 @@ public:
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
 	void NewGame();
+	static void	pauseMenu();
 	float getGraphicsScale() { return graphicsScale; }
 
 protected:
 	// Member variables
 	Grid* grid;
+	CSprite* pauseButton;
 	float graphicsScale;
 	int start_x;
 	int	start_y;

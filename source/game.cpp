@@ -38,6 +38,21 @@ void Game::Init(int width, int height)
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
+	// Create Start Game button
+	float x_pos = (float)IwGxGetScreenWidth() / 1;
+	float y_pos = (float)IwGxGetScreenHeight() / 1;
+	pauseButton = new CSprite();
+	pauseButton->SetImage(g_pResources->getPauseButton());
+	pauseButton->m_X = x_pos;
+	pauseButton->m_Y = y_pos;
+	pauseButton->m_W = pauseButton->GetImage()->GetWidth();
+	pauseButton->m_H = pauseButton->GetImage()->GetHeight();
+	pauseButton->m_AnchorX = 1;
+	pauseButton->m_AnchorY = 1;
+	pauseButton->m_ScaleX = getGraphicsScale();
+	pauseButton->m_ScaleY = getGraphicsScale();
+	AddChild(pauseButton);
+
 	grid = new Grid(this, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 }
 
@@ -48,6 +63,15 @@ void Game::Update(float deltaTime, float alphaMul)
 
 	Scene::Update(deltaTime, alphaMul);
 
+	// Detect screen tap
+	if (m_IsInputActive && m_Manager->getCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
+	{
+		g_pInput->Reset();
+		if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			pauseMenu();
+		}
+	}
 	if (m_IsInputActive && m_Manager->getCurrent() == this)
 	{
 		//if input is in grid
@@ -96,6 +120,12 @@ void Game::Update(float deltaTime, float alphaMul)
 void Game::Render()
 {
 	Scene::Render();
+}
+
+void Game::pauseMenu() 
+{
+	PauseMenu* pausemenu = (PauseMenu*)g_pSceneManager->Find("pausemenu");
+	g_pSceneManager->SwitchTo(pausemenu);
 }
 
 void Game::NewGame()
