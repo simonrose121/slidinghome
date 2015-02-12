@@ -114,12 +114,15 @@ void Grid::MovePlayerLeft()
 				EASING, Ease::sineInOut,
 				ONCOMPLETE, WinningState,
 				END);
+			game->setIsMoving(true);
 		}
 		else {
 			game->getTweener().Tween(speed,
 				FLOAT, &player->m_X, new_X,
 				EASING, Ease::sineInOut,
+				ONCOMPLETE, SetComplete,
 				END);
+			game->setIsMoving(true);
 		}
 	}
 }
@@ -143,12 +146,15 @@ void Grid::MovePlayerRight()
 				EASING, Ease::sineInOut,
 				ONCOMPLETE, WinningState,
 				END);
+			game->setIsMoving(true);
 		}
 		else {
 			game->getTweener().Tween(speed,
 				FLOAT, &player->m_X, new_X,
 				EASING, Ease::sineInOut,
+				ONCOMPLETE, SetComplete,
 				END);
+			game->setIsMoving(true);
 		}
 	}
 }
@@ -172,12 +178,15 @@ void Grid::MovePlayerUp()
 				EASING, Ease::sineInOut,
 				ONCOMPLETE, WinningState,
 				END);
+			game->setIsMoving(true);
 		}
 		else {
 			game->getTweener().Tween(speed,
 				FLOAT, &player->m_Y, new_Y,
 				EASING, Ease::sineInOut,
+				ONCOMPLETE, SetComplete,
 				END);
+			game->setIsMoving(true);
 		}
 	}
 }
@@ -201,12 +210,15 @@ void Grid::MovePlayerDown()
 				EASING, Ease::sineInOut,
 				ONCOMPLETE, WinningState,
 				END);
+			game->setIsMoving(true);
 		}
 		else {
 			game->getTweener().Tween(speed,
 				FLOAT, &player->m_Y, new_Y,
 				EASING, Ease::sineInOut,
+				ONCOMPLETE, SetComplete,
 				END);
+			game->setIsMoving(true);
 		}
 	}
 }
@@ -330,6 +342,12 @@ void Grid::WinningState(CTween* pTween)
 	Game* main_menu = (Game*)g_pSceneManager->Find("endscreen");
 	g_pSceneManager->SwitchTo(main_menu);
 	IwTrace(APP, ("win"));
+}
+
+void Grid::SetComplete(CTween* pTween)
+{
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	game->setIsMoving(false);
 }
 
 bool Grid::TestMap(Direction dir)

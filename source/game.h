@@ -21,6 +21,8 @@ public:
 	void NewGame();
 	static void	pauseMenu();
 	float getGraphicsScale() { return graphicsScale; }
+	bool getIsMoving() { return isMoving; }
+	void setIsMoving(bool moving) { isMoving = moving; }
 
 protected:
 	// Member variables
@@ -29,6 +31,7 @@ protected:
 	float graphicsScale;
 	int start_x;
 	int	start_y;
+	bool isMoving;
 };
 
 #endif

@@ -31,6 +31,7 @@ public:
 	void PrintGrid();
 	bool TestMap(Direction dir);
 	static void WinningState(CTween* pTween);
+	static void SetComplete(CTween* pTween);
 
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
