@@ -32,6 +32,8 @@ protected:
 	int start_x;
 	int	start_y;
 	bool isMoving;
+	int minimumSwipe;
+	int swipeOffset;
 };
 
 #endif

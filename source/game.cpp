@@ -11,8 +11,6 @@
 
 #define GRID_OFFSET_X 41
 #define GRID_OFFSET_Y 37
-#define MINIMUM_SWIPE 100
-#define SWIPE_OFFSET 200
 
 Game::~Game()
 {
@@ -56,6 +54,8 @@ void Game::Init(int width, int height)
 	grid = new Grid(this, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 
 	isMoving = false;
+	minimumSwipe = 100 * graphicsScale;
+	swipeOffset = 200 * graphicsScale;
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -95,25 +95,25 @@ void Game::Update(float deltaTime, float alphaMul)
 			else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 			{
 				// Check current input is smaller than start touch position minus min swipe
-				if (g_pInput->m_X < start_x - MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
+				if (g_pInput->m_X < start_x - minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
 				{
 					IwTrace(APP, ("move left"));
 					if (!isMoving)
 						grid->MovePlayerLeft();
 				}
-				if (g_pInput->m_Y < start_y - MINIMUM_SWIPE && g_pInput->m_X < start_x + SWIPE_OFFSET && g_pInput->m_X > start_x - SWIPE_OFFSET)
+				if (g_pInput->m_Y < start_y - minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
 				{
 					IwTrace(APP, ("move up"));
 					if (!isMoving)
 						grid->MovePlayerUp();
 				}
-				if (g_pInput->m_X > start_x + MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
+				if (g_pInput->m_X > start_x + minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
 				{
 					IwTrace(APP, ("move right"));
 					if (!isMoving)
 						grid->MovePlayerRight();
 				}
-				if (g_pInput->m_Y > start_y + MINIMUM_SWIPE && g_pInput->m_X < start_x + SWIPE_OFFSET && g_pInput->m_X > start_x - SWIPE_OFFSET)
+				if (g_pInput->m_Y > start_y + minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
 				{
 					IwTrace(APP, ("move down"));
 					if (!isMoving)

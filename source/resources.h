@@ -40,7 +40,6 @@ public:
 	CIw2DImage*	getRock() { return rock; }
 	CIw2DImage*	getBlank() { return blank; }
 	CIw2DImage* getHome() { return home; }
-	CIw2DFont* getFont() { return font; }
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
 	CAtlas* getPlayerRightAtlas() { return playerRightAtlas; }
 	CAtlas* getPlayerUpAtlas() { return playerUpAtlas; }
@@ -63,7 +62,6 @@ protected:
 	CIw2DImage*	rock;
 	CIw2DImage*	blank;
 	CIw2DImage*	home;
-	CIw2DFont* font;
 
 	// Atlases
 	CAtlas*	playerLeftAtlas;
