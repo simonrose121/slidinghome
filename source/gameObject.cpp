@@ -22,7 +22,7 @@ void GameObject::Init(float x, float y, CAtlas* atlas)
 	m_Y = y;
 
 	SetAtlas(atlas);
-	SetAnimDuration(2);
+	SetAnimDuration(0.2);
 	SetAnimRepeat(1);
 }
 

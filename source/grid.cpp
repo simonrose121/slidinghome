@@ -39,7 +39,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 
 	int bm_width = (int)g_pResources->getRock()->GetWidth();
 	gameObjectSize = (IwGxGetScreenWidth() * bm_width) / GRAPHIC_DESIGN_WIDTH;
-	speedVal = 2.0;
+	speedVal = 8.0;
 
 	float gem_scale = (float)gameObjectSize / bm_width;
 
@@ -118,10 +118,9 @@ void Grid::MovePlayerLeft()
 				FLOAT, &player->m_X, new_X,
 				EASING, Ease::sineInOut,
 				END);
-			player->SetAtlas(g_pResources->getPlayerDownAtlas());
-			player->SetAnimDuration(0.01f);
-			player->SetAnimRepeat(10);
 		}
+		player->SetAtlas(g_pResources->getPlayerLeftAtlas());
+		player->SetAnimRepeat(distance/2);
 	}
 }
 
@@ -151,6 +150,8 @@ void Grid::MovePlayerRight()
 				EASING, Ease::sineInOut,
 				END);
 		}
+		player->SetAtlas(g_pResources->getPlayerRightAtlas());
+		player->SetAnimRepeat(distance / 2);
 	}
 }
 
@@ -180,6 +181,8 @@ void Grid::MovePlayerUp()
 				EASING, Ease::sineInOut,
 				END);
 		}
+		player->SetAtlas(g_pResources->getPlayerUpAtlas());
+		player->SetAnimRepeat(distance / 2);
 	}
 }
 
@@ -210,6 +213,8 @@ void Grid::MovePlayerDown()
 				EASING, Ease::sineInOut,
 				END);
 		}
+		player->SetAtlas(g_pResources->getPlayerDownAtlas());
+		player->SetAnimRepeat(distance / 2);
 	}
 }
 
