@@ -100,29 +100,10 @@ void Grid::MovePlayerLeft()
 
 	if (distance > 0)
 	{
-		float speed = distance / speedVal;
 		float new_X = gameObjects[playerIndex]->m_X - (distance * gameObjectSize);
 		
-		UpdatePosition(distance, LEFT);
-		bool hasWon = TestMap(LEFT);
+		MovePlayer(LEFT, new_X, distance);
 
-		Game* game = (Game*)g_pSceneManager->Find("game");
-		if (hasWon) {
-			game->getTweener().Tween(speed,
-				FLOAT, &player->m_X, new_X,
-				EASING, Ease::sineInOut,
-				ONCOMPLETE, WinningState,
-				END);
-			game->setIsMoving(true);
-		}
-		else {
-			game->getTweener().Tween(speed,
-				FLOAT, &player->m_X, new_X,
-				EASING, Ease::sineInOut,
-				ONCOMPLETE, SetComplete,
-				END);
-			game->setIsMoving(true);
-		}
 		player->SetAtlas(g_pResources->getPlayerLeftAtlas());
 		player->SetAnimRepeat(distance/2);
 	}
@@ -134,29 +115,10 @@ void Grid::MovePlayerRight()
 
 	if (distance > 0)
 	{
-		float speed = distance / speedVal;
 		float new_X = gameObjects[playerIndex]->m_X + (distance * gameObjectSize);
 
-		UpdatePosition(distance, RIGHT);
-		bool hasWon = TestMap(RIGHT);
+		MovePlayer(RIGHT, new_X, distance);
 
-		Game* game = (Game*)g_pSceneManager->Find("game");
-		if (hasWon) {
-			game->getTweener().Tween(speed,
-				FLOAT, &player->m_X, new_X,
-				EASING, Ease::sineInOut,
-				ONCOMPLETE, WinningState,
-				END);
-			game->setIsMoving(true);
-		}
-		else {
-			game->getTweener().Tween(speed,
-				FLOAT, &player->m_X, new_X,
-				EASING, Ease::sineInOut,
-				ONCOMPLETE, SetComplete,
-				END);
-			game->setIsMoving(true);
-		}
 		player->SetAtlas(g_pResources->getPlayerRightAtlas());
 		player->SetAnimRepeat(distance / 2);
 	}
@@ -168,29 +130,10 @@ void Grid::MovePlayerUp()
 
 	if (distance > 0)
 	{
-		float speed = distance / speedVal;
 		float new_Y = gameObjects[playerIndex]->m_Y - (distance * gameObjectSize);
 
-		UpdatePosition(distance, UP);
-		bool hasWon = TestMap(UP);
+		MovePlayer(UP, new_Y, distance);
 
-		Game* game = (Game*)g_pSceneManager->Find("game");
-		if (hasWon) {
-			game->getTweener().Tween(speed,
-				FLOAT, &player->m_Y, new_Y,
-				EASING, Ease::sineInOut,
-				ONCOMPLETE, WinningState,
-				END);
-			game->setIsMoving(true);
-		}
-		else {
-			game->getTweener().Tween(speed,
-				FLOAT, &player->m_Y, new_Y,
-				EASING, Ease::sineInOut,
-				ONCOMPLETE, SetComplete,
-				END);
-			game->setIsMoving(true);
-		}
 		player->SetAtlas(g_pResources->getPlayerUpAtlas());
 		player->SetAnimRepeat(distance / 2);
 	}
@@ -202,16 +145,28 @@ void Grid::MovePlayerDown()
 
 	if (distance > 0)
 	{
-		float speed = distance / speedVal;
 		float new_Y = gameObjects[playerIndex]->m_Y + (distance * gameObjectSize);
 
-		UpdatePosition(distance, DOWN);
-		bool hasWon = TestMap(DOWN);
+		MovePlayer(DOWN, new_Y, distance);
+		
+		player->SetAtlas(g_pResources->getPlayerDownAtlas());
+		player->SetAnimRepeat(distance / 2);
+	}
+}
 
-		Game* game = (Game*)g_pSceneManager->Find("game");
+void Grid::MovePlayer(Direction dir, float newPos, int distance)
+{
+	float speed = distance / speedVal;
+
+	UpdatePosition(distance, dir);
+	bool hasWon = TestMap(dir);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	if (dir == DOWN || dir == UP)
+	{
 		if (hasWon) {
 			game->getTweener().Tween(speed,
-				FLOAT, &player->m_Y, new_Y,
+				FLOAT, &player->m_Y, newPos,
 				EASING, Ease::sineInOut,
 				ONCOMPLETE, WinningState,
 				END);
@@ -219,14 +174,31 @@ void Grid::MovePlayerDown()
 		}
 		else {
 			game->getTweener().Tween(speed,
-				FLOAT, &player->m_Y, new_Y,
+				FLOAT, &player->m_Y, newPos,
 				EASING, Ease::sineInOut,
 				ONCOMPLETE, SetComplete,
 				END);
 			game->setIsMoving(true);
 		}
-		player->SetAtlas(g_pResources->getPlayerDownAtlas());
-		player->SetAnimRepeat(distance / 2);
+	}
+	if (dir == LEFT || dir == RIGHT)
+	{
+		if (hasWon) {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_X, newPos,
+				EASING, Ease::sineInOut,
+				ONCOMPLETE, WinningState,
+				END);
+			game->setIsMoving(true);
+		}
+		else {
+			game->getTweener().Tween(speed,
+				FLOAT, &player->m_X, newPos,
+				EASING, Ease::sineInOut,
+				ONCOMPLETE, SetComplete,
+				END);
+			game->setIsMoving(true);
+		}
 	}
 }
 

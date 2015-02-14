@@ -68,6 +68,7 @@ void Game::Update(float deltaTime, float alphaMul)
 	// Detect screen tap
 	if (m_IsInputActive && m_Manager->getCurrent() == this)
 	{
+		// Check if player has pressed and lifted off
 		if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -76,7 +77,7 @@ void Game::Update(float deltaTime, float alphaMul)
 			}
 		}
 
-		//if input is in grid
+		// If input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
 			if (!g_pInput->m_Touched && !g_pInput->m_PrevTouched)

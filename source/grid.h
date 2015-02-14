@@ -27,12 +27,7 @@ public:
 	void MovePlayerRight();
 	void MovePlayerUp();
 	void MovePlayerDown();
-	void UpdatePosition(int distance, Direction dir);
-	void PrintGrid();
-	bool TestMap(Direction dir);
-	static void WinningState(CTween* pTween);
-	static void SetComplete(CTween* pTween);
-
+	
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
 	int	getGridOriginX() const { return gridOriginX; }
@@ -41,7 +36,7 @@ public:
 	int	getIndex();
 	int	getDistance(Direction dir);
 	
-protected:
+private:
 	// Member variables
 	GameObject** gameObjects;
 	GameObject* player;
@@ -51,8 +46,14 @@ protected:
 	int	gridOriginX;
 	int	gridOriginY;
 	int	gameObjectSize;
-
 	float speedVal;
+
+	void UpdatePosition(int distance, Direction dir);
+	void PrintGrid();
+	bool TestMap(Direction dir);
+	static void WinningState(CTween* pTween);
+	static void SetComplete(CTween* pTween);
+	void MovePlayer(Direction dir, float newPos, int distance);
 };
 
 #endif
