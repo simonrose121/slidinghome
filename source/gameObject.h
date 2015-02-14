@@ -15,6 +15,7 @@ public:
 
 	// Member functions
 	void Init(float x, float y, CIw2DImage* image);
+	void Init(float x, float y, CAtlas* atlas);
 	void UpdatePosition(float x, float y);
 
 	void setId(int id);

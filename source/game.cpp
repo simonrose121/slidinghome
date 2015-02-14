@@ -93,6 +93,7 @@ void Game::Update(float deltaTime, float alphaMul)
 			}
 			else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 			{
+				// Check current input is smaller than start touch position minus min swipe
 				if (g_pInput->m_X < start_x - MINIMUM_SWIPE && g_pInput->m_Y < start_y + SWIPE_OFFSET && g_pInput->m_Y > start_y - SWIPE_OFFSET)
 				{
 					IwTrace(APP, ("move left"));

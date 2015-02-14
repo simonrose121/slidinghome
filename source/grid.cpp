@@ -34,7 +34,6 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 		}
 		if (!file) break;
 	}
-
 	width = num_columns;
 	height = num_rows;
 	gameObjects = new GameObject* [num_columns * num_rows];
@@ -69,7 +68,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				break;
 
 			case 2:
-				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayer());
+				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayerDownAtlas());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(2);
@@ -124,6 +123,8 @@ void Grid::MovePlayerLeft()
 				END);
 			game->setIsMoving(true);
 		}
+		player->SetAtlas(g_pResources->getPlayerLeftAtlas());
+		player->SetAnimRepeat(distance/2);
 	}
 }
 
@@ -156,6 +157,8 @@ void Grid::MovePlayerRight()
 				END);
 			game->setIsMoving(true);
 		}
+		player->SetAtlas(g_pResources->getPlayerRightAtlas());
+		player->SetAnimRepeat(distance / 2);
 	}
 }
 
@@ -188,6 +191,8 @@ void Grid::MovePlayerUp()
 				END);
 			game->setIsMoving(true);
 		}
+		player->SetAtlas(g_pResources->getPlayerUpAtlas());
+		player->SetAnimRepeat(distance / 2);
 	}
 }
 
@@ -220,6 +225,8 @@ void Grid::MovePlayerDown()
 				END);
 			game->setIsMoving(true);
 		}
+		player->SetAtlas(g_pResources->getPlayerDownAtlas());
+		player->SetAnimRepeat(distance / 2);
 	}
 }
 
@@ -236,14 +243,12 @@ void Grid::UpdatePosition(int distance, Direction dir)
 		gameObjects[playerIndex - distance]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex - distance;
-		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case RIGHT:
 		gameObjects[playerIndex + distance]->setGridCoords(x + distance, y);
 		gameObjects[playerIndex + distance]->setId(2);
 		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex + distance;
-		IwTrace(APP, ("my index is now %d", playerIndex));
 		break;
 	case UP:
 		gameObjects[playerIndex - (distance * width)]->setGridCoords(x, y - distance);
