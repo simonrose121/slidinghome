@@ -57,9 +57,6 @@ assets
     textures
     fonts
 
-    (data-ram/data-gles1, data)
-    .
-
 }
 
 deployments

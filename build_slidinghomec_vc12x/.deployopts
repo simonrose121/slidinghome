@@ -1,0 +1,5 @@
+build ""
+outdir "C:/Users/Simon/Documents/sh/build_slidinghomec_vc12x"
+!config !name "Default"
+!config <os>
+configlist "Default",
