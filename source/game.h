@@ -34,6 +34,7 @@ protected:
 	bool isMoving;
 	int minimumSwipe;
 	int swipeOffset;
+	bool pressedDown;
 };
 
 #endif

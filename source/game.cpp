@@ -56,6 +56,7 @@ void Game::Init(int width, int height)
 	isMoving = false;
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
+	pressedDown = false;
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -80,14 +81,18 @@ void Game::Update(float deltaTime, float alphaMul)
 		// If input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
-			if (!g_pInput->m_Touched && !g_pInput->m_PrevTouched)
+			if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
 			{
-				//record start position of movement
-				start_x = g_pInput->m_X;
-				start_y = g_pInput->m_Y;
-			}
-			else if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
-			{
+				if (!pressedDown)
+				{
+					//record start position of movement
+					start_x = g_pInput->m_X;
+					start_y = g_pInput->m_Y;
+					pressedDown = true;
+
+					IwTrace(APP, ("pressed down is %d", pressedDown));
+				}
+
 				IwTrace(APP, ("currently pressing down"));
 
 				IwTrace(APP, ("start x,y = %d,%d current x,y = %d,%d", start_x, start_y, g_pInput->m_X, g_pInput->m_Y));
@@ -119,6 +124,7 @@ void Game::Update(float deltaTime, float alphaMul)
 					if (!isMoving)
 						grid->MovePlayerDown();
 				}
+				pressedDown = false;
 				g_pInput->Reset();
 			}
 		}
