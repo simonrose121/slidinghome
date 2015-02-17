@@ -98,60 +98,48 @@ void Grid::MovePlayerLeft()
 {
 	int distance = getDistance(LEFT);
 
-	if (distance > 0)
-	{
-		float new_X = gameObjects[playerIndex]->m_X - (distance * gameObjectSize);
+	float new_X = gameObjects[playerIndex]->m_X - (distance * gameObjectSize);
 		
-		MovePlayer(LEFT, new_X, distance);
+	MovePlayer(LEFT, new_X, distance);
 
-		player->SetAtlas(g_pResources->getPlayerLeftAtlas());
-		player->SetAnimRepeat(distance/2);
-	}
+	player->SetAtlas(g_pResources->getPlayerLeftAtlas());
+	player->SetAnimRepeat(distance/2);
 }
 
 void Grid::MovePlayerRight()
 {
 	int distance = getDistance(RIGHT);
 
-	if (distance > 0)
-	{
-		float new_X = gameObjects[playerIndex]->m_X + (distance * gameObjectSize);
+	float new_X = gameObjects[playerIndex]->m_X + (distance * gameObjectSize);
 
-		MovePlayer(RIGHT, new_X, distance);
+	MovePlayer(RIGHT, new_X, distance);
 
-		player->SetAtlas(g_pResources->getPlayerRightAtlas());
-		player->SetAnimRepeat(distance / 2);
-	}
+	player->SetAtlas(g_pResources->getPlayerRightAtlas());
+	player->SetAnimRepeat(distance / 2);
 }
 
 void Grid::MovePlayerUp()
 {
 	int distance = getDistance(UP);
 
-	if (distance > 0)
-	{
-		float new_Y = gameObjects[playerIndex]->m_Y - (distance * gameObjectSize);
+	float new_Y = gameObjects[playerIndex]->m_Y - (distance * gameObjectSize);
 
-		MovePlayer(UP, new_Y, distance);
+	MovePlayer(UP, new_Y, distance);
 
-		player->SetAtlas(g_pResources->getPlayerUpAtlas());
-		player->SetAnimRepeat(distance / 2);
-	}
+	player->SetAtlas(g_pResources->getPlayerUpAtlas());
+	player->SetAnimRepeat(distance / 2);
 }
 
 void Grid::MovePlayerDown()
 {
 	int distance = getDistance(DOWN);
 
-	if (distance > 0)
-	{
-		float new_Y = gameObjects[playerIndex]->m_Y + (distance * gameObjectSize);
+	float new_Y = gameObjects[playerIndex]->m_Y + (distance * gameObjectSize);
 
-		MovePlayer(DOWN, new_Y, distance);
+	MovePlayer(DOWN, new_Y, distance);
 		
-		player->SetAtlas(g_pResources->getPlayerDownAtlas());
-		player->SetAnimRepeat(distance / 2);
-	}
+	player->SetAtlas(g_pResources->getPlayerDownAtlas());
+	player->SetAnimRepeat(distance / 2);
 }
 
 void Grid::MovePlayer(Direction dir, float newPos, int distance)
