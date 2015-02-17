@@ -5,6 +5,7 @@
 #include "resources.h"
 #include "game.h"
 #include "main.h"
+#include "levelSelect.h"
 
 MainMenu::~MainMenu()
 {
@@ -74,8 +75,8 @@ void MainMenu::Render()
 
 void MainMenu::StartGame() 
 {
-	Game* game = (Game*)g_pSceneManager->Find("game");
-	g_pSceneManager->SwitchTo(game);
+	LevelSelect* levelselect = (LevelSelect*)g_pSceneManager->Find("levelselect");
+	g_pSceneManager->SwitchTo(levelselect);
 
 	//game->newGame();
 }

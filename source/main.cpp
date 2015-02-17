@@ -36,6 +36,11 @@ int main()
 	main_menu->Init();
 	g_pSceneManager->Add(main_menu);
 
+	LevelSelect* level_select = new LevelSelect();
+	level_select->setName("levelselect");
+	level_select->Init();
+	g_pSceneManager->Add(level_select);
+
 	PauseMenu* pause_menu = new PauseMenu();
 	pause_menu->setName("pausemenu");
 	pause_menu->Init();
