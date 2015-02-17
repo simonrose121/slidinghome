@@ -7,6 +7,7 @@
 #include "blankObject.h"
 #include "resources.h"
 #include "main.h"
+#include "endScreen.h"
 
 #include <iostream>
 #include <fstream>
@@ -19,7 +20,27 @@
 using namespace std;
 using namespace IwTween;
 
-Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
+Grid::Grid(CNode* scene)
+{
+	game = scene;
+}
+
+Grid::~Grid()
+{
+	if (gameObjects != 0)
+	{
+		for (int y = 0; y < width; y++)
+		{
+			for (int x = 0; x < height; x++)
+			{
+				game->RemoveChild(gameObjects[x * width + y]);
+			}
+		}
+		delete[] gameObjects;
+	}
+}
+
+void Grid::GenerateLevel(int levelId, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
 	ifstream file("maps/level1.txt");
 	int map[SIZEY][SIZEX];
@@ -36,7 +57,7 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 	}
 	width = num_columns;
 	height = num_rows;
-	gameObjects = new GameObject* [num_columns * num_rows];
+	gameObjects = new GameObject*[num_columns * num_rows];
 
 	int bm_width = (int)g_pResources->getRock()->GetWidth();
 	gameObjectSize = (IwGxGetScreenWidth() * bm_width) / GRAPHIC_DESIGN_WIDTH;
@@ -81,17 +102,11 @@ Grid::Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(3);
 			}
-			scene->AddChild(gameObjects[x + width*y]);
+			game->AddChild(gameObjects[x + width*y]);
 		}
 	}
 
 	PrintGrid();
-}
-
-Grid::~Grid()
-{
-	if (gameObjects != 0)
-		delete[] gameObjects;
 }
 
 void Grid::MovePlayerLeft()
@@ -304,8 +319,11 @@ void Grid::PrintGrid()
 
 void Grid::WinningState(CTween* pTween)
 {
-	Game* main_menu = (Game*)g_pSceneManager->Find("endscreen");
-	g_pSceneManager->SwitchTo(main_menu);
+	EndScreen* end_screen = (EndScreen*)g_pSceneManager->Find("endscreen");
+	g_pSceneManager->SwitchTo(end_screen);
+
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	game->EndGame();
 	IwTrace(APP, ("win"));
 }
 

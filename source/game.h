@@ -15,10 +15,11 @@ public:
 
 	// Member functions
 	Grid* GetGrid(); // Not currently used
-	void Init(int grid_width, int grid_height);
+	void Init();
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
-	void NewGame();
+	void NewGame(int width, int height);
+	void EndGame();
 	static void	pauseMenu();
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }

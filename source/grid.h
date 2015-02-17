@@ -19,7 +19,7 @@ public:
 	};
 
 	// Constructor & Destruction
-	Grid(CNode* scene, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
+	Grid(CNode* scene);
 	~Grid();
 
 	// Member functions
@@ -27,6 +27,8 @@ public:
 	void MovePlayerRight();
 	void MovePlayerUp();
 	void MovePlayerDown();
+	void GenerateLevel(int levelId, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
+	void ClearLevel();
 	
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
@@ -47,6 +49,7 @@ private:
 	int	gridOriginY;
 	int	gameObjectSize;
 	float speedVal;
+	CNode* game;
 
 	void UpdatePosition(int distance, Direction dir);
 	void PrintGrid();

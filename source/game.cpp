@@ -14,11 +14,11 @@
 
 Game::~Game()
 {
-	if (grid != 0)
+	if (grid != NULL)
 		delete grid;
 }
 
-void Game::Init(int width, int height)
+void Game::Init()
 {
 	Scene::Init();
 
@@ -50,8 +50,6 @@ void Game::Init(int width, int height)
 	pauseButton->m_ScaleX = getGraphicsScale();
 	pauseButton->m_ScaleY = getGraphicsScale();
 	AddChild(pauseButton);
-
-	grid = new Grid(this, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 
 	isMoving = false;
 	minimumSwipe = 100 * graphicsScale;
@@ -142,7 +140,13 @@ void Game::pauseMenu()
 	g_pSceneManager->SwitchTo(pausemenu);
 }
 
-void Game::NewGame()
+void Game::NewGame(int width, int height)
 {
-	//will be used in future to set map number etc
+	grid = new Grid(this);
+	grid->GenerateLevel(1, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
+}
+
+void Game::EndGame()
+{
+	delete grid;
 }

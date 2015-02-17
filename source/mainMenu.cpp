@@ -77,5 +77,5 @@ void MainMenu::StartGame()
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	g_pSceneManager->SwitchTo(game);
 
-	//game->newGame();
+	game->NewGame(11, 15);
 }
