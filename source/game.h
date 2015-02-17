@@ -28,6 +28,8 @@ protected:
 	// Member variables
 	Grid* grid;
 	CSprite* pauseButton;
+	CSprite* star;
+	CSprite* holostar;
 	float graphicsScale;
 	int start_x;
 	int	start_y;

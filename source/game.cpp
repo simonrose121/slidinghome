@@ -9,6 +9,9 @@
 #include "pauseMenu.h"
 #include "stringExtensions.h"
 
+#include <iostream>
+#include <fstream>
+
 #define GRID_OFFSET_X 41
 #define GRID_OFFSET_Y 37
 
@@ -51,12 +54,37 @@ void Game::Init(int width, int height)
 	pauseButton->m_ScaleY = getGraphicsScale();
 	AddChild(pauseButton);
 
+	//Create Star file
+	std::ifstream file("stars/star1.txt");
+	int fileNumber = 0;
+	file >> fileNumber;
+	x_pos = (float)IwGxGetScreenWidth() / 1.05;
+	y_pos = (float)IwGxGetScreenHeight() / 15;
+	star = new CSprite();
+	if (fileNumber == 1){
+		star->SetImage(g_pResources->getStar());
+	}
+	else {
+		star->SetImage(g_pResources->getHoloStar());
+	}
+	star->m_X = x_pos;
+	star->m_Y = y_pos;
+	star->m_W = star->GetImage()->GetWidth();
+	star->m_H = star->GetImage()->GetHeight();
+	star->m_AnchorX = 1;
+	star->m_AnchorY = 1;
+	star->m_ScaleX = getGraphicsScale();
+	star->m_ScaleY = getGraphicsScale();
+	AddChild(star);
+
 	grid = new Grid(this, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 
 	isMoving = false;
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
 	pressedDown = false;
+
+	
 }
 
 void Game::Update(float deltaTime, float alphaMul) 

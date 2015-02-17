@@ -10,8 +10,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <unistd.h>
 
 #define SIZEY 15
 #define SIZEX 11
@@ -304,6 +302,12 @@ void Grid::PrintGrid()
 
 void Grid::WinningState(CTween* pTween)
 {
+	std::ofstream file;
+	int complete = 1;
+	file.open("stars/star1.txt");
+	file << complete;
+	file.close();
+
 	Game* main_menu = (Game*)g_pSceneManager->Find("endscreen");
 	g_pSceneManager->SwitchTo(main_menu);
 	IwTrace(APP, ("win"));

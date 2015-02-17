@@ -10,6 +10,8 @@ Resources::Resources()
 	playButton = Iw2DCreateImage("textures/play_button.png");
 	exitButton = Iw2DCreateImage("textures/Exit_Button.png");
 	pauseButton = Iw2DCreateImage("textures/pause.png");
+	star = Iw2DCreateImage("textures/star_complete.png");
+	holoStar = Iw2DCreateImage("textures/star_uncomplete.png");
 	player = Iw2DCreateImage("textures/character.png");
 	playerLeft = Iw2DCreateImage("textures/left.png");
 	playerRight = Iw2DCreateImage("textures/right.png");
@@ -35,6 +37,8 @@ Resources::~Resources()
 	delete playButton;
 	delete exitButton;
 	delete pauseButton;
+	delete star;
+	delete holoStar;
 	delete player;
 	delete playerLeft;
 	delete playerRight;
