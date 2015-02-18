@@ -18,9 +18,11 @@ Resources::Resources()
 	playerUp = Iw2DCreateImage("textures/up.png");
 	playerDown = Iw2DCreateImage("textures/down.png");
 	rock = Iw2DCreateImage("textures/rock.png");
+	levelButton = Iw2DCreateImage("textures/Level_button.png");
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
 	// Load fonts
+	font = Iw2DCreateFont("fonts/arial8.gxfont");
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
 	int frame_h = (int)(playerLeft->GetHeight());
 	playerLeftAtlas = new CAtlas(frame_w, frame_h, 3, playerLeft);
@@ -46,8 +48,10 @@ Resources::~Resources()
 	delete playerDown;
 	delete gameBG;
 	delete rock;
+	delete levelButton;
 	delete blank;
 	delete home;
+	delete font;
 
 	delete playerLeftAtlas;
 	delete playerRightAtlas;
