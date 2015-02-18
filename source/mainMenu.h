@@ -14,7 +14,7 @@ public:
 	void Init();
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
-	static void	StartGame();
+	static void	MoveToLevelSelect();
 	float getGraphicsScale() { return graphicsScale; }
 
 protected:

@@ -75,6 +75,8 @@ void PauseMenu::Update(float deltaTime, float alphaMul)
 		g_pInput->Reset();
 		if (exitButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
+			Game* game = (Game*)g_pSceneManager->Find("game");
+			game->EndGame();
 			mainMenu();
 		}
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))

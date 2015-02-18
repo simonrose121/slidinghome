@@ -25,7 +25,7 @@ Grid::Grid(CNode* scene)
 
 Grid::~Grid()
 {
-	if (gameObjects != 0)
+	if (gameObjects != NULL)
 	{
 		for (int y = 0; y < width; y++)
 		{

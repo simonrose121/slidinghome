@@ -15,8 +15,11 @@ void LevelSelect::Init()
 {
 	Scene::Init();
 
+	fontScale = (float)IwGxGetScreenWidth() / FONT_DESIGN_WIDTH;
+	actualFontHeight = FONT_HEIGHT * fontScale;
+	graphicsScale = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH;
+
 	Game* game = (Game*)g_pSceneManager->Find("game");
-	levelCount = 4;
 
 	// Create menu background
 	CSprite* background = new CSprite();
@@ -34,42 +37,35 @@ void LevelSelect::Init()
 
 	//Buttons for levels need to be added here
 	// Create Start Game button
-	for (int i(1); i <= levelCount; ++i)
-	{
-		float x_pos = (float)IwGxGetScreenWidth() * 1;
-		float y_pos = (float)IwGxGetScreenHeight() * 1;
-		levelButton = new CSprite();
-		levelButton->SetImage(g_pResources->getLevelButton());
-		levelButton->m_X = x_pos;
-		levelButton->m_Y = y_pos;
-		levelButton->m_W = levelButton->GetImage()->GetWidth();
-		levelButton->m_H = levelButton->GetImage()->GetHeight();
-		levelButton->m_AnchorX = (i * 1.25);
-		levelButton->m_AnchorY = 8.5;
-		levelButton->m_ScaleX = game->getGraphicsScale();
-		levelButton->m_ScaleY = game->getGraphicsScale();
-		IwTrace(APP, ("i am being placed at %f, %f", levelButton->m_AnchorX, levelButton->m_AnchorY));
-		AddChild(levelButton);
+	float x_pos = (float)IwGxGetScreenWidth();
+	float y_pos = (float)IwGxGetScreenHeight();
+	levelButton = new CSprite();
+	levelButton->SetImage(g_pResources->getLevelButton());
+	levelButton->m_X = x_pos;
+	levelButton->m_Y = y_pos;
+	levelButton->m_W = levelButton->GetImage()->GetWidth();
+	levelButton->m_H = levelButton->GetImage()->GetHeight();
+	levelButton->m_AnchorX = 5.75;
+	levelButton->m_AnchorY = 8.5;
+	levelButton->m_ScaleX = game->getGraphicsScale();
+	levelButton->m_ScaleY = game->getGraphicsScale();
+	AddChild(levelButton);
 
-		levelLabel = new CLabel();
-		levelLabel->m_X = (float)IwGxGetScreenWidth() * 1;
-		levelLabel->m_Y = (float)IwGxGetScreenHeight() * 1;
-		levelLabel->m_W = FONT_DESIGN_WIDTH;
-		levelLabel->m_H = actualFontHeight;
-		levelLabel->m_AlignHor = IW_2D_FONT_ALIGN_LEFT;
-		levelLabel->m_AlignVer = IW_2D_FONT_ALIGN_TOP;
-		levelLabel->m_Font = g_pResources->getFont();
-		levelLabel->m_AnchorX = 1.25;
-		levelLabel->m_AnchorY = 8.5;
-		levelLabel->m_ScaleX = fontScale;
-		levelLabel->m_ScaleY = fontScale;
-		IwTrace(APP, ("text being placed at %f, %f", levelLabel->m_AnchorX, levelLabel->m_AnchorY));
-		AddChild(levelLabel);
-
-		char str[16];
-		snprintf(str, 16, "%d", i);
-		levelLabel->m_Text = str;
-	}
+	levelLabel = new CLabel();
+	levelLabel->m_X = x_pos /2;
+	levelLabel->m_Y = y_pos /2;
+	levelLabel->m_W = FONT_DESIGN_WIDTH;
+	levelLabel->m_H = actualFontHeight;
+	levelLabel->m_AlignHor = IW_2D_FONT_ALIGN_LEFT;
+	levelLabel->m_AlignVer = IW_2D_FONT_ALIGN_TOP;
+	levelLabel->m_Font = g_pResources->getFont();
+	levelLabel->m_AnchorX = 5.75;
+	levelLabel->m_AnchorY = 8.5;
+	levelLabel->m_Text = "1";
+	levelLabel->m_ScaleX = fontScale / graphicsScale;
+	levelLabel->m_ScaleY = fontScale / graphicsScale;
+	levelLabel->m_Color = CColor(0xff, 0xff, 0xff, 0xff);
+	AddChild(levelLabel);
 
 }
 
@@ -104,5 +100,5 @@ void LevelSelect::StartGame()
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	g_pSceneManager->SwitchTo(game);
 
-	//game->newGame();
+	game->NewGame(11,15);
 }

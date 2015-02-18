@@ -60,7 +60,7 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 		g_pInput->Reset();
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			StartGame();
+			MoveToLevelSelect();
 
 			// Start playing game music here
 			//Audio::PlayMusic("audio/in_game.mp3", true);
@@ -73,10 +73,8 @@ void MainMenu::Render()
 	Scene::Render();
 }
 
-void MainMenu::StartGame() 
+void MainMenu::MoveToLevelSelect()
 {
 	LevelSelect* levelselect = (LevelSelect*)g_pSceneManager->Find("levelselect");
 	g_pSceneManager->SwitchTo(levelselect);
-
-	game->NewGame(11, 15);
 }
