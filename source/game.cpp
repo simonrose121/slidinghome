@@ -21,7 +21,7 @@ Game::~Game()
 		delete grid;
 }
 
-void Game::Init(int width, int height)
+void Game::Init()
 {
 	Scene::Init();
 
@@ -39,52 +39,10 @@ void Game::Init(int width, int height)
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	// Create Start Game button
-	float x_pos = (float)IwGxGetScreenWidth() / 1;
-	float y_pos = (float)IwGxGetScreenHeight() / 1;
-	pauseButton = new CSprite();
-	pauseButton->SetImage(g_pResources->getPauseButton());
-	pauseButton->m_X = x_pos;
-	pauseButton->m_Y = y_pos;
-	pauseButton->m_W = pauseButton->GetImage()->GetWidth();
-	pauseButton->m_H = pauseButton->GetImage()->GetHeight();
-	pauseButton->m_AnchorX = 1;
-	pauseButton->m_AnchorY = 1;
-	pauseButton->m_ScaleX = getGraphicsScale();
-	pauseButton->m_ScaleY = getGraphicsScale();
-	AddChild(pauseButton);
-
-	//Create Star file
-	std::ifstream file("stars/star1.txt");
-	int fileNumber = 0;
-	file >> fileNumber;
-	x_pos = (float)IwGxGetScreenWidth() / 1.05;
-	y_pos = (float)IwGxGetScreenHeight() / 15;
-	star = new CSprite();
-	if (fileNumber == 1){
-		star->SetImage(g_pResources->getStar());
-	}
-	else {
-		star->SetImage(g_pResources->getHoloStar());
-	}
-	star->m_X = x_pos;
-	star->m_Y = y_pos;
-	star->m_W = star->GetImage()->GetWidth();
-	star->m_H = star->GetImage()->GetHeight();
-	star->m_AnchorX = 1;
-	star->m_AnchorY = 1;
-	star->m_ScaleX = getGraphicsScale();
-	star->m_ScaleY = getGraphicsScale();
-	AddChild(star);
-
-	grid = new Grid(this, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
-
 	isMoving = false;
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
 	pressedDown = false;
-
-	
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -170,7 +128,54 @@ void Game::pauseMenu()
 	g_pSceneManager->SwitchTo(pausemenu);
 }
 
-void Game::NewGame()
+void Game::NewGame(int width, int height)
 {
-	//will be used in future to set map number etc
+	grid = new Grid(this);
+	grid->GenerateLevel(1, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
+
+	// Create Start Game button
+	float x_pos = (float)IwGxGetScreenWidth() / 1;
+	float y_pos = (float)IwGxGetScreenHeight() / 1;
+	pauseButton = new CSprite();
+	pauseButton->SetImage(g_pResources->getPauseButton());
+	pauseButton->m_X = x_pos;
+	pauseButton->m_Y = y_pos;
+	pauseButton->m_W = pauseButton->GetImage()->GetWidth();
+	pauseButton->m_H = pauseButton->GetImage()->GetHeight();
+	pauseButton->m_AnchorX = 1;
+	pauseButton->m_AnchorY = 1;
+	pauseButton->m_ScaleX = getGraphicsScale();
+	pauseButton->m_ScaleY = getGraphicsScale();
+	AddChild(pauseButton);
+
+	//Create Star file
+	std::ifstream file("stars/star1.txt");
+	int fileNumber = 0;
+	file >> fileNumber;
+	x_pos = (float)IwGxGetScreenWidth() / 1.05;
+	y_pos = (float)IwGxGetScreenHeight() / 15;
+	star = new CSprite();
+	if (fileNumber == 1){
+		star->SetImage(g_pResources->getStar());
+	}
+	else {
+		star->SetImage(g_pResources->getHoloStar());
+	}
+	star->m_X = x_pos;
+	star->m_Y = y_pos;
+	star->m_W = star->GetImage()->GetWidth();
+	star->m_H = star->GetImage()->GetHeight();
+	star->m_AnchorX = 1;
+	star->m_AnchorY = 1;
+	star->m_ScaleX = getGraphicsScale();
+	star->m_ScaleY = getGraphicsScale();
+	AddChild(star);
+}
+
+void Game::EndGame()
+{
+	isMoving = false;
+	//cleaup this line
+	//grid = new Grid(this);
+	delete grid;
 }
