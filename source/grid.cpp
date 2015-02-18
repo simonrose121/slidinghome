@@ -34,10 +34,12 @@ Grid::~Grid()
 			for (int x = 0; x < height; x++)
 			{
 				game->RemoveChild(gameObjects[x * width + y]);
+				delete gameObjects[x * width + y];
 			}
 		}
-		delete[] gameObjects;
 	}
+
+	delete[] gameObjects;
 }
 
 void Grid::GenerateLevel(int levelId, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
@@ -319,11 +321,12 @@ void Grid::PrintGrid()
 
 void Grid::WinningState(CTween* pTween)
 {
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	game->EndGame();
+
 	EndScreen* end_screen = (EndScreen*)g_pSceneManager->Find("endscreen");
 	g_pSceneManager->SwitchTo(end_screen);
 
-	Game* game = (Game*)g_pSceneManager->Find("game");
-	game->EndGame();
 	IwTrace(APP, ("win"));
 }
 

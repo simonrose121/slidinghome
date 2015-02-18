@@ -14,8 +14,7 @@
 
 Game::~Game()
 {
-	if (grid != NULL)
-		delete grid;
+
 }
 
 void Game::Init()
@@ -148,5 +147,6 @@ void Game::NewGame(int width, int height)
 
 void Game::EndGame()
 {
+	isMoving = false;
 	delete grid;
 }
