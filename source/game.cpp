@@ -17,6 +17,8 @@
 
 Game::~Game()
 {
+	if (grid != 0)
+		delete grid;
 }
 
 void Game::Init()

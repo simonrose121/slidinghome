@@ -20,6 +20,7 @@ assets['Default'] = [
     ('c:/Users/b1009269/Desktop/slidinghome/data/audio', 'audio', 0),
     ('c:/Users/b1009269/Desktop/slidinghome/data/textures', 'textures', 0),
     ('c:/Users/b1009269/Desktop/slidinghome/data/maps', 'maps', 0),
+    ('c:/Users/b1009269/Desktop/slidinghome/data/fonts', 'fonts', 0),
     ('c:/Users/b1009269/Desktop/slidinghome/data-ram/data-gles1', '.', 0),
     ('c:/Users/b1009269/Desktop/slidinghome/data-ram/data-gles1/fonts/arial8.gxfont.bin', 'fonts/arial8.gxfont.bin', 0),
 ]
