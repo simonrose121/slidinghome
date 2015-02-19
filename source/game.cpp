@@ -147,7 +147,7 @@ void Game::NewGame(int width, int height)
 	AddChild(pauseButton);
 
 	//Create Star file
-	std::ifstream file("stars/star1.txt");
+	std::ifstream file("star1.txt");
 	int fileNumber = 0;
 	file >> fileNumber;
 	x_pos = (float)IwGxGetScreenWidth() / 1.05;

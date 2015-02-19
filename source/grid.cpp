@@ -324,7 +324,7 @@ void Grid::WinningState(CTween* pTween)
 {
 	std::ofstream file;
 	int complete = 1;
-	file.open("stars/star1.txt");
+	file.open("star1.txt");
 	file << complete;
 	file.close();
 
