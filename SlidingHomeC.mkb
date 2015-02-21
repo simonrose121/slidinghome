@@ -31,6 +31,7 @@ files
 	pauseMenu.cpp
 	resources.cpp
 	scene.cpp
+	settings.cpp
 
 	audio.h
 	blankObject.h
@@ -46,6 +47,7 @@ files
 	pauseMenu.h
 	resources.h
 	scene.h
+	settings.h
 	stringExtensions.h
 }
 

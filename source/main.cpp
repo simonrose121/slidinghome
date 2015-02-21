@@ -8,6 +8,7 @@
 #include "mainMenu.h"
 #include "pauseMenu.h"
 #include "endScreen.h"
+#include "settings.h"
 #include "resources.h"
 
 using namespace IwTween;
@@ -50,6 +51,11 @@ int main()
 	end_screen->setName("endscreen");
 	end_screen->Init();
 	g_pSceneManager->Add(end_screen);
+
+	Settings* settings = new Settings();
+	settings->setName("settings");
+	settings->Init();
+	g_pSceneManager->Add(settings);
 
 	g_pSceneManager->SwitchTo(main_menu);
 
