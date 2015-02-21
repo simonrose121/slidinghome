@@ -17,7 +17,7 @@
 
 Game::~Game()
 {
-	if (grid != 0)
+	if (currentState != State::COMPLETE)
 		delete grid;
 }
 
@@ -61,6 +61,7 @@ void Game::Update(float deltaTime, float alphaMul)
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
 				pauseMenu();
+				currentState = State::PAUSED;
 			}
 		}
 
@@ -170,6 +171,8 @@ void Game::NewGame(int width, int height)
 	star->m_ScaleX = getGraphicsScale();
 	star->m_ScaleY = getGraphicsScale();
 	AddChild(star);
+
+	currentState = State::INPROGRESS;
 }
 
 void Game::EndGame()
@@ -178,4 +181,5 @@ void Game::EndGame()
 	//cleaup this line
 	//grid = new Grid(this);
 	delete grid;
+	currentState = State::COMPLETE;
 }

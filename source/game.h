@@ -9,6 +9,12 @@
 class Game : public Scene 
 {
 public:
+	enum State {
+		PAUSED,
+		COMPLETE,
+		INPROGRESS
+	};
+
 	// Constructor & Destructor
 	Game() : grid(0) {}
 	~Game();
@@ -38,6 +44,7 @@ protected:
 	int minimumSwipe;
 	int swipeOffset;
 	bool pressedDown;
+	State currentState;
 };
 
 #endif
