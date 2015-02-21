@@ -39,6 +39,8 @@ void Game::Init()
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
+	//TODO: only initialise this if onScreenButtons bool is set
+
 	isMoving = false;
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;

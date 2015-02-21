@@ -29,7 +29,11 @@ public:
 	static void	pauseMenu();
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
+	bool getShowOnScreenButtons() { return showOnScreenButtons; }
+
 	void setIsMoving(bool moving) { isMoving = moving; }
+	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
+
 
 protected:
 	// Member variables
@@ -45,6 +49,7 @@ protected:
 	int swipeOffset;
 	bool pressedDown;
 	State currentState;
+	bool showOnScreenButtons;
 };
 
 #endif

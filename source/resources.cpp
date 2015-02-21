@@ -3,6 +3,7 @@
 
 Resources::Resources()
 {
+	// Load images
 	mainMenuBG = Iw2DCreateImage("textures/menu.png");
 	endScreenBG = Iw2DCreateImage("textures/End_Screen.png");
 	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
@@ -21,8 +22,15 @@ Resources::Resources()
 	levelButton = Iw2DCreateImage("textures/Level_button.png");
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
+	upButton = Iw2DCreateImage("textures/up-arrow.png");
+	rightButton = Iw2DCreateImage("textures/right-arrow.png");
+	downButton = Iw2DCreateImage("textures/down-arrow.png");
+	leftButton = Iw2DCreateImage("textures/left-arrow.png");
+
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
+
+	// Load atlases
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
 	int frame_h = (int)(playerLeft->GetHeight());
 	playerLeftAtlas = new CAtlas(frame_w, frame_h, 3, playerLeft);
@@ -33,6 +41,7 @@ Resources::Resources()
 
 Resources::~Resources()
 {
+	// Cleanup images
 	delete mainMenuBG;
 	delete endScreenBG;
 	delete pauseMenuBG;
@@ -51,8 +60,15 @@ Resources::~Resources()
 	delete levelButton;
 	delete blank;
 	delete home;
+	delete upButton;
+	delete rightButton;
+	delete downButton;
+	delete leftButton;
+
+	// Cleanup fonts
 	delete font;
 
+	// Cleanup atlases
 	delete playerLeftAtlas;
 	delete playerRightAtlas;
 	delete playerUpAtlas;
