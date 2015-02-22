@@ -23,6 +23,7 @@ public:
 	Grid* GetGrid(); // Not currently used
 	void Init();
 	void InitOnScreenButtons();
+	void CleanupOnScreenButtons();
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
 	void NewGame(int width, int height);

@@ -49,8 +49,8 @@ void Game::InitOnScreenButtons()
 {
 	//TODO: only initialise this if onScreenButtons bool is set
 	upButton = new CSprite();
-	upButton->m_X = IwGxGetScreenWidth() / 1;
-	upButton->m_Y = IwGxGetScreenHeight() / 1;
+	upButton->m_X = IwGxGetScreenWidth() / 2;
+	upButton->m_Y = IwGxGetScreenHeight() / 4;
 	upButton->SetImage(g_pResources->getUpButton());
 	upButton->m_W = upButton->GetImage()->GetWidth();
 	upButton->m_H = upButton->GetImage()->GetHeight();
@@ -59,8 +59,8 @@ void Game::InitOnScreenButtons()
 	AddChild(upButton);
 
 	rightButton = new CSprite();
-	rightButton->m_X = IwGxGetScreenWidth() / 1;
-	rightButton->m_Y = IwGxGetScreenHeight() / 1;
+	rightButton->m_X = IwGxGetScreenWidth() / 1.3;
+	rightButton->m_Y = IwGxGetScreenHeight() / 2.6;
 	rightButton->SetImage(g_pResources->getRightButton());
 	rightButton->m_W = rightButton->GetImage()->GetWidth();
 	rightButton->m_H = rightButton->GetImage()->GetHeight();
@@ -69,8 +69,8 @@ void Game::InitOnScreenButtons()
 	AddChild(rightButton);
 
 	downButton = new CSprite();
-	downButton->m_X = IwGxGetScreenWidth() / 1;
-	downButton->m_Y = IwGxGetScreenHeight() / 1;
+	downButton->m_X = IwGxGetScreenWidth() / 2;
+	downButton->m_Y = IwGxGetScreenHeight() / 1.8;
 	downButton->SetImage(g_pResources->getDownButton());
 	downButton->m_W = downButton->GetImage()->GetWidth();
 	downButton->m_H = downButton->GetImage()->GetHeight();
@@ -79,14 +79,29 @@ void Game::InitOnScreenButtons()
 	AddChild(downButton);
 
 	leftButton = new CSprite();
-	leftButton->m_X = IwGxGetScreenWidth() / 1;
-	leftButton->m_Y = IwGxGetScreenHeight() / 1;
+	leftButton->m_X = IwGxGetScreenWidth() / 3.3;
+	leftButton->m_Y = IwGxGetScreenHeight() / 2.6;
 	leftButton->SetImage(g_pResources->getLeftButton());
 	leftButton->m_W = leftButton->GetImage()->GetWidth();
 	leftButton->m_H = leftButton->GetImage()->GetHeight();
 	leftButton->m_AnchorX = 1;
 	leftButton->m_AnchorY = 1;
 	AddChild(leftButton);
+}
+
+void Game::CleanupOnScreenButtons()
+{
+	// Remove children from scene
+	RemoveChild(upButton);
+	RemoveChild(rightButton);
+	RemoveChild(downButton);
+	RemoveChild(leftButton);
+
+	// Cleanup buttons so they can be reinitialised
+	delete rightButton;
+	delete downButton;
+	delete upButton;
+	delete leftButton;
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -246,6 +261,7 @@ void Game::NewGame(int width, int height)
 void Game::EndGame()
 {
 	isMoving = false;
+	CleanupOnScreenButtons();
 	//cleaup this line
 	//grid = new Grid(this);
 	delete grid;
