@@ -17,10 +17,12 @@ public:
 
 	// Button callbacks
 	void SetOnScreenButtons();
+	void MoveToMainMenu();
 
 protected:
 	// UI components
 	CSprite* showOnScreenButtons;
+	CSprite* backButton;
 };
 
 #endif  // __SETTINGS_H__

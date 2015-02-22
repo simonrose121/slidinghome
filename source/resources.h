@@ -50,6 +50,7 @@ public:
 	CIw2DImage* getLeftButton() { return leftButton; }
 	CIw2DImage* getOnScreenSettingButton() { return onScreenSettingButton; }
 	CIw2DImage* getOnScreenSettingButtonSelected() { return onScreenSettingButtonSelected; }
+	CIw2DImage* getBackButton() { return backButton; }
 
 	CIw2DFont*  getFont() { return font; }
 
@@ -85,10 +86,10 @@ protected:
 	CIw2DImage* leftButton;
 	CIw2DImage* onScreenSettingButton;
 	CIw2DImage* onScreenSettingButtonSelected;
+	CIw2DImage* backButton;
 
 	// Fonts
 	CIw2DFont* font;
-
 
 	// Atlases
 	CAtlas*	playerLeftAtlas;

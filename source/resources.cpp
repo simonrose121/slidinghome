@@ -29,7 +29,7 @@ Resources::Resources()
 	leftButton = Iw2DCreateImage("textures/left-arrow.png");
 	onScreenSettingButton = Iw2DCreateImage("textures/onscreen_settings.png");
 	onScreenSettingButtonSelected = Iw2DCreateImage("textures/onscreen_settings_selected.png");
-
+	backButton = Iw2DCreateImage("textures/back_button2.png");
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
 
@@ -70,6 +70,7 @@ Resources::~Resources()
 	delete leftButton;
 	delete onScreenSettingButton;
 	delete onScreenSettingButtonSelected;
+	delete backButton;
 
 	// Cleanup fonts
 	delete font;

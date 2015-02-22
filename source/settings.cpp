@@ -32,13 +32,26 @@ void Settings::Init()
 	// Add on screen buttons button
 	showOnScreenButtons = new CSprite();
 	showOnScreenButtons->m_X = IwGxGetScreenWidth() / 2;
-	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 4;
+	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 2;
 	showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButton());
 	showOnScreenButtons->m_W = showOnScreenButtons->GetImage()->GetWidth();
 	showOnScreenButtons->m_H = showOnScreenButtons->GetImage()->GetHeight();
 	showOnScreenButtons->m_AnchorX = 1;
 	showOnScreenButtons->m_AnchorY = 1;
 	AddChild(showOnScreenButtons);
+
+	backButton = new CSprite();
+	backButton->m_X = (float)IwGxGetScreenWidth() / 8;
+	backButton->m_Y = (float)IwGxGetScreenHeight() / 8;
+	backButton->SetImage(g_pResources->getBackButton());
+	backButton->m_W = backButton->GetImage()->GetWidth();
+	backButton->m_H = backButton->GetImage()->GetHeight();
+	backButton->m_AnchorX = 0.5;
+	backButton->m_AnchorY = 0.5;
+	// Fit background to screen size
+	backButton->m_ScaleX = 0.5;
+	backButton->m_ScaleY = 0.5;
+	AddChild(backButton);
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setShowOnScreenButtons(false);
@@ -54,10 +67,13 @@ void Settings::Update(float deltaTime, float alphaMul)
 	// Detect screen tap
 	if (m_IsInputActive && m_Manager->getCurrent() == this)
 	{
-		
 		// Check if player has pressed and lifted off
 		if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 		{
+			if (backButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				MoveToMainMenu();
+			}
 			if (showOnScreenButtons->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
 				SetOnScreenButtons();
@@ -88,4 +104,10 @@ void Settings::SetOnScreenButtons()
 void Settings::Render()
 {
 	Scene::Render();
+}
+
+void Settings::MoveToMainMenu()
+{
+	MainMenu* main_menu = (MainMenu*)g_pSceneManager->Find("mainmenu");
+	g_pSceneManager->SwitchTo(main_menu);
 }

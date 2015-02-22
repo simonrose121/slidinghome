@@ -93,17 +93,20 @@ void Game::InitOnScreenButtons()
 
 void Game::CleanupOnScreenButtons()
 {
-	// Remove children from scene
-	RemoveChild(upButton);
-	RemoveChild(rightButton);
-	RemoveChild(downButton);
-	RemoveChild(leftButton);
+	if (showOnScreenButtons) 
+	{
+		// Remove children from scene
+		RemoveChild(upButton);
+		RemoveChild(rightButton);
+		RemoveChild(downButton);
+		RemoveChild(leftButton);
 
-	// Cleanup buttons so they can be reinitialised
-	delete rightButton;
-	delete downButton;
-	delete upButton;
-	delete leftButton;
+		// Cleanup buttons so they can be reinitialised
+		delete rightButton;
+		delete downButton;
+		delete upButton;
+		delete leftButton;
+	}
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
