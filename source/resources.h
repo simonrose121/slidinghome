@@ -32,6 +32,7 @@ public:
 	CIw2DImage*	getPlayButton() { return playButton; }
 	CIw2DImage*	getExitButton() { return exitButton; }
 	CIw2DImage*	getPauseButton() { return pauseButton; }
+	CIw2DImage* getSettingsButton() { return settingsButton; }
 	CIw2DImage* getStar() { return star; }
 	CIw2DImage* getHoloStar() { return holoStar; }
 	CIw2DImage*	getPlayer() { return player; }
@@ -58,6 +59,7 @@ protected:
 	CIw2DImage*	playButton;
 	CIw2DImage*	exitButton;
 	CIw2DImage* pauseButton;
+	CIw2DImage* settingsButton;
 	CIw2DImage* star;
 	CIw2DImage* holoStar;
 	CIw2DImage*	player;

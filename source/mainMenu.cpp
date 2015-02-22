@@ -6,6 +6,7 @@
 #include "game.h"
 #include "main.h"
 #include "levelSelect.h"
+#include "settings.h"
 
 MainMenu::~MainMenu()
 {
@@ -32,12 +33,10 @@ void MainMenu::Init()
 	AddChild(background);
 
 	// Create Start Game button
-	float x_pos = (float)IwGxGetScreenWidth() / 2;
-	float y_pos = (float)IwGxGetScreenHeight() / 3;
 	playButton = new CSprite();
 	playButton->SetImage(g_pResources->getPlayButton());
-	playButton->m_X = x_pos;
-	playButton->m_Y = y_pos;
+	playButton->m_X = (float)IwGxGetScreenWidth() / 2;
+	playButton->m_Y = (float)IwGxGetScreenHeight() / 3;
 	playButton->m_W = playButton->GetImage()->GetWidth();
 	playButton->m_H = playButton->GetImage()->GetHeight();
 	playButton->m_AnchorX = 1;
@@ -45,6 +44,19 @@ void MainMenu::Init()
 	playButton->m_ScaleX = game->getGraphicsScale();
 	playButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(playButton);
+
+	// Create settings
+	settingsButton = new CSprite();
+	settingsButton->SetImage(g_pResources->getSettingsButton());
+	settingsButton->m_X = (float)IwGxGetScreenWidth() / 2.2;
+	settingsButton->m_Y = (float)IwGxGetScreenHeight() / 2;
+	settingsButton->m_W = settingsButton->GetImage()->GetWidth();
+	settingsButton->m_H = settingsButton->GetImage()->GetHeight();
+	settingsButton->m_AnchorX = 1;
+	settingsButton->m_AnchorY = 1;
+	settingsButton->m_ScaleX = game->getGraphicsScale();
+	settingsButton->m_ScaleY = game->getGraphicsScale();
+	AddChild(settingsButton);
 }
 
 void MainMenu::Update(float deltaTime, float alphaMul)
@@ -65,6 +77,10 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 			// Start playing game music here
 			//Audio::PlayMusic("audio/in_game.mp3", true);
 		}
+		else if (settingsButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			MoveToSettings();
+		}
 	}
 }
 
@@ -77,4 +93,10 @@ void MainMenu::MoveToLevelSelect()
 {
 	LevelSelect* levelselect = (LevelSelect*)g_pSceneManager->Find("levelselect");
 	g_pSceneManager->SwitchTo(levelselect);
+}
+
+void MainMenu::MoveToSettings()
+{
+	Settings* settings = (Settings*)g_pSceneManager->Find("settings");
+	g_pSceneManager->SwitchTo(settings);
 }
