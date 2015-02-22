@@ -28,7 +28,7 @@ public:
 	void Render();
 	void NewGame(int width, int height);
 	void EndGame();
-	static void	ToPauseMenu();
+	static void	MoveToPauseMenu();
 
 
 	float getGraphicsScale() { return graphicsScale; }

@@ -119,7 +119,7 @@ void Game::Update(float deltaTime, float alphaMul)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				ToPauseMenu();
+				MoveToPauseMenu();
 				currentState = State::PAUSED;
 			}
 			else if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -206,7 +206,7 @@ void Game::Render()
 	Scene::Render();
 }
 
-void Game::ToPauseMenu()
+void Game::MoveToPauseMenu()
 {
 	PauseMenu* pausemenu = (PauseMenu*)g_pSceneManager->Find("pausemenu");
 	g_pSceneManager->SwitchTo(pausemenu);
