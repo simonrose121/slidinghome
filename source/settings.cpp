@@ -31,13 +31,15 @@ void Settings::Init()
 
 	// Add on screen buttons button
 	showOnScreenButtons = new CSprite();
-	showOnScreenButtons->m_X = IwGxGetScreenWidth() / 2;
+	showOnScreenButtons->m_X = IwGxGetScreenWidth() / 1.5;
 	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 2;
 	showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButton());
 	showOnScreenButtons->m_W = showOnScreenButtons->GetImage()->GetWidth();
 	showOnScreenButtons->m_H = showOnScreenButtons->GetImage()->GetHeight();
 	showOnScreenButtons->m_AnchorX = 1;
 	showOnScreenButtons->m_AnchorY = 1;
+	showOnScreenButtons->m_ScaleX = 0.5;
+	showOnScreenButtons->m_ScaleY = 0.5;
 	AddChild(showOnScreenButtons);
 
 	backButton = new CSprite();
@@ -48,9 +50,8 @@ void Settings::Init()
 	backButton->m_H = backButton->GetImage()->GetHeight();
 	backButton->m_AnchorX = 0.5;
 	backButton->m_AnchorY = 0.5;
-	// Fit background to screen size
-	backButton->m_ScaleX = 0.5;
-	backButton->m_ScaleY = 0.5;
+	backButton->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
+	backButton->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(backButton);
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
