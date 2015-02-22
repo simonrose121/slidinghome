@@ -22,11 +22,14 @@ public:
 	// Member functions
 	Grid* GetGrid(); // Not currently used
 	void Init();
+	void InitOnScreenButtons();
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
 	void NewGame(int width, int height);
 	void EndGame();
-	static void	pauseMenu();
+	static void	ToPauseMenu();
+
+
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
 	bool getShowOnScreenButtons() { return showOnScreenButtons; }
@@ -39,6 +42,10 @@ protected:
 	// Member variables
 	Grid* grid;
 	CSprite* pauseButton;
+	CSprite* upButton;
+	CSprite* rightButton;
+	CSprite* downButton;
+	CSprite* leftButton;
 	CSprite* star;
 	CSprite* holostar;
 	float graphicsScale;

@@ -109,6 +109,10 @@ void Grid::GenerateLevel(int levelId, int num_columns, int num_rows, int offset_
 		}
 	}
 
+	// Initialise on screen buttons
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	game->InitOnScreenButtons();
+
 	PrintGrid();
 }
 

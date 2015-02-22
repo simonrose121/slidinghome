@@ -39,12 +39,54 @@ void Game::Init()
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	//TODO: only initialise this if onScreenButtons bool is set
-
 	isMoving = false;
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
 	pressedDown = false;
+}
+
+void Game::InitOnScreenButtons()
+{
+	//TODO: only initialise this if onScreenButtons bool is set
+	upButton = new CSprite();
+	upButton->m_X = IwGxGetScreenWidth() / 1;
+	upButton->m_Y = IwGxGetScreenHeight() / 1;
+	upButton->SetImage(g_pResources->getUpButton());
+	upButton->m_W = upButton->GetImage()->GetWidth();
+	upButton->m_H = upButton->GetImage()->GetHeight();
+	upButton->m_AnchorX = 1;
+	upButton->m_AnchorY = 1;
+	AddChild(upButton);
+
+	rightButton = new CSprite();
+	rightButton->m_X = IwGxGetScreenWidth() / 1;
+	rightButton->m_Y = IwGxGetScreenHeight() / 1;
+	rightButton->SetImage(g_pResources->getRightButton());
+	rightButton->m_W = rightButton->GetImage()->GetWidth();
+	rightButton->m_H = rightButton->GetImage()->GetHeight();
+	rightButton->m_AnchorX = 1;
+	rightButton->m_AnchorY = 1;
+	AddChild(rightButton);
+
+	downButton = new CSprite();
+	downButton->m_X = IwGxGetScreenWidth() / 1;
+	downButton->m_Y = IwGxGetScreenHeight() / 1;
+	downButton->SetImage(g_pResources->getDownButton());
+	downButton->m_W = downButton->GetImage()->GetWidth();
+	downButton->m_H = downButton->GetImage()->GetHeight();
+	downButton->m_AnchorX = 1;
+	downButton->m_AnchorY = 1;
+	AddChild(downButton);
+
+	leftButton = new CSprite();
+	leftButton->m_X = IwGxGetScreenWidth() / 1;
+	leftButton->m_Y = IwGxGetScreenHeight() / 1;
+	leftButton->SetImage(g_pResources->getLeftButton());
+	leftButton->m_W = leftButton->GetImage()->GetWidth();
+	leftButton->m_H = leftButton->GetImage()->GetHeight();
+	leftButton->m_AnchorX = 1;
+	leftButton->m_AnchorY = 1;
+	AddChild(leftButton);
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -62,8 +104,32 @@ void Game::Update(float deltaTime, float alphaMul)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				pauseMenu();
+				ToPauseMenu();
 				currentState = State::PAUSED;
+			}
+			else if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				IwTrace(APP, ("move up button"));
+				if (!isMoving)
+					grid->MovePlayerUp();
+			}
+			else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				IwTrace(APP, ("move right button"));
+				if (!isMoving)
+					grid->MovePlayerRight();
+			}
+			else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				IwTrace(APP, ("move down button"));
+				if (!isMoving)
+					grid->MovePlayerDown();
+			}
+			else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				IwTrace(APP, ("move left button"));
+				if (!isMoving)
+					grid->MovePlayerLeft();
 			}
 		}
 
@@ -125,7 +191,7 @@ void Game::Render()
 	Scene::Render();
 }
 
-void Game::pauseMenu() 
+void Game::ToPauseMenu()
 {
 	PauseMenu* pausemenu = (PauseMenu*)g_pSceneManager->Find("pausemenu");
 	g_pSceneManager->SwitchTo(pausemenu);
@@ -136,7 +202,7 @@ void Game::NewGame(int width, int height)
 	grid = new Grid(this);
 	grid->GenerateLevel(1, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 
-	// Create Start Game button
+	// Create Pause Button
 	float x_pos = (float)IwGxGetScreenWidth() / 1;
 	float y_pos = (float)IwGxGetScreenHeight() / 1;
 	pauseButton = new CSprite();
