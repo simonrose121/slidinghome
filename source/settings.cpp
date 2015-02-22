@@ -7,6 +7,8 @@
 #include "mainMenu.h"
 #include "main.h"
 
+#include <fstream>
+
 Settings::~Settings()
 {
 }
@@ -56,6 +58,16 @@ void Settings::Init()
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setShowOnScreenButtons(false);
+
+	std::ifstream file("screenbuttons.txt");
+	int screenbuttons = 0;
+	file >> screenbuttons;
+	file.close();
+	if (screenbuttons == 1) 
+	{
+		showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButtonSelected());
+		game->setShowOnScreenButtons(true);
+	}
 }
 
 void Settings::Update(float deltaTime, float alphaMul)
@@ -87,17 +99,28 @@ void Settings::Update(float deltaTime, float alphaMul)
 void Settings::SetOnScreenButtons()
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
+	std::ofstream file;
 
 	if (!game->getShowOnScreenButtons())
 	{
 		showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButtonSelected());
 		game->setShowOnScreenButtons(true);
+
+		file.open("screenbuttons.txt");
+		file << 1;
+		file.close();
+		
 		IwTrace(APP, ("selected on screen buttons option"));
 	}
 	else
 	{
 		showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButton());
 		game->setShowOnScreenButtons(false);
+
+		file.open("screenbuttons.txt");
+		file << 0;
+		file.close();
+
 		IwTrace(APP, ("deselected on screen buttons option"));
 	}
 }

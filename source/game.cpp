@@ -241,6 +241,7 @@ void Game::NewGame(int width, int height)
 	std::ifstream file("star1.txt");
 	int fileNumber = 0;
 	file >> fileNumber;
+	file.close();
 	x_pos = (float)IwGxGetScreenWidth() / 1.05;
 	y_pos = (float)IwGxGetScreenHeight() / 15;
 	star = new CSprite();
