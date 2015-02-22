@@ -22,6 +22,7 @@ Resources::Resources()
 	levelButton = Iw2DCreateImage("textures/Level_button.png");
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
+	backButton = Iw2DCreateImage("textures/back_button2.png");
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
@@ -54,6 +55,7 @@ Resources::~Resources()
 	delete blank;
 	delete home;
 	delete font;
+	delete backButton;
 
 	delete playerLeftAtlas;
 	delete playerRightAtlas;

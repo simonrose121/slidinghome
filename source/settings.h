@@ -16,9 +16,11 @@ public:
 	void Render();
 
 	// Button callbacks
+	void MoveToMainMenu();
 
 protected:
 	// UI components
+	CSprite* backButton;
 };
 
 #endif  // __SETTINGS_H__

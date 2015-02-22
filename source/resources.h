@@ -44,6 +44,7 @@ public:
 	CIw2DImage*	getLevelButton() { return levelButton; }
 	CIw2DImage*	getBlank() { return blank; }
 	CIw2DImage* getHome() { return home; }
+	CIw2DImage* getBackButton() { return backButton; }
 	CIw2DFont*  getFont() { return font; }
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
 	CAtlas* getPlayerRightAtlas() { return playerRightAtlas; }
@@ -71,9 +72,9 @@ protected:
 	CIw2DImage* levelButton;
 	CIw2DImage*	blank;
 	CIw2DImage*	home;
+	CIw2DImage* backButton;
+
 	CIw2DFont* font;
-
-
 
 	// Atlases
 	CAtlas*	playerLeftAtlas;
