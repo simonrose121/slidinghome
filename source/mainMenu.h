@@ -15,13 +15,14 @@ public:
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
 	static void	MoveToLevelSelect();
+	static void MoveToSettings();
 	float getGraphicsScale() { return graphicsScale; }
 
 protected:
 	// Member variables
 	float graphicsScale;
 	CSprite* playButton;
-	CSprite* playText;
+	CSprite* settingsButton;
 };
 
 #endif  // __MAIN_MENU_H__
