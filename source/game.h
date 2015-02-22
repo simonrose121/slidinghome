@@ -38,7 +38,6 @@ public:
 	void setIsMoving(bool moving) { isMoving = moving; }
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
 
-
 protected:
 	// Member variables
 	Grid* grid;

@@ -16,9 +16,11 @@ public:
 	void Render();
 
 	// Button callbacks
+	void SetOnScreenButtons();
 
 protected:
 	// UI components
+	CSprite* showOnScreenButtons;
 };
 
 #endif  // __SETTINGS_H__

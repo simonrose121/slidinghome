@@ -48,6 +48,8 @@ public:
 	CIw2DImage* getRightButton() { return rightButton; }
 	CIw2DImage* getDownButton() { return downButton; }
 	CIw2DImage* getLeftButton() { return leftButton; }
+	CIw2DImage* getOnScreenSettingButton() { return onScreenSettingButton; }
+	CIw2DImage* getOnScreenSettingButtonSelected() { return onScreenSettingButtonSelected; }
 
 	CIw2DFont*  getFont() { return font; }
 
@@ -81,6 +83,8 @@ protected:
 	CIw2DImage* rightButton;
 	CIw2DImage* downButton;
 	CIw2DImage* leftButton;
+	CIw2DImage* onScreenSettingButton;
+	CIw2DImage* onScreenSettingButtonSelected;
 
 	// Fonts
 	CIw2DFont* font;

@@ -47,46 +47,48 @@ void Game::Init()
 
 void Game::InitOnScreenButtons()
 {
-	//TODO: only initialise this if onScreenButtons bool is set
-	upButton = new CSprite();
-	upButton->m_X = IwGxGetScreenWidth() / 2;
-	upButton->m_Y = IwGxGetScreenHeight() / 4;
-	upButton->SetImage(g_pResources->getUpButton());
-	upButton->m_W = upButton->GetImage()->GetWidth();
-	upButton->m_H = upButton->GetImage()->GetHeight();
-	upButton->m_AnchorX = 1;
-	upButton->m_AnchorY = 1;
-	AddChild(upButton);
+	if (showOnScreenButtons) 
+	{
+		upButton = new CSprite();
+		upButton->m_X = IwGxGetScreenWidth() / 2;
+		upButton->m_Y = IwGxGetScreenHeight() / 4;
+		upButton->SetImage(g_pResources->getUpButton());
+		upButton->m_W = upButton->GetImage()->GetWidth();
+		upButton->m_H = upButton->GetImage()->GetHeight();
+		upButton->m_AnchorX = 1;
+		upButton->m_AnchorY = 1;
+		AddChild(upButton);
 
-	rightButton = new CSprite();
-	rightButton->m_X = IwGxGetScreenWidth() / 1.3;
-	rightButton->m_Y = IwGxGetScreenHeight() / 2.6;
-	rightButton->SetImage(g_pResources->getRightButton());
-	rightButton->m_W = rightButton->GetImage()->GetWidth();
-	rightButton->m_H = rightButton->GetImage()->GetHeight();
-	rightButton->m_AnchorX = 1;
-	rightButton->m_AnchorY = 1;
-	AddChild(rightButton);
+		rightButton = new CSprite();
+		rightButton->m_X = IwGxGetScreenWidth() / 1.3;
+		rightButton->m_Y = IwGxGetScreenHeight() / 2.6;
+		rightButton->SetImage(g_pResources->getRightButton());
+		rightButton->m_W = rightButton->GetImage()->GetWidth();
+		rightButton->m_H = rightButton->GetImage()->GetHeight();
+		rightButton->m_AnchorX = 1;
+		rightButton->m_AnchorY = 1;
+		AddChild(rightButton);
 
-	downButton = new CSprite();
-	downButton->m_X = IwGxGetScreenWidth() / 2;
-	downButton->m_Y = IwGxGetScreenHeight() / 1.8;
-	downButton->SetImage(g_pResources->getDownButton());
-	downButton->m_W = downButton->GetImage()->GetWidth();
-	downButton->m_H = downButton->GetImage()->GetHeight();
-	downButton->m_AnchorX = 1;
-	downButton->m_AnchorY = 1;
-	AddChild(downButton);
+		downButton = new CSprite();
+		downButton->m_X = IwGxGetScreenWidth() / 2;
+		downButton->m_Y = IwGxGetScreenHeight() / 1.8;
+		downButton->SetImage(g_pResources->getDownButton());
+		downButton->m_W = downButton->GetImage()->GetWidth();
+		downButton->m_H = downButton->GetImage()->GetHeight();
+		downButton->m_AnchorX = 1;
+		downButton->m_AnchorY = 1;
+		AddChild(downButton);
 
-	leftButton = new CSprite();
-	leftButton->m_X = IwGxGetScreenWidth() / 3.3;
-	leftButton->m_Y = IwGxGetScreenHeight() / 2.6;
-	leftButton->SetImage(g_pResources->getLeftButton());
-	leftButton->m_W = leftButton->GetImage()->GetWidth();
-	leftButton->m_H = leftButton->GetImage()->GetHeight();
-	leftButton->m_AnchorX = 1;
-	leftButton->m_AnchorY = 1;
-	AddChild(leftButton);
+		leftButton = new CSprite();
+		leftButton->m_X = IwGxGetScreenWidth() / 3.3;
+		leftButton->m_Y = IwGxGetScreenHeight() / 2.6;
+		leftButton->SetImage(g_pResources->getLeftButton());
+		leftButton->m_W = leftButton->GetImage()->GetWidth();
+		leftButton->m_H = leftButton->GetImage()->GetHeight();
+		leftButton->m_AnchorX = 1;
+		leftButton->m_AnchorY = 1;
+		AddChild(leftButton);
+	}
 }
 
 void Game::CleanupOnScreenButtons()

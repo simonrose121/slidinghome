@@ -27,6 +27,8 @@ Resources::Resources()
 	rightButton = Iw2DCreateImage("textures/right-arrow.png");
 	downButton = Iw2DCreateImage("textures/down-arrow.png");
 	leftButton = Iw2DCreateImage("textures/left-arrow.png");
+	onScreenSettingButton = Iw2DCreateImage("textures/onscreen_settings.png");
+	onScreenSettingButtonSelected = Iw2DCreateImage("textures/onscreen_settings_selected.png");
 
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
@@ -66,6 +68,8 @@ Resources::~Resources()
 	delete rightButton;
 	delete downButton;
 	delete leftButton;
+	delete onScreenSettingButton;
+	delete onScreenSettingButtonSelected;
 
 	// Cleanup fonts
 	delete font;
