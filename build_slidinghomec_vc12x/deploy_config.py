@@ -4,9 +4,9 @@
 # tool during the build process.
 
 config = {}
-cmdline = ['C:/Marmalade/7.3/s3e/makefile_builder/mkb.py', 'c:/Users/b1009269/Desktop/slidinghome/SlidingHomeC.mkb', '--deploy-only', '--hub-data', 'C:/Users/b1009269/Desktop/slidinghome/project_SlidingHomeC/mkb-windows.txt', '--buildenv=VC12X']
-mkb = 'c:/Users/b1009269/Desktop/slidinghome/SlidingHomeC.mkb'
-mkf = ['c:\\marmalade\\7.3\\modules\\iw2d\\iw2d.mkf', 'c:\\marmalade\\7.3\\modules\\iwgx\\iwgx.mkf', 'c:\\marmalade\\7.3\\modules\\iwgl\\iwgl.mkf', 'c:\\marmalade\\7.3\\modules\\iwutil\\iwutil.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\libjpeg\\libjpeg.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\libpng\\libpng.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\zlib\\zlib.mkf', 'c:\\marmalade\\7.3\\modules\\iwgeom\\iwgeom.mkf', 'c:\\marmalade\\7.3\\modules\\iwresmanager\\iwresmanager.mkf', 'c:\\marmalade\\7.3\\extensions\\pvrtextool\\pvrtextool.mkf', 'c:\\marmalade\\7.3\\modules\\iwgxfont\\iwgxfont.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\tiniconv\\tiniconv.mkf', 'c:\\marmalade\\7.3\\modules\\iw2dscenegraph\\iw2dscenegraph.mkf', 'c:\\marmalade\\7.3\\modules\\iw2dscenegraphcore\\iw2dscenegraphcore.mkf', 'c:\\marmalade\\7.3\\modules\\iwtween\\iwtween.mkf', 'c:\\users\\b1009269\\desktop\\slidinghome\\modules\\soundengine\\soundengine.mkf']
+cmdline = ['C:/Marmalade/7.3/s3e/makefile_builder/mkb.py', 'c:/Users/b2036561/Desktop/slidinghome/SlidingHomeC.mkb', '--buildenv=VC12X', '--fake-vc-call', '--deploy-only']
+mkb = 'c:/Users/b2036561/Desktop/slidinghome/SlidingHomeC.mkb'
+mkf = ['c:\\marmalade\\7.3\\modules\\iw2d\\iw2d.mkf', 'c:\\marmalade\\7.3\\modules\\iwgx\\iwgx.mkf', 'c:\\marmalade\\7.3\\modules\\iwgl\\iwgl.mkf', 'c:\\marmalade\\7.3\\modules\\iwutil\\iwutil.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\libjpeg\\libjpeg.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\libpng\\libpng.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\zlib\\zlib.mkf', 'c:\\marmalade\\7.3\\modules\\iwgeom\\iwgeom.mkf', 'c:\\marmalade\\7.3\\modules\\iwresmanager\\iwresmanager.mkf', 'c:\\marmalade\\7.3\\extensions\\pvrtextool\\pvrtextool.mkf', 'c:\\marmalade\\7.3\\modules\\iwgxfont\\iwgxfont.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\tiniconv\\tiniconv.mkf', 'c:\\marmalade\\7.3\\modules\\iw2dscenegraph\\iw2dscenegraph.mkf', 'c:\\marmalade\\7.3\\modules\\iw2dscenegraphcore\\iw2dscenegraphcore.mkf', 'c:\\marmalade\\7.3\\modules\\iwtween\\iwtween.mkf', 'c:\\users\\b2036561\\desktop\\slidinghome\\modules\\soundengine\\soundengine.mkf']
 
 class DeployConfig(object):
     pass
@@ -16,13 +16,13 @@ class DeployConfig(object):
 assets = {}
 
 assets['Default'] = [
-    ('c:/Users/b1009269/Desktop/slidinghome/data', '.', 0),
-    ('c:/Users/b1009269/Desktop/slidinghome/data/audio', 'audio', 0),
-    ('c:/Users/b1009269/Desktop/slidinghome/data/textures', 'textures', 0),
-    ('c:/Users/b1009269/Desktop/slidinghome/data/maps', 'maps', 0),
-    ('c:/Users/b1009269/Desktop/slidinghome/data/fonts', 'fonts', 0),
-    ('c:/Users/b1009269/Desktop/slidinghome/data-ram/data-gles1', '.', 0),
-    ('c:/Users/b1009269/Desktop/slidinghome/data-ram/data-gles1/fonts/arial8.gxfont.bin', 'fonts/arial8.gxfont.bin', 0),
+    ('c:/Users/b2036561/Desktop/slidinghome/data', '.', 0),
+    ('c:/Users/b2036561/Desktop/slidinghome/data/audio', 'audio', 0),
+    ('c:/Users/b2036561/Desktop/slidinghome/data/textures', 'textures', 0),
+    ('c:/Users/b2036561/Desktop/slidinghome/data/maps', 'maps', 0),
+    ('c:/Users/b2036561/Desktop/slidinghome/data/fonts', 'fonts', 0),
+    ('c:/Users/b2036561/Desktop/slidinghome/data-ram/data-gles1', '.', 0),
+    ('c:/Users/b2036561/Desktop/slidinghome/data-ram/data-gles1/fonts/arial8.gxfont.bin', 'fonts/arial8.gxfont.bin', 0),
 ]
 
 ######### DEFAULT CONFIG #############
@@ -35,8 +35,8 @@ class DefaultConfig(DeployConfig):
     caption = 'SlidingHomeC'
     long_caption = 'SlidingHomeC'
     version = [0, 0, 0]
-    config = ['c:/Users/b1009269/Desktop/slidinghome/data/app.icf']
-    data_dir = 'c:/Users/b1009269/Desktop/slidinghome/data'
+    config = ['c:/Users/b2036561/Desktop/slidinghome/data/app.icf']
+    data_dir = 'c:/Users/b2036561/Desktop/slidinghome/data'
     iphone_link_lib = []
     osx_ext_dll = ['c:/marmalade/7.3/extensions/pvrtextool/lib/osx/libPVRTexTool.dylib']
     ws8_ext_capabilities = []
@@ -72,36 +72,36 @@ class DefaultConfig(DeployConfig):
     iphone_link_libs = []
     target = {
          'gcc_x86' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_x86/SlidingHomeC.so',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_x86/SlidingHomeC.so',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_x86/SlidingHomeC.so',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_x86/SlidingHomeC.so',
                  },
          'gcc_x86_tizen' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_x86_tizen/SlidingHomeC.s86',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_x86_tizen/SlidingHomeC.s86',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_x86_tizen/SlidingHomeC.s86',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_x86_tizen/SlidingHomeC.s86',
                  },
          'mips_gcc' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
                  },
          'arm_gcc' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_arm/SlidingHomeC.s3e',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_arm/SlidingHomeC.s3e',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_arm/SlidingHomeC.s3e',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_arm/SlidingHomeC.s3e',
                  },
          'mips' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_mips/SlidingHomeC.so',
                  },
          'gcc_x86_android' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_x86_android/SlidingHomeC.so',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_x86_android/SlidingHomeC.so',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_gcc_x86_android/SlidingHomeC.so',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_gcc_x86_android/SlidingHomeC.so',
                  },
          'arm' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_arm/SlidingHomeC.s3e',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_arm/SlidingHomeC.s3e',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_arm/SlidingHomeC.s3e',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_arm/SlidingHomeC.s3e',
                  },
          'x86' : {
-                   'debug'   : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_x86/SlidingHomeC.s86',
-                   'release' : r'c:/Users/b1009269/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_x86/SlidingHomeC.s86',
+                   'debug'   : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Debug_SlidingHomeC_VC12X_x86/SlidingHomeC.s86',
+                   'release' : r'c:/Users/b2036561/Desktop/slidinghome/build_slidinghomec_vc12x/Release_SlidingHomeC_VC12X_x86/SlidingHomeC.s86',
                  },
         }
     arm_arch = ''

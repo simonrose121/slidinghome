@@ -37,10 +37,13 @@ public:
 
 	void setIsMoving(bool moving) { isMoving = moving; }
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
+	void setHighContrastMode(bool highContrastMode);
+
 
 protected:
 	// Member variables
 	Grid* grid;
+	CSprite* background;
 	CSprite* pauseButton;
 	CSprite* upButton;
 	CSprite* rightButton;
@@ -57,6 +60,7 @@ protected:
 	bool pressedDown;
 	State currentState;
 	bool showOnScreenButtons;
+	bool changeToHighContrast;
 };
 
 #endif
