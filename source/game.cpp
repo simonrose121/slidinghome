@@ -8,6 +8,7 @@
 #include "resources.h"
 #include "pauseMenu.h"
 #include "stringExtensions.h"
+#include "s3eVibra.h"
 
 #include <iostream>
 #include <fstream>
@@ -124,29 +125,35 @@ void Game::Update(float deltaTime, float alphaMul)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
+				s3eVibraVibrate(120, 500);
 				MoveToPauseMenu();
 				currentState = State::PAUSED;
+
 			}
 			else if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
+				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move up button"));
 				if (!isMoving)
 					grid->MovePlayerUp();
 			}
 			else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
+				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move right button"));
 				if (!isMoving)
 					grid->MovePlayerRight();
 			}
 			else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
+				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move down button"));
 				if (!isMoving)
 					grid->MovePlayerDown();
 			}
 			else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
+				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move left button"));
 				if (!isMoving)
 					grid->MovePlayerLeft();
