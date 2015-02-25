@@ -127,80 +127,88 @@ void Game::Update(float deltaTime, float alphaMul)
 				MoveToPauseMenu();
 				currentState = State::PAUSED;
 			}
-			else if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+
+			if (showOnScreenButtons)
 			{
-				IwTrace(APP, ("move up button"));
-				if (!isMoving)
-					grid->MovePlayerUp();
-			}
-			else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
-				IwTrace(APP, ("move right button"));
-				if (!isMoving)
-					grid->MovePlayerRight();
-			}
-			else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
-				IwTrace(APP, ("move down button"));
-				if (!isMoving)
-					grid->MovePlayerDown();
-			}
-			else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
-				IwTrace(APP, ("move left button"));
-				if (!isMoving)
-					grid->MovePlayerLeft();
+				if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move up button"));
+					if (!isMoving)
+						grid->MovePlayerUp();
+				}
+				else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move right button"));
+					if (!isMoving)
+						grid->MovePlayerRight();
+				}
+				else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move down button"));
+					if (!isMoving)
+						grid->MovePlayerDown();
+				}
+				else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move left button"));
+					if (!isMoving)
+						grid->MovePlayerLeft();
+				}
+				g_pInput->Reset();
 			}
 		}
 
 		// If input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
-			if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
+			if (!showOnScreenButtons)
 			{
-				if (!pressedDown)
+				if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
 				{
-					//record start position of movement
-					start_x = g_pInput->m_X;
-					start_y = g_pInput->m_Y;
-					pressedDown = true;
+					if (!pressedDown)
+					{
+						//record start position of movement
+						start_x = g_pInput->m_X;
+						start_y = g_pInput->m_Y;
+						pressedDown = true;
 
-					IwTrace(APP, ("pressed down is %d", pressedDown));
-				}
+						IwTrace(APP, ("pressed down is %d", pressedDown));
+					}
 
-				IwTrace(APP, ("currently pressing down"));
+					IwTrace(APP, ("currently pressing down"));
 
-				IwTrace(APP, ("start x,y = %d,%d current x,y = %d,%d", start_x, start_y, g_pInput->m_X, g_pInput->m_Y));
-			}
-			else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
-			{
-				// Check current input is smaller than start touch position minus min swipe
-				if (g_pInput->m_X < start_x - minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
-				{
-					IwTrace(APP, ("move left"));
-					if (!isMoving)
-						grid->MovePlayerLeft();
+					IwTrace(APP, ("start x,y = %d,%d current x,y = %d,%d", start_x, start_y, g_pInput->m_X, g_pInput->m_Y));
 				}
-				if (g_pInput->m_Y < start_y - minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
+				else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 				{
-					IwTrace(APP, ("move up"));
-					if (!isMoving)
-						grid->MovePlayerUp();
+					// Check current input is smaller than start touch position minus min swipe
+					if (g_pInput->m_X < start_x - minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
+					{
+						IwTrace(APP, ("move left"));
+						if (!isMoving)
+							grid->MovePlayerLeft();
+					}
+					if (g_pInput->m_Y < start_y - minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
+					{
+						IwTrace(APP, ("move up"));
+						if (!isMoving)
+							grid->MovePlayerUp();
+					}
+					if (g_pInput->m_X > start_x + minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
+					{
+						IwTrace(APP, ("move right"));
+						if (!isMoving)
+							grid->MovePlayerRight();
+					}
+					if (g_pInput->m_Y > start_y + minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
+					{
+						IwTrace(APP, ("move down"));
+						if (!isMoving)
+							grid->MovePlayerDown();
+					}
+					pressedDown = false;
+					g_pInput->Reset();
 				}
-				if (g_pInput->m_X > start_x + minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
-				{
-					IwTrace(APP, ("move right"));
-					if (!isMoving)
-						grid->MovePlayerRight();
-				}
-				if (g_pInput->m_Y > start_y + minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
-				{
-					IwTrace(APP, ("move down"));
-					if (!isMoving)
-						grid->MovePlayerDown();
-				}
-				pressedDown = false;
-				g_pInput->Reset();
 			}
 		}
 	}
