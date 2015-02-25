@@ -8,6 +8,7 @@
 #include "resources.h"
 #include "pauseMenu.h"
 #include "stringExtensions.h"
+#include "s3eVibra.h"
 
 #include <iostream>
 #include <fstream>
@@ -17,7 +18,7 @@
 
 Game::~Game()
 {
-	if (currentState != State::COMPLETE)
+	if (currentState != COMPLETE)
 		delete grid;
 }
 
@@ -133,8 +134,10 @@ void Game::Update(float deltaTime, float alphaMul)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
+				s3eVibraVibrate(60, 125);
 				MoveToPauseMenu();
-				currentState = State::PAUSED;
+				currentState = PAUSED;
+
 			}
 
 			if (showOnScreenButtons)
@@ -278,7 +281,7 @@ void Game::NewGame(int width, int height)
 	star->m_ScaleY = getGraphicsScale();
 	AddChild(star);
 
-	currentState = State::INPROGRESS;
+	currentState = INPROGRESS;
 }
 
 void Game::EndGame()
@@ -288,5 +291,5 @@ void Game::EndGame()
 	//cleaup this line
 	//grid = new Grid(this);
 	delete grid;
-	currentState = State::COMPLETE;
+	currentState = COMPLETE;
 }
