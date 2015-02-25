@@ -19,7 +19,7 @@ void MainMenu::Init()
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
 	// Create menu background
-	CSprite* background = new CSprite();
+	background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
 	background->m_Y = (float)IwGxGetScreenHeight() / 2;
 	background->SetImage(g_pResources->getMainMenuBG());
@@ -57,6 +57,19 @@ void MainMenu::Init()
 	settingsButton->m_ScaleX = game->getGraphicsScale();
 	settingsButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(settingsButton);
+}
+
+void MainMenu::ChangeBackground(){
+	if (changeToHighContrast){
+		background->SetImage(g_pResources->getMainMenuBGHC());
+		playButton->SetImage(g_pResources->getPlayButtonHC());
+		settingsButton->SetImage(g_pResources->getSettingsButtonHC());
+	}
+	else{
+		background->SetImage(g_pResources->getMainMenuBG());
+		playButton->SetImage(g_pResources->getPlayButton());
+		settingsButton->SetImage(g_pResources->getSettingsButton());
+	}
 }
 
 void MainMenu::Update(float deltaTime, float alphaMul)

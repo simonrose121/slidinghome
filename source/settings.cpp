@@ -85,6 +85,7 @@ void Settings::Init()
 	}
 
 	game->setHighContrastMode(false);
+	MainMenu* menu = (MainMenu*)g_pSceneManager->Find("mainMenu");
 
 	std::ifstream file2("highcontrastmode.txt");
 	int highcontrast = 0;
@@ -93,6 +94,9 @@ void Settings::Init()
 	if (highcontrast == 1){
 		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButtonSelected());
 		game->setHighContrastMode(true);
+		menu->setHighContrastMode(true);
+		game->ChangeBackground();
+		menu->ChangeBackground();
 	}
 
 }
@@ -157,6 +161,7 @@ void Settings::SetOnScreenButtons()
 }
 void Settings::SetHighContrastMode(){
 	Game* game = (Game*)g_pSceneManager->Find("game");
+	MainMenu* menu = (MainMenu*)g_pSceneManager->Find("mainMenu");
 
 	if (!game->getHighContrastMode())
 	{
@@ -164,7 +169,9 @@ void Settings::SetHighContrastMode(){
 
 		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButtonSelected());
 		game->setHighContrastMode(true);
+		menu->setHighContrastMode(true);
 		game->ChangeBackground();
+		menu->ChangeBackground();
 
 		fileContrastWrite.open("highcontrastmode.txt");
 		fileContrastWrite << 1;
@@ -178,7 +185,9 @@ void Settings::SetHighContrastMode(){
 
 		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
 		game->setHighContrastMode(false);
+		menu->setHighContrastMode(false);
 		game->ChangeBackground();
+		menu->ChangeBackground();
 
 		fileContrastWrite.open("highcontrastmode.txt");
 		fileContrastWrite << 0;

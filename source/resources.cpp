@@ -5,14 +5,17 @@ Resources::Resources()
 {
 	// Load images
 	mainMenuBG = Iw2DCreateImage("textures/menu.png");
+	mainMenuBGHC = Iw2DCreateImage("textures/HC_Menu.png");
 	endScreenBG = Iw2DCreateImage("textures/End_Screen.png");
 	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
 	gameBG = Iw2DCreateImage("textures/background.png");
 	gameBGHC = Iw2DCreateImage("textures/HC_Background_1st_Level.png");
 	playButton = Iw2DCreateImage("textures/play_button.png");
+	playButtonHC = Iw2DCreateImage("textures/HC_play_button.png");
 	exitButton = Iw2DCreateImage("textures/Exit_Button.png");
 	pauseButton = Iw2DCreateImage("textures/pause.png");
 	settingsButton = Iw2DCreateImage("textures/Settings_Button.png");
+	settingsButtonHC = Iw2DCreateImage("textures/HC_Settings_Button.png");
 	star = Iw2DCreateImage("textures/star_complete.png");
 	holoStar = Iw2DCreateImage("textures/star_uncomplete.png");
 	player = Iw2DCreateImage("textures/character.png");
@@ -49,12 +52,15 @@ Resources::~Resources()
 {
 	// Cleanup images
 	delete mainMenuBG;
+	delete mainMenuBGHC;
 	delete endScreenBG;
 	delete pauseMenuBG;
 	delete playButton;
+	delete playButtonHC;
 	delete exitButton;
 	delete pauseButton;
 	delete settingsButton;
+	delete settingsButtonHC;
 	delete star;
 	delete holoStar;
 	delete player;
