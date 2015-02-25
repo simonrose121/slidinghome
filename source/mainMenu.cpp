@@ -74,14 +74,14 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
 			MoveToLevelSelect();
-			s3eVibraVibrate(120, 500);
+			s3eVibraVibrate(60, 125);
 			// Start playing game music here
 			//Audio::PlayMusic("audio/in_game.mp3", true);
 		}
 		else if (settingsButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
 			MoveToSettings();
-			s3eVibraVibrate(120, 500);
+			s3eVibraVibrate(60, 125);
 		}
 	}
 }

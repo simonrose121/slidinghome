@@ -83,7 +83,7 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 		g_pInput->Reset();
 		if (levelButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			s3eVibraVibrate(120, 500);
+			s3eVibraVibrate(60, 125);
 			StartGame();
 
 			// Start playing game music here

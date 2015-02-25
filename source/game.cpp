@@ -18,7 +18,7 @@
 
 Game::~Game()
 {
-	if (currentState != State::COMPLETE)
+	if (currentState != COMPLETE)
 		delete grid;
 }
 
@@ -125,35 +125,31 @@ void Game::Update(float deltaTime, float alphaMul)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(120, 500);
+				s3eVibraVibrate(60, 125);
 				MoveToPauseMenu();
-				currentState = State::PAUSED;
+				currentState = PAUSED;
 
 			}
 			else if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move up button"));
 				if (!isMoving)
 					grid->MovePlayerUp();
 			}
 			else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move right button"));
 				if (!isMoving)
 					grid->MovePlayerRight();
 			}
 			else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move down button"));
 				if (!isMoving)
 					grid->MovePlayerDown();
 			}
 			else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(120, 500);
 				IwTrace(APP, ("move left button"));
 				if (!isMoving)
 					grid->MovePlayerLeft();
@@ -268,7 +264,7 @@ void Game::NewGame(int width, int height)
 	star->m_ScaleY = getGraphicsScale();
 	AddChild(star);
 
-	currentState = State::INPROGRESS;
+	currentState = INPROGRESS;
 }
 
 void Game::EndGame()
@@ -278,5 +274,5 @@ void Game::EndGame()
 	//cleaup this line
 	//grid = new Grid(this);
 	delete grid;
-	currentState = State::COMPLETE;
+	currentState = COMPLETE;
 }

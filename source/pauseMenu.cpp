@@ -76,14 +76,14 @@ void PauseMenu::Update(float deltaTime, float alphaMul)
 		g_pInput->Reset();
 		if (exitButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			s3eVibraVibrate(120, 500);
+			s3eVibraVibrate(60, 125);
 			Game* game = (Game*)g_pSceneManager->Find("game");
 			game->EndGame();
 			mainMenu();
 		}
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			s3eVibraVibrate(120, 500);
+			s3eVibraVibrate(60, 125);
 			StartGame();
 		}
 	}
