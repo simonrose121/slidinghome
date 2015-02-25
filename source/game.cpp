@@ -45,13 +45,13 @@ void Game::Init()
 	pressedDown = false;
 }
 
-void Game::setHighContrastMode(bool highContrastMode){
-	//if (changeToHighContrast){
-	//	background->SetImage(g_pResources->getGameBGHC());
-	//}
-	//else{
-	//	background->SetImage(g_pResources->getGameBG());
-	//}
+void Game::ChangeBackground(){
+	if (changeToHighContrast){
+		background->SetImage(g_pResources->getGameBGHC());
+	}
+	else{
+		background->SetImage(g_pResources->getGameBG());
+	}
 }
 
 void Game::InitOnScreenButtons()
