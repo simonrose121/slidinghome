@@ -27,7 +27,7 @@ void Game::Init()
 
 	graphicsScale = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH;
 
-	CSprite* background = new CSprite();
+	background = new CSprite();
 	background->m_X = IwGxGetScreenWidth() / 2;
 	background->m_Y = IwGxGetScreenHeight() / 2;
 	background->SetImage(g_pResources->getGameBG());
@@ -43,6 +43,15 @@ void Game::Init()
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
 	pressedDown = false;
+}
+
+void Game::ChangeBackground(){
+	if (changeToHighContrast){
+		background->SetImage(g_pResources->getGameBGHC());
+	}
+	else{
+		background->SetImage(g_pResources->getGameBG());
+	}
 }
 
 void Game::InitOnScreenButtons()

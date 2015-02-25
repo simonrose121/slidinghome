@@ -8,6 +8,7 @@ Resources::Resources()
 	endScreenBG = Iw2DCreateImage("textures/End_Screen.png");
 	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
 	gameBG = Iw2DCreateImage("textures/background.png");
+	gameBGHC = Iw2DCreateImage("textures/HC_Background_1st_Level.png");
 	playButton = Iw2DCreateImage("textures/play_button.png");
 	exitButton = Iw2DCreateImage("textures/Exit_Button.png");
 	pauseButton = Iw2DCreateImage("textures/pause.png");
@@ -29,6 +30,8 @@ Resources::Resources()
 	leftButton = Iw2DCreateImage("textures/left-arrow.png");
 	onScreenSettingButton = Iw2DCreateImage("textures/onscreen_settings.png");
 	onScreenSettingButtonSelected = Iw2DCreateImage("textures/onscreen_settings_selected.png");
+	highContrastButton = Iw2DCreateImage("textures/highcontrast_settings.png");
+	highContrastButtonSelected = Iw2DCreateImage("textures/highcontrast_settings_selected.png");
 	backButton = Iw2DCreateImage("textures/back_button2.png");
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
@@ -60,6 +63,7 @@ Resources::~Resources()
 	delete playerUp;
 	delete playerDown;
 	delete gameBG;
+	delete gameBGHC;
 	delete rock;
 	delete levelButton;
 	delete blank;
@@ -70,6 +74,8 @@ Resources::~Resources()
 	delete leftButton;
 	delete onScreenSettingButton;
 	delete onScreenSettingButtonSelected;
+	delete highContrastButton;
+	delete highContrastButtonSelected;
 	delete backButton;
 
 	// Cleanup fonts

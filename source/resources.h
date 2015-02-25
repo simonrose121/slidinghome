@@ -29,6 +29,7 @@ public:
 	CIw2DImage*	getEndScreenBG()	{ return endScreenBG; }
 	CIw2DImage*	getPauseMenuBG()	{ return pauseMenuBG; }
 	CIw2DImage*	getGameBG() { return gameBG; }
+	CIw2DImage* getGameBGHC() { return gameBGHC; }
 	CIw2DImage*	getPlayButton() { return playButton; }
 	CIw2DImage*	getExitButton() { return exitButton; }
 	CIw2DImage*	getPauseButton() { return pauseButton; }
@@ -50,6 +51,8 @@ public:
 	CIw2DImage* getLeftButton() { return leftButton; }
 	CIw2DImage* getOnScreenSettingButton() { return onScreenSettingButton; }
 	CIw2DImage* getOnScreenSettingButtonSelected() { return onScreenSettingButtonSelected; }
+	CIw2DImage* getHighContrastSettingButton() { return highContrastButton; }
+	CIw2DImage* getHighContrastSettingButtonSelected() { return highContrastButtonSelected; }
 	CIw2DImage* getBackButton() { return backButton; }
 
 	CIw2DFont*  getFont() { return font; }
@@ -65,6 +68,7 @@ protected:
 	CIw2DImage*	endScreenBG;
 	CIw2DImage* pauseMenuBG;
 	CIw2DImage*	gameBG;
+	CIw2DImage* gameBGHC;
 	CIw2DImage*	playButton;
 	CIw2DImage*	exitButton;
 	CIw2DImage* pauseButton;
@@ -86,6 +90,8 @@ protected:
 	CIw2DImage* leftButton;
 	CIw2DImage* onScreenSettingButton;
 	CIw2DImage* onScreenSettingButtonSelected;
+	CIw2DImage* highContrastButton;
+	CIw2DImage* highContrastButtonSelected;
 	CIw2DImage* backButton;
 
 	// Fonts

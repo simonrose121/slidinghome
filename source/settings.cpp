@@ -44,6 +44,19 @@ void Settings::Init()
 	showOnScreenButtons->m_ScaleY = 0.5;
 	AddChild(showOnScreenButtons);
 
+	// Add High Contrast Mode Button
+	showHighContrastMode = new CSprite();
+	showHighContrastMode->m_X = IwGxGetScreenWidth() / 1.5;
+	showHighContrastMode->m_Y = IwGxGetScreenHeight() / 3;
+	showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
+	showHighContrastMode->m_W = showHighContrastMode->GetImage()->GetWidth();
+	showHighContrastMode->m_H = showHighContrastMode->GetImage()->GetHeight();
+	showHighContrastMode->m_AnchorX = 1;
+	showHighContrastMode->m_AnchorY = 1;
+	showHighContrastMode->m_ScaleX = 0.5;
+	showHighContrastMode->m_ScaleY = 0.5;
+	AddChild(showHighContrastMode);
+
 	backButton = new CSprite();
 	backButton->m_X = (float)IwGxGetScreenWidth() / 8;
 	backButton->m_Y = (float)IwGxGetScreenHeight() / 8;
@@ -56,18 +69,32 @@ void Settings::Init()
 	backButton->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(backButton);
 
+
+	// Checks if the option was selected since the last time the game has been played
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setShowOnScreenButtons(false);
 
-	std::ifstream file("screenbuttons.txt");
+	std::ifstream file1("screenbuttons.txt");
 	int screenbuttons = 0;
-	file >> screenbuttons;
-	file.close();
+	file1 >> screenbuttons;
+	file1.close();
 	if (screenbuttons == 1) 
 	{
 		showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButtonSelected());
 		game->setShowOnScreenButtons(true);
 	}
+
+	game->setHighContrastMode(false);
+
+	std::ifstream file2("highcontrastmode.txt");
+	int highcontrast = 0;
+	file2 >> highcontrast;
+	file2.close();
+	if (highcontrast == 1){
+		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButtonSelected());
+		game->setHighContrastMode(true);
+	}
+
 }
 
 void Settings::Update(float deltaTime, float alphaMul)
@@ -90,6 +117,10 @@ void Settings::Update(float deltaTime, float alphaMul)
 			if (showOnScreenButtons->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
 				SetOnScreenButtons();
+			}
+			if (showHighContrastMode->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				SetHighContrastMode();
 			}
 			g_pInput->Reset();
 		}
@@ -124,6 +155,39 @@ void Settings::SetOnScreenButtons()
 		IwTrace(APP, ("deselected on screen buttons option"));
 	}
 }
+void Settings::SetHighContrastMode(){
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	if (!game->getHighContrastMode())
+	{
+		std::ofstream fileContrastWrite;
+
+		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButtonSelected());
+		game->setHighContrastMode(true);
+		game->ChangeBackground();
+
+		fileContrastWrite.open("highcontrastmode.txt");
+		fileContrastWrite << 1;
+		fileContrastWrite.close();
+		
+		IwTrace(APP, ("selected on screen buttons option"));
+	}
+	else
+	{
+		std::ofstream fileContrastWrite;
+
+		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
+		game->setHighContrastMode(false);
+		game->ChangeBackground();
+
+		fileContrastWrite.open("highcontrastmode.txt");
+		fileContrastWrite << 0;
+		fileContrastWrite.close();
+
+		IwTrace(APP, ("deselected on screen buttons option"));
+	}
+}
+
 
 void Settings::Render()
 {

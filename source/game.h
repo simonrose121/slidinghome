@@ -29,18 +29,23 @@ public:
 	void NewGame(int width, int height);
 	void EndGame();
 	static void	MoveToPauseMenu();
+	void ChangeBackground();
 
 
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
 	bool getShowOnScreenButtons() { return showOnScreenButtons; }
+	bool getHighContrastMode() { return changeToHighContrast; }
 
 	void setIsMoving(bool moving) { isMoving = moving; }
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
+	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
+
 
 protected:
 	// Member variables
 	Grid* grid;
+	CSprite* background;
 	CSprite* pauseButton;
 	CSprite* upButton;
 	CSprite* rightButton;
@@ -57,6 +62,7 @@ protected:
 	bool pressedDown;
 	State currentState;
 	bool showOnScreenButtons;
+	bool changeToHighContrast;
 };
 
 #endif
