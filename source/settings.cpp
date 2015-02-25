@@ -41,8 +41,8 @@ void Settings::Init()
 	showOnScreenButtons->m_H = showOnScreenButtons->GetImage()->GetHeight();
 	showOnScreenButtons->m_AnchorX = 1;
 	showOnScreenButtons->m_AnchorY = 1;
-	showOnScreenButtons->m_ScaleX = 0.5;
-	showOnScreenButtons->m_ScaleY = 0.5;
+	showOnScreenButtons->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
+	showOnScreenButtons->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(showOnScreenButtons);
 
 	// Add High Contrast Mode Button
@@ -54,8 +54,8 @@ void Settings::Init()
 	showHighContrastMode->m_H = showHighContrastMode->GetImage()->GetHeight();
 	showHighContrastMode->m_AnchorX = 1;
 	showHighContrastMode->m_AnchorY = 1;
-	showHighContrastMode->m_ScaleX = 0.5;
-	showHighContrastMode->m_ScaleY = 0.5;
+	showHighContrastMode->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
+	showHighContrastMode->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(showHighContrastMode);
 
 	backButton = new CSprite();

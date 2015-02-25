@@ -67,6 +67,8 @@ void Game::InitOnScreenButtons()
 		upButton->m_H = upButton->GetImage()->GetHeight();
 		upButton->m_AnchorX = 1;
 		upButton->m_AnchorY = 1;
+		upButton->m_ScaleX = graphicsScale;
+		upButton->m_ScaleY = graphicsScale;
 		AddChild(upButton);
 
 		rightButton = new CSprite();
@@ -77,6 +79,8 @@ void Game::InitOnScreenButtons()
 		rightButton->m_H = rightButton->GetImage()->GetHeight();
 		rightButton->m_AnchorX = 1;
 		rightButton->m_AnchorY = 1;
+		rightButton->m_ScaleX = graphicsScale;
+		rightButton->m_ScaleY = graphicsScale;
 		AddChild(rightButton);
 
 		downButton = new CSprite();
@@ -87,6 +91,8 @@ void Game::InitOnScreenButtons()
 		downButton->m_H = downButton->GetImage()->GetHeight();
 		downButton->m_AnchorX = 1;
 		downButton->m_AnchorY = 1;
+		downButton->m_ScaleX = graphicsScale;
+		downButton->m_ScaleY = graphicsScale;
 		AddChild(downButton);
 
 		leftButton = new CSprite();
@@ -97,6 +103,8 @@ void Game::InitOnScreenButtons()
 		leftButton->m_H = leftButton->GetImage()->GetHeight();
 		leftButton->m_AnchorX = 1;
 		leftButton->m_AnchorY = 1;
+		leftButton->m_ScaleX = graphicsScale;
+		leftButton->m_ScaleY = graphicsScale;
 		AddChild(leftButton);
 	}
 }
