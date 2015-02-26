@@ -134,7 +134,6 @@ void Game::Update(float deltaTime, float alphaMul)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(60, 125);
 				MoveToPauseMenu();
 				currentState = PAUSED;
 

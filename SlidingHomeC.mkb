@@ -32,6 +32,7 @@ files
 	resources.cpp
 	scene.cpp
 	settings.cpp
+	vibration.cpp
 
 	audio.h
 	blankObject.h
@@ -49,6 +50,7 @@ files
 	scene.h
 	settings.h
 	stringExtensions.h
+	vibration.h
 }
 
 assets
