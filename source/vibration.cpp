@@ -3,6 +3,7 @@
 #include "input.h"
 #include "vibration.h"
 #include "s3eVibra.h"
+#include "game.h"
 
 Vibration* g_pVibration;
 
@@ -12,5 +13,8 @@ Vibration::~Vibration()
 
 void Vibration::Vibrate()
 {
-	s3eVibraVibrate(intensity, time);
+	if (changeVibration)
+	{
+		s3eVibraVibrate(intensity, time);
+	}
 }

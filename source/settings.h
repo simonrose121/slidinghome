@@ -18,12 +18,14 @@ public:
 	// Button callbacks
 	void SetOnScreenButtons();
 	void SetHighContrastMode();
+	void SetVibrationOn();
 	void MoveToMainMenu();
 
 protected:
 	// UI components
 	CSprite* showOnScreenButtons;
 	CSprite* showHighContrastMode;
+	CSprite* showVibration;
 	CSprite* backButton;
 };
 

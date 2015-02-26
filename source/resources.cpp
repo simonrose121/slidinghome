@@ -8,13 +8,18 @@ Resources::Resources()
 	endScreenBG = Iw2DCreateImage("textures/End_Screen.png");
 	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
 	gameBG = Iw2DCreateImage("textures/background.png");
+
 	gameBGHC = Iw2DCreateImage("textures/HC_Background_1st_Level.png");
+
 	playButton = Iw2DCreateImage("textures/play_button.png");
 	exitButton = Iw2DCreateImage("textures/Exit_Button.png");
 	pauseButton = Iw2DCreateImage("textures/pause.png");
 	settingsButton = Iw2DCreateImage("textures/Settings_Button.png");
+	backButton = Iw2DCreateImage("textures/back_button2.png");
+
 	star = Iw2DCreateImage("textures/star_complete.png");
 	holoStar = Iw2DCreateImage("textures/star_uncomplete.png");
+
 	player = Iw2DCreateImage("textures/character.png");
 	playerLeft = Iw2DCreateImage("textures/left.png");
 	playerRight = Iw2DCreateImage("textures/right.png");
@@ -24,15 +29,19 @@ Resources::Resources()
 	levelButton = Iw2DCreateImage("textures/Level_button.png");
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
+
 	upButton = Iw2DCreateImage("textures/up-arrow.png");
 	rightButton = Iw2DCreateImage("textures/right-arrow.png");
 	downButton = Iw2DCreateImage("textures/down-arrow.png");
 	leftButton = Iw2DCreateImage("textures/left-arrow.png");
+
 	onScreenSettingButton = Iw2DCreateImage("textures/onscreen_settings.png");
 	onScreenSettingButtonSelected = Iw2DCreateImage("textures/onscreen_settings_selected.png");
 	highContrastButton = Iw2DCreateImage("textures/highcontrast_settings.png");
 	highContrastButtonSelected = Iw2DCreateImage("textures/highcontrast_settings_selected.png");
-	backButton = Iw2DCreateImage("textures/back_button2.png");
+	vibrationButton = Iw2DCreateImage("textures/vibration_settings.png");
+	vibrationButtonSelected = Iw2DCreateImage("textures/vibration_settings_selected.png");
+
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
 
@@ -51,33 +60,40 @@ Resources::~Resources()
 	delete mainMenuBG;
 	delete endScreenBG;
 	delete pauseMenuBG;
+	delete gameBG;
+
+	delete gameBGHC;
+
 	delete playButton;
 	delete exitButton;
 	delete pauseButton;
 	delete settingsButton;
+	delete backButton;
+
 	delete star;
 	delete holoStar;
+
 	delete player;
 	delete playerLeft;
 	delete playerRight;
 	delete playerUp;
 	delete playerDown;
-	delete gameBG;
-	delete gameBGHC;
 	delete rock;
 	delete levelButton;
 	delete blank;
 	delete home;
+
 	delete upButton;
 	delete rightButton;
 	delete downButton;
 	delete leftButton;
+
 	delete onScreenSettingButton;
 	delete onScreenSettingButtonSelected;
 	delete highContrastButton;
 	delete highContrastButtonSelected;
-	delete backButton;
-
+	delete vibrationButton;
+	delete vibrationButtonSelected;
 	// Cleanup fonts
 	delete font;
 
