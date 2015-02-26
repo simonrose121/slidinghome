@@ -6,7 +6,7 @@
 #include "game.h"
 #include "mainMenu.h"
 #include "main.h"
-#include "s3eVibra.h"
+#include "vibration.h"
 
 #include <fstream>
 
@@ -113,12 +113,12 @@ void Settings::Update(float deltaTime, float alphaMul)
 		{
 			if (backButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(60, 125);
+				g_pVibration->Vibrate();
 				MoveToMainMenu();
 			}
 			if (showOnScreenButtons->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				s3eVibraVibrate(60, 125);
+				g_pVibration->Vibrate();
 				SetOnScreenButtons();
 			}
 			if (showHighContrastMode->HitTest(g_pInput->m_X, g_pInput->m_Y))

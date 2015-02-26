@@ -8,7 +8,7 @@
 #include "resources.h"
 #include "main.h"
 #include "endScreen.h"
-#include "s3eVibra.h"
+#include "vibration.h"
 
 #include <iostream>
 #include <fstream>
@@ -333,7 +333,7 @@ void Grid::WinningState(CTween* pTween)
 	file << complete;
 	file.close();
 
-	s3eVibraVibrate(60, 125);
+	g_pVibration->Vibrate();
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->EndGame();
@@ -348,7 +348,7 @@ void Grid::SetComplete(CTween* pTween)
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setIsMoving(false);
-	s3eVibraVibrate(60, 125);
+	g_pVibration->Vibrate();
 }
 
 bool Grid::TestMap(Direction dir)

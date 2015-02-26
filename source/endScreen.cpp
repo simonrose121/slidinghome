@@ -6,7 +6,7 @@
 #include "game.h"
 #include "mainMenu.h"
 #include "main.h"
-#include "s3eVibra.h"
+#include "vibration.h"
 
 EndScreen::~EndScreen()
 {
@@ -62,7 +62,7 @@ void EndScreen::Update(float deltaTime, float alphaMul)
 		if (exitButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
 			mainMenu();
-			s3eVibraVibrate(60, 125);
+			g_pVibration->Vibrate();
 
 			// Start playing game music here
 			//Audio::PlayMusic("audio/in_game.mp3", true);
