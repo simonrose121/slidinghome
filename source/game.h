@@ -54,6 +54,7 @@ protected:
 	CSprite* star;
 	CSprite* holostar;
 	float graphicsScale;
+	float buttonScale;
 	int start_x;
 	int	start_y;
 	bool isMoving;

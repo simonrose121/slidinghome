@@ -18,6 +18,8 @@ void Settings::Init()
 {
 	Scene::Init();
 
+	Game* game = (Game*)g_pSceneManager->Find("game");
+
 	// Create menu background
 	CSprite* background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
@@ -34,45 +36,43 @@ void Settings::Init()
 
 	// Add on screen buttons button
 	showOnScreenButtons = new CSprite();
-	showOnScreenButtons->m_X = IwGxGetScreenWidth() / 1.5;
-	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 2;
+	showOnScreenButtons->m_X = (float)IwGxGetScreenWidth();
+	showOnScreenButtons->m_Y = (float)IwGxGetScreenHeight();
 	showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButton());
 	showOnScreenButtons->m_W = showOnScreenButtons->GetImage()->GetWidth();
 	showOnScreenButtons->m_H = showOnScreenButtons->GetImage()->GetHeight();
 	showOnScreenButtons->m_AnchorX = 1;
-	showOnScreenButtons->m_AnchorY = 1;
-	showOnScreenButtons->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
-	showOnScreenButtons->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
+	showOnScreenButtons->m_AnchorY = 7;
+	showOnScreenButtons->m_ScaleX = game->getGraphicsScale();
+	showOnScreenButtons->m_ScaleY = game->getGraphicsScale();
 	AddChild(showOnScreenButtons);
 
 	// Add High Contrast Mode Button
 	showHighContrastMode = new CSprite();
-	showHighContrastMode->m_X = IwGxGetScreenWidth() / 1.5;
-	showHighContrastMode->m_Y = IwGxGetScreenHeight() / 3;
+	showHighContrastMode->m_X = (float)IwGxGetScreenWidth();
+	showHighContrastMode->m_Y = (float)IwGxGetScreenHeight();
 	showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
 	showHighContrastMode->m_W = showHighContrastMode->GetImage()->GetWidth();
 	showHighContrastMode->m_H = showHighContrastMode->GetImage()->GetHeight();
 	showHighContrastMode->m_AnchorX = 1;
-	showHighContrastMode->m_AnchorY = 1;
-	showHighContrastMode->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
-	showHighContrastMode->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
+	showHighContrastMode->m_AnchorY = 5;
+	showHighContrastMode->m_ScaleX = game->getGraphicsScale();
+	showHighContrastMode->m_ScaleY = game->getGraphicsScale();
 	AddChild(showHighContrastMode);
 
 	backButton = new CSprite();
-	backButton->m_X = (float)IwGxGetScreenWidth() / 8;
-	backButton->m_Y = (float)IwGxGetScreenHeight() / 8;
+	backButton->m_X = (float)IwGxGetScreenWidth();
+	backButton->m_Y = (float)IwGxGetScreenHeight();
 	backButton->SetImage(g_pResources->getBackButton());
 	backButton->m_W = backButton->GetImage()->GetWidth();
 	backButton->m_H = backButton->GetImage()->GetHeight();
-	backButton->m_AnchorX = 0.5;
-	backButton->m_AnchorY = 0.5;
-	backButton->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
-	backButton->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
+	backButton->m_AnchorX = 9.5;
+	backButton->m_AnchorY = 20.5;
+	backButton->m_ScaleX = game->getGraphicsScale();
+	backButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(backButton);
 
-
 	// Checks if the option was selected since the last time the game has been played
-	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setShowOnScreenButtons(false);
 
 	std::ifstream file1("screenbuttons.txt");
