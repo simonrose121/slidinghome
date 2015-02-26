@@ -13,11 +13,13 @@ public:
 	// Member functions
 	void Vibrate();
 
+	bool getVibration() { return changeVibration; }
+	void setVibrationMode(bool vibrationOn){ changeVibration = vibrationOn; }
 private:
 	// Member variables
-	bool vibrationEnabled;
 	int time;
 	int intensity;
+	bool changeVibration;
 };
 
 extern Vibration* g_pVibration;

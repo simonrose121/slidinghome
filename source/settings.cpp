@@ -58,6 +58,19 @@ void Settings::Init()
 	showHighContrastMode->m_ScaleY = 0.5;
 	AddChild(showHighContrastMode);
 
+	// Add Vibration On Button
+	showVibration = new CSprite();
+	showVibration->m_X = IwGxGetScreenWidth() / 1.5;
+	showVibration->m_Y = IwGxGetScreenHeight() / 1.5;
+	showVibration->SetImage(g_pResources->getVibrationSettingButton());
+	showVibration->m_W = showVibration->GetImage()->GetWidth();
+	showVibration->m_H = showVibration->GetImage()->GetHeight();
+	showVibration->m_AnchorX = 1;
+	showVibration->m_AnchorY = 1;
+	showVibration->m_ScaleX = 0.5;
+	showVibration->m_ScaleY = 0.5;
+	AddChild(showVibration);
+
 	backButton = new CSprite();
 	backButton->m_X = (float)IwGxGetScreenWidth() / 8;
 	backButton->m_Y = (float)IwGxGetScreenHeight() / 8;
@@ -96,6 +109,17 @@ void Settings::Init()
 		game->setHighContrastMode(true);
 	}
 
+	g_pVibration->setVibrationMode(false);
+
+	std::ifstream file3("vibration.txt");
+	int vibration = 0;
+	file3 >> vibration;
+	file3.close();
+	if (vibration == 1){
+		showVibration->SetImage(g_pResources->getVibrationSettingButtonSelected());
+		g_pVibration->setVibrationMode(true);
+	}
+
 }
 
 void Settings::Update(float deltaTime, float alphaMul)
@@ -123,7 +147,13 @@ void Settings::Update(float deltaTime, float alphaMul)
 			}
 			if (showHighContrastMode->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
+				g_pVibration->Vibrate();
 				SetHighContrastMode();
+			}
+			if (showVibration->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				g_pVibration->Vibrate();
+				SetVibrationOn();
 			}
 			g_pInput->Reset();
 		}
@@ -190,7 +220,34 @@ void Settings::SetHighContrastMode(){
 		IwTrace(APP, ("deselected on screen buttons option"));
 	}
 }
+void Settings::SetVibrationOn(){
+	if (!g_pVibration->getVibration())
+	{
+		std::ofstream fileVibrationWrite;
 
+		showVibration->SetImage(g_pResources->getVibrationSettingButtonSelected());
+		g_pVibration->setVibrationMode(true);
+
+		fileVibrationWrite.open("vibration.txt");
+		fileVibrationWrite << 1;
+		fileVibrationWrite.close();
+
+		IwTrace(APP, ("selected on screen buttons option"));
+	}
+	else
+	{
+		std::ofstream fileVibrationWrite;
+
+		showVibration->SetImage(g_pResources->getVibrationSettingButton());
+		g_pVibration->setVibrationMode(false);
+
+		fileVibrationWrite.open("vibration.txt");
+		fileVibrationWrite << 0;
+		fileVibrationWrite.close();
+
+		IwTrace(APP, ("deselected on screen buttons option"));
+	}
+}
 
 void Settings::Render()
 {
