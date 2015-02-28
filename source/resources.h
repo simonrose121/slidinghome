@@ -70,7 +70,7 @@ public:
 	CAtlas* getPlayerUpAtlas() { return playerUpAtlas; }
 	CAtlas* getPlayerDownAtlas() { return playerDownAtlas; }
 
-protected:
+private:
 	// Member variables
 	CIw2DImage*	mainMenuBG;
 	CIw2DImage*	endScreenBG;

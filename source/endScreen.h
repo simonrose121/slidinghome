@@ -16,7 +16,7 @@ public:
 	void Render();
 	static void	mainMenu();
 
-protected:
+private:
 	// Member variables
 	CSprite* exitButton;
 	CSprite* playText;

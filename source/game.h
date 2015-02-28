@@ -42,7 +42,7 @@ public:
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
 
 
-protected:
+private:
 	// Member variables
 	Grid* grid;
 	CSprite* background;

@@ -21,7 +21,7 @@ public:
 	void SetVibrationOn();
 	void MoveToMainMenu();
 
-protected:
+private:
 	// UI components
 	CSprite* showOnScreenButtons;
 	CSprite* showHighContrastMode;

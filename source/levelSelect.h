@@ -26,7 +26,7 @@ public:
 	// Button callbacks
 	static void	StartGame();
 
-protected:
+private:
 	// Member variables
 	float graphicsScale;
 	float fontScale;      

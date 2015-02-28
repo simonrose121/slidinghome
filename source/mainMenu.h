@@ -18,7 +18,7 @@ public:
 	static void MoveToSettings();
 	float getGraphicsScale() { return graphicsScale; }
 
-protected:
+private:
 	// Member variables
 	float graphicsScale;
 	CSprite* playButton;
