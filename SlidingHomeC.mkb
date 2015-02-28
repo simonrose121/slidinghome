@@ -18,7 +18,6 @@ files
     [source]
     (source)
 	audio.cpp
-	blankObject.cpp
 	endScreen.cpp
 	game.cpp
 	gameObject.cpp
@@ -35,7 +34,6 @@ files
 	vibration.cpp
 
 	audio.h
-	blankObject.h
 	endScreen.h
 	game.h
 	gameObject.h

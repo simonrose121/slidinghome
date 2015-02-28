@@ -34,7 +34,6 @@ public:
 
 class Audio
 {
-protected:
 public:
 	// Constructor & Destructor
     Audio();
