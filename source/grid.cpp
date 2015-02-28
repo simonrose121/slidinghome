@@ -4,7 +4,6 @@
 #include "scene.h"
 #include "grid.h"
 #include "game.h"
-#include "blankObject.h"
 #include "resources.h"
 #include "main.h"
 #include "endScreen.h"
@@ -12,6 +11,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #define SIZEY 15
 #define SIZEX 11
@@ -44,9 +44,11 @@ Grid::~Grid()
 	}
 }
 
-void Grid::GenerateLevel(int levelId, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
+void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
 {
-	ifstream file("maps/level1.txt");
+	std::string filename = "maps/level" + levelNo;
+	filename += ".txt";
+	ifstream file(filename.c_str());
 	int map[SIZEY][SIZEX];
 	for (int y = 0; y < num_rows; y++)
 	{

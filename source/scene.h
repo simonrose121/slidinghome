@@ -43,7 +43,7 @@ public:
 	CTweenManager& getTweener() { return m_Tweener; }
 	unsigned int getNameHash() const { return m_NameHash; }
 
-private:
+protected:
 	unsigned int m_NameHash; // Hash string representation of scene name
 	bool m_IsActive; // Active state
 	bool m_IsInputActive; // Input active state
@@ -72,7 +72,7 @@ public:
 	static void OnSwitchComplete(CTween* pTween);
 	void FinishSwitch();
 
-private:
+protected:
 	// Member variables
 	Scene* m_Current; // Currently active scene
 	Scene* m_Next; // Next scene (scene that is being switched to)

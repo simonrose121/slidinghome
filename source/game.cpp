@@ -7,7 +7,6 @@
 #include "audio.h"
 #include "resources.h"
 #include "pauseMenu.h"
-#include "stringExtensions.h"
 #include "s3eVibra.h"
 
 #include <iostream>
@@ -245,10 +244,10 @@ void Game::MoveToPauseMenu()
 	g_pSceneManager->SwitchTo(pausemenu);
 }
 
-void Game::NewGame(int width, int height)
+void Game::NewGame(std::string levelNo, int width, int height)
 {
 	grid = new Grid(this);
-	grid->GenerateLevel(1, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
+	grid->GenerateLevel(levelNo, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 
 	// Create Pause Button
 	float x_pos = (float)IwGxGetScreenWidth() / 1;

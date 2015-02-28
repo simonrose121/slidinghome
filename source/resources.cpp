@@ -26,9 +26,14 @@ Resources::Resources()
 	playerUp = Iw2DCreateImage("textures/up.png");
 	playerDown = Iw2DCreateImage("textures/down.png");
 	rock = Iw2DCreateImage("textures/rock.png");
-	levelButton = Iw2DCreateImage("textures/Level_button.png");
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
+
+	level1 = Iw2DCreateImage("textures/level1.png");
+	level2 = Iw2DCreateImage("textures/level2.png");
+	level3 = Iw2DCreateImage("textures/level3.png");
+	level4 = Iw2DCreateImage("textures/level4.png");
+	level5 = Iw2DCreateImage("textures/level5.png");
 
 	upButton = Iw2DCreateImage("textures/up-arrow.png");
 	rightButton = Iw2DCreateImage("textures/right-arrow.png");
@@ -79,9 +84,14 @@ Resources::~Resources()
 	delete playerUp;
 	delete playerDown;
 	delete rock;
-	delete levelButton;
 	delete blank;
 	delete home;
+
+	delete level1;
+	delete level2;
+	delete level3;
+	delete level4;
+	delete level5;
 
 	delete upButton;
 	delete rightButton;

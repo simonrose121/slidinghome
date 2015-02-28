@@ -1,9 +1,6 @@
 #if !defined(__LEVEL_SELECT_H_)
 #define __LEVEL_SELECT_H_
 
-#define FONT_DESIGN_WIDTH 320
-#define FONT_HEIGHT 15
-
 #include "scene.h"
 
 class LevelSelect : public Scene
@@ -21,17 +18,17 @@ public:
 	// Render the menu
 	void Render();
 
-	float getFontScale() { return fontScale; }
-
 	// Button callbacks
-	static void	StartGame();
+	static void	StartGame(std::string levelNo);
 
 private:
 	// Member variables
 	float graphicsScale;
-	float fontScale;      
-	float actualFontHeight;
-	CSprite* levelButton;
+	CSprite* level1;
+	CSprite* level2;
+	CSprite* level3;
+	CSprite* level4;
+	CSprite* level5;
 	CSprite* playText;
 	CLabel* levelLabel;
 	int levelCount;

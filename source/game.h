@@ -26,7 +26,7 @@ public:
 	void CleanupOnScreenButtons();
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
-	void NewGame(int width, int height);
+	void NewGame(std::string levelNo, int width, int height);
 	void EndGame();
 	static void	MoveToPauseMenu();
 	void ChangeBackground();

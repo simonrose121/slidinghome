@@ -47,9 +47,14 @@ public:
 	CIw2DImage* getPlayerUp() { return playerUp; }
 	CIw2DImage* getPlayerDown() { return playerDown; }
 	CIw2DImage*	getRock() { return rock; }
-	CIw2DImage*	getLevelButton() { return levelButton; }
 	CIw2DImage*	getBlank() { return blank; }
 	CIw2DImage* getHome() { return home; }
+
+	CIw2DImage* getLevel1() { return level1; }
+	CIw2DImage* getLevel2() { return level2; }
+	CIw2DImage* getLevel3() { return level3; }
+	CIw2DImage* getLevel4() { return level4; }
+	CIw2DImage* getLevel5() { return level5; }
 
 	CIw2DImage* getUpButton() { return upButton; }
 	CIw2DImage* getRightButton() { return rightButton; }
@@ -93,9 +98,14 @@ private:
 	CIw2DImage* playerUp;
 	CIw2DImage* playerDown;
 	CIw2DImage*	rock;
-	CIw2DImage* levelButton;
 	CIw2DImage*	blank;
 	CIw2DImage*	home;
+
+	CIw2DImage* level1;
+	CIw2DImage* level2;
+	CIw2DImage* level3;
+	CIw2DImage* level4;
+	CIw2DImage* level5;
 
 	CIw2DImage* upButton;
 	CIw2DImage* rightButton;
