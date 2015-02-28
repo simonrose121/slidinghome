@@ -49,7 +49,6 @@ files
 	resources.h
 	scene.h
 	settings.h
-	stringExtensions.h
 	vibration.h
 }
 
