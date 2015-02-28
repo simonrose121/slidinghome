@@ -58,7 +58,7 @@ void LevelSelect::Init()
 	level2->m_Y = y_pos;
 	level2->m_W = level2->GetImage()->GetWidth();
 	level2->m_H = level2->GetImage()->GetHeight();
-	level2->m_AnchorX = 4.75;
+	level2->m_AnchorX = 4.25;
 	level2->m_AnchorY = 8.5;
 	level2->m_ScaleX = game->getGraphicsScale();
 	level2->m_ScaleY = game->getGraphicsScale();
@@ -70,7 +70,7 @@ void LevelSelect::Init()
 	level3->m_Y = y_pos;
 	level3->m_W = level3->GetImage()->GetWidth();
 	level3->m_H = level3->GetImage()->GetHeight();
-	level3->m_AnchorX = 3.75;
+	level3->m_AnchorX = 2.75;
 	level3->m_AnchorY = 8.5;
 	level3->m_ScaleX = game->getGraphicsScale();
 	level3->m_ScaleY = game->getGraphicsScale();
@@ -82,7 +82,7 @@ void LevelSelect::Init()
 	level4->m_Y = y_pos;
 	level4->m_W = level4->GetImage()->GetWidth();
 	level4->m_H = level4->GetImage()->GetHeight();
-	level4->m_AnchorX = 2.75;
+	level4->m_AnchorX = 1.25;
 	level4->m_AnchorY = 8.5;
 	level4->m_ScaleX = game->getGraphicsScale();
 	level4->m_ScaleY = game->getGraphicsScale();
@@ -94,11 +94,23 @@ void LevelSelect::Init()
 	level5->m_Y = y_pos;
 	level5->m_W = level5->GetImage()->GetWidth();
 	level5->m_H = level5->GetImage()->GetHeight();
-	level5->m_AnchorX = 1.75;
-	level5->m_AnchorY = 8.5;
+	level5->m_AnchorX = 5.75;
+	level5->m_AnchorY = 7;
 	level5->m_ScaleX = game->getGraphicsScale();
 	level5->m_ScaleY = game->getGraphicsScale();
 	AddChild(level5);
+
+	level6 = new CSprite();
+	level6->SetImage(g_pResources->getLevel6());
+	level6->m_X = x_pos;
+	level6->m_Y = y_pos;
+	level6->m_W = level6->GetImage()->GetWidth();
+	level6->m_H = level6->GetImage()->GetHeight();
+	level6->m_AnchorX = 4.25;
+	level6->m_AnchorY = 7;
+	level6->m_ScaleX = game->getGraphicsScale();
+	level6->m_ScaleY = game->getGraphicsScale();
+	AddChild(level6);
 }
 
 void LevelSelect::Update(float deltaTime, float alphaMul)
@@ -137,6 +149,11 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 		{
 			g_pVibration->Vibrate();
 			StartGame("5");
+		}
+		if (level6->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("6");
 		}
 	}
 }

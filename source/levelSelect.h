@@ -29,6 +29,7 @@ private:
 	CSprite* level3;
 	CSprite* level4;
 	CSprite* level5;
+	CSprite* level6;
 	CSprite* playText;
 	CLabel* levelLabel;
 	int levelCount;
