@@ -102,11 +102,21 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 				player = gameObjects[x + width*y];
 				playerIndex = x + width * y;
 				break;
+
 			case 3:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getHome());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(3);
+				break;
+
+			case 4:
+				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getSnowpatch());
+				gameObjects[x + width*y]->m_ScaleX = gem_scale;
+				gameObjects[x + width*y]->m_ScaleY = gem_scale;
+				gameObjects[x + width*y]->setId(4);
+				break;
+
 			}
 			game->AddChild(gameObjects[x + width*y]);
 		}
@@ -288,24 +298,46 @@ int Grid::getDistance(Direction dir)
 		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == 0)
 		{
 			distance++;
+			// Check for snowpatch
+			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == 4)
+			{
+				// Ensure player is on snowpatch
+				distance++;
+				break;
+			}
 		}
 		break;
 	case RIGHT:
 		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == 0)
 		{
 			distance++;
+			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == 4)
+			{
+				distance++;
+				break;
+			}
 		}
 		break;
 	case UP:
 		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == 0)
 		{
 			distance++;
+			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == 4)
+			{
+				distance++;
+				break;
+			}
 		}
 		break;
 	case DOWN:
 		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == 0)
 		{
 			distance++;
+			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == 4)
+			{
+				distance++;
+				break;
+			}
 		}
 		break;
 	}

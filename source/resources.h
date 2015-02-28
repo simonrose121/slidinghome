@@ -49,6 +49,7 @@ public:
 	CIw2DImage*	getRock() { return rock; }
 	CIw2DImage*	getBlank() { return blank; }
 	CIw2DImage* getHome() { return home; }
+	CIw2DImage* getSnowpatch() { return snowpatch; }
 
 	CIw2DImage* getLevel1() { return level1; }
 	CIw2DImage* getLevel2() { return level2; }
@@ -101,6 +102,7 @@ private:
 	CIw2DImage*	rock;
 	CIw2DImage*	blank;
 	CIw2DImage*	home;
+	CIw2DImage* snowpatch;
 
 	CIw2DImage* level1;
 	CIw2DImage* level2;

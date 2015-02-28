@@ -28,6 +28,7 @@ Resources::Resources()
 	rock = Iw2DCreateImage("textures/rock.png");
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
+	snowpatch = Iw2DCreateImage("textures/snowpatch.png");
 
 	level1 = Iw2DCreateImage("textures/level1.png");
 	level2 = Iw2DCreateImage("textures/level2.png");
@@ -87,6 +88,7 @@ Resources::~Resources()
 	delete rock;
 	delete blank;
 	delete home;
+	delete snowpatch;
 
 	delete level1;
 	delete level2;

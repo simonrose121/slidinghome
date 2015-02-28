@@ -16,8 +16,6 @@ void LevelSelect::Init()
 {
 	Scene::Init();
 
-	levelCount = 5;
-
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
 	// Create menu background

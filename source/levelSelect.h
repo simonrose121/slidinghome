@@ -31,9 +31,6 @@ private:
 	CSprite* level5;
 	CSprite* level6;
 	CSprite* playText;
-	CLabel* levelLabel;
-	int levelCount;
-	int uiYPosition;
 
 };
 
