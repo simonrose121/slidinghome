@@ -51,6 +51,7 @@ private:
 	float speedVal;
 	CNode* game;
 	bool onSnowPatch;
+	std::string levelNum;
 
 	void CheckIfOnSnowpatch();
 	void UpdatePosition(int distance, Direction dir);

@@ -394,15 +394,16 @@ void Grid::PrintGrid()
 
 void Grid::WinningState(CTween* pTween)
 {
-	std::ofstream file;
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	std::string filename = "star" + game->getLevelNum();
+	filename += ".txt";
+	std::ofstream file(filename.c_str());
 	int complete = 1;
-	file.open("star1.txt");
 	file << complete;
 	file.close();
 
 	g_pVibration->Vibrate();
 
-	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->EndGame();
 
 	EndScreen* end_screen = (EndScreen*)g_pSceneManager->Find("endscreen");

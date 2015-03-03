@@ -37,7 +37,6 @@ void LevelSelect::Init()
 	float x_pos = (float)IwGxGetScreenWidth();
 	float y_pos = (float)IwGxGetScreenHeight();
 
-	
 	level1 = new CSprite();
 	level1->SetImage(g_pResources->getLevel1());
 	level1->m_X = x_pos;
@@ -126,7 +125,6 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 		{
 			g_pVibration->Vibrate();
 			StartGame("1");
-
 		}
 		if (level2->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{

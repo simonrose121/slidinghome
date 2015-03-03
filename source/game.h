@@ -36,11 +36,11 @@ public:
 	bool getIsMoving() { return isMoving; }
 	bool getShowOnScreenButtons() { return showOnScreenButtons; }
 	bool getHighContrastMode() { return changeToHighContrast; }
+	std::string getLevelNum() { return levelNum; }
 
 	void setIsMoving(bool moving) { isMoving = moving; }
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
-
 
 private:
 	// Member variables
@@ -64,6 +64,7 @@ private:
 	State currentState;
 	bool showOnScreenButtons;
 	bool changeToHighContrast;
+	std::string levelNum;
 };
 
 #endif

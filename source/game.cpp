@@ -144,7 +144,6 @@ void Game::Update(float deltaTime, float alphaMul)
 			{
 				MoveToPauseMenu();
 				currentState = PAUSED;
-
 			}
 
 			if (showOnScreenButtons)
@@ -265,7 +264,10 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	AddChild(pauseButton);
 
 	//Create Star file
-	std::ifstream file("star1.txt");
+	levelNum = levelNo;
+	std::string filename = "star" + levelNum;
+	filename += ".txt";
+	std::ifstream file(filename.c_str());
 	int fileNumber = 0;
 	file >> fileNumber;
 	file.close();
