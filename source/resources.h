@@ -54,6 +54,10 @@ public:
 	CIw2DImage* getHome() { return home; }
 	CIw2DImage* getSnowpatch() { return snowpatch; }
 
+	CIw2DImage* getIceRock(){ return iceRock; }
+	CIw2DImage* getShrubSnow(){ return shrubSnow; }
+	CIw2DImage* getRockUpdated(){ return rockUpdated; }
+
 	CIw2DImage* getLevel1() { return level1; }
 	CIw2DImage* getLevel2() { return level2; }
 	CIw2DImage* getLevel3() { return level3; }
@@ -97,6 +101,10 @@ private:
 	CIw2DImage* settingsButton;
 	CIw2DImage* settingsButtonHC;
 	CIw2DImage* backButton;
+
+	CIw2DImage* iceRock;
+	CIw2DImage* shrubSnow;
+	CIw2DImage* rockUpdated;
 
 	CIw2DImage* star;
 	CIw2DImage* holoStar;
