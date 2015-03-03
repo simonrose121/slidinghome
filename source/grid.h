@@ -50,7 +50,9 @@ private:
 	int	gameObjectSize;
 	float speedVal;
 	CNode* game;
+	bool onSnowPatch;
 
+	void CheckIfOnSnowpatch();
 	void UpdatePosition(int distance, Direction dir);
 	void PrintGrid();
 	bool TestMap(Direction dir);

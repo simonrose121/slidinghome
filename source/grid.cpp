@@ -126,6 +126,8 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->InitOnScreenButtons();
 
+	onSnowPatch = false;
+
 	PrintGrid();
 }
 
@@ -234,32 +236,63 @@ void Grid::UpdatePosition(int distance, Direction dir)
 	switch (dir)
 	{
 	case LEFT:
+		CheckIfOnSnowpatch();
+		//if the destination will be a snowpatch then set bool
+		if (gameObjects[playerIndex - distance]->getId() == 4)
+		{
+			onSnowPatch = true;
+		}
 		gameObjects[playerIndex - distance]->setGridCoords(x - distance, y);
 		gameObjects[playerIndex - distance]->setId(2);
-		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex - distance;
 		break;
 	case RIGHT:
+		CheckIfOnSnowpatch();
+		if (gameObjects[playerIndex - distance]->getId() == 4)
+		{
+			onSnowPatch = true;
+		}
 		gameObjects[playerIndex + distance]->setGridCoords(x + distance, y);
 		gameObjects[playerIndex + distance]->setId(2);
-		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex + distance;
 		break;
 	case UP:
+		CheckIfOnSnowpatch();
+		if (gameObjects[playerIndex - (distance * width)]->getId() == 4)
+		{
+			onSnowPatch = true;
+		}
 		gameObjects[playerIndex - (distance * width)]->setGridCoords(x, y - distance);
 		gameObjects[playerIndex - (distance * width)]->setId(2);
-		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex - (distance * width);
 		break;
 	case DOWN:
+		CheckIfOnSnowpatch();
+		if (gameObjects[playerIndex + (distance * width)]->getId() == 4)
+		{
+			onSnowPatch = true;
+		}
 		gameObjects[playerIndex + (distance * width)]->setGridCoords(x, y + distance);
 		gameObjects[playerIndex + (distance * width)]->setId(2);
-		gameObjects[playerIndex]->setId(0);
 		playerIndex = playerIndex + (distance * width);
 		break;
 	}
 
 	PrintGrid();
+}
+
+void Grid::CheckIfOnSnowpatch() 
+{
+	// check if player is on snowpatch set that position back to a snowpatch when he moves off
+	if (onSnowPatch)
+	{
+		gameObjects[playerIndex]->setId(4);
+		onSnowPatch = false;
+	}
+	else
+	{
+		gameObjects[playerIndex]->setId(0);
+	}
 }
 
 int Grid::getIndex()
