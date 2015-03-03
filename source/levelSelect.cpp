@@ -6,6 +6,7 @@
 #include "game.h"
 #include "mainMenu.h"
 #include "main.h"
+#include "vibration.h"
 
 LevelSelect::~LevelSelect()
 {
@@ -14,10 +15,6 @@ LevelSelect::~LevelSelect()
 void LevelSelect::Init()
 {
 	Scene::Init();
-
-	fontScale = (float)IwGxGetScreenWidth() / FONT_DESIGN_WIDTH;
-	actualFontHeight = FONT_HEIGHT * fontScale;
-	graphicsScale = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH;
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
@@ -39,34 +36,79 @@ void LevelSelect::Init()
 	// Create Start Game button
 	float x_pos = (float)IwGxGetScreenWidth();
 	float y_pos = (float)IwGxGetScreenHeight();
-	levelButton = new CSprite();
-	levelButton->SetImage(g_pResources->getLevelButton());
-	levelButton->m_X = x_pos;
-	levelButton->m_Y = y_pos;
-	levelButton->m_W = levelButton->GetImage()->GetWidth();
-	levelButton->m_H = levelButton->GetImage()->GetHeight();
-	levelButton->m_AnchorX = 5.75;
-	levelButton->m_AnchorY = 8.5;
-	levelButton->m_ScaleX = game->getGraphicsScale();
-	levelButton->m_ScaleY = game->getGraphicsScale();
-	AddChild(levelButton);
 
-	levelLabel = new CLabel();
-	levelLabel->m_X = x_pos /2;
-	levelLabel->m_Y = y_pos /2;
-	levelLabel->m_W = FONT_DESIGN_WIDTH;
-	levelLabel->m_H = actualFontHeight;
-	levelLabel->m_AlignHor = IW_2D_FONT_ALIGN_LEFT;
-	levelLabel->m_AlignVer = IW_2D_FONT_ALIGN_TOP;
-	levelLabel->m_Font = g_pResources->getFont();
-	levelLabel->m_AnchorX = 5.75;
-	levelLabel->m_AnchorY = 8.5;
-	levelLabel->m_Text = "1";
-	levelLabel->m_ScaleX = fontScale / graphicsScale;
-	levelLabel->m_ScaleY = fontScale / graphicsScale;
-	levelLabel->m_Color = CColor(0xff, 0xff, 0xff, 0xff);
-	AddChild(levelLabel);
+	
+	level1 = new CSprite();
+	level1->SetImage(g_pResources->getLevel1());
+	level1->m_X = x_pos;
+	level1->m_Y = y_pos;
+	level1->m_W = level1->GetImage()->GetWidth();
+	level1->m_H = level1->GetImage()->GetHeight();
+	level1->m_AnchorX = 5.75;
+	level1->m_AnchorY = 8.5;
+	level1->m_ScaleX = game->getGraphicsScale();
+	level1->m_ScaleY = game->getGraphicsScale();
+	AddChild(level1);
 
+	level2 = new CSprite();
+	level2->SetImage(g_pResources->getLevel2());
+	level2->m_X = x_pos;
+	level2->m_Y = y_pos;
+	level2->m_W = level2->GetImage()->GetWidth();
+	level2->m_H = level2->GetImage()->GetHeight();
+	level2->m_AnchorX = 4.25;
+	level2->m_AnchorY = 8.5;
+	level2->m_ScaleX = game->getGraphicsScale();
+	level2->m_ScaleY = game->getGraphicsScale();
+	AddChild(level2);
+
+	level3 = new CSprite();
+	level3->SetImage(g_pResources->getLevel3());
+	level3->m_X = x_pos;
+	level3->m_Y = y_pos;
+	level3->m_W = level3->GetImage()->GetWidth();
+	level3->m_H = level3->GetImage()->GetHeight();
+	level3->m_AnchorX = 2.75;
+	level3->m_AnchorY = 8.5;
+	level3->m_ScaleX = game->getGraphicsScale();
+	level3->m_ScaleY = game->getGraphicsScale();
+	AddChild(level3);
+
+	level4 = new CSprite();
+	level4->SetImage(g_pResources->getLevel4());
+	level4->m_X = x_pos;
+	level4->m_Y = y_pos;
+	level4->m_W = level4->GetImage()->GetWidth();
+	level4->m_H = level4->GetImage()->GetHeight();
+	level4->m_AnchorX = 1.25;
+	level4->m_AnchorY = 8.5;
+	level4->m_ScaleX = game->getGraphicsScale();
+	level4->m_ScaleY = game->getGraphicsScale();
+	AddChild(level4);
+
+	level5 = new CSprite();
+	level5->SetImage(g_pResources->getLevel5());
+	level5->m_X = x_pos;
+	level5->m_Y = y_pos;
+	level5->m_W = level5->GetImage()->GetWidth();
+	level5->m_H = level5->GetImage()->GetHeight();
+	level5->m_AnchorX = 5.75;
+	level5->m_AnchorY = 7;
+	level5->m_ScaleX = game->getGraphicsScale();
+	level5->m_ScaleY = game->getGraphicsScale();
+	AddChild(level5);
+
+	level6 = new CSprite();
+	level6->SetImage(g_pResources->getLevel6());
+	level6->m_X = x_pos;
+	level6->m_Y = y_pos;
+	level6->m_W = level6->GetImage()->GetWidth();
+	level6->m_H = level6->GetImage()->GetHeight();
+	level6->m_AnchorX = 4.25;
+	level6->m_AnchorY = 7;
+	level6->m_ScaleX = game->getGraphicsScale();
+	level6->m_ScaleY = game->getGraphicsScale();
+	AddChild(level6);
 }
 
 void LevelSelect::Update(float deltaTime, float alphaMul)
@@ -80,12 +122,36 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 	if (m_IsInputActive && m_Manager->getCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
 	{
 		g_pInput->Reset();
-		if (levelButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		if (level1->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
-			StartGame();
+			g_pVibration->Vibrate();
+			StartGame("1");
 
-			// Start playing game music here
-			//Audio::PlayMusic("audio/in_game.mp3", true);
+		}
+		if (level2->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("2");
+		}
+		if (level3->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("3");
+		}
+		if (level4->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("4");
+		}
+		if (level5->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("5");
+		}
+		if (level6->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("6");
 		}
 	}
 }
@@ -95,10 +161,10 @@ void LevelSelect::Render()
 	Scene::Render();
 }
 
-void LevelSelect::StartGame()
+void LevelSelect::StartGame(std::string levelNo)
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	g_pSceneManager->SwitchTo(game);
 
-	game->NewGame(11,15);
+	game->NewGame(levelNo, 11, 15);
 }

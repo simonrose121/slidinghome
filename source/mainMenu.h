@@ -23,7 +23,7 @@ public:
 
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
 
-protected:
+private:
 	// Member variables
 	float graphicsScale;
 	CSprite* background;

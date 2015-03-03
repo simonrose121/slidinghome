@@ -7,7 +7,7 @@
 #include "audio.h"
 #include "resources.h"
 #include "pauseMenu.h"
-#include "stringExtensions.h"
+#include "s3eVibra.h"
 
 #include <iostream>
 #include <fstream>
@@ -17,7 +17,7 @@
 
 Game::~Game()
 {
-	if (currentState != State::COMPLETE)
+	if (currentState != COMPLETE)
 		delete grid;
 }
 
@@ -26,6 +26,7 @@ void Game::Init()
 	Scene::Init();
 
 	graphicsScale = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH;
+	buttonScale = 2;
 
 	background = new CSprite();
 	background->m_X = IwGxGetScreenWidth() / 2;
@@ -66,6 +67,8 @@ void Game::InitOnScreenButtons()
 		upButton->m_H = upButton->GetImage()->GetHeight();
 		upButton->m_AnchorX = 1;
 		upButton->m_AnchorY = 1;
+		upButton->m_ScaleX = graphicsScale * buttonScale;
+		upButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(upButton);
 
 		rightButton = new CSprite();
@@ -76,6 +79,8 @@ void Game::InitOnScreenButtons()
 		rightButton->m_H = rightButton->GetImage()->GetHeight();
 		rightButton->m_AnchorX = 1;
 		rightButton->m_AnchorY = 1;
+		rightButton->m_ScaleX = graphicsScale * buttonScale;
+		rightButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(rightButton);
 
 		downButton = new CSprite();
@@ -86,6 +91,8 @@ void Game::InitOnScreenButtons()
 		downButton->m_H = downButton->GetImage()->GetHeight();
 		downButton->m_AnchorX = 1;
 		downButton->m_AnchorY = 1;
+		downButton->m_ScaleX = graphicsScale * buttonScale;
+		downButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(downButton);
 
 		leftButton = new CSprite();
@@ -96,6 +103,8 @@ void Game::InitOnScreenButtons()
 		leftButton->m_H = leftButton->GetImage()->GetHeight();
 		leftButton->m_AnchorX = 1;
 		leftButton->m_AnchorY = 1;
+		leftButton->m_ScaleX = graphicsScale * buttonScale;
+		leftButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(leftButton);
 	}
 }
@@ -134,82 +143,91 @@ void Game::Update(float deltaTime, float alphaMul)
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
 				MoveToPauseMenu();
-				currentState = State::PAUSED;
+				currentState = PAUSED;
+
 			}
-			else if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+
+			if (showOnScreenButtons)
 			{
-				IwTrace(APP, ("move up button"));
-				if (!isMoving)
-					grid->MovePlayerUp();
-			}
-			else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
-				IwTrace(APP, ("move right button"));
-				if (!isMoving)
-					grid->MovePlayerRight();
-			}
-			else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
-				IwTrace(APP, ("move down button"));
-				if (!isMoving)
-					grid->MovePlayerDown();
-			}
-			else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
-				IwTrace(APP, ("move left button"));
-				if (!isMoving)
-					grid->MovePlayerLeft();
+				if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move up button"));
+					if (!isMoving)
+						grid->MovePlayerUp();
+				}
+				else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move right button"));
+					if (!isMoving)
+						grid->MovePlayerRight();
+				}
+				else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move down button"));
+					if (!isMoving)
+						grid->MovePlayerDown();
+				}
+				else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					IwTrace(APP, ("move left button"));
+					if (!isMoving)
+						grid->MovePlayerLeft();
+				}
+				g_pInput->Reset();
 			}
 		}
 
 		// If input is in grid
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
-			if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
+			if (!showOnScreenButtons)
 			{
-				if (!pressedDown)
+				if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
 				{
-					//record start position of movement
-					start_x = g_pInput->m_X;
-					start_y = g_pInput->m_Y;
-					pressedDown = true;
+					if (!pressedDown)
+					{
+						//record start position of movement
+						start_x = g_pInput->m_X;
+						start_y = g_pInput->m_Y;
+						pressedDown = true;
 
-					IwTrace(APP, ("pressed down is %d", pressedDown));
-				}
+						IwTrace(APP, ("pressed down is %d", pressedDown));
+					}
 
-				IwTrace(APP, ("currently pressing down"));
+					IwTrace(APP, ("currently pressing down"));
 
-				IwTrace(APP, ("start x,y = %d,%d current x,y = %d,%d", start_x, start_y, g_pInput->m_X, g_pInput->m_Y));
-			}
-			else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
-			{
-				// Check current input is smaller than start touch position minus min swipe
-				if (g_pInput->m_X < start_x - minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
-				{
-					IwTrace(APP, ("move left"));
-					if (!isMoving)
-						grid->MovePlayerLeft();
+					IwTrace(APP, ("start x,y = %d,%d current x,y = %d,%d", start_x, start_y, g_pInput->m_X, g_pInput->m_Y));
 				}
-				if (g_pInput->m_Y < start_y - minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
+				else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 				{
-					IwTrace(APP, ("move up"));
-					if (!isMoving)
-						grid->MovePlayerUp();
+					// Check current input is smaller than start touch position minus min swipe
+					if (g_pInput->m_X < start_x - minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
+					{
+						IwTrace(APP, ("move left"));
+						if (!isMoving)
+							grid->MovePlayerLeft();
+					}
+					if (g_pInput->m_Y < start_y - minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
+					{
+						IwTrace(APP, ("move up"));
+						if (!isMoving)
+							grid->MovePlayerUp();
+					}
+					if (g_pInput->m_X > start_x + minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
+					{
+						IwTrace(APP, ("move right"));
+						if (!isMoving)
+							grid->MovePlayerRight();
+					}
+					if (g_pInput->m_Y > start_y + minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
+					{
+						IwTrace(APP, ("move down"));
+						if (!isMoving)
+							grid->MovePlayerDown();
+					}
+					pressedDown = false;
+					g_pInput->Reset();
 				}
-				if (g_pInput->m_X > start_x + minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
-				{
-					IwTrace(APP, ("move right"));
-					if (!isMoving)
-						grid->MovePlayerRight();
-				}
-				if (g_pInput->m_Y > start_y + minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
-				{
-					IwTrace(APP, ("move down"));
-					if (!isMoving)
-						grid->MovePlayerDown();
-				}
-				pressedDown = false;
-				g_pInput->Reset();
 			}
 		}
 	}
@@ -226,10 +244,10 @@ void Game::MoveToPauseMenu()
 	g_pSceneManager->SwitchTo(pausemenu);
 }
 
-void Game::NewGame(int width, int height)
+void Game::NewGame(std::string levelNo, int width, int height)
 {
 	grid = new Grid(this);
-	grid->GenerateLevel(1, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
+	grid->GenerateLevel(levelNo, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 
 	// Create Pause Button
 	float x_pos = (float)IwGxGetScreenWidth() / 1;
@@ -270,7 +288,7 @@ void Game::NewGame(int width, int height)
 	star->m_ScaleY = getGraphicsScale();
 	AddChild(star);
 
-	currentState = State::INPROGRESS;
+	currentState = INPROGRESS;
 }
 
 void Game::EndGame()
@@ -280,5 +298,5 @@ void Game::EndGame()
 	//cleaup this line
 	//grid = new Grid(this);
 	delete grid;
-	currentState = State::COMPLETE;
+	currentState = COMPLETE;
 }

@@ -19,7 +19,7 @@ public:
 
 	// Button callbacks
 
-protected:
+private:
 	// UI components
 	CSprite* exitButton;
 	CSprite* playButton;

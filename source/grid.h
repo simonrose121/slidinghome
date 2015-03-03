@@ -27,7 +27,7 @@ public:
 	void MovePlayerRight();
 	void MovePlayerUp();
 	void MovePlayerDown();
-	void GenerateLevel(int levelId, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
+	void GenerateLevel(std::string levelId, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
 	void ClearLevel();
 	
 	int	getWidth() const { return width; }
@@ -50,7 +50,9 @@ private:
 	int	gameObjectSize;
 	float speedVal;
 	CNode* game;
+	bool onSnowPatch;
 
+	void CheckIfOnSnowpatch();
 	void UpdatePosition(int distance, Direction dir);
 	void PrintGrid();
 	bool TestMap(Direction dir);

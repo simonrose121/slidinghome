@@ -10,10 +10,12 @@
 #include "endScreen.h"
 #include "settings.h"
 #include "resources.h"
+#include "vibration.h"
 
 using namespace IwTween;
 
 #define FRAME_TIME  (30.0f / 1000.0f)
+
 
 CTweenManager*  g_pTweener = 0;
 
@@ -26,6 +28,7 @@ int main()
 	g_pInput = new Input();
 	g_pAudio = new Audio();
 	g_pSceneManager = new SceneManager();
+	g_pVibration = new Vibration(60, 125);
 
 	Game* game = new Game();
 	game->setName("game");
@@ -88,6 +91,7 @@ int main()
 	delete g_pSceneManager;
 	delete g_pTweener;
 	delete g_pResources;
+	delete g_pVibration;
 	Iw2DTerminate();
 
 	return 0;

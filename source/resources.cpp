@@ -10,32 +10,47 @@ Resources::Resources()
 	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
 	gameBG = Iw2DCreateImage("textures/background.png");
 	gameBGHC = Iw2DCreateImage("textures/HC_Background_1st_Level.png");
+
 	playButton = Iw2DCreateImage("textures/play_button.png");
 	playButtonHC = Iw2DCreateImage("textures/HC_play_button.png");
 	exitButton = Iw2DCreateImage("textures/Exit_Button.png");
 	pauseButton = Iw2DCreateImage("textures/pause.png");
 	settingsButton = Iw2DCreateImage("textures/Settings_Button.png");
 	settingsButtonHC = Iw2DCreateImage("textures/HC_Settings_Button.png");
+	backButton = Iw2DCreateImage("textures/back_button2.png");
+
 	star = Iw2DCreateImage("textures/star_complete.png");
 	holoStar = Iw2DCreateImage("textures/star_uncomplete.png");
+
 	player = Iw2DCreateImage("textures/character.png");
 	playerLeft = Iw2DCreateImage("textures/left.png");
 	playerRight = Iw2DCreateImage("textures/right.png");
 	playerUp = Iw2DCreateImage("textures/up.png");
 	playerDown = Iw2DCreateImage("textures/down.png");
 	rock = Iw2DCreateImage("textures/rock.png");
-	levelButton = Iw2DCreateImage("textures/Level_button.png");
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
+	snowpatch = Iw2DCreateImage("textures/snowpatch.png");
+
+	level1 = Iw2DCreateImage("textures/level1.png");
+	level2 = Iw2DCreateImage("textures/level2.png");
+	level3 = Iw2DCreateImage("textures/level3.png");
+	level4 = Iw2DCreateImage("textures/level4.png");
+	level5 = Iw2DCreateImage("textures/level5.png");
+	level6 = Iw2DCreateImage("textures/level6.png");
+
 	upButton = Iw2DCreateImage("textures/up-arrow.png");
 	rightButton = Iw2DCreateImage("textures/right-arrow.png");
 	downButton = Iw2DCreateImage("textures/down-arrow.png");
 	leftButton = Iw2DCreateImage("textures/left-arrow.png");
+
 	onScreenSettingButton = Iw2DCreateImage("textures/onscreen_settings.png");
 	onScreenSettingButtonSelected = Iw2DCreateImage("textures/onscreen_settings_selected.png");
 	highContrastButton = Iw2DCreateImage("textures/highcontrast_settings.png");
 	highContrastButtonSelected = Iw2DCreateImage("textures/highcontrast_settings_selected.png");
-	backButton = Iw2DCreateImage("textures/back_button2.png");
+	vibrationButton = Iw2DCreateImage("textures/vibration_settings.png");
+	vibrationButtonSelected = Iw2DCreateImage("textures/vibration_settings_selected.png");
+
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
 
@@ -55,35 +70,49 @@ Resources::~Resources()
 	delete mainMenuBGHC;
 	delete endScreenBG;
 	delete pauseMenuBG;
+	delete gameBG;
+
+	delete gameBGHC;
+
 	delete playButton;
 	delete playButtonHC;
 	delete exitButton;
 	delete pauseButton;
 	delete settingsButton;
 	delete settingsButtonHC;
+	delete backButton;
+
 	delete star;
 	delete holoStar;
+
 	delete player;
 	delete playerLeft;
 	delete playerRight;
 	delete playerUp;
 	delete playerDown;
-	delete gameBG;
-	delete gameBGHC;
 	delete rock;
-	delete levelButton;
 	delete blank;
 	delete home;
+	delete snowpatch;
+
+	delete level1;
+	delete level2;
+	delete level3;
+	delete level4;
+	delete level5;
+	delete level6;
+
 	delete upButton;
 	delete rightButton;
 	delete downButton;
 	delete leftButton;
+
 	delete onScreenSettingButton;
 	delete onScreenSettingButtonSelected;
 	delete highContrastButton;
 	delete highContrastButtonSelected;
-	delete backButton;
-
+	delete vibrationButton;
+	delete vibrationButtonSelected;
 	// Cleanup fonts
 	delete font;
 

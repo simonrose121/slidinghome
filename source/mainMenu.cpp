@@ -7,6 +7,7 @@
 #include "main.h"
 #include "levelSelect.h"
 #include "settings.h"
+#include "vibration.h"
 
 MainMenu::~MainMenu()
 {
@@ -86,13 +87,14 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
 			MoveToLevelSelect();
-
+			g_pVibration->Vibrate();
 			// Start playing game music here
 			//Audio::PlayMusic("audio/in_game.mp3", true);
 		}
 		else if (settingsButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
 			MoveToSettings();
+			g_pVibration->Vibrate();
 		}
 	}
 }
