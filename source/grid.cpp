@@ -82,19 +82,24 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 			gameObjects[x + width*y]->setGridCoords(x, y);
 			switch (map[y][x])
 			{
-			case 0:
+			case BLANK:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getBlank());
 				gameObjects[x + width*y]->setId(BLANK);
 				break;
 
-			case 1:
+			case EDGE:
+				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getBlank());
+				gameObjects[x + width*y]->setId(EDGE);
+				break;
+
+			case ROCK:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getRock());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(ROCK);
 				break;
 
-			case 2:
+			case PLAYER:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayerDownAtlas());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
@@ -103,14 +108,14 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 				playerIndex = x + width * y;
 				break;
 
-			case 3:
+			case HOME:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getHome());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
 				gameObjects[x + width*y]->setId(HOME);
 				break;
 
-			case 4:
+			case SNOWPATCH:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getSnowpatch());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;

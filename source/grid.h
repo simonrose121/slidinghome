@@ -41,10 +41,11 @@ public:
 private:
 	enum ObjectIds {
 		BLANK = 0,
-		ROCK = 1,
-		PLAYER = 2,
-		HOME = 3,
-		SNOWPATCH = 4
+		EDGE = 1,
+		ROCK = 2,
+		PLAYER = 3,
+		HOME = 4,
+		SNOWPATCH = 5
 	};
 
 	// Member variables
@@ -61,6 +62,7 @@ private:
 	bool onSnowPatch;
 	std::string levelNum;
 
+	// Private member functions
 	void CheckIfOnSnowpatch();
 	void UpdatePosition(int distance, Direction dir);
 	void PrintGrid();

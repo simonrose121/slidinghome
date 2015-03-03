@@ -164,5 +164,5 @@ void LevelSelect::StartGame(std::string levelNo)
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	g_pSceneManager->SwitchTo(game);
 
-	game->NewGame(levelNo, 11, 15);
+	game->NewGame(levelNo, 13, 14);
 }

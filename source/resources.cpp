@@ -7,7 +7,7 @@ Resources::Resources()
 	mainMenuBG = Iw2DCreateImage("textures/menu.png");
 	endScreenBG = Iw2DCreateImage("textures/End_Screen.png");
 	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
-	gameBG = Iw2DCreateImage("textures/background.png");
+	gameBG = Iw2DCreateImage("textures/level_background.png");
 
 	gameBGHC = Iw2DCreateImage("textures/HC_Background_1st_Level.png");
 
@@ -37,10 +37,10 @@ Resources::Resources()
 	level5 = Iw2DCreateImage("textures/level5.png");
 	level6 = Iw2DCreateImage("textures/level6.png");
 
-	upButton = Iw2DCreateImage("textures/up-arrow.png");
-	rightButton = Iw2DCreateImage("textures/right-arrow.png");
-	downButton = Iw2DCreateImage("textures/down-arrow.png");
-	leftButton = Iw2DCreateImage("textures/left-arrow.png");
+	upButton = Iw2DCreateImage("textures/up-button.png");
+	rightButton = Iw2DCreateImage("textures/right-button.png");
+	downButton = Iw2DCreateImage("textures/down-button.png");
+	leftButton = Iw2DCreateImage("textures/left-button.png");
 
 	onScreenSettingButton = Iw2DCreateImage("textures/onscreen_settings.png");
 	onScreenSettingButtonSelected = Iw2DCreateImage("textures/onscreen_settings_selected.png");

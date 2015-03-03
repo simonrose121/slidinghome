@@ -12,8 +12,8 @@
 #include <iostream>
 #include <fstream>
 
-#define GRID_OFFSET_X 41
-#define GRID_OFFSET_Y 37
+#define GRID_OFFSET_X 20
+#define GRID_OFFSET_Y 100
 
 Game::~Game()
 {
@@ -46,11 +46,14 @@ void Game::Init()
 	pressedDown = false;
 }
 
-void Game::ChangeBackground(){
-	if (changeToHighContrast){
+void Game::ChangeBackground()
+{
+	if (changeToHighContrast)
+	{
 		background->SetImage(g_pResources->getGameBGHC());
 	}
-	else{
+	else
+	{
 		background->SetImage(g_pResources->getGameBG());
 	}
 }
@@ -60,51 +63,43 @@ void Game::InitOnScreenButtons()
 	if (showOnScreenButtons) 
 	{
 		upButton = new CSprite();
-		upButton->m_X = IwGxGetScreenWidth() / 2;
-		upButton->m_Y = IwGxGetScreenHeight() / 4;
+		upButton->m_X = IwGxGetScreenWidth();
+		upButton->m_Y = IwGxGetScreenHeight() / 3.5;
 		upButton->SetImage(g_pResources->getUpButton());
 		upButton->m_W = upButton->GetImage()->GetWidth();
 		upButton->m_H = upButton->GetImage()->GetHeight();
 		upButton->m_AnchorX = 1;
 		upButton->m_AnchorY = 1;
-		upButton->m_ScaleX = graphicsScale * buttonScale;
-		upButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(upButton);
 
 		rightButton = new CSprite();
-		rightButton->m_X = IwGxGetScreenWidth() / 1.3;
-		rightButton->m_Y = IwGxGetScreenHeight() / 2.6;
 		rightButton->SetImage(g_pResources->getRightButton());
+		rightButton->m_X = IwGxGetScreenWidth();
+		rightButton->m_Y = rightButton->GetImage()->GetHeight() * 1.2;
 		rightButton->m_W = rightButton->GetImage()->GetWidth();
 		rightButton->m_H = rightButton->GetImage()->GetHeight();
 		rightButton->m_AnchorX = 1;
 		rightButton->m_AnchorY = 1;
-		rightButton->m_ScaleX = graphicsScale * buttonScale;
-		rightButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(rightButton);
 
 		downButton = new CSprite();
-		downButton->m_X = IwGxGetScreenWidth() / 2;
-		downButton->m_Y = IwGxGetScreenHeight() / 1.8;
+		downButton->m_X = IwGxGetScreenWidth();
+		downButton->m_Y = IwGxGetScreenHeight() / 1.1;
 		downButton->SetImage(g_pResources->getDownButton());
 		downButton->m_W = downButton->GetImage()->GetWidth();
 		downButton->m_H = downButton->GetImage()->GetHeight();
 		downButton->m_AnchorX = 1;
 		downButton->m_AnchorY = 1;
-		downButton->m_ScaleX = graphicsScale * buttonScale;
-		downButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(downButton);
 
 		leftButton = new CSprite();
-		leftButton->m_X = IwGxGetScreenWidth() / 3.3;
-		leftButton->m_Y = IwGxGetScreenHeight() / 2.6;
 		leftButton->SetImage(g_pResources->getLeftButton());
+		leftButton->m_X = leftButton->GetImage()->GetWidth();
+		leftButton->m_Y = leftButton->GetImage()->GetHeight() * 1.2;
 		leftButton->m_W = leftButton->GetImage()->GetWidth();
 		leftButton->m_H = leftButton->GetImage()->GetHeight();
 		leftButton->m_AnchorX = 1;
 		leftButton->m_AnchorY = 1;
-		leftButton->m_ScaleX = graphicsScale * buttonScale;
-		leftButton->m_ScaleY = graphicsScale * buttonScale;
 		AddChild(leftButton);
 	}
 }
