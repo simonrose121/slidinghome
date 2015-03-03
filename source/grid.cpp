@@ -84,21 +84,21 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 			{
 			case 0:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getBlank());
-				gameObjects[x + width*y]->setId(0);
+				gameObjects[x + width*y]->setId(BLANK);
 				break;
 
 			case 1:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getRock());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
-				gameObjects[x + width*y]->setId(1);
+				gameObjects[x + width*y]->setId(ROCK);
 				break;
 
 			case 2:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayerDownAtlas());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
-				gameObjects[x + width*y]->setId(2);
+				gameObjects[x + width*y]->setId(PLAYER);
 				player = gameObjects[x + width*y];
 				playerIndex = x + width * y;
 				break;
@@ -107,14 +107,14 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getHome());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
-				gameObjects[x + width*y]->setId(3);
+				gameObjects[x + width*y]->setId(HOME);
 				break;
 
 			case 4:
 				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getSnowpatch());
 				gameObjects[x + width*y]->m_ScaleX = gem_scale;
 				gameObjects[x + width*y]->m_ScaleY = gem_scale;
-				gameObjects[x + width*y]->setId(4);
+				gameObjects[x + width*y]->setId(SNOWPATCH);
 				break;
 
 			}
@@ -238,42 +238,42 @@ void Grid::UpdatePosition(int distance, Direction dir)
 	case LEFT:
 		CheckIfOnSnowpatch();
 		//if the destination will be a snowpatch then set bool
-		if (gameObjects[playerIndex - distance]->getId() == 4)
+		if (gameObjects[playerIndex - distance]->getId() == SNOWPATCH)
 		{
 			onSnowPatch = true;
 		}
 		gameObjects[playerIndex - distance]->setGridCoords(x - distance, y);
-		gameObjects[playerIndex - distance]->setId(2);
+		gameObjects[playerIndex - distance]->setId(PLAYER);
 		playerIndex = playerIndex - distance;
 		break;
 	case RIGHT:
 		CheckIfOnSnowpatch();
-		if (gameObjects[playerIndex - distance]->getId() == 4)
+		if (gameObjects[playerIndex - distance]->getId() == SNOWPATCH)
 		{
 			onSnowPatch = true;
 		}
 		gameObjects[playerIndex + distance]->setGridCoords(x + distance, y);
-		gameObjects[playerIndex + distance]->setId(2);
+		gameObjects[playerIndex + distance]->setId(PLAYER);
 		playerIndex = playerIndex + distance;
 		break;
 	case UP:
 		CheckIfOnSnowpatch();
-		if (gameObjects[playerIndex - (distance * width)]->getId() == 4)
+		if (gameObjects[playerIndex - (distance * width)]->getId() == SNOWPATCH)
 		{
 			onSnowPatch = true;
 		}
 		gameObjects[playerIndex - (distance * width)]->setGridCoords(x, y - distance);
-		gameObjects[playerIndex - (distance * width)]->setId(2);
+		gameObjects[playerIndex - (distance * width)]->setId(PLAYER);
 		playerIndex = playerIndex - (distance * width);
 		break;
 	case DOWN:
 		CheckIfOnSnowpatch();
-		if (gameObjects[playerIndex + (distance * width)]->getId() == 4)
+		if (gameObjects[playerIndex + (distance * width)]->getId() == SNOWPATCH)
 		{
 			onSnowPatch = true;
 		}
 		gameObjects[playerIndex + (distance * width)]->setGridCoords(x, y + distance);
-		gameObjects[playerIndex + (distance * width)]->setId(2);
+		gameObjects[playerIndex + (distance * width)]->setId(PLAYER);
 		playerIndex = playerIndex + (distance * width);
 		break;
 	}
@@ -286,12 +286,12 @@ void Grid::CheckIfOnSnowpatch()
 	// check if player is on snowpatch set that position back to a snowpatch when he moves off
 	if (onSnowPatch)
 	{
-		gameObjects[playerIndex]->setId(4);
+		gameObjects[playerIndex]->setId(SNOWPATCH);
 		onSnowPatch = false;
 	}
 	else
 	{
-		gameObjects[playerIndex]->setId(0);
+		gameObjects[playerIndex]->setId(BLANK);
 	}
 }
 
@@ -328,11 +328,11 @@ int Grid::getDistance(Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == 0)
+		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == BLANK)
 		{
 			distance++;
 			// Check for snowpatch
-			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == 4)
+			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
 			{
 				// Ensure player is on snowpatch
 				distance++;
@@ -341,10 +341,10 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case RIGHT:
-		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == 0)
+		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == BLANK)
 		{
 			distance++;
-			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == 4)
+			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
 			{
 				distance++;
 				break;
@@ -352,10 +352,10 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case UP:
-		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == 0)
+		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == BLANK)
 		{
 			distance++;
-			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == 4)
+			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
 				distance++;
 				break;
@@ -363,10 +363,10 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case DOWN:
-		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == 0)
+		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == BLANK)
 		{
 			distance++;
-			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == 4)
+			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
 				distance++;
 				break;
@@ -428,25 +428,25 @@ bool Grid::TestMap(Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-		if (gameObjects[(x - 1) + width*y]->getId() == 3)
+		if (gameObjects[(x - 1) + width*y]->getId() == HOME)
 		{
 			return true;
 		}
 		break;
 	case RIGHT:
-		if (gameObjects[(x + 1) + width*y]->getId() == 3)
+		if (gameObjects[(x + 1) + width*y]->getId() == HOME)
 		{
 			return true;
 		}
 		break;
 	case UP:
-		if (gameObjects[(x + width*y) - width]->getId() == 3)
+		if (gameObjects[(x + width*y) - width]->getId() == HOME)
 		{
 			return true;
 		}
 		break;
 	case DOWN:
-		if (gameObjects[(x + width*y) + width]->getId() == 3)
+		if (gameObjects[(x + width*y) + width]->getId() == HOME)
 		{
 			return true;
 		}

@@ -39,6 +39,14 @@ public:
 	int	getDistance(Direction dir);
 	
 private:
+	enum ObjectIds {
+		BLANK = 0,
+		ROCK = 1,
+		PLAYER = 2,
+		HOME = 3,
+		SNOWPATCH = 4
+	};
+
 	// Member variables
 	GameObject** gameObjects;
 	GameObject* player;
