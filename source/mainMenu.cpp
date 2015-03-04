@@ -35,9 +35,9 @@ void MainMenu::Init()
 
 	// Create Start Game button
 	playButton = new CSprite();
-	playButton->SetImage(g_pResources->getPlayButton());
-	playButton->m_X = (float)IwGxGetScreenWidth() / 2;
-	playButton->m_Y = (float)IwGxGetScreenHeight() / 3;
+	playButton->SetImage(g_pResources->getPlayButtonHC());
+	playButton->m_X = (float)IwGxGetScreenWidth() / 1.3;
+	playButton->m_Y = (float)IwGxGetScreenHeight() / 1.8;
 	playButton->m_W = playButton->GetImage()->GetWidth();
 	playButton->m_H = playButton->GetImage()->GetHeight();
 	playButton->m_AnchorX = 1;
@@ -48,9 +48,9 @@ void MainMenu::Init()
 
 	// Create settings
 	settingsButton = new CSprite();
-	settingsButton->SetImage(g_pResources->getSettingsButton());
-	settingsButton->m_X = (float)IwGxGetScreenWidth() / 2.2;
-	settingsButton->m_Y = (float)IwGxGetScreenHeight() / 2;
+	settingsButton->SetImage(g_pResources->getSettingsButtonHC());
+	settingsButton->m_X = (float)IwGxGetScreenWidth() / 1.42;
+	settingsButton->m_Y = (float)IwGxGetScreenHeight() / 1.48;
 	settingsButton->m_W = settingsButton->GetImage()->GetWidth();
 	settingsButton->m_H = settingsButton->GetImage()->GetHeight();
 	settingsButton->m_AnchorX = 1;
@@ -63,13 +63,9 @@ void MainMenu::Init()
 void MainMenu::ChangeBackground(){
 	if (changeToHighContrast){
 		background->SetImage(g_pResources->getMainMenuBGHC());
-		playButton->SetImage(g_pResources->getPlayButtonHC());
-		settingsButton->SetImage(g_pResources->getSettingsButtonHC());
 	}
 	else{
 		background->SetImage(g_pResources->getMainMenuBG());
-		playButton->SetImage(g_pResources->getPlayButton());
-		settingsButton->SetImage(g_pResources->getSettingsButton());
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "resources.h"
 #include "game.h"
 #include "mainMenu.h"
+#include "pauseMenu.h"
 #include "main.h"
 #include "vibration.h"
 
@@ -100,6 +101,7 @@ void Settings::Init()
 
 	game->setHighContrastMode(false);
 	MainMenu* menu = (MainMenu*)g_pSceneManager->Find("mainMenu");
+	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pauseMenu");
 
 	std::ifstream highcontrastfile("highcontrastmode.txt");
 	int highcontrast = 0;
@@ -109,8 +111,10 @@ void Settings::Init()
 		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButtonSelected());
 		game->setHighContrastMode(true);
 		menu->setHighContrastMode(true);
+		pause->setHighContrastMode(true);
 		game->ChangeBackground();
 		menu->ChangeBackground();
+		pause->ChangeBackground();
 	}
 
 	g_pVibration->setVibrationMode(false);
@@ -192,6 +196,8 @@ void Settings::SetOnScreenButtons()
 void Settings::SetHighContrastMode(){
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	MainMenu* menu = (MainMenu*)g_pSceneManager->Find("mainMenu");
+	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pauseMenu");
+
 
 	if (!game->getHighContrastMode())
 	{
@@ -200,8 +206,10 @@ void Settings::SetHighContrastMode(){
 		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButtonSelected());
 		game->setHighContrastMode(true);
 		menu->setHighContrastMode(true);
+		pause->setHighContrastMode(true);
 		game->ChangeBackground();
 		menu->ChangeBackground();
+		pause->ChangeBackground();
 
 		fileContrastWrite.open("highcontrastmode.txt");
 		fileContrastWrite << 1;
@@ -214,8 +222,10 @@ void Settings::SetHighContrastMode(){
 		showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
 		game->setHighContrastMode(false);
 		menu->setHighContrastMode(false);
+		pause->setHighContrastMode(false);
 		game->ChangeBackground();
 		menu->ChangeBackground();
+		pause->ChangeBackground();
 
 		fileContrastWrite.open("highcontrastmode.txt");
 		fileContrastWrite << 0;

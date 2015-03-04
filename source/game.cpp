@@ -250,8 +250,8 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	grid->GenerateLevel(levelNo, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
 
 	// Create Pause Button
-	float x_pos = (float)IwGxGetScreenWidth() / 1;
-	float y_pos = (float)IwGxGetScreenHeight() / 1;
+	float x_pos = (float)IwGxGetScreenWidth() / 8;
+	float y_pos = (float)IwGxGetScreenHeight() / 15;
 	pauseButton = new CSprite();
 	pauseButton->SetImage(g_pResources->getPauseButton());
 	pauseButton->m_X = x_pos;

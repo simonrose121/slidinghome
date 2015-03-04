@@ -29,6 +29,7 @@ public:
 	CIw2DImage* getMainMenuBGHC(){ return mainMenuBGHC; }
 	CIw2DImage*	getEndScreenBG()	{ return endScreenBG; }
 	CIw2DImage*	getPauseMenuBG()	{ return pauseMenuBG; }
+	CIw2DImage* getPauseMenuBGHC(){ return pauseMenuBGHC; }
 	CIw2DImage*	getGameBG() { return gameBG; }
 
 	CIw2DImage* getGameBGHC() { return gameBGHC; }
@@ -90,6 +91,7 @@ private:
 	CIw2DImage* mainMenuBGHC;
 	CIw2DImage*	endScreenBG;
 	CIw2DImage* pauseMenuBG;
+	CIw2DImage* pauseMenuBGHC;
 	CIw2DImage*	gameBG;
 
 	CIw2DImage* gameBGHC;
