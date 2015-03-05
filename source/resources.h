@@ -69,6 +69,10 @@ public:
 	CIw2DImage* getHighContrastSettingButtonSelected() { return highContrastButtonSelected; }
 	CIw2DImage* getVibrationSettingButton() { return vibrationButton; }
 	CIw2DImage* getVibrationSettingButtonSelected() { return vibrationButtonSelected; }
+	CIw2DImage* getSoundSettingButton() { return soundButton; }
+	CIw2DImage* getSoundSettingButtonSelected() { return soundButtonSelected; }
+	CIw2DImage* getMusicSettingButton() { return musicButton; }
+	CIw2DImage* getMusicSettingButtonSelected() { return musicButtonSelected; }
 
 	CIw2DFont*  getFont() { return font; }
 
@@ -122,6 +126,10 @@ private:
 	CIw2DImage* highContrastButtonSelected;
 	CIw2DImage* vibrationButton;
 	CIw2DImage* vibrationButtonSelected;
+	CIw2DImage* soundButton;
+	CIw2DImage* soundButtonSelected;
+	CIw2DImage* musicButton;
+	CIw2DImage* musicButtonSelected;
 
 	// Fonts
 	CIw2DFont* font;

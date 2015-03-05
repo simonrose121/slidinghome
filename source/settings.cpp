@@ -7,6 +7,7 @@
 #include "mainMenu.h"
 #include "main.h"
 #include "vibration.h"
+#include "sound.h"
 
 #include <fstream>
 
@@ -68,10 +69,36 @@ void Settings::Init()
 	showVibration->m_W = showVibration->GetImage()->GetWidth();
 	showVibration->m_H = showVibration->GetImage()->GetHeight();
 	showVibration->m_AnchorX = 1;
-	showVibration->m_AnchorY = 2.75;
+	showVibration->m_AnchorY = 3;
 	showVibration->m_ScaleX = game->getGraphicsScale();
 	showVibration->m_ScaleY = game->getGraphicsScale();
 	AddChild(showVibration);
+
+	// Add Sounds on button
+	showSound = new CSprite();
+	showSound->m_X = IwGxGetScreenWidth();
+	showSound->m_Y = IwGxGetScreenWidth();
+	showSound->SetImage(g_pResources->getSoundSettingButton());
+	showSound->m_W = showSound->GetImage()->GetWidth();
+	showSound->m_H = showSound->GetImage()->GetHeight();
+	showSound->m_AnchorX = 1;
+	showSound->m_AnchorY = 1;
+	showSound->m_ScaleX = game->getGraphicsScale();
+	showSound->m_ScaleY = game->getGraphicsScale();
+	AddChild(showSound);
+
+	// Add Music on button
+	showMusic = new CSprite();
+	showMusic->m_X = IwGxGetScreenWidth();
+	showMusic->m_Y = IwGxGetScreenWidth();
+	showMusic->SetImage(g_pResources->getMusicSettingButton());
+	showMusic->m_W = showMusic->GetImage()->GetWidth();
+	showMusic->m_H = showMusic->GetImage()->GetHeight();
+	showMusic->m_AnchorX = 1;
+	showMusic->m_AnchorY = 0.25;
+	showMusic->m_ScaleX = game->getGraphicsScale();
+	showMusic->m_ScaleY = game->getGraphicsScale();
+	AddChild(showMusic);
 
 	backButton = new CSprite();
 	backButton->m_X = IwGxGetScreenWidth();
@@ -120,6 +147,25 @@ void Settings::Init()
 		g_pVibration->setVibrationMode(true);
 	}
 
+	g_pSound->setSoundMode(false);
+	std::ifstream soundfile("sound.txt");
+	int sound = 0;
+	soundfile >> sound;
+	soundfile.close();
+	if (sound == 1){
+		showSound->SetImage(g_pResources->getSoundSettingButtonSelected());
+		g_pSound->setSoundMode(true);
+	}
+
+	g_pSound->setMusicMode(false);
+	std::ifstream musicfile("music.txt");
+	int music = 0;
+	musicfile >> sound;
+	musicfile.close();
+	if (music == 1){
+		showSound->SetImage(g_pResources->getSoundSettingButtonSelected());
+		g_pSound->setMusicMode(true);
+	}
 }
 
 void Settings::Update(float deltaTime, float alphaMul)
@@ -154,6 +200,16 @@ void Settings::Update(float deltaTime, float alphaMul)
 			{
 				g_pVibration->Vibrate();
 				SetVibrationOn();
+			}
+			if (showSound->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				g_pVibration->Vibrate();
+				SetSound();
+			}
+			if (showMusic->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				g_pVibration->Vibrate();
+				SetMusic();
 			}
 			g_pInput->Reset();
 		}
@@ -236,6 +292,58 @@ void Settings::SetVibrationOn(){
 		fileVibrationWrite.open("vibration.txt");
 		fileVibrationWrite << 0;
 		fileVibrationWrite.close();
+	}
+}
+
+void Settings::SetSound()
+{
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	std::ofstream soundfile;
+
+	if (!g_pSound->getSound())
+	{
+		showSound->SetImage(g_pResources->getSoundSettingButtonSelected());
+		g_pSound->setSoundMode(true);
+
+		soundfile.open("sound.txt");
+		soundfile << 1;
+		soundfile.close();
+	}
+	else
+	{
+		showSound->SetImage(g_pResources->getSoundSettingButton());
+		g_pSound->setSoundMode(false);
+
+		soundfile.open("sound.txt");
+		soundfile << 0;
+		soundfile.close();
+	}
+}
+
+void Settings::SetMusic()
+{
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	std::ofstream musicfile;
+
+	if (!g_pSound->getMusic())
+	{
+		showMusic->SetImage(g_pResources->getMusicSettingButtonSelected());
+		g_pSound->setMusicMode(true);
+		g_pSound->StartMusic();
+
+		musicfile.open("music.txt");
+		musicfile << 1;
+		musicfile.close();
+	}
+	else
+	{
+		showMusic->SetImage(g_pResources->getMusicSettingButton());
+		g_pSound->setMusicMode(false);
+		g_pSound->StopMusic();
+
+		musicfile.open("music.txt");
+		musicfile << 0;
+		musicfile.close();
 	}
 }
 

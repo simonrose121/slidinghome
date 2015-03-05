@@ -48,6 +48,10 @@ Resources::Resources()
 	highContrastButtonSelected = Iw2DCreateImage("textures/highcontrast_settings_selected.png");
 	vibrationButton = Iw2DCreateImage("textures/vibration_settings.png");
 	vibrationButtonSelected = Iw2DCreateImage("textures/vibration_settings_selected.png");
+	soundButton = Iw2DCreateImage("textures/sound_settings.png");
+	soundButtonSelected = Iw2DCreateImage("textures/sound_settings_selected.png");
+	musicButton = Iw2DCreateImage("textures/music_settings.png");
+	musicButtonSelected = Iw2DCreateImage("textures/music_settings_selected.png");
 
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
@@ -108,6 +112,11 @@ Resources::~Resources()
 	delete highContrastButtonSelected;
 	delete vibrationButton;
 	delete vibrationButtonSelected;
+	delete soundButton;
+	delete soundButtonSelected;
+	delete musicButton;
+	delete musicButtonSelected;
+
 	// Cleanup fonts
 	delete font;
 

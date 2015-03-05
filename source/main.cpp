@@ -11,6 +11,7 @@
 #include "settings.h"
 #include "resources.h"
 #include "vibration.h"
+#include "sound.h"
 
 using namespace IwTween;
 
@@ -29,6 +30,7 @@ int main()
 	g_pAudio = new Audio();
 	g_pSceneManager = new SceneManager();
 	g_pVibration = new Vibration(60, 125);
+	g_pSound = new Sound();
 
 	Game* game = new Game();
 	game->setName("game");
@@ -60,7 +62,16 @@ int main()
 	settings->Init();
 	g_pSceneManager->Add(settings);
 
+	//s3eVideoPlay("intromovie.mp4", 1, 0, 0, 200, 150);
+
 	g_pSceneManager->SwitchTo(main_menu);
+
+	if (g_pSound->getMusic())
+	{
+		g_pSound->StartMusic();
+	}
+	//Audio::PlayMusic("audio/in_game.mp3", true);
+
 
 	while (!s3eDeviceCheckQuitRequest())
 	{
@@ -92,6 +103,7 @@ int main()
 	delete g_pTweener;
 	delete g_pResources;
 	delete g_pVibration;
+	delete g_pSound;
 	Iw2DTerminate();
 
 	return 0;

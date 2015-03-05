@@ -31,6 +31,7 @@ files
 	resources.cpp
 	scene.cpp
 	settings.cpp
+	sound.cpp
 	vibration.cpp
 
 	audio.h
@@ -47,6 +48,7 @@ files
 	resources.h
 	scene.h
 	settings.h
+	sound.h
 	vibration.h
 }
 
