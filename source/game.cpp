@@ -8,6 +8,7 @@
 #include "resources.h"
 #include "pauseMenu.h"
 #include "s3eVibra.h"
+#include "sound.h"
 
 #include <iostream>
 #include <fstream>
@@ -147,25 +148,41 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					IwTrace(APP, ("move up button"));
 					if (!isMoving)
+					{
 						grid->MovePlayerUp();
+						g_pSound->SoundFunc();
+						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+					}
 				}
 				else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
 					IwTrace(APP, ("move right button"));
 					if (!isMoving)
+					{
 						grid->MovePlayerRight();
+						g_pSound->SoundFunc();
+						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+					}
 				}
 				else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
 					IwTrace(APP, ("move down button"));
 					if (!isMoving)
+					{
 						grid->MovePlayerDown();
+						g_pSound->SoundFunc();
+						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+					}
 				}
 				else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
 					IwTrace(APP, ("move left button"));
 					if (!isMoving)
+					{
 						grid->MovePlayerLeft();
+						g_pSound->SoundFunc();
+						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+					}
 				}
 				g_pInput->Reset();
 			}
@@ -199,25 +216,41 @@ void Game::Update(float deltaTime, float alphaMul)
 					{
 						IwTrace(APP, ("move left"));
 						if (!isMoving)
+						{
 							grid->MovePlayerLeft();
+							g_pSound->SoundFunc();
+							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+						}
 					}
 					if (g_pInput->m_Y < start_y - minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
 					{
 						IwTrace(APP, ("move up"));
 						if (!isMoving)
+						{
 							grid->MovePlayerUp();
+							g_pSound->SoundFunc();
+							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+						}
 					}
 					if (g_pInput->m_X > start_x + minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
 					{
 						IwTrace(APP, ("move right"));
 						if (!isMoving)
+						{
 							grid->MovePlayerRight();
+							g_pSound->SoundFunc();
+							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+						}
 					}
 					if (g_pInput->m_Y > start_y + minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
 					{
 						IwTrace(APP, ("move down"));
 						if (!isMoving)
+						{
 							grid->MovePlayerDown();
+							g_pSound->SoundFunc();
+							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
+						}
 					}
 					pressedDown = false;
 					g_pInput->Reset();
