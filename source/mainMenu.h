@@ -16,13 +16,20 @@ public:
 	void Render();
 	static void	MoveToLevelSelect();
 	static void MoveToSettings();
+	void ChangeBackground();
+
 	float getGraphicsScale() { return graphicsScale; }
+	bool getHighContrastMode() { return changeToHighContrast; }
+
+	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
 
 private:
 	// Member variables
 	float graphicsScale;
+	CSprite* background;
 	CSprite* playButton;
 	CSprite* settingsButton;
+	bool changeToHighContrast;
 };
 
 #endif  // __MAIN_MENU_H__

@@ -26,16 +26,20 @@ public:
 
 	// Member functions
 	CIw2DImage*	getMainMenuBG()	{ return mainMenuBG; }
+	CIw2DImage* getMainMenuBGHC(){ return mainMenuBGHC; }
 	CIw2DImage*	getEndScreenBG()	{ return endScreenBG; }
 	CIw2DImage*	getPauseMenuBG()	{ return pauseMenuBG; }
+	CIw2DImage* getPauseMenuBGHC(){ return pauseMenuBGHC; }
 	CIw2DImage*	getGameBG() { return gameBG; }
 
 	CIw2DImage* getGameBGHC() { return gameBGHC; }
 
 	CIw2DImage*	getPlayButton() { return playButton; }
+	CIw2DImage* getPlayButtonHC(){ return playButtonHC; }
 	CIw2DImage*	getExitButton() { return exitButton; }
 	CIw2DImage*	getPauseButton() { return pauseButton; }
 	CIw2DImage* getSettingsButton() { return settingsButton; }
+	CIw2DImage* getSettingsButtonHC() { return settingsButtonHC; }
 	CIw2DImage* getBackButton() { return backButton; }
 
 	CIw2DImage* getStar() { return star; }
@@ -50,6 +54,10 @@ public:
 	CIw2DImage*	getBlank() { return blank; }
 	CIw2DImage* getHome() { return home; }
 	CIw2DImage* getSnowpatch() { return snowpatch; }
+
+	CIw2DImage* getIceRock(){ return iceRock; }
+	CIw2DImage* getShrubSnow(){ return shrubSnow; }
+	CIw2DImage* getRockUpdated(){ return rockUpdated; }
 
 	CIw2DImage* getLevel1() { return level1; }
 	CIw2DImage* getLevel2() { return level2; }
@@ -80,17 +88,25 @@ public:
 private:
 	// Member variables
 	CIw2DImage*	mainMenuBG;
+	CIw2DImage* mainMenuBGHC;
 	CIw2DImage*	endScreenBG;
 	CIw2DImage* pauseMenuBG;
+	CIw2DImage* pauseMenuBGHC;
 	CIw2DImage*	gameBG;
 
 	CIw2DImage* gameBGHC;
 
 	CIw2DImage*	playButton;
+	CIw2DImage* playButtonHC;
 	CIw2DImage*	exitButton;
 	CIw2DImage* pauseButton;
 	CIw2DImage* settingsButton;
+	CIw2DImage* settingsButtonHC;
 	CIw2DImage* backButton;
+
+	CIw2DImage* iceRock;
+	CIw2DImage* shrubSnow;
+	CIw2DImage* rockUpdated;
 
 	CIw2DImage* star;
 	CIw2DImage* holoStar;

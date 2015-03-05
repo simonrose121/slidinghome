@@ -4,17 +4,23 @@
 Resources::Resources()
 {
 	// Load images
-	mainMenuBG = Iw2DCreateImage("textures/menu.png");
+	mainMenuBG = Iw2DCreateImage("textures/New_Main_Menu.png");
+	mainMenuBGHC = Iw2DCreateImage("textures/HC_Menu.png");
 	endScreenBG = Iw2DCreateImage("textures/End_Screen.png");
 	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
 	gameBG = Iw2DCreateImage("textures/level_background.png");
-
 	gameBGHC = Iw2DCreateImage("textures/HC_Background_1st_Level.png");
+	pauseMenuBG = Iw2DCreateImage("textures/New_Pause_Menu.png");
+	pauseMenuBGHC = Iw2DCreateImage("textures/HC_Pause_Menu.png");
+	gameBG = Iw2DCreateImage("textures/level_background.png");
+	gameBGHC = Iw2DCreateImage("textures/HC_level_background.png");
 
 	playButton = Iw2DCreateImage("textures/play_button.png");
-	exitButton = Iw2DCreateImage("textures/Exit_Button.png");
+	playButtonHC = Iw2DCreateImage("textures/HC_play_button.png");
+	exitButton = Iw2DCreateImage("textures/End_Game_Button.png");
 	pauseButton = Iw2DCreateImage("textures/pause.png");
 	settingsButton = Iw2DCreateImage("textures/Settings_Button.png");
+	settingsButtonHC = Iw2DCreateImage("textures/HC_Settings_Button.png");
 	backButton = Iw2DCreateImage("textures/back_button2.png");
 
 	star = Iw2DCreateImage("textures/star_complete.png");
@@ -29,6 +35,11 @@ Resources::Resources()
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
 	snowpatch = Iw2DCreateImage("textures/snowpatch.png");
+
+	//New Sprites
+	iceRock = Iw2DCreateImage("textures/Ice_Rock.png");
+	shrubSnow = Iw2DCreateImage("textures/Shrub_Snow.png");
+	rockUpdated = Iw2DCreateImage("textures/Rock_Updated.png");
 
 	level1 = Iw2DCreateImage("textures/level1.png");
 	level2 = Iw2DCreateImage("textures/level2.png");
@@ -65,16 +76,20 @@ Resources::~Resources()
 {
 	// Cleanup images
 	delete mainMenuBG;
+	delete mainMenuBGHC;
 	delete endScreenBG;
 	delete pauseMenuBG;
+	delete pauseMenuBGHC;
 	delete gameBG;
 
 	delete gameBGHC;
 
 	delete playButton;
+	delete playButtonHC;
 	delete exitButton;
 	delete pauseButton;
 	delete settingsButton;
+	delete settingsButtonHC;
 	delete backButton;
 
 	delete star;
@@ -89,6 +104,10 @@ Resources::~Resources()
 	delete blank;
 	delete home;
 	delete snowpatch;
+
+	delete iceRock;
+	delete shrubSnow;
+	delete rockUpdated;
 
 	delete level1;
 	delete level2;

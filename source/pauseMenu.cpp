@@ -19,7 +19,6 @@ void PauseMenu::Init()
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
 	// Create menu background
-	CSprite* background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
 	background->m_Y = (float)IwGxGetScreenHeight() / 2;
 	background->SetImage(g_pResources->getPauseMenuBG());
@@ -33,10 +32,10 @@ void PauseMenu::Init()
 	AddChild(background);
 
 	// Create Start Game button
-	float x_pos = (float)IwGxGetScreenWidth() / 2;
-	float y_pos = (float)IwGxGetScreenHeight() / 3;
+	float x_pos = (float)IwGxGetScreenWidth() / 1.4;
+	float y_pos = (float)IwGxGetScreenHeight() / 2.75;
 	playButton = new CSprite();
-	playButton->SetImage(g_pResources->getPlayButton());
+	playButton->SetImage(g_pResources->getPlayButtonHC());
 	playButton->m_X = x_pos;
 	playButton->m_Y = y_pos;
 	playButton->m_W = playButton->GetImage()->GetWidth();
@@ -48,8 +47,8 @@ void PauseMenu::Init()
 	AddChild(playButton);
 
 	// Create End Game button
-	float endx_pos = (float)IwGxGetScreenWidth() / 2;
-	float endy_pos = (float)IwGxGetScreenHeight() / 2;
+	float endx_pos = (float)IwGxGetScreenWidth() / 1.4;
+	float endy_pos = (float)IwGxGetScreenHeight() / 1.75;
 	exitButton = new CSprite();
 	exitButton->SetImage(g_pResources->getExitButton());
 	exitButton->m_X = endx_pos;
@@ -61,6 +60,14 @@ void PauseMenu::Init()
 	exitButton->m_ScaleX = game->getGraphicsScale();
 	exitButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(exitButton);
+}
+void PauseMenu::ChangeBackground(){
+	if (changeToHighContrast){
+		background->SetImage(g_pResources->getPauseMenuBGHC());
+	}
+	else{
+		background->SetImage(g_pResources->getPauseMenuBG());
+	}
 }
 
 void PauseMenu::Update(float deltaTime, float alphaMul)

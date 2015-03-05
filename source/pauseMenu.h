@@ -16,6 +16,10 @@ public:
 	void Render();
 	static void	mainMenu();
 	static void	StartGame();
+	void ChangeBackground();
+
+	bool getHighContrastMode() { return changeToHighContrast; }
+	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
 
 	// Button callbacks
 
@@ -24,6 +28,8 @@ private:
 	CSprite* exitButton;
 	CSprite* playButton;
 	CSprite* playText;
+	CSprite* background = new CSprite();
+	bool changeToHighContrast;
 };
 
 #endif  // __PAUSEMENU_H__
