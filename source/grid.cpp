@@ -121,6 +121,19 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 				gameObjects[x + width*y]->setId(SNOWPATCH);
 				break;
 
+			case SWITCH:
+				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getSwitchUp());
+				gameObjects[x + width*y]->m_ScaleX = gem_scale;
+				gameObjects[x + width*y]->m_ScaleY = gem_scale;
+				gameObjects[x + width*y]->setId(SWITCH);
+				break;
+
+			case SWITCHROCK:
+				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getRock());
+				gameObjects[x + width*y]->m_ScaleX = gem_scale;
+				gameObjects[x + width*y]->m_ScaleY = gem_scale;
+				gameObjects[x + width*y]->setId(SWITCHROCK);
+				break;
 			}
 			game->AddChild(gameObjects[x + width*y]);
 		}
@@ -249,6 +262,7 @@ void Grid::UpdatePosition(int distance, Direction dir)
 	switch (dir)
 	{
 	case LEFT:
+		//check if currently on snowpatch
 		CheckIfOnSnowpatch();
 		//if the destination will be a snowpatch then set bool
 		if (gameObjects[playerIndex - distance]->getId() == SNOWPATCH)
@@ -316,7 +330,7 @@ int Grid::getIndex()
 	{
 		for (int x = 0; x < width; x++)
 		{
-			if (gameObjects[x + width * y]->getId() == 2)
+			if (gameObjects[x + width * y]->getId() == PLAYER)
 			{
 				index = x + width * y;
 			}
@@ -341,8 +355,13 @@ int Grid::getDistance(Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == BLANK)
+		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == BLANK || gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH)
 		{
+			// check if player is moving over a switch
+			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH)
+			{
+				SwitchPressed((x - (distance + 1)) + width*y);
+			}
 			distance++;
 			// Check for snowpatch
 			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
@@ -354,8 +373,12 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case RIGHT:
-		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == BLANK)
+		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == BLANK || gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH)
 		{
+			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH)
+			{
+				SwitchPressed((x + (distance + 1)) + width*y);
+			}
 			distance++;
 			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
 			{
@@ -365,8 +388,12 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case UP:
-		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == BLANK)
+		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == BLANK || gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH)
 		{
+			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH)
+			{
+				SwitchPressed((x + width*y) - (width*(distance + 1)));
+			}
 			distance++;
 			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
@@ -376,8 +403,12 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case DOWN:
-		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == BLANK)
+		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == BLANK || gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH)
 		{
+			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH)
+			{
+				SwitchPressed((x + width*y) + (width*(distance + 1)));
+			}
 			distance++;
 			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
@@ -391,6 +422,27 @@ int Grid::getDistance(Direction dir)
 	IwTrace(APP, ("distance is %d", distance));
 
 	return distance;
+}
+
+void Grid::SwitchPressed(int switchIndex)
+{
+	// set image of switch to down
+	gameObjects[switchIndex]->SetImage(g_pResources->getSwitchDown());
+
+	// find all switch rocks and convert them to blanks
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			if (gameObjects[x + width * y]->getId() == SWITCHROCK)
+			{
+				gameObjects[x + width * y]->SetImage(g_pResources->getBlank());
+				gameObjects[x + width * y]->setId(0);
+			}
+		}
+	}
+
+	IwTrace(APP, ("switch pressed"));
 }
 
 void Grid::PrintGrid()

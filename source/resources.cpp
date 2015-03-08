@@ -32,11 +32,11 @@ Resources::Resources()
 	blank = Iw2DCreateImage("textures/blank.png");
 	home = Iw2DCreateImage("textures/igloo.png");
 	snowpatch = Iw2DCreateImage("textures/snowpatch.png");
-
-	//New Sprites
 	iceRock = Iw2DCreateImage("textures/Ice_Rock.png");
 	shrubSnow = Iw2DCreateImage("textures/Shrub_Snow.png");
 	rockUpdated = Iw2DCreateImage("textures/Rock_Updated.png");
+	switchUp = Iw2DCreateImage("textures/switch_up.png");
+	switchDown = Iw2DCreateImage("textures/switch_down.png");
 
 	level1 = Iw2DCreateImage("textures/level1.png");
 	level2 = Iw2DCreateImage("textures/level2.png");
@@ -44,6 +44,7 @@ Resources::Resources()
 	level4 = Iw2DCreateImage("textures/level4.png");
 	level5 = Iw2DCreateImage("textures/level5.png");
 	level6 = Iw2DCreateImage("textures/level6.png");
+	level7 = Iw2DCreateImage("textures/level7.png");
 
 	upButton = Iw2DCreateImage("textures/up-button.png");
 	rightButton = Iw2DCreateImage("textures/right-button.png");
@@ -104,10 +105,11 @@ Resources::~Resources()
 	delete blank;
 	delete home;
 	delete snowpatch;
-
 	delete iceRock;
 	delete shrubSnow;
 	delete rockUpdated;
+	delete switchUp;
+	delete switchDown;
 
 	delete level1;
 	delete level2;
@@ -115,6 +117,7 @@ Resources::~Resources()
 	delete level4;
 	delete level5;
 	delete level6;
+	delete level7;
 
 	delete upButton;
 	delete rightButton;

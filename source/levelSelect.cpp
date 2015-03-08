@@ -108,6 +108,18 @@ void LevelSelect::Init()
 	level6->m_ScaleX = game->getGraphicsScale();
 	level6->m_ScaleY = game->getGraphicsScale();
 	AddChild(level6);
+
+	level7 = new CSprite();
+	level7->SetImage(g_pResources->getLevel7());
+	level7->m_X = x_pos;
+	level7->m_Y = y_pos;
+	level7->m_W = level7->GetImage()->GetWidth();
+	level7->m_H = level7->GetImage()->GetHeight();
+	level7->m_AnchorX = 2.75;
+	level7->m_AnchorY = 7;
+	level7->m_ScaleX = game->getGraphicsScale();
+	level7->m_ScaleY = game->getGraphicsScale();
+	AddChild(level7);
 }
 
 void LevelSelect::Update(float deltaTime, float alphaMul)
@@ -151,6 +163,11 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 			g_pVibration->Vibrate();
 			StartGame("6");
 		}
+		if (level7->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("7");
+		}
 	}
 }
 
@@ -164,5 +181,5 @@ void LevelSelect::StartGame(std::string levelNo)
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	g_pSceneManager->SwitchTo(game);
 
-	game->NewGame(levelNo, 13, 14);
+	game->NewGame(levelNo, 12, 14);
 }

@@ -30,6 +30,7 @@ private:
 	CSprite* level4;
 	CSprite* level5;
 	CSprite* level6;
+	CSprite* level7;
 	CSprite* playText;
 
 };

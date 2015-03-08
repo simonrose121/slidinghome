@@ -45,7 +45,9 @@ private:
 		ROCK = 2,
 		PLAYER = 3,
 		HOME = 4,
-		SNOWPATCH = 5
+		SNOWPATCH = 5,
+		SWITCH = 6,
+		SWITCHROCK = 7
 	};
 
 	// Member variables
@@ -63,6 +65,7 @@ private:
 	std::string levelNum;
 
 	// Private member functions
+	void SwitchPressed(int switchIndex);
 	void CheckIfOnSnowpatch();
 	void UpdatePosition(int distance, Direction dir);
 	void PrintGrid();

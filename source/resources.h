@@ -54,10 +54,11 @@ public:
 	CIw2DImage*	getBlank() { return blank; }
 	CIw2DImage* getHome() { return home; }
 	CIw2DImage* getSnowpatch() { return snowpatch; }
-
-	CIw2DImage* getIceRock(){ return iceRock; }
-	CIw2DImage* getShrubSnow(){ return shrubSnow; }
-	CIw2DImage* getRockUpdated(){ return rockUpdated; }
+	CIw2DImage* getIceRock() { return iceRock; }
+	CIw2DImage* getShrubSnow() { return shrubSnow; }
+	CIw2DImage* getRockUpdated() { return rockUpdated; }
+	CIw2DImage* getSwitchUp() { return switchUp; }
+	CIw2DImage* getSwitchDown() { return switchDown; }
 
 	CIw2DImage* getLevel1() { return level1; }
 	CIw2DImage* getLevel2() { return level2; }
@@ -65,6 +66,7 @@ public:
 	CIw2DImage* getLevel4() { return level4; }
 	CIw2DImage* getLevel5() { return level5; }
 	CIw2DImage* getLevel6() { return level6; }
+	CIw2DImage* getLevel7() { return level7; }
 
 	CIw2DImage* getUpButton() { return upButton; }
 	CIw2DImage* getRightButton() { return rightButton; }
@@ -91,15 +93,16 @@ public:
 
 private:
 	// Member variables
+	// Backgrounds
 	CIw2DImage*	mainMenuBG;
 	CIw2DImage* mainMenuBGHC;
 	CIw2DImage*	endScreenBG;
 	CIw2DImage* pauseMenuBG;
 	CIw2DImage* pauseMenuBGHC;
 	CIw2DImage*	gameBG;
-
 	CIw2DImage* gameBGHC;
 
+	// Buttons
 	CIw2DImage*	playButton;
 	CIw2DImage* playButtonHC;
 	CIw2DImage*	exitButton;
@@ -108,12 +111,11 @@ private:
 	CIw2DImage* settingsButtonHC;
 	CIw2DImage* backButton;
 
-	CIw2DImage* iceRock;
-	CIw2DImage* shrubSnow;
-	CIw2DImage* rockUpdated;
-
+	// Other images
 	CIw2DImage* star;
 	CIw2DImage* holoStar;
+
+	// In game assets
 	CIw2DImage*	player;
 	CIw2DImage*	playerLeft;
 	CIw2DImage* playerRight;
@@ -123,19 +125,28 @@ private:
 	CIw2DImage*	blank;
 	CIw2DImage*	home;
 	CIw2DImage* snowpatch;
+	CIw2DImage* iceRock;
+	CIw2DImage* shrubSnow;
+	CIw2DImage* rockUpdated;
+	CIw2DImage* switchUp;
+	CIw2DImage* switchDown;
 
+	// Level buttons
 	CIw2DImage* level1;
 	CIw2DImage* level2;
 	CIw2DImage* level3;
 	CIw2DImage* level4;
 	CIw2DImage* level5;
 	CIw2DImage* level6;
+	CIw2DImage* level7;
 
+	// On screen buttons
 	CIw2DImage* upButton;
 	CIw2DImage* rightButton;
 	CIw2DImage* downButton;
 	CIw2DImage* leftButton;
 
+	// Settings
 	CIw2DImage* onScreenSettingButton;
 	CIw2DImage* onScreenSettingButtonSelected;
 	CIw2DImage* highContrastButton;
