@@ -7,9 +7,6 @@ Resources::Resources()
 	mainMenuBG = Iw2DCreateImage("textures/New_Main_Menu.png");
 	mainMenuBGHC = Iw2DCreateImage("textures/HC_Menu.png");
 	endScreenBG = Iw2DCreateImage("textures/End_Screen.png");
-	pauseMenuBG = Iw2DCreateImage("textures/Pause_Menu.png");
-	gameBG = Iw2DCreateImage("textures/level_background.png");
-	gameBGHC = Iw2DCreateImage("textures/HC_Background_1st_Level.png");
 	pauseMenuBG = Iw2DCreateImage("textures/New_Pause_Menu.png");
 	pauseMenuBGHC = Iw2DCreateImage("textures/HC_Pause_Menu.png");
 	gameBG = Iw2DCreateImage("textures/level_background.png");
@@ -82,11 +79,10 @@ Resources::~Resources()
 	delete mainMenuBG;
 	delete mainMenuBGHC;
 	delete endScreenBG;
+	delete gameBG;
+	delete gameBGHC;
 	delete pauseMenuBG;
 	delete pauseMenuBGHC;
-	delete gameBG;
-
-	delete gameBGHC;
 
 	delete playButton;
 	delete playButtonHC;

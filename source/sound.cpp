@@ -22,10 +22,10 @@ void Sound::SoundFunc()
 
 void Sound::StartMusic()
 {
-	Audio::PlayMusic("audio/in_game.mp3", true);
+	g_pAudio->PlayMusic("audio/in_game.mp3", true);
 }
 
 void Sound::StopMusic() 
 {
-	Audio::StopMusic();
+	g_pAudio->StopMusic();
 }
