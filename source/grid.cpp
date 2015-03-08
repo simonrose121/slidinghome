@@ -74,6 +74,9 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 	gridOriginX = offset_x;
 	gridOriginY = IwGxGetScreenHeight() - (num_rows * gameObjectSize) - offset_y;
 
+	int playerX = 0;
+	int playerY = 0;
+
 	for (int y = 0; y < num_rows; y++)
 	{
 		for (int x = 0; x < num_columns; x++)
@@ -100,12 +103,8 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 				break;
 
 			case PLAYER:
-				gameObjects[x + width*y]->Init((float)x * gameObjectSize + gridOriginX, gridOriginY + (float)y * gameObjectSize, g_pResources->getPlayerDownAtlas());
-				gameObjects[x + width*y]->m_ScaleX = gem_scale;
-				gameObjects[x + width*y]->m_ScaleY = gem_scale;
-				gameObjects[x + width*y]->setId(PLAYER);
-				player = gameObjects[x + width*y];
-				playerIndex = x + width * y;
+				playerX = x;
+				playerY = y;
 				break;
 
 			case HOME:
@@ -126,6 +125,15 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 			game->AddChild(gameObjects[x + width*y]);
 		}
 	}
+
+	// Initialise player last so appears on top of snowpatches / switches
+	gameObjects[playerX + width*playerY]->Init((float)playerX * gameObjectSize + gridOriginX, gridOriginY + (float)playerY * gameObjectSize, g_pResources->getPlayerDownAtlas());
+	gameObjects[playerX + width*playerY]->m_ScaleX = gem_scale;
+	gameObjects[playerX + width*playerY]->m_ScaleY = gem_scale;
+	gameObjects[playerX + width*playerY]->setId(PLAYER);
+	player = gameObjects[playerX + width*playerY];
+	playerIndex = playerX + width * playerY;
+	game->AddChild(gameObjects[playerX + width*playerY]);
 
 	// Initialise on screen buttons
 	Game* game = (Game*)g_pSceneManager->Find("game");
