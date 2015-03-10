@@ -84,6 +84,11 @@ public:
 	CIw2DImage* getMusicSettingButton() { return musicButton; }
 	CIw2DImage* getMusicSettingButtonSelected() { return musicButtonSelected; }
 
+	CIw2DImage* getSoundButtonHome(){ return soundButtonHome; }
+	CIw2DImage* getMusicButtonHome(){ return musicButtonHome; }
+	CIw2DImage* getSoundButtonHomeOff(){ return soundButtonHomeOff; }
+	CIw2DImage* getMusicButtonHomeOff(){ return musicButtonHomeOff; }
+
 	CIw2DFont*  getFont() { return font; }
 
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
@@ -157,6 +162,11 @@ private:
 	CIw2DImage* soundButtonSelected;
 	CIw2DImage* musicButton;
 	CIw2DImage* musicButtonSelected;
+
+	CIw2DImage* soundButtonHome;
+	CIw2DImage* musicButtonHome;
+	CIw2DImage* soundButtonHomeOff;
+	CIw2DImage* musicButtonHomeOff;
 
 	// Fonts
 	CIw2DFont* font;

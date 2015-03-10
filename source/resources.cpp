@@ -62,6 +62,11 @@ Resources::Resources()
 	musicButton = Iw2DCreateImage("textures/music_settings.png");
 	musicButtonSelected = Iw2DCreateImage("textures/music_settings_selected.png");
 
+	soundButtonHome = Iw2DCreateImage("textures/Sound_Button.png");
+	musicButtonHome = Iw2DCreateImage("textures/Music_Button.png");
+	soundButtonHomeOff = Iw2DCreateImage("textures/Sound_Button_X.png");
+	musicButtonHomeOff = Iw2DCreateImage("textures/Music_Button_X.png");
+
 	// Load fonts
 	font = Iw2DCreateFont("fonts/arial8.gxfont");
 
@@ -135,6 +140,10 @@ Resources::~Resources()
 	delete musicButton;
 	delete musicButtonSelected;
 
+	delete soundButtonHome;
+	delete musicButtonHome;
+	delete soundButtonHomeOff;
+	delete musicButtonHomeOff;
 	// Cleanup fonts
 	delete font;
 

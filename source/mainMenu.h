@@ -17,6 +17,8 @@ public:
 	static void	MoveToLevelSelect();
 	static void MoveToSettings();
 	void ChangeBackground();
+	void SetSound();
+	void SetMusic();
 
 	float getGraphicsScale() { return graphicsScale; }
 	bool getHighContrastMode() { return changeToHighContrast; }
@@ -29,6 +31,8 @@ private:
 	CSprite* background;
 	CSprite* playButton;
 	CSprite* settingsButton;
+	CSprite* soundButtonHome;
+	CSprite* musicButtonHome;
 	bool changeToHighContrast;
 };
 

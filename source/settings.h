@@ -19,8 +19,6 @@ public:
 	void SetOnScreenButtons();
 	void SetHighContrastMode();
 	void SetVibrationOn();
-	void SetSound();
-	void SetMusic();
 	void MoveToMainMenu();
 
 private:
@@ -28,8 +26,6 @@ private:
 	CSprite* showOnScreenButtons;
 	CSprite* showHighContrastMode;
 	CSprite* showVibration;
-	CSprite* showSound;
-	CSprite* showMusic;
 	CSprite* backButton;
 };
 

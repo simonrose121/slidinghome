@@ -8,6 +8,9 @@
 #include "levelSelect.h"
 #include "settings.h"
 #include "vibration.h"
+#include "sound.h"
+
+#include <fstream>
 
 MainMenu::~MainMenu()
 {
@@ -58,6 +61,59 @@ void MainMenu::Init()
 	settingsButton->m_ScaleX = game->getGraphicsScale();
 	settingsButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(settingsButton);
+
+	// Create Sound Button
+	soundButtonHome = new CSprite();
+	soundButtonHome->SetImage(g_pResources->getSoundButtonHome());
+	soundButtonHome->m_X = (float)IwGxGetScreenWidth() / 1.55;
+	soundButtonHome->m_Y = (float)IwGxGetScreenHeight() / 1.25;
+	soundButtonHome->m_W = soundButtonHome->GetImage()->GetWidth();
+	soundButtonHome->m_H = soundButtonHome->GetImage()->GetHeight();
+	soundButtonHome->m_AnchorX = 1;
+	soundButtonHome->m_AnchorY = 1;
+	soundButtonHome->m_ScaleX = game->getGraphicsScale();
+	soundButtonHome->m_ScaleY = game->getGraphicsScale();
+	AddChild(soundButtonHome);
+
+	// Create Music Button
+	musicButtonHome = new CSprite();
+	musicButtonHome->SetImage(g_pResources->getMusicButtonHome());
+	musicButtonHome->m_X = (float)IwGxGetScreenWidth() / 2.05;
+	musicButtonHome->m_Y = (float)IwGxGetScreenHeight() / 1.25;
+	musicButtonHome->m_W = musicButtonHome->GetImage()->GetWidth();
+	musicButtonHome->m_H = musicButtonHome->GetImage()->GetHeight();
+	musicButtonHome->m_AnchorX = 1;
+	musicButtonHome->m_AnchorY = 1;
+	musicButtonHome->m_ScaleX = game->getGraphicsScale();
+	musicButtonHome->m_ScaleY = game->getGraphicsScale();
+	AddChild(musicButtonHome);
+
+	
+	std::ifstream soundfile("sound.txt");
+	int sound = 0;
+	soundfile >> sound;
+	soundfile.close();
+	if (sound == 1){
+		soundButtonHome->SetImage(g_pResources->getSoundButtonHome());
+		g_pSound->setSoundMode(true);
+	}
+	else{
+		soundButtonHome->SetImage(g_pResources->getSoundButtonHomeOff());
+		g_pSound->setSoundMode(false);
+	}
+	
+	std::ifstream musicfile("music.txt");
+	int music = 0;
+	musicfile >> music;
+	musicfile.close();
+	if (music == 1){
+		musicButtonHome->SetImage(g_pResources->getMusicButtonHome());
+		g_pSound->setMusicMode(true);
+	}
+	else{
+		musicButtonHome->SetImage(g_pResources->getMusicButtonHomeOff());
+		g_pSound->setMusicMode(false);
+	}
 }
 
 void MainMenu::ChangeBackground(){
@@ -92,6 +148,16 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 			MoveToSettings();
 			g_pVibration->Vibrate();
 		}
+		else if (soundButtonHome->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			SetSound();
+			g_pVibration->Vibrate();
+		}
+		else if (musicButtonHome->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			SetMusic();
+			g_pVibration->Vibrate();
+		}
 	}
 }
 
@@ -110,4 +176,52 @@ void MainMenu::MoveToSettings()
 {
 	Settings* settings = (Settings*)g_pSceneManager->Find("settings");
 	g_pSceneManager->SwitchTo(settings);
+}
+
+void MainMenu::SetSound(){
+	std::ofstream soundfile;
+
+	if (!g_pSound->getSound())
+	{
+		soundButtonHome->SetImage(g_pResources->getSoundButtonHome());
+		g_pSound->setSoundMode(true);
+
+		soundfile.open("sound.txt");
+		soundfile << 1;
+		soundfile.close();
+	}
+	else
+	{
+		soundButtonHome->SetImage(g_pResources->getSoundButtonHomeOff());
+		g_pSound->setSoundMode(false);
+
+		soundfile.open("sound.txt");
+		soundfile << 0;
+		soundfile.close();
+	}
+}
+
+void MainMenu::SetMusic(){
+	std::ofstream musicfile;
+
+	if (!g_pSound->getMusic())
+	{
+		musicButtonHome->SetImage(g_pResources->getMusicButtonHome());
+		g_pSound->setMusicMode(true);
+		g_pSound->StartMusic();
+
+		musicfile.open("music.txt");
+		musicfile << 1;
+		musicfile.close();
+	}
+	else
+	{
+		musicButtonHome->SetImage(g_pResources->getMusicButtonHomeOff());
+		g_pSound->setMusicMode(false);
+		g_pSound->StopMusic();
+
+		musicfile.open("music.txt");
+		musicfile << 0;
+		musicfile.close();
+	}
 }
