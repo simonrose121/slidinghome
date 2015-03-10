@@ -7,6 +7,10 @@
 #include "mainMenu.h"
 #include "main.h"
 #include "vibration.h"
+#include "s3eVideo.h"
+
+#include <iostream>
+#include <fstream>
 
 LevelSelect::~LevelSelect()
 {
@@ -120,6 +124,43 @@ void LevelSelect::Init()
 	level7->m_ScaleX = game->getGraphicsScale();
 	level7->m_ScaleY = game->getGraphicsScale();
 	AddChild(level7);
+
+	//Star complete
+	//levelNum = levelNo;
+	//std::string filename = "star" + levelNum;
+	//filename += ".txt";
+	//std::ifstream file(filename.c_str());
+	//int fileNumber = 0;
+	//file >> fileNumber;
+	//file.close();
+	//x_pos = (float)IwGxGetScreenWidth() / 1.05;
+	//y_pos = (float)IwGxGetScreenHeight() / 15;
+	//star = new CSprite();
+	//if (fileNumber == 1){
+	//	star->SetImage(g_pResources->getStar());
+	//}
+	//star->m_X = x_pos;
+	//star->m_Y = y_pos;
+	//star->m_W = star->GetImage()->GetWidth();
+	//star->m_H = star->GetImage()->GetHeight();
+	//star->m_AnchorX = 1;
+	//star->m_AnchorY = 1;
+	//star->m_ScaleX = game->getGraphicsScale();
+	//star->m_ScaleY = game->getGraphicsScale();
+	//AddChild(star);
+
+	//Back button
+	backButton = new CSprite();
+	backButton->m_X = IwGxGetScreenWidth();
+	backButton->m_Y = IwGxGetScreenHeight();
+	backButton->SetImage(g_pResources->getBackButton());
+	backButton->m_W = backButton->GetImage()->GetWidth();
+	backButton->m_H = backButton->GetImage()->GetHeight();
+	backButton->m_AnchorX = 9.75;
+	backButton->m_AnchorY = 20.85;
+	backButton->m_ScaleX = game->getGraphicsScale();
+	backButton->m_ScaleY = game->getGraphicsScale();
+	AddChild(backButton);
 }
 
 void LevelSelect::Update(float deltaTime, float alphaMul)
@@ -133,6 +174,11 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 	if (m_IsInputActive && m_Manager->getCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
 	{
 		g_pInput->Reset();
+		if (backButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			MoveToMainMenu();
+		}
 		if (level1->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
 			g_pVibration->Vibrate();
@@ -169,11 +215,16 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 			StartGame("7");
 		}
 	}
+
 }
 
 void LevelSelect::Render()
 {
-	Scene::Render();
+	//s3eVideoPlay("videos/intromovie.mp4", 1, 0, 0, 200, 150);
+	//if (s3eVideoIsPlaying() == S3E_FALSE)
+	//{
+		Scene::Render();
+	//}
 }
 
 void LevelSelect::StartGame(std::string levelNo)
@@ -182,4 +233,10 @@ void LevelSelect::StartGame(std::string levelNo)
 	g_pSceneManager->SwitchTo(game);
 
 	game->NewGame(levelNo, 12, 14);
+}
+
+void LevelSelect::MoveToMainMenu()
+{
+	MainMenu* main_menu = (MainMenu*)g_pSceneManager->Find("mainmenu");
+	g_pSceneManager->SwitchTo(main_menu);
 }

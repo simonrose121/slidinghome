@@ -101,14 +101,15 @@ void Settings::Init()
 	showMusic->m_ScaleY = game->getGraphicsScale();
 	AddChild(showMusic);
 
+	//back button
 	backButton = new CSprite();
 	backButton->m_X = IwGxGetScreenWidth();
 	backButton->m_Y = IwGxGetScreenHeight();
 	backButton->SetImage(g_pResources->getBackButton());
 	backButton->m_W = backButton->GetImage()->GetWidth();
 	backButton->m_H = backButton->GetImage()->GetHeight();
-	backButton->m_AnchorX = 9.5;
-	backButton->m_AnchorY = 20.5;
+	backButton->m_AnchorX = 9.75;
+	backButton->m_AnchorY = 20.85;
 	backButton->m_ScaleX = game->getGraphicsScale();
 	backButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(backButton);

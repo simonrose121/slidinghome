@@ -20,6 +20,7 @@ public:
 
 	// Button callbacks
 	static void	StartGame(std::string levelNo);
+	void MoveToMainMenu();
 
 private:
 	// Member variables
@@ -32,6 +33,8 @@ private:
 	CSprite* level6;
 	CSprite* level7;
 	CSprite* playText;
+	CSprite* backButton;
+	CSprite* star;
 
 };
 

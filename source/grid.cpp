@@ -6,7 +6,7 @@
 #include "game.h"
 #include "resources.h"
 #include "main.h"
-#include "endScreen.h"
+#include "levelSelect.h"
 #include "vibration.h"
 
 #include <iostream>
@@ -471,8 +471,8 @@ void Grid::WinningState(CTween* pTween)
 
 	game->EndGame();
 
-	EndScreen* end_screen = (EndScreen*)g_pSceneManager->Find("endscreen");
-	g_pSceneManager->SwitchTo(end_screen);
+	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+	g_pSceneManager->SwitchTo(level_select);
 
 	IwTrace(APP, ("win"));
 }
