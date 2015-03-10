@@ -7,7 +7,6 @@
 #include "levelSelect.h"
 #include "mainMenu.h"
 #include "pauseMenu.h"
-#include "endScreen.h"
 #include "settings.h"
 #include "resources.h"
 #include "vibration.h"
@@ -52,17 +51,10 @@ int main()
 	pause_menu->Init();
 	g_pSceneManager->Add(pause_menu);
 
-	EndScreen* end_screen = new EndScreen();
-	end_screen->setName("endscreen");
-	end_screen->Init();
-	g_pSceneManager->Add(end_screen);
-
 	Settings* settings = new Settings();
 	settings->setName("settings");
 	settings->Init();
 	g_pSceneManager->Add(settings);
-
-	//s3eVideoPlay("intromovie.mp4", 1, 0, 0, 200, 150);
 
 	g_pSceneManager->SwitchTo(main_menu);
 
@@ -70,7 +62,6 @@ int main()
 	{
 		g_pSound->StartMusic();
 	}
-	//Audio::PlayMusic("audio/in_game.mp3", true);
 
 
 	while (!s3eDeviceCheckQuitRequest())

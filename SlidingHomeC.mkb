@@ -18,7 +18,6 @@ files
     [source]
     (source)
 	audio.cpp
-	endScreen.cpp
 	game.cpp
 	gameObject.cpp
 	grid.cpp
@@ -35,7 +34,6 @@ files
 	vibration.cpp
 
 	audio.h
-	endScreen.h
 	game.h
 	gameObject.h
 	grid.h
@@ -60,6 +58,7 @@ assets
     textures
 	maps
 	fonts
+	videos
 
 	(data-ram/data-gles1)
 	.
