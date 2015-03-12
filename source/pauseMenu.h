@@ -17,9 +17,15 @@ public:
 	static void	mainMenu();
 	static void	StartGame();
 	void ChangeBackground();
+	void SetSound();
+	void SetMusic();
 
 	bool getHighContrastMode() { return changeToHighContrast; }
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
+
+	CSprite* getSoundButtonPause() { return soundButtonPause; }
+	CSprite* getMusicButtonPause() { return musicButtonPause; }
+	
 
 	// Button callbacks
 
@@ -29,6 +35,8 @@ private:
 	CSprite* playButton;
 	CSprite* playText;
 	CSprite* background;
+	CSprite* soundButtonPause;
+	CSprite* musicButtonPause;
 	bool changeToHighContrast;
 };
 

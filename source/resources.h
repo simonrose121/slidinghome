@@ -79,15 +79,11 @@ public:
 	CIw2DImage* getHighContrastSettingButtonSelected() { return highContrastButtonSelected; }
 	CIw2DImage* getVibrationSettingButton() { return vibrationButton; }
 	CIw2DImage* getVibrationSettingButtonSelected() { return vibrationButtonSelected; }
-	CIw2DImage* getSoundSettingButton() { return soundButton; }
-	CIw2DImage* getSoundSettingButtonSelected() { return soundButtonSelected; }
-	CIw2DImage* getMusicSettingButton() { return musicButton; }
-	CIw2DImage* getMusicSettingButtonSelected() { return musicButtonSelected; }
 
-	CIw2DImage* getSoundButtonHome(){ return soundButtonHome; }
-	CIw2DImage* getMusicButtonHome(){ return musicButtonHome; }
-	CIw2DImage* getSoundButtonHomeOff(){ return soundButtonHomeOff; }
-	CIw2DImage* getMusicButtonHomeOff(){ return musicButtonHomeOff; }
+	CIw2DImage* getSoundButton(){ return soundButton; }
+	CIw2DImage* getMusicButton(){ return musicButton; }
+	CIw2DImage* getSoundButtonOff(){ return soundButtonOff; }
+	CIw2DImage* getMusicButtonOff(){ return musicButtonOff; }
 
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
 	CAtlas* getPlayerRightAtlas() { return playerRightAtlas; }
@@ -156,15 +152,11 @@ private:
 	CIw2DImage* highContrastButtonSelected;
 	CIw2DImage* vibrationButton;
 	CIw2DImage* vibrationButtonSelected;
-	CIw2DImage* soundButton;
-	CIw2DImage* soundButtonSelected;
-	CIw2DImage* musicButton;
-	CIw2DImage* musicButtonSelected;
 
-	CIw2DImage* soundButtonHome;
-	CIw2DImage* musicButtonHome;
-	CIw2DImage* soundButtonHomeOff;
-	CIw2DImage* musicButtonHomeOff;
+	CIw2DImage* soundButton;
+	CIw2DImage* musicButton;
+	CIw2DImage* soundButtonOff;
+	CIw2DImage* musicButtonOff;
 
 	// Atlases
 	CAtlas*	playerLeftAtlas;

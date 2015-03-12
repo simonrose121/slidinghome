@@ -25,6 +25,9 @@ public:
 
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
 
+	CSprite* getSoundButtonHome() { return soundButtonHome; }
+	CSprite* getMusicButtonHome() { return musicButtonHome; }
+
 private:
 	// Member variables
 	float graphicsScale;

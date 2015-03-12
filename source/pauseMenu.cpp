@@ -7,6 +7,9 @@
 #include "mainMenu.h"
 #include "main.h"
 #include "vibration.h"
+#include "sound.h"
+
+#include <fstream>
 
 PauseMenu::~PauseMenu()
 {
@@ -61,6 +64,58 @@ void PauseMenu::Init()
 	exitButton->m_ScaleX = game->getGraphicsScale();
 	exitButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(exitButton);
+
+	// Create Sound Button
+	soundButtonPause = new CSprite();
+	soundButtonPause->SetImage(g_pResources->getSoundButton());
+	soundButtonPause->m_X = (float)IwGxGetScreenWidth() / 1.55;
+	soundButtonPause->m_Y = (float)IwGxGetScreenHeight() / 1.25;
+	soundButtonPause->m_W = soundButtonPause->GetImage()->GetWidth();
+	soundButtonPause->m_H = soundButtonPause->GetImage()->GetHeight();
+	soundButtonPause->m_AnchorX = 1;
+	soundButtonPause->m_AnchorY = 1;
+	soundButtonPause->m_ScaleX = game->getGraphicsScale();
+	soundButtonPause->m_ScaleY = game->getGraphicsScale();
+	AddChild(soundButtonPause);
+
+	// Create Music Button
+	musicButtonPause = new CSprite();
+	musicButtonPause->SetImage(g_pResources->getMusicButton());
+	musicButtonPause->m_X = (float)IwGxGetScreenWidth() / 2.05;
+	musicButtonPause->m_Y = (float)IwGxGetScreenHeight() / 1.25;
+	musicButtonPause->m_W = musicButtonPause->GetImage()->GetWidth();
+	musicButtonPause->m_H = musicButtonPause->GetImage()->GetHeight();
+	musicButtonPause->m_AnchorX = 1;
+	musicButtonPause->m_AnchorY = 1;
+	musicButtonPause->m_ScaleX = game->getGraphicsScale();
+	musicButtonPause->m_ScaleY = game->getGraphicsScale();
+	AddChild(musicButtonPause);
+
+	std::ifstream soundfile("sound.txt");
+	int sound = 0;
+	soundfile >> sound;
+	soundfile.close();
+	if (sound == 1){
+		soundButtonPause->SetImage(g_pResources->getSoundButton());
+		g_pSound->setSoundMode(true);
+	}
+	else{
+		soundButtonPause->SetImage(g_pResources->getSoundButtonOff());
+		g_pSound->setSoundMode(false);
+	}
+
+	std::ifstream musicfile("music.txt");
+	int music = 0;
+	musicfile >> music;
+	musicfile.close();
+	if (music == 1){
+		musicButtonPause->SetImage(g_pResources->getMusicButton());
+		g_pSound->setMusicMode(true);
+	}
+	else{
+		musicButtonPause->SetImage(g_pResources->getMusicButtonOff());
+		g_pSound->setMusicMode(false);
+	}
 }
 void PauseMenu::ChangeBackground(){
 	if (changeToHighContrast){
@@ -94,6 +149,16 @@ void PauseMenu::Update(float deltaTime, float alphaMul)
 			g_pVibration->Vibrate();
 			StartGame();
 		}
+		else if (soundButtonPause->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			SetSound();
+			g_pVibration->Vibrate();
+		}
+		else if (musicButtonPause->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			SetMusic();
+			g_pVibration->Vibrate();
+		}
 	}
 }
 
@@ -113,4 +178,58 @@ void PauseMenu::mainMenu()
 	MainMenu* mainmenu = (MainMenu*)g_pSceneManager->Find("mainmenu");
 	g_pSceneManager->SwitchTo(mainmenu);
 
+}
+
+void PauseMenu::SetSound(){
+	std::ofstream soundfile;
+	MainMenu* mainmenu = (MainMenu*)g_pSceneManager->Find("mainmenu");
+
+	if (!g_pSound->getSound())
+	{
+		soundButtonPause->SetImage(g_pResources->getSoundButton());
+		mainmenu->getSoundButtonHome()->SetImage(g_pResources->getSoundButton());
+		g_pSound->setSoundMode(true);
+
+		soundfile.open("sound.txt");
+		soundfile << 1;
+		soundfile.close();
+	}
+	else
+	{
+		soundButtonPause->SetImage(g_pResources->getSoundButtonOff());
+		mainmenu->getSoundButtonHome()->SetImage(g_pResources->getSoundButtonOff());
+		g_pSound->setSoundMode(false);
+
+		soundfile.open("sound.txt");
+		soundfile << 0;
+		soundfile.close();
+	}
+}
+
+void PauseMenu::SetMusic(){
+	std::ofstream musicfile;
+	MainMenu* mainmenu = (MainMenu*)g_pSceneManager->Find("mainmenu");
+
+	if (!g_pSound->getMusic())
+	{
+		musicButtonPause->SetImage(g_pResources->getMusicButton());
+		mainmenu->getMusicButtonHome()->SetImage(g_pResources->getMusicButton());
+		g_pSound->setMusicMode(true);
+		g_pSound->StartMusic();
+
+		musicfile.open("music.txt");
+		musicfile << 1;
+		musicfile.close();
+	}
+	else
+	{
+		musicButtonPause->SetImage(g_pResources->getMusicButtonOff());
+		mainmenu->getMusicButtonHome()->SetImage(g_pResources->getMusicButtonOff());
+		g_pSound->setMusicMode(false);
+		g_pSound->StopMusic();
+
+		musicfile.open("music.txt");
+		musicfile << 0;
+		musicfile.close();
+	}
 }

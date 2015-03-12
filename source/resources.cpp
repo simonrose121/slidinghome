@@ -57,15 +57,11 @@ Resources::Resources()
 	highContrastButtonSelected = Iw2DCreateImage("textures/highcontrast_settings_selected.png");
 	vibrationButton = Iw2DCreateImage("textures/vibration_settings.png");
 	vibrationButtonSelected = Iw2DCreateImage("textures/vibration_settings_selected.png");
-	soundButton = Iw2DCreateImage("textures/sound_settings.png");
-	soundButtonSelected = Iw2DCreateImage("textures/sound_settings_selected.png");
-	musicButton = Iw2DCreateImage("textures/music_settings.png");
-	musicButtonSelected = Iw2DCreateImage("textures/music_settings_selected.png");
 
-	soundButtonHome = Iw2DCreateImage("textures/Sound_Button.png");
-	musicButtonHome = Iw2DCreateImage("textures/Music_Button.png");
-	soundButtonHomeOff = Iw2DCreateImage("textures/Sound_Button_X.png");
-	musicButtonHomeOff = Iw2DCreateImage("textures/Music_Button_X.png");
+	soundButton = Iw2DCreateImage("textures/Sound_Button.png");
+	musicButton = Iw2DCreateImage("textures/Music_Button.png");
+	soundButtonOff = Iw2DCreateImage("textures/Sound_Button_X.png");
+	musicButtonOff = Iw2DCreateImage("textures/Music_Button_X.png");
 
 	// Load atlases
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
@@ -132,15 +128,11 @@ Resources::~Resources()
 	delete highContrastButtonSelected;
 	delete vibrationButton;
 	delete vibrationButtonSelected;
-	delete soundButton;
-	delete soundButtonSelected;
-	delete musicButton;
-	delete musicButtonSelected;
 
-	delete soundButtonHome;
-	delete musicButtonHome;
-	delete soundButtonHomeOff;
-	delete musicButtonHomeOff;
+	delete soundButton;
+	delete musicButton;
+	delete soundButtonOff;
+	delete musicButtonOff;
 
 	// Cleanup atlases
 	delete playerLeftAtlas;

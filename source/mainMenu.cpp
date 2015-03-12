@@ -9,6 +9,7 @@
 #include "settings.h"
 #include "vibration.h"
 #include "sound.h"
+#include "pauseMenu.h"
 
 #include <fstream>
 
@@ -64,7 +65,7 @@ void MainMenu::Init()
 
 	// Create Sound Button
 	soundButtonHome = new CSprite();
-	soundButtonHome->SetImage(g_pResources->getSoundButtonHome());
+	soundButtonHome->SetImage(g_pResources->getSoundButton());
 	soundButtonHome->m_X = (float)IwGxGetScreenWidth() / 1.55;
 	soundButtonHome->m_Y = (float)IwGxGetScreenHeight() / 1.25;
 	soundButtonHome->m_W = soundButtonHome->GetImage()->GetWidth();
@@ -77,7 +78,7 @@ void MainMenu::Init()
 
 	// Create Music Button
 	musicButtonHome = new CSprite();
-	musicButtonHome->SetImage(g_pResources->getMusicButtonHome());
+	musicButtonHome->SetImage(g_pResources->getMusicButton());
 	musicButtonHome->m_X = (float)IwGxGetScreenWidth() / 2.05;
 	musicButtonHome->m_Y = (float)IwGxGetScreenHeight() / 1.25;
 	musicButtonHome->m_W = musicButtonHome->GetImage()->GetWidth();
@@ -94,11 +95,11 @@ void MainMenu::Init()
 	soundfile >> sound;
 	soundfile.close();
 	if (sound == 1){
-		soundButtonHome->SetImage(g_pResources->getSoundButtonHome());
+		soundButtonHome->SetImage(g_pResources->getSoundButton());
 		g_pSound->setSoundMode(true);
 	}
 	else{
-		soundButtonHome->SetImage(g_pResources->getSoundButtonHomeOff());
+		soundButtonHome->SetImage(g_pResources->getSoundButtonOff());
 		g_pSound->setSoundMode(false);
 	}
 	
@@ -107,11 +108,11 @@ void MainMenu::Init()
 	musicfile >> music;
 	musicfile.close();
 	if (music == 1){
-		musicButtonHome->SetImage(g_pResources->getMusicButtonHome());
+		musicButtonHome->SetImage(g_pResources->getMusicButton());
 		g_pSound->setMusicMode(true);
 	}
 	else{
-		musicButtonHome->SetImage(g_pResources->getMusicButtonHomeOff());
+		musicButtonHome->SetImage(g_pResources->getMusicButtonOff());
 		g_pSound->setMusicMode(false);
 	}
 }
@@ -181,9 +182,12 @@ void MainMenu::MoveToSettings()
 void MainMenu::SetSound(){
 	std::ofstream soundfile;
 
+	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pause");
+
 	if (!g_pSound->getSound())
 	{
-		soundButtonHome->SetImage(g_pResources->getSoundButtonHome());
+		soundButtonHome->SetImage(g_pResources->getSoundButton());
+		pause->getSoundButtonPause()->SetImage(g_pResources->getSoundButton());
 		g_pSound->setSoundMode(true);
 
 		soundfile.open("sound.txt");
@@ -192,7 +196,8 @@ void MainMenu::SetSound(){
 	}
 	else
 	{
-		soundButtonHome->SetImage(g_pResources->getSoundButtonHomeOff());
+		soundButtonHome->SetImage(g_pResources->getSoundButtonOff());
+		pause->getSoundButtonPause()->SetImage(g_pResources->getSoundButtonOff());
 		g_pSound->setSoundMode(false);
 
 		soundfile.open("sound.txt");
@@ -203,10 +208,12 @@ void MainMenu::SetSound(){
 
 void MainMenu::SetMusic(){
 	std::ofstream musicfile;
+	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pauseMenu");
 
 	if (!g_pSound->getMusic())
 	{
-		musicButtonHome->SetImage(g_pResources->getMusicButtonHome());
+		musicButtonHome->SetImage(g_pResources->getMusicButton());
+		pause->getMusicButtonPause()->SetImage(g_pResources->getMusicButton());
 		g_pSound->setMusicMode(true);
 		g_pSound->StartMusic();
 
@@ -216,7 +223,8 @@ void MainMenu::SetMusic(){
 	}
 	else
 	{
-		musicButtonHome->SetImage(g_pResources->getMusicButtonHomeOff());
+		musicButtonHome->SetImage(g_pResources->getMusicButtonOff());
+		pause->getMusicButtonPause()->SetImage(g_pResources->getMusicButtonOff());
 		g_pSound->setMusicMode(false);
 		g_pSound->StopMusic();
 
