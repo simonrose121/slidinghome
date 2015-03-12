@@ -89,8 +89,6 @@ public:
 	CIw2DImage* getSoundButtonHomeOff(){ return soundButtonHomeOff; }
 	CIw2DImage* getMusicButtonHomeOff(){ return musicButtonHomeOff; }
 
-	CIw2DFont*  getFont() { return font; }
-
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
 	CAtlas* getPlayerRightAtlas() { return playerRightAtlas; }
 	CAtlas* getPlayerUpAtlas() { return playerUpAtlas; }
@@ -167,9 +165,6 @@ private:
 	CIw2DImage* musicButtonHome;
 	CIw2DImage* soundButtonHomeOff;
 	CIw2DImage* musicButtonHomeOff;
-
-	// Fonts
-	CIw2DFont* font;
 
 	// Atlases
 	CAtlas*	playerLeftAtlas;

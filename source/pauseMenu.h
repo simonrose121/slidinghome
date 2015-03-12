@@ -28,7 +28,7 @@ private:
 	CSprite* exitButton;
 	CSprite* playButton;
 	CSprite* playText;
-	CSprite* background = new CSprite();
+	CSprite* background;
 	bool changeToHighContrast;
 };
 

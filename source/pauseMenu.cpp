@@ -19,6 +19,7 @@ void PauseMenu::Init()
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
 	// Create menu background
+	background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
 	background->m_Y = (float)IwGxGetScreenHeight() / 2;
 	background->SetImage(g_pResources->getPauseMenuBG());

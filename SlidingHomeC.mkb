@@ -57,12 +57,7 @@ assets
     audio
     textures
 	maps
-	fonts
 	videos
-
-	(data-ram/data-gles1)
-	.
-	fonts/arial8.gxfont.bin
 }
 
 deployments

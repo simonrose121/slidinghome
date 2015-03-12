@@ -67,9 +67,6 @@ Resources::Resources()
 	soundButtonHomeOff = Iw2DCreateImage("textures/Sound_Button_X.png");
 	musicButtonHomeOff = Iw2DCreateImage("textures/Music_Button_X.png");
 
-	// Load fonts
-	font = Iw2DCreateFont("fonts/arial8.gxfont");
-
 	// Load atlases
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
 	int frame_h = (int)(playerLeft->GetHeight());
@@ -144,8 +141,6 @@ Resources::~Resources()
 	delete musicButtonHome;
 	delete soundButtonHomeOff;
 	delete musicButtonHomeOff;
-	// Cleanup fonts
-	delete font;
 
 	// Cleanup atlases
 	delete playerLeftAtlas;
