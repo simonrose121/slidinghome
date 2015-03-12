@@ -63,5 +63,6 @@ assets
 deployments
 {
     version-revision = "0"
+	icon = "data/textures/Logo.png"
 }
 

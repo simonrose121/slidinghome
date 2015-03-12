@@ -20,7 +20,6 @@ public:
 	~Game();
 
 	// Member functions
-	Grid* GetGrid(); // Not currently used
 	void Init();
 	void InitOnScreenButtons();
 	void CleanupOnScreenButtons();

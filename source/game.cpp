@@ -27,7 +27,6 @@ void Game::Init()
 	Scene::Init();
 
 	graphicsScale = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH;
-	buttonScale = 2;
 
 	background = new CSprite();
 	background->m_X = IwGxGetScreenWidth() / 2;
@@ -65,42 +64,50 @@ void Game::InitOnScreenButtons()
 	{
 		upButton = new CSprite();
 		upButton->m_X = IwGxGetScreenWidth();
-		upButton->m_Y = IwGxGetScreenHeight() / 3.5;
+		upButton->m_Y = IwGxGetScreenHeight();
 		upButton->SetImage(g_pResources->getUpButton());
 		upButton->m_W = upButton->GetImage()->GetWidth();
 		upButton->m_H = upButton->GetImage()->GetHeight();
 		upButton->m_AnchorX = 1;
-		upButton->m_AnchorY = 1;
+		upButton->m_AnchorY = 4.43;
+		upButton->m_ScaleX = graphicsScale;
+		upButton->m_ScaleY = graphicsScale;
 		AddChild(upButton);
 
 		rightButton = new CSprite();
 		rightButton->SetImage(g_pResources->getRightButton());
 		rightButton->m_X = IwGxGetScreenWidth();
-		rightButton->m_Y = rightButton->GetImage()->GetHeight() * 1.73;
+		rightButton->m_Y = rightButton->GetImage()->GetHeight();
 		rightButton->m_W = rightButton->GetImage()->GetWidth();
 		rightButton->m_H = rightButton->GetImage()->GetHeight();
 		rightButton->m_AnchorX = 1;
-		rightButton->m_AnchorY = 1;
+		rightButton->m_AnchorY = 1.67;
+		rightButton->m_ScaleX = graphicsScale;
+		rightButton->m_ScaleY = graphicsScale;
 		AddChild(rightButton);
 
 		downButton = new CSprite();
 		downButton->m_X = IwGxGetScreenWidth();
-		downButton->m_Y = IwGxGetScreenHeight() / 1.13;
+		downButton->m_Y = IwGxGetScreenHeight();
 		downButton->SetImage(g_pResources->getDownButton());
 		downButton->m_W = downButton->GetImage()->GetWidth();
 		downButton->m_H = downButton->GetImage()->GetHeight();
 		downButton->m_AnchorX = 1;
-		downButton->m_AnchorY = 1;
+		downButton->m_AnchorY = 1.55;
+		downButton->m_ScaleX = graphicsScale;
+		downButton->m_ScaleY = graphicsScale;
 		AddChild(downButton);
 
 		leftButton = new CSprite();
 		leftButton->SetImage(g_pResources->getLeftButton());
-		leftButton->m_X = leftButton->GetImage()->GetWidth();
-		leftButton->m_Y = leftButton->GetImage()->GetHeight() * 1.73;
+		leftButton->m_X = leftButton->GetImage()->GetWidth() * graphicsScale;
+		leftButton->m_Y = leftButton->GetImage()->GetHeight();
 		leftButton->m_W = leftButton->GetImage()->GetWidth();
 		leftButton->m_H = leftButton->GetImage()->GetHeight();
 		leftButton->m_AnchorX = 1;
-		leftButton->m_AnchorY = 1;
+		leftButton->m_AnchorY = 1.67;
+		leftButton->m_ScaleX = graphicsScale;
+		leftButton->m_ScaleY = graphicsScale;
 		AddChild(leftButton);
 	}
 }
