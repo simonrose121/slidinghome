@@ -3,6 +3,8 @@
 
 #include "scene.h"
 
+#define LEVEL_COUNT 7
+
 class LevelSelect : public Scene
 {
 public:
@@ -21,6 +23,9 @@ public:
 	// Button callbacks
 	static void	StartGame(std::string levelNo);
 	void MoveToMainMenu();
+
+	void LevelStars();
+	void RemoveLevelStars();
 
 private:
 	// Member variables

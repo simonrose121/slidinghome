@@ -8,6 +8,7 @@
 #include "main.h"
 #include "vibration.h"
 #include "s3eVideo.h"
+#include <sstream>
 
 #include <iostream>
 #include <fstream>
@@ -125,30 +126,6 @@ void LevelSelect::Init()
 	level7->m_ScaleY = game->getGraphicsScale();
 	AddChild(level7);
 
-	//Star complete
-	//levelNum = levelNo;
-	//std::string filename = "star" + levelNum;
-	//filename += ".txt";
-	//std::ifstream file(filename.c_str());
-	//int fileNumber = 0;
-	//file >> fileNumber;
-	//file.close();
-	//x_pos = (float)IwGxGetScreenWidth() / 1.05;
-	//y_pos = (float)IwGxGetScreenHeight() / 15;
-	//star = new CSprite();
-	//if (fileNumber == 1){
-	//	star->SetImage(g_pResources->getStar());
-	//}
-	//star->m_X = x_pos;
-	//star->m_Y = y_pos;
-	//star->m_W = star->GetImage()->GetWidth();
-	//star->m_H = star->GetImage()->GetHeight();
-	//star->m_AnchorX = 1;
-	//star->m_AnchorY = 1;
-	//star->m_ScaleX = game->getGraphicsScale();
-	//star->m_ScaleY = game->getGraphicsScale();
-	//AddChild(star);
-
 	//Back button
 	backButton = new CSprite();
 	backButton->m_X = IwGxGetScreenWidth();
@@ -161,6 +138,8 @@ void LevelSelect::Init()
 	backButton->m_ScaleX = game->getGraphicsScale();
 	backButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(backButton);
+
+	LevelStars();
 }
 
 void LevelSelect::Update(float deltaTime, float alphaMul)
@@ -239,4 +218,50 @@ void LevelSelect::MoveToMainMenu()
 {
 	MainMenu* main_menu = (MainMenu*)g_pSceneManager->Find("mainmenu");
 	g_pSceneManager->SwitchTo(main_menu);
+}
+
+void LevelSelect::LevelStars()
+{
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
+	{
+		std::string levelNoVal;
+		std::ostringstream convert;
+		convert << levelNo;
+		levelNoVal = convert.str();
+
+		//Star complete
+		std::string filename = "star" + levelNoVal;
+		filename += ".txt";
+		std::ifstream file(filename.c_str());
+		int fileNumber = 0;
+		file >> fileNumber;
+		file.close();
+		star = new CSprite();
+		if (fileNumber == 1)
+		{
+			star->SetImage(g_pResources->getStar());
+		}
+		else 
+		{
+			star->SetImage(g_pResources->getHoloStar());
+		}
+		star->m_X = (float)IwGxGetScreenWidth();
+		star->m_Y = (float)IwGxGetScreenHeight();
+		star->m_W = star->GetImage()->GetWidth();
+		star->m_H = star->GetImage()->GetHeight();
+		star->m_AnchorX = 5.75 - ((levelNo - 1) * 1.5);
+		star->m_AnchorY = 8.5;
+		star->m_ScaleX = game->getGraphicsScale();
+		star->m_ScaleY = game->getGraphicsScale();
+		AddChild(star);
+	}
+}
+
+void LevelSelect::RemoveLevelStars()
+{
+	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
+	{
+		RemoveChild(star);
+	}
 }

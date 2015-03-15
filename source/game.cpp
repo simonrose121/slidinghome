@@ -9,6 +9,7 @@
 #include "pauseMenu.h"
 #include "s3eVibra.h"
 #include "sound.h"
+#include "levelSelect.h"
 
 #include <iostream>
 #include <fstream>
