@@ -335,5 +335,8 @@ void Game::EndGame()
 	//cleaup this line
 	//grid = new Grid(this);
 	delete grid;
+	// clean up star after each level
+	this->RemoveChild(star);
+	delete star;
 	currentState = COMPLETE;
 }

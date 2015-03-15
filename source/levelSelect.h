@@ -35,7 +35,6 @@ private:
 	CSprite* playText;
 	CSprite* backButton;
 	CSprite* star;
-
 };
 
 #endif
