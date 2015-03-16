@@ -472,6 +472,8 @@ void Grid::WinningState(CTween* pTween)
 	game->EndGame();
 
 	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+	level_select->RemoveLevelStars();
+	level_select->LevelStars();
 	g_pSceneManager->SwitchTo(level_select);
 
 	IwTrace(APP, ("win"));

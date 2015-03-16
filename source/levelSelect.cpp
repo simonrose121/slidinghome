@@ -237,31 +237,28 @@ void LevelSelect::LevelStars()
 		int fileNumber = 0;
 		file >> fileNumber;
 		file.close();
-		star = new CSprite();
 		if (fileNumber == 1)
 		{
+			star = new CSprite();
 			star->SetImage(g_pResources->getStar());
+			star->m_X = (float)IwGxGetScreenWidth();
+			star->m_Y = (float)IwGxGetScreenHeight();
+			star->m_W = star->GetImage()->GetWidth();
+			star->m_H = star->GetImage()->GetHeight();
+			float x = 11 - (((levelNo - 1) % 4) * 3);
+			float y = 16.5 - ((4 % levelNo) / 1.35);
+			IwTrace(APP, ("star at position: %f, %f", x, y));
+			star->m_AnchorX = x;
+			star->m_AnchorY = y;
+			star->m_ScaleX = game->getGraphicsScale();
+			star->m_ScaleY = game->getGraphicsScale();
+			AddChild(star);
 		}
-		else 
-		{
-			star->SetImage(g_pResources->getHoloStar());
-		}
-		star->m_X = (float)IwGxGetScreenWidth();
-		star->m_Y = (float)IwGxGetScreenHeight();
-		star->m_W = star->GetImage()->GetWidth();
-		star->m_H = star->GetImage()->GetHeight();
-		star->m_AnchorX = 5.75 - ((levelNo - 1) * 1.5);
-		star->m_AnchorY = 8.5;
-		star->m_ScaleX = game->getGraphicsScale();
-		star->m_ScaleY = game->getGraphicsScale();
-		AddChild(star);
 	}
 }
 
 void LevelSelect::RemoveLevelStars()
 {
-	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
-	{
-		RemoveChild(star);
-	}
+	this->RemoveChild(star);
+	delete star;
 }
