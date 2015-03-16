@@ -40,6 +40,7 @@ private:
 	CSprite* playText;
 	CSprite* backButton;
 	CSprite* star;
+	bool hasStars;
 };
 
 #endif

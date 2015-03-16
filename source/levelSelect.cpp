@@ -139,6 +139,7 @@ void LevelSelect::Init()
 	backButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(backButton);
 
+	hasStars = false;
 	LevelStars();
 }
 
@@ -246,19 +247,22 @@ void LevelSelect::LevelStars()
 			star->m_W = star->GetImage()->GetWidth();
 			star->m_H = star->GetImage()->GetHeight();
 			float x = 11 - (((levelNo - 1) % 4) * 3);
-			float y = 16.5 - ((4 % levelNo) / 1.35);
-			IwTrace(APP, ("star at position: %f, %f", x, y));
+			float y = levelNo == 3 ? 16.5 - ((4 % levelNo - 1) / 1.35) : 16.5 - ((4 % levelNo) / 1.35);
 			star->m_AnchorX = x;
 			star->m_AnchorY = y;
 			star->m_ScaleX = game->getGraphicsScale();
 			star->m_ScaleY = game->getGraphicsScale();
 			AddChild(star);
+			hasStars = true;
 		}
 	}
 }
 
 void LevelSelect::RemoveLevelStars()
 {
-	this->RemoveChild(star);
-	delete star;
+	if (hasStars) 
+	{
+		this->RemoveChild(star);
+		delete star;
+	}
 }
