@@ -67,6 +67,11 @@ public:
 	CIw2DImage* getLevel5() { return level5; }
 	CIw2DImage* getLevel6() { return level6; }
 	CIw2DImage* getLevel7() { return level7; }
+	CIw2DImage* getLevel8() { return level8; }
+	CIw2DImage* getLevel9() { return level9; }
+	CIw2DImage* getLevel10() { return level10; }
+	CIw2DImage* getLevel11() { return level11; }
+	CIw2DImage* getLevel12() { return level12; }
 
 	CIw2DImage* getUpButton() { return upButton; }
 	CIw2DImage* getRightButton() { return rightButton; }
@@ -138,6 +143,11 @@ private:
 	CIw2DImage* level5;
 	CIw2DImage* level6;
 	CIw2DImage* level7;
+	CIw2DImage* level8;
+	CIw2DImage* level9;
+	CIw2DImage* level10;
+	CIw2DImage* level11;
+	CIw2DImage* level12;
 
 	// On screen buttons
 	CIw2DImage* upButton;

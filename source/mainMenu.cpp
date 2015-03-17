@@ -181,7 +181,6 @@ void MainMenu::MoveToSettings()
 
 void MainMenu::SetSound(){
 	std::ofstream soundfile;
-
 	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pause");
 
 	if (!g_pSound->getSound())

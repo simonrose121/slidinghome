@@ -1,0 +1,6 @@
+Level 12 cant be complete until the new switch mechanic is changed
+Level 7 if the player slides on the first snow patch and then slide down, they cant get back up
+Level 8 if the player slides on the first snow patch and then down, they slide stright over the first one to the next snowpatch, Also like level 7 they can't slide back up on the third patch
+Level 5 has the same problem with the second snowpatch
+Level 6 same problem with the second patch and thrid if they slide left then right it completes the game
+Problem with star on levels, if the player completes any of the bottom row of levels (9,10,11,12) then it put the start above

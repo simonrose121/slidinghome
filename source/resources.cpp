@@ -45,6 +45,11 @@ Resources::Resources()
 	level5 = Iw2DCreateImage("textures/level5.png");
 	level6 = Iw2DCreateImage("textures/level6.png");
 	level7 = Iw2DCreateImage("textures/level7.png");
+	level8 = Iw2DCreateImage("textures/Level_button.png");
+	level9 = Iw2DCreateImage("textures/Level_button.png");
+	level10 = Iw2DCreateImage("textures/Level_button.png");
+	level11 = Iw2DCreateImage("textures/Level_button.png");
+	level12 = Iw2DCreateImage("textures/Level_button.png");
 
 	upButton = Iw2DCreateImage("textures/up-button.png");
 	rightButton = Iw2DCreateImage("textures/right-button.png");
@@ -116,6 +121,11 @@ Resources::~Resources()
 	delete level5;
 	delete level6;
 	delete level7;
+	delete level8;
+	delete level9;
+	delete level10;
+	delete level11;
+	delete level12;
 
 	delete upButton;
 	delete rightButton;

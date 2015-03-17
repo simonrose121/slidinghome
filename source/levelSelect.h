@@ -3,7 +3,7 @@
 
 #include "scene.h"
 
-#define LEVEL_COUNT 7
+#define LEVEL_COUNT 12
 
 class LevelSelect : public Scene
 {
@@ -37,6 +37,11 @@ private:
 	CSprite* level5;
 	CSprite* level6;
 	CSprite* level7;
+	CSprite* level8;
+	CSprite* level9;
+	CSprite* level10;
+	CSprite* level11;
+	CSprite* level12;
 	CSprite* playText;
 	CSprite* backButton;
 	CSprite* star;

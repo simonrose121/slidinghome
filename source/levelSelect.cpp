@@ -126,6 +126,66 @@ void LevelSelect::Init()
 	level7->m_ScaleY = game->getGraphicsScale();
 	AddChild(level7);
 
+	level8 = new CSprite();
+	level8->SetImage(g_pResources->getLevel8());
+	level8->m_X = x_pos;
+	level8->m_Y = y_pos;
+	level8->m_W = level8->GetImage()->GetWidth();
+	level8->m_H = level8->GetImage()->GetHeight();
+	level8->m_AnchorX = 1.25;
+	level8->m_AnchorY = 7;
+	level8->m_ScaleX = game->getGraphicsScale();
+	level8->m_ScaleY = game->getGraphicsScale();
+	AddChild(level8);
+
+	level9 = new CSprite();
+	level9->SetImage(g_pResources->getLevel9());
+	level9->m_X = x_pos;
+	level9->m_Y = y_pos;
+	level9->m_W = level9->GetImage()->GetWidth();
+	level9->m_H = level9->GetImage()->GetHeight();
+	level9->m_AnchorX = 5.75;
+	level9->m_AnchorY = 5.5;
+	level9->m_ScaleX = game->getGraphicsScale();
+	level9->m_ScaleY = game->getGraphicsScale();
+	AddChild(level9);
+
+	level10 = new CSprite();
+	level10->SetImage(g_pResources->getLevel10());
+	level10->m_X = x_pos;
+	level10->m_Y = y_pos;
+	level10->m_W = level10->GetImage()->GetWidth();
+	level10->m_H = level10->GetImage()->GetHeight();
+	level10->m_AnchorX = 4.25;
+	level10->m_AnchorY = 5.5;
+	level10->m_ScaleX = game->getGraphicsScale();
+	level10->m_ScaleY = game->getGraphicsScale();
+	AddChild(level10);
+
+	level11 = new CSprite();
+	level11->SetImage(g_pResources->getLevel11());
+	level11->m_X = x_pos;
+	level11->m_Y = y_pos;
+	level11->m_W = level11->GetImage()->GetWidth();
+	level11->m_H = level11->GetImage()->GetHeight();
+	level11->m_AnchorX = 2.75;
+	level11->m_AnchorY = 5.5;
+	level11->m_ScaleX = game->getGraphicsScale();
+	level11->m_ScaleY = game->getGraphicsScale();
+	AddChild(level11);
+
+	level12 = new CSprite();
+	level12->SetImage(g_pResources->getLevel12());
+	level12->m_X = x_pos;
+	level12->m_Y = y_pos;
+	level12->m_W = level12->GetImage()->GetWidth();
+	level12->m_H = level12->GetImage()->GetHeight();
+	level12->m_AnchorX = 1.25;
+	level12->m_AnchorY = 5.5;
+	level12->m_ScaleX = game->getGraphicsScale();
+	level12->m_ScaleY = game->getGraphicsScale();
+	AddChild(level12);
+
 	//Back button
 	backButton = new CSprite();
 	backButton->m_X = IwGxGetScreenWidth();
@@ -193,6 +253,31 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 		{
 			g_pVibration->Vibrate();
 			StartGame("7");
+		}
+		if (level8->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("8");
+		}
+		if (level9->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("9");
+		}
+		if (level10->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("10");
+		}
+		if (level11->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("11");
+		}
+		if (level12->HitTest(g_pInput->m_X, g_pInput->m_Y))
+		{
+			g_pVibration->Vibrate();
+			StartGame("12");
 		}
 	}
 
