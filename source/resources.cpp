@@ -45,11 +45,11 @@ Resources::Resources()
 	level5 = Iw2DCreateImage("textures/level5.png");
 	level6 = Iw2DCreateImage("textures/level6.png");
 	level7 = Iw2DCreateImage("textures/level7.png");
-	level8 = Iw2DCreateImage("textures/Level_button.png");
-	level9 = Iw2DCreateImage("textures/Level_button.png");
-	level10 = Iw2DCreateImage("textures/Level_button.png");
-	level11 = Iw2DCreateImage("textures/Level_button.png");
-	level12 = Iw2DCreateImage("textures/Level_button.png");
+	level8 = Iw2DCreateImage("textures/level8.png");
+	level9 = Iw2DCreateImage("textures/level9.png");
+	level10 = Iw2DCreateImage("textures/level10.png");
+	level11 = Iw2DCreateImage("textures/level11.png");
+	level12 = Iw2DCreateImage("textures/level12.png");
 
 	upButton = Iw2DCreateImage("textures/up-button.png");
 	rightButton = Iw2DCreateImage("textures/right-button.png");
