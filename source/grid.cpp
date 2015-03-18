@@ -355,7 +355,9 @@ int Grid::getDistance(Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == BLANK || gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH)
+		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == BLANK || 
+				gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH ||
+				gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
 		{
 			// check if player is moving over a switch
 			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH)
@@ -373,7 +375,9 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case RIGHT:
-		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == BLANK || gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH)
+		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == BLANK || 
+				gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH ||
+				gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
 		{
 			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH)
 			{
@@ -388,7 +392,9 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case UP:
-		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == BLANK || gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH)
+		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == BLANK || 
+			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH ||
+			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
 		{
 			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH)
 			{
@@ -403,7 +409,9 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case DOWN:
-		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == BLANK || gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH)
+		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == BLANK ||
+			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH ||
+			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
 		{
 			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH)
 			{

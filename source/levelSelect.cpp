@@ -309,6 +309,7 @@ void LevelSelect::MoveToMainMenu()
 void LevelSelect::LevelStars()
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
+	// keep track of row to fix y values
 	int row = 0;
 	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
 	{
