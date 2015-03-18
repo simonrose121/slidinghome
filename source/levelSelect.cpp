@@ -309,6 +309,7 @@ void LevelSelect::MoveToMainMenu()
 void LevelSelect::LevelStars()
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
+	int row = 0;
 	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
 	{
 		std::string levelNoVal;
@@ -332,13 +333,18 @@ void LevelSelect::LevelStars()
 			star->m_W = star->GetImage()->GetWidth();
 			star->m_H = star->GetImage()->GetHeight();
 			float x = 11 - (((levelNo - 1) % 4) * 3);
-			float y = levelNo == 3 ? 16.5 - ((4 % levelNo - 1) / 1.35) : 16.5 - ((4 % levelNo) / 1.35);
+			float y = 16.5 - ((4 * row) / 1.35);
+			IwTrace(APP, ("level %d, position %f, %f", levelNo, x, y));
 			star->m_AnchorX = x;
 			star->m_AnchorY = y;
 			star->m_ScaleX = game->getGraphicsScale();
 			star->m_ScaleY = game->getGraphicsScale();
 			AddChild(star);
 			hasStars = true;
+		}
+		if ((levelNo % 4) == 0)
+		{
+			row++;
 		}
 	}
 }
