@@ -153,6 +153,7 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 	game->InitOnScreenButtons();
 
 	onSnowPatch = false;
+	switchPressed = false;
 
 	PrintGrid();
 }
@@ -357,7 +358,8 @@ int Grid::getDistance(Direction dir)
 	case LEFT:
 		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == BLANK || 
 				gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH ||
-				gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
+				gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH ||
+				gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCHROCKINVISIBLE)
 		{
 			// Check for snowpatch
 			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
@@ -377,7 +379,8 @@ int Grid::getDistance(Direction dir)
 	case RIGHT:
 		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == BLANK || 
 				gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH ||
-				gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
+				gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH ||
+				gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCHROCKINVISIBLE)
 		{
 			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
 			{
@@ -394,7 +397,8 @@ int Grid::getDistance(Direction dir)
 	case UP:
 		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == BLANK || 
 			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH ||
-			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
+			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH || 
+			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCHROCKINVISIBLE)
 		{
 			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
@@ -411,7 +415,8 @@ int Grid::getDistance(Direction dir)
 	case DOWN:
 		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == BLANK ||
 			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH ||
-			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
+			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH ||
+			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCHROCKINVISIBLE)
 		{
 			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
@@ -434,23 +439,44 @@ int Grid::getDistance(Direction dir)
 
 void Grid::SwitchPressed(int switchIndex)
 {
-	// set image of switch to down
-	gameObjects[switchIndex]->SetImage(g_pResources->getSwitchDown());
-
-	// find all switch rocks and convert them to blanks
-	for (int y = 0; y < height; y++)
+	if (!switchPressed)
 	{
-		for (int x = 0; x < width; x++)
+		// set image of switch to down
+		gameObjects[switchIndex]->SetImage(g_pResources->getSwitchDown());
+
+		// find all switch rocks and convert them to blanks
+		for (int y = 0; y < height; y++)
 		{
-			if (gameObjects[x + width * y]->getId() == SWITCHROCK)
+			for (int x = 0; x < width; x++)
 			{
-				gameObjects[x + width * y]->SetImage(g_pResources->getBlank());
-				gameObjects[x + width * y]->setId(0);
+				if (gameObjects[x + width * y]->getId() == SWITCHROCK)
+				{
+					gameObjects[x + width * y]->SetImage(g_pResources->getBlank());
+					gameObjects[x + width * y]->setId(SWITCHROCKINVISIBLE);
+				}
 			}
 		}
+		switchPressed = true;
 	}
+	else
+	{
+		// set image of switch to down
+		gameObjects[switchIndex]->SetImage(g_pResources->getSwitchUp());
 
-	IwTrace(APP, ("switch pressed"));
+		// find all switch rocks and convert them to blanks
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++)
+			{
+				if (gameObjects[x + width * y]->getId() == SWITCHROCKINVISIBLE)
+				{
+					gameObjects[x + width * y]->SetImage(g_pResources->getRock());
+					gameObjects[x + width * y]->setId(SWITCHROCK);
+				}
+			}
+		}
+		switchPressed = false;
+	}
 }
 
 void Grid::PrintGrid()

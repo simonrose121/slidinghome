@@ -47,7 +47,8 @@ private:
 		HOME = 4,
 		SNOWPATCH = 5,
 		SWITCH = 6,
-		SWITCHROCK = 7
+		SWITCHROCK = 7,
+		SWITCHROCKINVISIBLE = 8
 	};
 
 	// Member variables
@@ -63,6 +64,7 @@ private:
 	CNode* game;
 	bool onSnowPatch;
 	std::string levelNum;
+	bool switchPressed;
 
 	// Private member functions
 	void SwitchPressed(int switchIndex);
