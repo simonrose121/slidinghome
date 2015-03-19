@@ -275,7 +275,7 @@ void Grid::UpdatePosition(int distance, Direction dir)
 		break;
 	case RIGHT:
 		CheckIfOnSnowpatch();
-		if (gameObjects[playerIndex - distance]->getId() == SNOWPATCH)
+		if (gameObjects[playerIndex + distance]->getId() == SNOWPATCH)
 		{
 			onSnowPatch = true;
 		}
