@@ -15,8 +15,11 @@
 
 #define SIZEY 15
 #define SIZEX 11
+#define CHECKRIGHTID gameObjects[(x + (distance + 1)) + width*y]->getId()
+#define CHECKLEFTID gameObjects[(x - (distance + 1)) + width*y]->getId()
+#define CHECKUPID gameObjects[(x + width*y) - (width*(distance + 1))]->getId()
+#define CHECKDOWNID gameObjects[(x + width*y) + (width*(distance + 1))]->getId()
 
-using namespace std;
 using namespace IwTween;
 
 Grid::Grid(CNode* scene)
@@ -48,7 +51,7 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 {
 	std::string filename = "maps/level" + levelNo;
 	filename += ".txt";
-	ifstream file(filename.c_str());
+	std::ifstream file(filename.c_str());
 	int map[SIZEY][SIZEX];
 	for (int y = 0; y < num_rows; y++)
 	{
@@ -356,20 +359,17 @@ int Grid::getDistance(Direction dir)
 	switch (dir)
 	{
 	case LEFT:
-		while (gameObjects[(x - (distance + 1)) + width*y]->getId() == BLANK || 
-				gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH ||
-				gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH ||
-				gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCHROCKINVISIBLE)
+		while (CHECKLEFTID == BLANK || CHECKLEFTID == SWITCH || CHECKLEFTID == SNOWPATCH || CHECKLEFTID == SWITCHROCKINVISIBLE)
 		{
 			// Check for snowpatch
-			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
+			if (CHECKLEFTID == SNOWPATCH)
 			{
 				// Ensure player is on snowpatch
 				distance++;
 				break;
 			}
 			// check if player is moving over a switch
-			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH)
+			if (CHECKLEFTID == SWITCH)
 			{
 				SwitchPressed((x - (distance + 1)) + width*y);
 			}
@@ -377,17 +377,14 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case RIGHT:
-		while (gameObjects[(x + (distance + 1)) + width*y]->getId() == BLANK || 
-				gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH ||
-				gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH ||
-				gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCHROCKINVISIBLE)
+		while (CHECKRIGHTID == BLANK || CHECKRIGHTID == SWITCH || CHECKRIGHTID == SNOWPATCH || CHECKRIGHTID == SWITCHROCKINVISIBLE)
 		{
-			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
+			if (CHECKRIGHTID == SNOWPATCH)
 			{
 				distance++;
 				break;
 			}
-			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH)
+			if (CHECKRIGHTID == SWITCH)
 			{
 				SwitchPressed((x + (distance + 1)) + width*y);
 			}
@@ -395,17 +392,14 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case UP:
-		while (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == BLANK || 
-			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH ||
-			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH || 
-			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCHROCKINVISIBLE)
+		while (CHECKUPID == BLANK || CHECKUPID == SWITCH || CHECKUPID == SNOWPATCH || CHECKUPID == SWITCHROCKINVISIBLE)
 		{
-			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
+			if (CHECKUPID == SNOWPATCH)
 			{
 				distance++;
 				break;
 			}
-			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH)
+			if (CHECKUPID == SWITCH)
 			{
 				SwitchPressed((x + width*y) - (width*(distance + 1)));
 			}
@@ -413,17 +407,14 @@ int Grid::getDistance(Direction dir)
 		}
 		break;
 	case DOWN:
-		while (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == BLANK ||
-			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH ||
-			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH ||
-			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCHROCKINVISIBLE)
+		while (CHECKDOWNID == BLANK || CHECKDOWNID == SWITCH || CHECKDOWNID == SNOWPATCH || CHECKDOWNID == SWITCHROCKINVISIBLE)
 		{
-			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
+			if (CHECKDOWNID == SNOWPATCH)
 			{
 				distance++;
 				break;
 			}
-			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH)
+			if (CHECKDOWNID == SWITCH)
 			{
 				SwitchPressed((x + width*y) + (width*(distance + 1)));
 			}
