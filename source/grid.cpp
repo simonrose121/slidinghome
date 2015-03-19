@@ -359,12 +359,6 @@ int Grid::getDistance(Direction dir)
 				gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH ||
 				gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
 		{
-			// check if player is moving over a switch
-			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH)
-			{
-				SwitchPressed((x - (distance + 1)) + width*y);
-			}
-			distance++;
 			// Check for snowpatch
 			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SNOWPATCH)
 			{
@@ -372,6 +366,12 @@ int Grid::getDistance(Direction dir)
 				distance++;
 				break;
 			}
+			// check if player is moving over a switch
+			if (gameObjects[(x - (distance + 1)) + width*y]->getId() == SWITCH)
+			{
+				SwitchPressed((x - (distance + 1)) + width*y);
+			}
+			distance++;
 		}
 		break;
 	case RIGHT:
@@ -379,16 +379,16 @@ int Grid::getDistance(Direction dir)
 				gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH ||
 				gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
 		{
-			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH)
-			{
-				SwitchPressed((x + (distance + 1)) + width*y);
-			}
-			distance++;
 			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SNOWPATCH)
 			{
 				distance++;
 				break;
 			}
+			if (gameObjects[(x + (distance + 1)) + width*y]->getId() == SWITCH)
+			{
+				SwitchPressed((x + (distance + 1)) + width*y);
+			}
+			distance++;
 		}
 		break;
 	case UP:
@@ -396,16 +396,16 @@ int Grid::getDistance(Direction dir)
 			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH ||
 			gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
 		{
-			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH)
-			{
-				SwitchPressed((x + width*y) - (width*(distance + 1)));
-			}
-			distance++;
 			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
 				distance++;
 				break;
 			}
+			if (gameObjects[(x + width*y) - (width*(distance + 1))]->getId() == SWITCH)
+			{
+				SwitchPressed((x + width*y) - (width*(distance + 1)));
+			}
+			distance++;
 		}
 		break;
 	case DOWN:
@@ -413,16 +413,16 @@ int Grid::getDistance(Direction dir)
 			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH ||
 			gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
 		{
-			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH)
-			{
-				SwitchPressed((x + width*y) + (width*(distance + 1)));
-			}
-			distance++;
 			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SNOWPATCH)
 			{
 				distance++;
 				break;
 			}
+			if (gameObjects[(x + width*y) + (width*(distance + 1))]->getId() == SWITCH)
+			{
+				SwitchPressed((x + width*y) + (width*(distance + 1)));
+			}
+			distance++;
 		}
 		break;
 	}

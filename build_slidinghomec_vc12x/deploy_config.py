@@ -4,7 +4,7 @@
 # tool during the build process.
 
 config = {}
-cmdline = ['C:/Marmalade/7.3/s3e/makefile_builder/mkb.py', 'c:/Users/b1009269/Desktop/sh/SlidingHomeC.mkb', '--deploy-only', '--hub-data', 'C:/Users/b1009269/Desktop/sh/project_SlidingHomeC/mkb-windows.txt', '--buildenv=VC12X']
+cmdline = ['C:/Marmalade/7.3/s3e/makefile_builder/mkb.py', 'c:/Users/b1009269/Desktop/sh/SlidingHomeC.mkb', '--buildenv=VC12X', '--test-assets', 'Default', '--fake-vc-call', '--deploy-only']
 mkb = 'c:/Users/b1009269/Desktop/sh/SlidingHomeC.mkb'
 mkf = ['c:\\marmalade\\7.3\\modules\\iw2d\\iw2d.mkf', 'c:\\marmalade\\7.3\\modules\\iwgx\\iwgx.mkf', 'c:\\marmalade\\7.3\\modules\\iwgl\\iwgl.mkf', 'c:\\marmalade\\7.3\\modules\\iwutil\\iwutil.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\libjpeg\\libjpeg.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\libpng\\libpng.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\zlib\\zlib.mkf', 'c:\\marmalade\\7.3\\modules\\iwgeom\\iwgeom.mkf', 'c:\\marmalade\\7.3\\modules\\iwresmanager\\iwresmanager.mkf', 'c:\\marmalade\\7.3\\extensions\\pvrtextool\\pvrtextool.mkf', 'c:\\marmalade\\7.3\\modules\\iwgxfont\\iwgxfont.mkf', 'c:\\marmalade\\7.3\\modules\\third_party\\tiniconv\\tiniconv.mkf', 'c:\\marmalade\\7.3\\modules\\iw2dscenegraph\\iw2dscenegraph.mkf', 'c:\\marmalade\\7.3\\modules\\iw2dscenegraphcore\\iw2dscenegraphcore.mkf', 'c:\\marmalade\\7.3\\modules\\iwtween\\iwtween.mkf', 'c:\\users\\b1009269\\desktop\\sh\\modules\\soundengine\\soundengine.mkf']
 
@@ -20,10 +20,7 @@ assets['Default'] = [
     ('c:/Users/b1009269/Desktop/sh/data/audio', 'audio', 0),
     ('c:/Users/b1009269/Desktop/sh/data/textures', 'textures', 0),
     ('c:/Users/b1009269/Desktop/sh/data/maps', 'maps', 0),
-    ('c:/Users/b1009269/Desktop/sh/data/fonts', 'fonts', 0),
     ('c:/Users/b1009269/Desktop/sh/data/videos', 'videos', 0),
-    ('c:/Users/b1009269/Desktop/sh/data-ram/data-gles1', '.', 0),
-    ('c:/Users/b1009269/Desktop/sh/data-ram/data-gles1/fonts/arial8.gxfont.bin', 'fonts/arial8.gxfont.bin', 0),
 ]
 
 ######### DEFAULT CONFIG #############
@@ -50,6 +47,7 @@ class DefaultConfig(DeployConfig):
     ws8_ext_native_dll = []
     android_extra_manifest = []
     iphone_link_libdirs = []
+    icon = 'c:/Users/b1009269/Desktop/sh/data/textures/Logo.png'
     linux_ext_lib = []
     ws8_ext_managed_dll = []
     ws81_ext_sdk_ref_file = []
