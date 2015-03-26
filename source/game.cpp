@@ -78,11 +78,11 @@ void Game::InitOnScreenButtons()
 		rightButton = new CSprite();
 		rightButton->SetImage(g_pResources->getRightButton());
 		rightButton->m_X = IwGxGetScreenWidth();
-		rightButton->m_Y = rightButton->GetImage()->GetHeight();
+		rightButton->m_Y = IwGxGetScreenHeight() / 2;
 		rightButton->m_W = rightButton->GetImage()->GetWidth();
 		rightButton->m_H = rightButton->GetImage()->GetHeight();
 		rightButton->m_AnchorX = 1;
-		rightButton->m_AnchorY = 1.67;
+		rightButton->m_AnchorY = 0.5;
 		rightButton->m_ScaleX = graphicsScale;
 		rightButton->m_ScaleY = graphicsScale;
 		AddChild(rightButton);
@@ -94,7 +94,7 @@ void Game::InitOnScreenButtons()
 		downButton->m_W = downButton->GetImage()->GetWidth();
 		downButton->m_H = downButton->GetImage()->GetHeight();
 		downButton->m_AnchorX = 1;
-		downButton->m_AnchorY = 1.55;
+		downButton->m_AnchorY = 1.4;
 		downButton->m_ScaleX = graphicsScale;
 		downButton->m_ScaleY = graphicsScale;
 		AddChild(downButton);
@@ -102,11 +102,11 @@ void Game::InitOnScreenButtons()
 		leftButton = new CSprite();
 		leftButton->SetImage(g_pResources->getLeftButton());
 		leftButton->m_X = leftButton->GetImage()->GetWidth() * graphicsScale;
-		leftButton->m_Y = leftButton->GetImage()->GetHeight();
+		leftButton->m_Y = IwGxGetScreenHeight() / 2;
 		leftButton->m_W = leftButton->GetImage()->GetWidth();
 		leftButton->m_H = leftButton->GetImage()->GetHeight();
 		leftButton->m_AnchorX = 1;
-		leftButton->m_AnchorY = 1.67;
+		leftButton->m_AnchorY = 0.5;
 		leftButton->m_ScaleX = graphicsScale;
 		leftButton->m_ScaleY = graphicsScale;
 		AddChild(leftButton);
@@ -148,6 +148,13 @@ void Game::Update(float deltaTime, float alphaMul)
 			{
 				MoveToPauseMenu();
 				currentState = PAUSED;
+			}
+
+			if (resetButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				EndGame();
+				NewGame(levelNum, 12, 14);
+				g_pInput->Reset();
 			}
 
 			if (showOnScreenButtons)
@@ -298,6 +305,19 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	pauseButton->m_ScaleX = getGraphicsScale();
 	pauseButton->m_ScaleY = getGraphicsScale();
 	AddChild(pauseButton);
+
+	// Create Reset button
+	resetButton = new CSprite();
+	resetButton->SetImage(g_pResources->getResetButton());
+	resetButton->m_X = (float)IwGxGetScreenWidth() / 4;
+	resetButton->m_Y = (float)IwGxGetScreenHeight() / 15;
+	resetButton->m_W = pauseButton->GetImage()->GetWidth();
+	resetButton->m_H = pauseButton->GetImage()->GetHeight();
+	resetButton->m_AnchorX = 1;
+	resetButton->m_AnchorY = 1;
+	resetButton->m_ScaleX = getGraphicsScale();
+	resetButton->m_ScaleY = getGraphicsScale();
+	AddChild(resetButton);
 
 	//Create Star file
 	levelNum = levelNo;

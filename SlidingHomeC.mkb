@@ -1,4 +1,4 @@
-#!/usr/bin/env mkb
+ #!/usr/bin/env mkb
 options
 {
     module_path="modules"

@@ -16,6 +16,7 @@ Resources::Resources()
 	playButtonHC = Iw2DCreateImage("textures/HC_play_button.png");
 	exitButton = Iw2DCreateImage("textures/End_Game_Button.png");
 	pauseButton = Iw2DCreateImage("textures/pause.png");
+	resetButton = Iw2DCreateImage("textures/reset.png");
 	settingsButton = Iw2DCreateImage("textures/Settings_Button.png");
 	settingsButtonHC = Iw2DCreateImage("textures/HC_Settings_Button.png");
 	backButton = Iw2DCreateImage("textures/back_button2.png");
@@ -92,6 +93,7 @@ Resources::~Resources()
 	delete playButtonHC;
 	delete exitButton;
 	delete pauseButton;
+	delete resetButton;
 	delete settingsButton;
 	delete settingsButtonHC;
 	delete backButton;

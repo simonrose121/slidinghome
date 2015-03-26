@@ -46,6 +46,7 @@ private:
 	Grid* grid;
 	CSprite* background;
 	CSprite* pauseButton;
+	CSprite* resetButton;
 	CSprite* upButton;
 	CSprite* rightButton;
 	CSprite* downButton;

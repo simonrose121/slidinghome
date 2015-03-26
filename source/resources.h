@@ -38,6 +38,7 @@ public:
 	CIw2DImage* getPlayButtonHC(){ return playButtonHC; }
 	CIw2DImage*	getExitButton() { return exitButton; }
 	CIw2DImage*	getPauseButton() { return pauseButton; }
+	CIw2DImage* getResetButton() { return resetButton; }
 	CIw2DImage* getSettingsButton() { return settingsButton; }
 	CIw2DImage* getSettingsButtonHC() { return settingsButtonHC; }
 	CIw2DImage* getBackButton() { return backButton; }
@@ -111,6 +112,7 @@ private:
 	CIw2DImage* playButtonHC;
 	CIw2DImage*	exitButton;
 	CIw2DImage* pauseButton;
+	CIw2DImage* resetButton;
 	CIw2DImage* settingsButton;
 	CIw2DImage* settingsButtonHC;
 	CIw2DImage* backButton;

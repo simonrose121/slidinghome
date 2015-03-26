@@ -38,51 +38,51 @@ void Settings::Init()
 
 	// Add on screen buttons button
 	showOnScreenButtons = new CSprite();
-	showOnScreenButtons->m_X = IwGxGetScreenWidth();
-	showOnScreenButtons->m_Y = IwGxGetScreenHeight();
+	showOnScreenButtons->m_X = IwGxGetScreenWidth() / 2;
+	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 2;
 	showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButton());
 	showOnScreenButtons->m_W = showOnScreenButtons->GetImage()->GetWidth();
 	showOnScreenButtons->m_H = showOnScreenButtons->GetImage()->GetHeight();
-	showOnScreenButtons->m_AnchorX = 1;
-	showOnScreenButtons->m_AnchorY = 7;
+	showOnScreenButtons->m_AnchorX = 0.5;
+	showOnScreenButtons->m_AnchorY = 0.5;
 	showOnScreenButtons->m_ScaleX = game->getGraphicsScale();
 	showOnScreenButtons->m_ScaleY = game->getGraphicsScale();
 	AddChild(showOnScreenButtons);
 
 	// Add High Contrast Mode Button
 	showHighContrastMode = new CSprite();
-	showHighContrastMode->m_X = IwGxGetScreenWidth();
-	showHighContrastMode->m_Y = IwGxGetScreenHeight();
+	showHighContrastMode->m_X = IwGxGetScreenWidth() / 2;
+	showHighContrastMode->m_Y = IwGxGetScreenHeight() / 4;
 	showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
 	showHighContrastMode->m_W = showHighContrastMode->GetImage()->GetWidth();
 	showHighContrastMode->m_H = showHighContrastMode->GetImage()->GetHeight();
-	showHighContrastMode->m_AnchorX = 1;
-	showHighContrastMode->m_AnchorY = 5;
+	showHighContrastMode->m_AnchorX = 0.5;
+	showHighContrastMode->m_AnchorY = 0.5;
 	showHighContrastMode->m_ScaleX = game->getGraphicsScale();
 	showHighContrastMode->m_ScaleY = game->getGraphicsScale();
 	AddChild(showHighContrastMode);
 
 	// Add Vibration On Button
 	showVibration = new CSprite();
-	showVibration->m_X = IwGxGetScreenWidth();
-	showVibration->m_Y = IwGxGetScreenWidth();
+	showVibration->m_X = IwGxGetScreenWidth() / 2;
+	showVibration->m_Y = IwGxGetScreenHeight() / 2 * 1.5;
 	showVibration->SetImage(g_pResources->getVibrationSettingButton());
 	showVibration->m_W = showVibration->GetImage()->GetWidth();
 	showVibration->m_H = showVibration->GetImage()->GetHeight();
-	showVibration->m_AnchorX = 1;
-	showVibration->m_AnchorY = 3;
+	showVibration->m_AnchorX = 0.5;
+	showVibration->m_AnchorY = 0.5;
 	showVibration->m_ScaleX = game->getGraphicsScale();
 	showVibration->m_ScaleY = game->getGraphicsScale();
 	AddChild(showVibration);
 
 	backButton = new CSprite();
-	backButton->m_X = IwGxGetScreenWidth();
-	backButton->m_Y = IwGxGetScreenHeight();
+	backButton->m_X = IwGxGetDisplayWidth() / 15;
+	backButton->m_Y = IwGxGetScreenHeight() / 25;
 	backButton->SetImage(g_pResources->getBackButton());
 	backButton->m_W = backButton->GetImage()->GetWidth();
 	backButton->m_H = backButton->GetImage()->GetHeight();
-	backButton->m_AnchorX = 9.75;
-	backButton->m_AnchorY = 20.85;
+	backButton->m_AnchorX = 0.5;
+	backButton->m_AnchorY = 0.5;
 	backButton->m_ScaleX = game->getGraphicsScale();
 	backButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(backButton);
