@@ -14,9 +14,6 @@
 #include <iostream>
 #include <fstream>
 
-#define GRID_OFFSET_X 20
-#define GRID_OFFSET_Y 100
-
 Game::~Game()
 {
 	if (currentState != COMPLETE)
@@ -289,7 +286,7 @@ void Game::MoveToPauseMenu()
 void Game::NewGame(std::string levelNo, int width, int height)
 {
 	grid = new Grid(this);
-	grid->GenerateLevel(levelNo, width, height, (int)(GRID_OFFSET_X * graphicsScale), (int)(GRID_OFFSET_Y * graphicsScale), IwGxGetScreenWidth());
+	grid->GenerateLevel(levelNo, width, height, IwGxGetScreenWidth(), graphicsScale);
 
 	// Create Pause Button
 	float x_pos = (float)IwGxGetScreenWidth() / 8;

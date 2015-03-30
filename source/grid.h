@@ -27,7 +27,7 @@ public:
 	void MovePlayerRight();
 	void MovePlayerUp();
 	void MovePlayerDown();
-	void GenerateLevel(std::string levelId, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width);
+	void GenerateLevel(std::string levelId, int num_columns, int num_rows, int grid_width, int graphicsScale);
 	void ClearLevel();
 	
 	int	getWidth() const { return width; }

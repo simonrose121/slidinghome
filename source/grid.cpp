@@ -15,6 +15,8 @@
 
 #define SIZEY 15
 #define SIZEX 11
+#define GRID_OFFSET_X 20
+#define GRID_OFFSET_Y 100
 #define CHECKRIGHTID gameObjects[(x + (distance + 1)) + width*y]->getId()
 #define CHECKLEFTID gameObjects[(x - (distance + 1)) + width*y]->getId()
 #define CHECKUPID gameObjects[(x + width*y) - (width*(distance + 1))]->getId()
@@ -47,7 +49,7 @@ Grid::~Grid()
 	}
 }
 
-void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int offset_x, int offset_y, int grid_width)
+void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int grid_width, int graphicsScale)
 {
 	std::string filename = "maps/level" + levelNo;
 	filename += ".txt";
@@ -74,8 +76,8 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 
 	float gem_scale = (float)gameObjectSize / bm_width;
 
-	gridOriginX = offset_x;
-	gridOriginY = IwGxGetScreenHeight() - (num_rows * gameObjectSize) - offset_y;
+	gridOriginX = (int)(GRID_OFFSET_X * graphicsScale);
+	gridOriginY = IwGxGetScreenHeight() - (num_rows * gameObjectSize) - (int)(GRID_OFFSET_Y * graphicsScale);
 
 	int playerX = 0;
 	int playerY = 0;
