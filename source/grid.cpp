@@ -49,7 +49,7 @@ Grid::~Grid()
 	}
 }
 
-void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int grid_width, int graphicsScale)
+void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int grid_width, float graphicsScale)
 {
 	std::string filename = "maps/level" + levelNo;
 	filename += ".txt";
