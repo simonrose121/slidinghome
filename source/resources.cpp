@@ -69,6 +69,8 @@ Resources::Resources()
 	soundButtonOff = Iw2DCreateImage("textures/Sound_Button_X.png");
 	musicButtonOff = Iw2DCreateImage("textures/Music_Button_X.png");
 
+	//
+
 	// Load atlases
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
 	int frame_h = (int)(playerLeft->GetHeight());

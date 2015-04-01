@@ -64,7 +64,11 @@ private:
 	State currentState;
 	bool showOnScreenButtons;
 	bool changeToHighContrast;
+	bool tutorialRun;
 	std::string levelNum;
+
+	// Private member functions
+	void SetupTutorialInstructions();
 };
 
 #endif

@@ -170,6 +170,8 @@ private:
 	CIw2DImage* soundButtonOff;
 	CIw2DImage* musicButtonOff;
 
+	// Tutorial images
+
 	// Atlases
 	CAtlas*	playerLeftAtlas;
 	CAtlas*	playerRightAtlas;

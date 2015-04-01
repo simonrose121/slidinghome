@@ -42,6 +42,18 @@ void Game::Init()
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
 	pressedDown = false;
+	
+	std::ifstream tutrunfile("tutrun.txt");
+	int tutrun = 0;
+	tutrunfile >> tutrun;
+	if (tutrun == 1) 
+	{
+		tutorialRun = true;
+	}
+	else
+	{
+		tutorialRun = false;
+	}
 }
 
 void Game::ChangeBackground()
@@ -283,8 +295,30 @@ void Game::MoveToPauseMenu()
 	g_pSceneManager->SwitchTo(pausemenu);
 }
 
+void Game::SetupTutorialInstructions()
+{
+	// add overlay
+
+
+	// set tutorial not to run again
+	std::ofstream file;
+	file.open("tutrun.txt");
+	file << 1;
+	file.close();
+	tutorialRun = true;
+}
+
 void Game::NewGame(std::string levelNo, int width, int height)
 {
+	// Set the current level
+	levelNum = levelNo;
+
+	if (levelNum == "1" && !tutorialRun) 
+	{
+		IwTrace(APP, ("Setting up tutorial level"));
+		SetupTutorialInstructions();
+	}
+
 	grid = new Grid(this);
 	grid->GenerateLevel(levelNo, width, height, IwGxGetScreenWidth(), graphicsScale);
 
@@ -317,7 +351,6 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	AddChild(resetButton);
 
 	//Create Star file
-	levelNum = levelNo;
 	std::string filename = "star" + levelNum;
 	filename += ".txt";
 	std::ifstream file(filename.c_str());
