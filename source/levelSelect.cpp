@@ -8,8 +8,8 @@
 #include "main.h"
 #include "vibration.h"
 #include "s3eVideo.h"
-#include <sstream>
 
+#include <sstream>
 #include <iostream>
 #include <fstream>
 

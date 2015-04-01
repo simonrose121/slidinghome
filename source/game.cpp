@@ -11,6 +11,7 @@
 #include "sound.h"
 #include "levelSelect.h"
 
+#include <sstream>
 #include <iostream>
 #include <fstream>
 
@@ -128,6 +129,20 @@ void Game::CleanupOnScreenButtons()
 	}
 }
 
+void Game::CleanLevelCompletePopup()
+{
+	RemoveChild(levelComplete);
+	RemoveChild(allText);
+	delete levelComplete;
+	delete allText;
+
+	if (levelNum != "12")
+	{
+		RemoveChild(nextText);
+		delete nextText;
+	}
+}
+
 void Game::Update(float deltaTime, float alphaMul) 
 {
 	if (!m_IsActive)
@@ -152,6 +167,42 @@ void Game::Update(float deltaTime, float alphaMul)
 				EndGame();
 				NewGame(levelNum, 12, 14);
 				g_pInput->Reset();
+			}
+
+			if (currentState == COMPLETE)
+			{
+				if (levelNum != "12")
+				{
+					if (nextText->HitTest(g_pInput->m_X, g_pInput->m_Y))
+					{
+						CleanLevelCompletePopup();
+
+						// convert string to int
+						int lNum = atoi(levelNum.c_str());
+
+						// increment 
+						lNum++;
+
+						// convert back
+						std::ostringstream convert;
+						convert << lNum;
+						levelNum = convert.str();
+
+						// start new game for that level
+						NewGame(levelNum, 12, 14);
+					}
+				}
+
+				if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					CleanLevelCompletePopup();
+
+					LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+					// Update completed level stars
+					level_select->RemoveLevelStars();
+					level_select->LevelStars();
+					g_pSceneManager->SwitchTo(level_select);
+				}
 			}
 
 			if (showOnScreenButtons)
@@ -357,4 +408,44 @@ void Game::EndGame()
 	this->RemoveChild(star);
 	delete star;
 	currentState = COMPLETE;
+
+	// show panel
+	levelComplete = new CSprite();
+	levelComplete->SetImage(g_pResources->getPopup());
+	levelComplete->m_X = (float)IwGxGetScreenWidth() / 2;
+	levelComplete->m_Y = (float)IwGxGetScreenHeight() / 2;
+	levelComplete->m_W = levelComplete->GetImage()->GetWidth();
+	levelComplete->m_H = levelComplete->GetImage()->GetHeight();
+	levelComplete->m_AnchorX = 0.5;
+	levelComplete->m_AnchorY = 0.5;
+	levelComplete->m_ScaleX = getGraphicsScale();
+	levelComplete->m_ScaleY = getGraphicsScale();
+	AddChild(levelComplete);
+
+	if (levelNum != "12") 
+	{
+		nextText = new CSprite();
+		nextText->SetImage(g_pResources->getNextText());
+		nextText->m_X = (float)IwGxGetScreenWidth() / 1.6;
+		nextText->m_Y = (float)IwGxGetScreenHeight() / 1.6;
+		nextText->m_W = nextText->GetImage()->GetWidth();
+		nextText->m_H = nextText->GetImage()->GetHeight();
+		nextText->m_AnchorX = 0.5;
+		nextText->m_AnchorY = 0.5;
+		nextText->m_ScaleX = getGraphicsScale();
+		nextText->m_ScaleY = getGraphicsScale();
+		AddChild(nextText);
+	}
+
+	allText = new CSprite();
+	allText->SetImage(g_pResources->getAllText());
+	allText->m_X = (float)IwGxGetScreenWidth() / 2.6;
+	allText->m_Y = (float)IwGxGetScreenHeight() / 1.6;
+	allText->m_W = allText->GetImage()->GetWidth();
+	allText->m_H = allText->GetImage()->GetHeight();
+	allText->m_AnchorX = 0.5;
+	allText->m_AnchorY = 0.5;
+	allText->m_ScaleX = getGraphicsScale();
+	allText->m_ScaleY = getGraphicsScale();
+	AddChild(allText);
 }

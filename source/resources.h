@@ -91,6 +91,10 @@ public:
 	CIw2DImage* getSoundButtonOff(){ return soundButtonOff; }
 	CIw2DImage* getMusicButtonOff(){ return musicButtonOff; }
 
+	CIw2DImage* getPopup() { return popup; }
+	CIw2DImage* getAllText() { return allText; }
+	CIw2DImage* getNextText() { return nextText; }
+
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
 	CAtlas* getPlayerRightAtlas() { return playerRightAtlas; }
 	CAtlas* getPlayerUpAtlas() { return playerUpAtlas; }
@@ -169,6 +173,11 @@ private:
 	CIw2DImage* musicButton;
 	CIw2DImage* soundButtonOff;
 	CIw2DImage* musicButtonOff;
+
+	// Level complete
+	CIw2DImage* popup;
+	CIw2DImage* allText;
+	CIw2DImage* nextText;
 
 	// Atlases
 	CAtlas*	playerLeftAtlas;

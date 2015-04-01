@@ -29,7 +29,7 @@ public:
 	void EndGame();
 	static void	MoveToPauseMenu();
 	void ChangeBackground();
-
+	void CleanLevelCompletePopup();
 
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
@@ -53,6 +53,9 @@ private:
 	CSprite* leftButton;
 	CSprite* star;
 	CSprite* holostar;
+	CSprite* nextText;
+	CSprite* levelComplete;
+	CSprite* allText;
 	float graphicsScale;
 	float buttonScale;
 	int start_x;

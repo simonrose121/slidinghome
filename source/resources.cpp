@@ -69,6 +69,10 @@ Resources::Resources()
 	soundButtonOff = Iw2DCreateImage("textures/Sound_Button_X.png");
 	musicButtonOff = Iw2DCreateImage("textures/Music_Button_X.png");
 
+	popup = Iw2DCreateImage("textures/level-complete.png");
+	allText = Iw2DCreateImage("textures/all.png");
+	nextText = Iw2DCreateImage("textures/next.png");
+
 	// Load atlases
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
 	int frame_h = (int)(playerLeft->GetHeight());
@@ -145,6 +149,10 @@ Resources::~Resources()
 	delete musicButton;
 	delete soundButtonOff;
 	delete musicButtonOff;
+
+	delete popup;
+	delete allText;
+	delete nextText;
 
 	// Cleanup atlases
 	delete playerLeftAtlas;
