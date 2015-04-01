@@ -31,6 +31,8 @@ public:
 	void ChangeBackground();
 	void CleanLevelCompletePopup();
 	void InitLevelCompletePopup();
+	void InitInstructions();
+	void CleanupInstructions();
 
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
@@ -58,6 +60,7 @@ private:
 	CSprite* levelComplete;
 	CSprite* allText;
 	CSprite* levelInfo;
+	CSprite* instructions;
 	float graphicsScale;
 	float buttonScale;
 	int start_x;

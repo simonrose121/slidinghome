@@ -74,6 +74,7 @@ Resources::Resources()
 	nextText = Iw2DCreateImage("textures/next.png");
 
 	levelInfo = Iw2DCreateImage("textures/level-info.png");
+	instructions = Iw2DCreateImage("textures/instructions.png");
 
 	// Load atlases
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
@@ -157,6 +158,7 @@ Resources::~Resources()
 	delete nextText;
 
 	delete levelInfo;
+	delete instructions;
 
 	// Cleanup atlases
 	delete playerLeftAtlas;

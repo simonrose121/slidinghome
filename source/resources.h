@@ -95,7 +95,8 @@ public:
 	CIw2DImage* getAllText() { return allText; }
 	CIw2DImage* getNextText() { return nextText; }
 
-	CIw2DImage* getLevelInfo(){ return levelInfo; }
+	CIw2DImage* getLevelInfo() { return levelInfo; }
+	CIw2DImage* getInstructions() { return instructions; }
 
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
 	CAtlas* getPlayerRightAtlas() { return playerRightAtlas; }
@@ -183,6 +184,7 @@ private:
 	
 	// Level info
 	CIw2DImage* levelInfo;
+	CIw2DImage* instructions;
 
 	// Atlases
 	CAtlas*	playerLeftAtlas;

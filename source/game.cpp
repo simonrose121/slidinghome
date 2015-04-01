@@ -154,6 +154,20 @@ void Game::InitLevelCompletePopup()
 	AddChild(allText);
 }
 
+void Game::InitInstructions()
+{
+	instructions = new CSprite();
+	instructions->m_X = IwGxGetScreenWidth() / 2;
+	instructions->m_Y = IwGxGetScreenHeight() / 2;
+	instructions->SetImage(g_pResources->getInstructions());
+	instructions->m_W = instructions->GetImage()->GetWidth();
+	instructions->m_H = instructions->GetImage()->GetHeight();
+	instructions->m_AnchorX = 0.5;
+	instructions->m_AnchorY = 0.5;
+	instructions->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
+	instructions->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
+	AddChild(instructions);
+}
 
 void Game::CleanupOnScreenButtons()
 {
@@ -187,6 +201,12 @@ void Game::CleanLevelCompletePopup()
 	}
 }
 
+void Game::CleanupInstructions()
+{
+	RemoveChild(instructions);
+	delete instructions;
+}
+
 void Game::Update(float deltaTime, float alphaMul) 
 {
 	if (!m_IsActive)
@@ -212,6 +232,19 @@ void Game::Update(float deltaTime, float alphaMul)
 				NewGame(levelNum, 12, 14);
 				g_pInput->Reset();
 			}
+
+			if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				InitInstructions();
+				g_pInput->Reset();
+			}
+
+			if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				CleanupInstructions();
+				g_pInput->Reset();
+			}
+
 
 			if (currentState == COMPLETE)
 			{
@@ -465,5 +498,12 @@ void Game::EndGame()
 	// clean up star after each level
 	this->RemoveChild(star);
 	delete star;
+
+	// clean up info sign if there
+	if (levelNum == "1")
+	{
+		this->RemoveChild(levelInfo);
+		delete levelInfo;
+	}
 	currentState = COMPLETE;
 }
