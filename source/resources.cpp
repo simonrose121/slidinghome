@@ -73,6 +73,8 @@ Resources::Resources()
 	allText = Iw2DCreateImage("textures/all.png");
 	nextText = Iw2DCreateImage("textures/next.png");
 
+	levelInfo = Iw2DCreateImage("textures/level-info.png");
+
 	// Load atlases
 	int frame_w = (int)(playerLeft->GetWidth() / 3);
 	int frame_h = (int)(playerLeft->GetHeight());
@@ -153,6 +155,8 @@ Resources::~Resources()
 	delete popup;
 	delete allText;
 	delete nextText;
+
+	delete levelInfo;
 
 	// Cleanup atlases
 	delete playerLeftAtlas;

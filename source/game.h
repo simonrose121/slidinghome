@@ -30,6 +30,7 @@ public:
 	static void	MoveToPauseMenu();
 	void ChangeBackground();
 	void CleanLevelCompletePopup();
+	void InitLevelCompletePopup();
 
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
@@ -56,6 +57,7 @@ private:
 	CSprite* nextText;
 	CSprite* levelComplete;
 	CSprite* allText;
+	CSprite* levelInfo;
 	float graphicsScale;
 	float buttonScale;
 	int start_x;

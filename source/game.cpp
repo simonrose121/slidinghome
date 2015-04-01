@@ -175,6 +175,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					if (nextText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 					{
+						EndGame();
 						CleanLevelCompletePopup();
 
 						// convert string to int
@@ -195,6 +196,7 @@ void Game::Update(float deltaTime, float alphaMul)
 
 				if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
+					EndGame();
 					CleanLevelCompletePopup();
 
 					LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
@@ -395,6 +397,20 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	AddChild(star);
 
 	currentState = INPROGRESS;
+
+	if (levelNum == "1")	{ //or other levels with info
+		levelInfo = new CSprite();
+		levelInfo->SetImage(g_pResources->getLevelInfo());
+		levelInfo->m_X = (float)IwGxGetScreenWidth() / 1.2;
+		levelInfo->m_Y = (float)IwGxGetScreenHeight() / 1.2;
+		levelInfo->m_W = levelInfo->GetImage()->GetWidth();
+		levelInfo->m_H = levelInfo->GetImage()->GetHeight();
+		levelInfo->m_AnchorX = 0.5;
+		levelInfo->m_AnchorY = 0.5;
+		levelInfo->m_ScaleX = getGraphicsScale();
+		levelInfo->m_ScaleY = getGraphicsScale();
+		AddChild(levelInfo);
+	}
 }
 
 void Game::EndGame()
@@ -408,7 +424,10 @@ void Game::EndGame()
 	this->RemoveChild(star);
 	delete star;
 	currentState = COMPLETE;
+}
 
+void Game::InitLevelCompletePopup()
+{
 	// show panel
 	levelComplete = new CSprite();
 	levelComplete->SetImage(g_pResources->getPopup());
@@ -422,7 +441,7 @@ void Game::EndGame()
 	levelComplete->m_ScaleY = getGraphicsScale();
 	AddChild(levelComplete);
 
-	if (levelNum != "12") 
+	if (levelNum != "12")
 	{
 		nextText = new CSprite();
 		nextText->SetImage(g_pResources->getNextText());
