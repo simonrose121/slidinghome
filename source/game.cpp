@@ -111,6 +111,50 @@ void Game::InitOnScreenButtons()
 	}
 }
 
+void Game::InitLevelCompletePopup()
+{
+	// show panel
+	levelComplete = new CSprite();
+	levelComplete->SetImage(g_pResources->getPopup());
+	levelComplete->m_X = (float)IwGxGetScreenWidth() / 2;
+	levelComplete->m_Y = (float)IwGxGetScreenHeight() / 2;
+	levelComplete->m_W = levelComplete->GetImage()->GetWidth();
+	levelComplete->m_H = levelComplete->GetImage()->GetHeight();
+	levelComplete->m_AnchorX = 0.5;
+	levelComplete->m_AnchorY = 0.5;
+	levelComplete->m_ScaleX = getGraphicsScale();
+	levelComplete->m_ScaleY = getGraphicsScale();
+	AddChild(levelComplete);
+
+	if (levelNum != "12")
+	{
+		nextText = new CSprite();
+		nextText->SetImage(g_pResources->getNextText());
+		nextText->m_X = (float)IwGxGetScreenWidth() / 1.6;
+		nextText->m_Y = (float)IwGxGetScreenHeight() / 1.6;
+		nextText->m_W = nextText->GetImage()->GetWidth();
+		nextText->m_H = nextText->GetImage()->GetHeight();
+		nextText->m_AnchorX = 0.5;
+		nextText->m_AnchorY = 0.5;
+		nextText->m_ScaleX = getGraphicsScale();
+		nextText->m_ScaleY = getGraphicsScale();
+		AddChild(nextText);
+	}
+
+	allText = new CSprite();
+	allText->SetImage(g_pResources->getAllText());
+	allText->m_X = (float)IwGxGetScreenWidth() / 2.6;
+	allText->m_Y = (float)IwGxGetScreenHeight() / 1.6;
+	allText->m_W = allText->GetImage()->GetWidth();
+	allText->m_H = allText->GetImage()->GetHeight();
+	allText->m_AnchorX = 0.5;
+	allText->m_AnchorY = 0.5;
+	allText->m_ScaleX = getGraphicsScale();
+	allText->m_ScaleY = getGraphicsScale();
+	AddChild(allText);
+}
+
+
 void Game::CleanupOnScreenButtons()
 {
 	if (showOnScreenButtons) 
@@ -175,7 +219,6 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					if (nextText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 					{
-						EndGame();
 						CleanLevelCompletePopup();
 
 						// convert string to int
@@ -196,7 +239,6 @@ void Game::Update(float deltaTime, float alphaMul)
 
 				if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					EndGame();
 					CleanLevelCompletePopup();
 
 					LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
@@ -424,47 +466,4 @@ void Game::EndGame()
 	this->RemoveChild(star);
 	delete star;
 	currentState = COMPLETE;
-}
-
-void Game::InitLevelCompletePopup()
-{
-	// show panel
-	levelComplete = new CSprite();
-	levelComplete->SetImage(g_pResources->getPopup());
-	levelComplete->m_X = (float)IwGxGetScreenWidth() / 2;
-	levelComplete->m_Y = (float)IwGxGetScreenHeight() / 2;
-	levelComplete->m_W = levelComplete->GetImage()->GetWidth();
-	levelComplete->m_H = levelComplete->GetImage()->GetHeight();
-	levelComplete->m_AnchorX = 0.5;
-	levelComplete->m_AnchorY = 0.5;
-	levelComplete->m_ScaleX = getGraphicsScale();
-	levelComplete->m_ScaleY = getGraphicsScale();
-	AddChild(levelComplete);
-
-	if (levelNum != "12")
-	{
-		nextText = new CSprite();
-		nextText->SetImage(g_pResources->getNextText());
-		nextText->m_X = (float)IwGxGetScreenWidth() / 1.6;
-		nextText->m_Y = (float)IwGxGetScreenHeight() / 1.6;
-		nextText->m_W = nextText->GetImage()->GetWidth();
-		nextText->m_H = nextText->GetImage()->GetHeight();
-		nextText->m_AnchorX = 0.5;
-		nextText->m_AnchorY = 0.5;
-		nextText->m_ScaleX = getGraphicsScale();
-		nextText->m_ScaleY = getGraphicsScale();
-		AddChild(nextText);
-	}
-
-	allText = new CSprite();
-	allText->SetImage(g_pResources->getAllText());
-	allText->m_X = (float)IwGxGetScreenWidth() / 2.6;
-	allText->m_Y = (float)IwGxGetScreenHeight() / 1.6;
-	allText->m_W = allText->GetImage()->GetWidth();
-	allText->m_H = allText->GetImage()->GetHeight();
-	allText->m_AnchorX = 0.5;
-	allText->m_AnchorY = 0.5;
-	allText->m_ScaleX = getGraphicsScale();
-	allText->m_ScaleY = getGraphicsScale();
-	AddChild(allText);
 }

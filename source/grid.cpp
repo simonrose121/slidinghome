@@ -496,6 +496,7 @@ void Grid::WinningState(CTween* pTween)
 
 	g_pVibration->Vibrate();
 	
+	game->EndGame();
 	game->InitLevelCompletePopup();
 }
 
