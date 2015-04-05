@@ -43,6 +43,7 @@ void Game::Init()
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
 	pressedDown = false;
+	instructionsOn = false;
 }
 
 void Game::ChangeBackground()
@@ -235,14 +236,22 @@ void Game::Update(float deltaTime, float alphaMul)
 
 			if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				InitInstructions();
-				g_pInput->Reset();
+				if (!instructionsOn) 
+				{
+					InitInstructions();
+					g_pInput->Reset();
+					instructionsOn = true;
+				}
 			}
 
 			if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				CleanupInstructions();
-				g_pInput->Reset();
+				if (instructionsOn)
+				{
+					CleanupInstructions();
+					g_pInput->Reset();
+					instructionsOn = false;
+				}
 			}
 
 

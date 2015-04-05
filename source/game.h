@@ -72,6 +72,7 @@ private:
 	State currentState;
 	bool showOnScreenButtons;
 	bool changeToHighContrast;
+	bool instructionsOn;
 	std::string levelNum;
 };
 
