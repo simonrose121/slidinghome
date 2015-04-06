@@ -223,8 +223,9 @@ void Game::Update(float deltaTime, float alphaMul)
 		{
 			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				MoveToPauseMenu();
 				currentState = PAUSED;
+				MoveToPauseMenu();
+				g_pInput->Reset();
 			}
 
 			if (resetButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -234,26 +235,29 @@ void Game::Update(float deltaTime, float alphaMul)
 				g_pInput->Reset();
 			}
 
-			if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			if (levelNum == "1")
 			{
-				if (!instructionsOn) 
+				if (!instructionsOn)
 				{
-					InitInstructions();
-					g_pInput->Reset();
-					instructionsOn = true;
-				}
-			}
+					if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
+					{
 
-			if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
+						InitInstructions();
+						instructionsOn = true;
+						IwTrace(APP, ("instructions on"));
+					}
+				}
 				if (instructionsOn)
 				{
-					CleanupInstructions();
-					g_pInput->Reset();
-					instructionsOn = false;
+					if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
+					{
+					
+							CleanupInstructions();
+							instructionsOn = false;
+							IwTrace(APP, ("instructions off"));
+					}
 				}
 			}
-
 
 			if (currentState == COMPLETE)
 			{
@@ -513,6 +517,11 @@ void Game::EndGame()
 	{
 		this->RemoveChild(levelInfo);
 		delete levelInfo;
+		if (instructionsOn) 
+		{
+			this->RemoveChild(instructions);
+			delete instructions;
+		}
 	}
 	currentState = COMPLETE;
 }
