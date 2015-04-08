@@ -210,9 +210,7 @@ void Game::CleanLevelCompletePopup()
 	{
 		if (instructionsOn)
 		{
-			this->RemoveChild(instructions);
-			delete instructions;
-			instructionsOn = false;
+			CleanupInstructions();
 		}
 	}
 }
@@ -260,13 +258,16 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					InitInstructions();
 					IwTrace(APP, ("instructions on"));
-					g_pInput->Reset();
+					//g_pInput->Reset();
 				}
-				if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				if (instructionsOn)
 				{
-					CleanupInstructions();
-					IwTrace(APP, ("instructions off"));
-					g_pInput->Reset();
+					if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
+					{
+						CleanupInstructions();
+						IwTrace(APP, ("instructions off"));
+						g_pInput->Reset();
+					}
 				}
 			}
 
@@ -537,5 +538,11 @@ void Game::EndGame()
 			instructionsOn = false;
 		}
 	}
+
+	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+	// Update completed level stars
+	level_select->RemoveLevelStars();
+	level_select->LevelStars();
+
 	currentState = COMPLETE;
 }

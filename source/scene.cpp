@@ -81,14 +81,13 @@ void SceneManager::SwitchTo(Scene* scene)
 	}
 	else
 	{
-		IwTrace(Output, ("trying to switch scene"));
 		m_Current->setInputActive(false);
 		m_Next->setActive(true);
 		m_Next->m_X = -(float)IwGxGetScreenWidth();
 		g_pTweener->Tween(0.5f,
 			FLOAT, &m_Next->m_X, 0.0f,
 			FLOAT, &m_Current->m_X, (float)IwGxGetScreenWidth(),
-			EASING, Ease::sineIn,
+			EASING, Ease::linear,
 			ONCOMPLETE, OnSwitchComplete,
 			END);
 	}
