@@ -157,17 +157,21 @@ void Game::InitLevelCompletePopup()
 
 void Game::InitInstructions()
 {
-	instructions = new CSprite();
-	instructions->m_X = IwGxGetScreenWidth() / 2;
-	instructions->m_Y = IwGxGetScreenHeight() / 2;
-	instructions->SetImage(g_pResources->getInstructions());
-	instructions->m_W = instructions->GetImage()->GetWidth();
-	instructions->m_H = instructions->GetImage()->GetHeight();
-	instructions->m_AnchorX = 0.5;
-	instructions->m_AnchorY = 0.5;
-	instructions->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
-	instructions->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
-	AddChild(instructions);
+	if (!instructionsOn)
+	{
+		instructions = new CSprite();
+		instructions->m_X = IwGxGetScreenWidth() / 2;
+		instructions->m_Y = IwGxGetScreenHeight() / 2;
+		instructions->SetImage(g_pResources->getInstructions());
+		instructions->m_W = instructions->GetImage()->GetWidth();
+		instructions->m_H = instructions->GetImage()->GetHeight();
+		instructions->m_AnchorX = 0.5;
+		instructions->m_AnchorY = 0.5;
+		instructions->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
+		instructions->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
+		AddChild(instructions);
+		instructionsOn = true;
+	}
 }
 
 void Game::CleanupOnScreenButtons()
@@ -190,22 +194,34 @@ void Game::CleanupOnScreenButtons()
 
 void Game::CleanLevelCompletePopup()
 {
-	RemoveChild(levelComplete);
-	RemoveChild(allText);
+	this->RemoveChild(levelComplete);
+	this->RemoveChild(allText);
 	delete levelComplete;
 	delete allText;
 
 	if (levelNum != "12")
 	{
-		RemoveChild(nextText);
+		this->RemoveChild(nextText);
 		delete nextText;
+	}
+
+	// clean up info sign if there
+	if (levelNum == "1") 
+	{
+		if (instructionsOn)
+		{
+			this->RemoveChild(instructions);
+			delete instructions;
+			instructionsOn = false;
+		}
 	}
 }
 
 void Game::CleanupInstructions()
 {
-	RemoveChild(instructions);
+	this->RemoveChild(instructions);
 	delete instructions;
+	instructionsOn = false;
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -230,32 +246,27 @@ void Game::Update(float deltaTime, float alphaMul)
 
 			if (resetButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 			{
-				EndGame();
-				NewGame(levelNum, 12, 14);
-				g_pInput->Reset();
+				if (hasMoved)
+				{
+					EndGame();
+					NewGame(levelNum, 12, 14);
+					g_pInput->Reset();
+				}
 			}
 
 			if (levelNum == "1")
 			{
-				if (!instructionsOn)
+				if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
-					{
-
-						InitInstructions();
-						instructionsOn = true;
-						IwTrace(APP, ("instructions on"));
-					}
+					InitInstructions();
+					IwTrace(APP, ("instructions on"));
+					g_pInput->Reset();
 				}
-				if (instructionsOn)
+				if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
-					{
-					
-							CleanupInstructions();
-							instructionsOn = false;
-							IwTrace(APP, ("instructions off"));
-					}
+					CleanupInstructions();
+					IwTrace(APP, ("instructions off"));
+					g_pInput->Reset();
 				}
 			}
 
@@ -304,7 +315,6 @@ void Game::Update(float deltaTime, float alphaMul)
 					{
 						grid->MovePlayerUp();
 						g_pSound->SoundFunc();
-						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 					}
 				}
 				else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -314,7 +324,6 @@ void Game::Update(float deltaTime, float alphaMul)
 					{
 						grid->MovePlayerRight();
 						g_pSound->SoundFunc();
-						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 					}
 				}
 				else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -324,7 +333,6 @@ void Game::Update(float deltaTime, float alphaMul)
 					{
 						grid->MovePlayerDown();
 						g_pSound->SoundFunc();
-						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 					}
 				}
 				else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -334,7 +342,6 @@ void Game::Update(float deltaTime, float alphaMul)
 					{
 						grid->MovePlayerLeft();
 						g_pSound->SoundFunc();
-						//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 					}
 				}
 				g_pInput->Reset();
@@ -370,6 +377,7 @@ void Game::Update(float deltaTime, float alphaMul)
 						IwTrace(APP, ("move left"));
 						if (!isMoving)
 						{
+							hasMoved = true;
 							grid->MovePlayerLeft();
 							g_pSound->SoundFunc();
 							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
@@ -380,6 +388,7 @@ void Game::Update(float deltaTime, float alphaMul)
 						IwTrace(APP, ("move up"));
 						if (!isMoving)
 						{
+							hasMoved = true;
 							grid->MovePlayerUp();
 							g_pSound->SoundFunc();
 							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
@@ -390,6 +399,7 @@ void Game::Update(float deltaTime, float alphaMul)
 						IwTrace(APP, ("move right"));
 						if (!isMoving)
 						{
+							hasMoved = true;
 							grid->MovePlayerRight();
 							g_pSound->SoundFunc();
 							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
@@ -400,6 +410,7 @@ void Game::Update(float deltaTime, float alphaMul)
 						IwTrace(APP, ("move down"));
 						if (!isMoving)
 						{
+							hasMoved = true;
 							grid->MovePlayerDown();
 							g_pSound->SoundFunc();
 							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
@@ -485,6 +496,8 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	AddChild(star);
 
 	currentState = INPROGRESS;
+	hasMoved = false;
+	instructionsOn = false; 
 
 	if (levelNum == "1")	{ //or other levels with info
 		levelInfo = new CSprite();
@@ -521,6 +534,7 @@ void Game::EndGame()
 		{
 			this->RemoveChild(instructions);
 			delete instructions;
+			instructionsOn = false;
 		}
 	}
 	currentState = COMPLETE;

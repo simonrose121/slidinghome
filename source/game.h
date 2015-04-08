@@ -73,6 +73,7 @@ private:
 	bool showOnScreenButtons;
 	bool changeToHighContrast;
 	bool instructionsOn;
+	bool hasMoved;
 	std::string levelNum;
 };
 
