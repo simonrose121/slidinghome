@@ -159,6 +159,7 @@ void Game::InitInstructions()
 {
 	if (!instructionsOn)
 	{
+		instructionsOn = true;
 		instructions = new CSprite();
 		instructions->m_X = IwGxGetScreenWidth() / 2;
 		instructions->m_Y = IwGxGetScreenHeight() / 2;
@@ -170,7 +171,6 @@ void Game::InitInstructions()
 		instructions->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
 		instructions->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 		AddChild(instructions);
-		instructionsOn = true;
 	}
 }
 
@@ -220,6 +220,21 @@ void Game::CleanupInstructions()
 	this->RemoveChild(instructions);
 	delete instructions;
 	instructionsOn = false;
+
+	this->RemoveChild(levelInfo);
+	delete levelInfo;
+
+	levelInfo = new CSprite();
+	levelInfo->SetImage(g_pResources->getLevelInfo());
+	levelInfo->m_X = (float)IwGxGetScreenWidth() / 1.2;
+	levelInfo->m_Y = (float)IwGxGetScreenHeight() / 1.2;
+	levelInfo->m_W = levelInfo->GetImage()->GetWidth();
+	levelInfo->m_H = levelInfo->GetImage()->GetHeight();
+	levelInfo->m_AnchorX = 0.5;
+	levelInfo->m_AnchorY = 0.5;
+	levelInfo->m_ScaleX = getGraphicsScale();
+	levelInfo->m_ScaleY = getGraphicsScale();
+	AddChild(levelInfo);
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
