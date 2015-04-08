@@ -9,8 +9,10 @@
 #include "main.h"
 #include "vibration.h"
 #include "sound.h"
+#include "levelSelect.h"
 
 #include <fstream>
+#include <stdio.h>
 
 Settings::~Settings()
 {
@@ -87,6 +89,18 @@ void Settings::Init()
 	backButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(backButton);
 
+	reset = new CSprite();
+	reset->m_X = IwGxGetDisplayWidth() / 1.1;
+	reset->m_Y = IwGxGetScreenHeight() / 25;
+	reset->SetImage(g_pResources->getResetButton());
+	reset->m_W = reset->GetImage()->GetWidth();
+	reset->m_H = reset->GetImage()->GetHeight();
+	reset->m_AnchorX = 0.5;
+	reset->m_AnchorY = 0.5;
+	reset->m_ScaleX = game->getGraphicsScale();
+	reset->m_ScaleY = game->getGraphicsScale();
+	AddChild(reset);
+
 	// Checks if the option was selected since the last time the game has been played
 	game->setShowOnScreenButtons(false);
 
@@ -162,6 +176,11 @@ void Settings::Update(float deltaTime, float alphaMul)
 			{
 				g_pVibration->Vibrate();
 				SetVibrationOn();
+			}
+			if (reset->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			{
+				g_pVibration->Vibrate();
+				ResetGame();
 			}
 			g_pInput->Reset();
 		}
@@ -267,4 +286,25 @@ void Settings::MoveToMainMenu()
 {
 	MainMenu* main_menu = (MainMenu*)g_pSceneManager->Find("mainmenu");
 	g_pSceneManager->SwitchTo(main_menu);
+}
+
+void Settings::ResetGame()
+{
+	std::remove("star1.txt");
+	std::remove("star2.txt");
+	std::remove("star3.txt");
+	std::remove("star4.txt");
+	std::remove("star5.txt");
+	std::remove("star6.txt");
+	std::remove("star7.txt");
+	std::remove("star8.txt");
+	std::remove("star9.txt");
+	std::remove("star10.txt");
+	std::remove("star11.txt");
+	std::remove("star12.txt");
+
+	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+	// Update completed level stars
+	level_select->RemoveLevelStars();
+	level_select->LevelStars();
 }

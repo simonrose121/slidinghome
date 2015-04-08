@@ -14,6 +14,7 @@ public:
 	void Init();
 	void Update(float deltaTime = 0.0f, float alphaMul = 1.0f);
 	void Render();
+	void ResetGame();
 
 	// Button callbacks
 	void SetOnScreenButtons();
@@ -27,6 +28,7 @@ private:
 	CSprite* showHighContrastMode;
 	CSprite* showVibration;
 	CSprite* backButton;
+	CSprite* reset;
 };
 
 #endif  // __SETTINGS_H__

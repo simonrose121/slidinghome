@@ -543,7 +543,6 @@ void Game::EndGame()
 	// Update completed level stars
 	level_select->RemoveLevelStars();
 	level_select->LevelStars();
-	delete level_select;
 
 	currentState = COMPLETE;
 }
