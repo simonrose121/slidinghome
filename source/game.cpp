@@ -220,21 +220,6 @@ void Game::CleanupInstructions()
 	this->RemoveChild(instructions);
 	delete instructions;
 	instructionsOn = false;
-
-	this->RemoveChild(levelInfo);
-	delete levelInfo;
-
-	levelInfo = new CSprite();
-	levelInfo->SetImage(g_pResources->getLevelInfo());
-	levelInfo->m_X = (float)IwGxGetScreenWidth() / 1.2;
-	levelInfo->m_Y = (float)IwGxGetScreenHeight() / 1.2;
-	levelInfo->m_W = levelInfo->GetImage()->GetWidth();
-	levelInfo->m_H = levelInfo->GetImage()->GetHeight();
-	levelInfo->m_AnchorX = 0.5;
-	levelInfo->m_AnchorY = 0.5;
-	levelInfo->m_ScaleX = getGraphicsScale();
-	levelInfo->m_ScaleY = getGraphicsScale();
-	AddChild(levelInfo);
 }
 
 void Game::Update(float deltaTime, float alphaMul) 
@@ -558,6 +543,7 @@ void Game::EndGame()
 	// Update completed level stars
 	level_select->RemoveLevelStars();
 	level_select->LevelStars();
+	delete level_select;
 
 	currentState = COMPLETE;
 }
