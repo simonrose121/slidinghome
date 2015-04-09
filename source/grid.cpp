@@ -487,6 +487,8 @@ void Grid::PrintGrid()
 void Grid::WinningState(CTween* pTween)
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
+
+	// save that level is complete
 	std::string filename = "star" + game->getLevelNum();
 	filename += ".txt";
 	std::ofstream file(filename.c_str());
@@ -496,7 +498,7 @@ void Grid::WinningState(CTween* pTween)
 
 	g_pVibration->Vibrate();
 	
-	game->EndGame();
+	// show level complete popup
 	game->InitLevelCompletePopup();
 }
 

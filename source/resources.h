@@ -85,6 +85,7 @@ public:
 	CIw2DImage* getHighContrastSettingButtonSelected() { return highContrastButtonSelected; }
 	CIw2DImage* getVibrationSettingButton() { return vibrationButton; }
 	CIw2DImage* getVibrationSettingButtonSelected() { return vibrationButtonSelected; }
+	CIw2DImage* getResetLevels() { return resetLevels; }
 
 	CIw2DImage* getSoundButton(){ return soundButton; }
 	CIw2DImage* getMusicButton(){ return musicButton; }
@@ -176,6 +177,7 @@ private:
 	CIw2DImage* musicButton;
 	CIw2DImage* soundButtonOff;
 	CIw2DImage* musicButtonOff;
+	CIw2DImage* resetLevels;
 
 	// Level complete
 	CIw2DImage* popup;

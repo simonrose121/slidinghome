@@ -41,7 +41,7 @@ void Settings::Init()
 	// Add on screen buttons button
 	showOnScreenButtons = new CSprite();
 	showOnScreenButtons->m_X = IwGxGetScreenWidth() / 2;
-	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 2;
+	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 5;
 	showOnScreenButtons->SetImage(g_pResources->getOnScreenSettingButton());
 	showOnScreenButtons->m_W = showOnScreenButtons->GetImage()->GetWidth();
 	showOnScreenButtons->m_H = showOnScreenButtons->GetImage()->GetHeight();
@@ -54,7 +54,7 @@ void Settings::Init()
 	// Add High Contrast Mode Button
 	showHighContrastMode = new CSprite();
 	showHighContrastMode->m_X = IwGxGetScreenWidth() / 2;
-	showHighContrastMode->m_Y = IwGxGetScreenHeight() / 4;
+	showHighContrastMode->m_Y = IwGxGetScreenHeight() / 3;
 	showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
 	showHighContrastMode->m_W = showHighContrastMode->GetImage()->GetWidth();
 	showHighContrastMode->m_H = showHighContrastMode->GetImage()->GetHeight();
@@ -67,7 +67,7 @@ void Settings::Init()
 	// Add Vibration On Button
 	showVibration = new CSprite();
 	showVibration->m_X = IwGxGetScreenWidth() / 2;
-	showVibration->m_Y = IwGxGetScreenHeight() / 2 * 1.5;
+	showVibration->m_Y = IwGxGetScreenHeight() / 2;
 	showVibration->SetImage(g_pResources->getVibrationSettingButton());
 	showVibration->m_W = showVibration->GetImage()->GetWidth();
 	showVibration->m_H = showVibration->GetImage()->GetHeight();
@@ -92,7 +92,7 @@ void Settings::Init()
 	reset = new CSprite();
 	reset->m_X = IwGxGetDisplayWidth() / 1.1;
 	reset->m_Y = IwGxGetScreenHeight() / 25;
-	reset->SetImage(g_pResources->getResetButton());
+	reset->SetImage(g_pResources->getResetLevels());
 	reset->m_W = reset->GetImage()->GetWidth();
 	reset->m_H = reset->GetImage()->GetHeight();
 	reset->m_AnchorX = 0.5;

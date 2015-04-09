@@ -114,6 +114,9 @@ void Game::InitOnScreenButtons()
 
 void Game::InitLevelCompletePopup()
 {
+	// set that game is in complete stage
+	currentState = COMPLETE;
+
 	// show panel
 	levelComplete = new CSprite();
 	levelComplete->SetImage(g_pResources->getPopup());
@@ -277,6 +280,8 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					if (nextText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 					{
+						IwTrace(APP, ("hit next"));
+						EndGame();
 						CleanLevelCompletePopup();
 
 						// convert string to int
@@ -295,8 +300,9 @@ void Game::Update(float deltaTime, float alphaMul)
 					}
 				}
 
-				if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				else if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
+					EndGame();
 					CleanLevelCompletePopup();
 
 					LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
@@ -522,6 +528,7 @@ void Game::EndGame()
 	//cleaup this line
 	//grid = new Grid(this);
 	delete grid;
+
 	// clean up star after each level
 	this->RemoveChild(star);
 	delete star;
@@ -543,6 +550,4 @@ void Game::EndGame()
 	// Update completed level stars
 	level_select->RemoveLevelStars();
 	level_select->LevelStars();
-
-	currentState = COMPLETE;
 }

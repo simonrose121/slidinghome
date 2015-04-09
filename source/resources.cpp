@@ -63,6 +63,7 @@ Resources::Resources()
 	highContrastButtonSelected = Iw2DCreateImage("textures/highcontrast_settings_selected.png");
 	vibrationButton = Iw2DCreateImage("textures/vibration_settings.png");
 	vibrationButtonSelected = Iw2DCreateImage("textures/vibration_settings_selected.png");
+	resetLevels = Iw2DCreateImage("textures/resetlevels.png");
 
 	soundButton = Iw2DCreateImage("textures/Sound_Button.png");
 	musicButton = Iw2DCreateImage("textures/Music_Button.png");
@@ -147,6 +148,7 @@ Resources::~Resources()
 	delete highContrastButtonSelected;
 	delete vibrationButton;
 	delete vibrationButtonSelected;
+	delete resetLevels;
 
 	delete soundButton;
 	delete musicButton;
