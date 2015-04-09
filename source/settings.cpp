@@ -12,6 +12,8 @@
 #include "levelSelect.h"
 
 #include <fstream>
+#include <sstream>
+#include <iostream>
 #include <stdio.h>
 
 Settings::~Settings()
@@ -290,18 +292,20 @@ void Settings::MoveToMainMenu()
 
 void Settings::ResetGame()
 {
-	std::remove("star1.txt");
-	std::remove("star2.txt");
-	std::remove("star3.txt");
-	std::remove("star4.txt");
-	std::remove("star5.txt");
-	std::remove("star6.txt");
-	std::remove("star7.txt");
-	std::remove("star8.txt");
-	std::remove("star9.txt");
-	std::remove("star10.txt");
-	std::remove("star11.txt");
-	std::remove("star12.txt");
+	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
+	{
+		std::string levelNoVal;
+		std::ostringstream convert;
+		convert << levelNo;
+		levelNoVal = convert.str();
+
+		// set level to incomplete
+		std::string filename = "star" + levelNoVal;
+		filename += ".txt";
+		std::ofstream file(filename.c_str());
+		file << 0;
+		file.close();
+	}
 
 	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
 	// Update completed level stars

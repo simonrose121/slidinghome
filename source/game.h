@@ -33,6 +33,7 @@ public:
 	void InitLevelCompletePopup();
 	void InitInstructions();
 	void CleanupInstructions();
+	void UpdateSwitches();
 
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
@@ -43,8 +44,6 @@ public:
 	void setIsMoving(bool moving) { isMoving = moving; }
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
-
-	void updateSwitches();
 
 private:
 	// Member variables

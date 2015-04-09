@@ -459,7 +459,7 @@ void Grid::SwitchPressed()
 			switchPressed = true;
 		}
 		else
-		{
+		{ 
 			// set image of switch to down
 			gameObjects[switchIndex]->SetImage(g_pResources->getSwitchUp());
 
@@ -515,7 +515,7 @@ void Grid::SetComplete(CTween* pTween)
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setIsMoving(false);
-	game->updateSwitches();
+	game->UpdateSwitches();
 	g_pVibration->Vibrate();
 }
 
