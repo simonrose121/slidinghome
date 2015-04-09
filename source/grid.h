@@ -29,6 +29,7 @@ public:
 	void MovePlayerDown();
 	void GenerateLevel(std::string levelId, int num_columns, int num_rows, int grid_width, float graphicsScale);
 	void ClearLevel();
+	void SwitchPressed();
 	
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
@@ -37,7 +38,7 @@ public:
 	int	getGameObjectSize() const { return gameObjectSize; }
 	int	getIndex();
 	int	getDistance(Direction dir);
-	
+
 private:
 	enum ObjectIds {
 		BLANK = 0,
@@ -65,16 +66,19 @@ private:
 	bool onSnowPatch;
 	std::string levelNum;
 	bool switchPressed;
+	bool onSwitch;
+	int switchIndex;
 
 	// Private member functions
-	void SwitchPressed(int switchIndex);
 	void CheckIfOnSnowpatch();
 	void UpdatePosition(int distance, Direction dir);
 	void PrintGrid();
 	bool TestMap(Direction dir);
 	static void WinningState(CTween* pTween);
 	static void SetComplete(CTween* pTween);
+	static void SetCompleteSwitchPressed(CTween* pTween);
 	void MovePlayer(Direction dir, float newPos, int distance);
+
 };
 
 #endif

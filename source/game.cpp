@@ -429,6 +429,11 @@ void Game::Update(float deltaTime, float alphaMul)
 	}
 }
 
+void Game::updateSwitches()
+{
+	grid->SwitchPressed();
+}
+
 void Game::Render()
 {
 	Scene::Render();

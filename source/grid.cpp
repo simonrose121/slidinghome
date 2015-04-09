@@ -159,6 +159,7 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 
 	onSnowPatch = false;
 	switchPressed = false;
+	onSwitch = false;
 
 	PrintGrid();
 }
@@ -373,7 +374,8 @@ int Grid::getDistance(Direction dir)
 			// check if player is moving over a switch
 			if (CHECKLEFTID == SWITCH)
 			{
-				SwitchPressed((x - (distance + 1)) + width*y);
+				switchIndex = ((x - (distance + 1)) + width*y);
+				onSwitch = true;
 			}
 			distance++;
 		}
@@ -388,7 +390,8 @@ int Grid::getDistance(Direction dir)
 			}
 			if (CHECKRIGHTID == SWITCH)
 			{
-				SwitchPressed((x + (distance + 1)) + width*y);
+				switchIndex = ((x + (distance + 1)) + width*y);
+				onSwitch = true;
 			}
 			distance++;
 		}
@@ -403,7 +406,8 @@ int Grid::getDistance(Direction dir)
 			}
 			if (CHECKUPID == SWITCH)
 			{
-				SwitchPressed((x + width*y) - (width*(distance + 1)));
+				switchIndex = ((x + width*y) - (width*(distance + 1)));
+				onSwitch = true;
 			}
 			distance++;
 		}
@@ -418,7 +422,8 @@ int Grid::getDistance(Direction dir)
 			}
 			if (CHECKDOWNID == SWITCH)
 			{
-				SwitchPressed((x + width*y) + (width*(distance + 1)));
+				switchIndex = ((x + width*y) + (width*(distance + 1)));
+				onSwitch = true;
 			}
 			distance++;
 		}
@@ -430,45 +435,49 @@ int Grid::getDistance(Direction dir)
 	return distance;
 }
 
-void Grid::SwitchPressed(int switchIndex)
+void Grid::SwitchPressed()
 {
-	if (!switchPressed)
+	if (onSwitch)
 	{
-		// set image of switch to down
-		gameObjects[switchIndex]->SetImage(g_pResources->getSwitchDown());
-
-		// find all switch rocks and convert them to blanks
-		for (int y = 0; y < height; y++)
+		if (!switchPressed)
 		{
-			for (int x = 0; x < width; x++)
+			// set image of switch to down
+			gameObjects[switchIndex]->SetImage(g_pResources->getSwitchDown());
+
+			// find all switch rocks and convert them to blanks
+			for (int y = 0; y < height; y++)
 			{
-				if (gameObjects[x + width * y]->getId() == SWITCHROCK)
+				for (int x = 0; x < width; x++)
 				{
-					gameObjects[x + width * y]->SetImage(g_pResources->getBlank());
-					gameObjects[x + width * y]->setId(SWITCHROCKINVISIBLE);
+					if (gameObjects[x + width * y]->getId() == SWITCHROCK)
+					{
+						gameObjects[x + width * y]->SetImage(g_pResources->getBlank());
+						gameObjects[x + width * y]->setId(SWITCHROCKINVISIBLE);
+					}
 				}
 			}
+			switchPressed = true;
 		}
-		switchPressed = true;
-	}
-	else
-	{
-		// set image of switch to down
-		gameObjects[switchIndex]->SetImage(g_pResources->getSwitchUp());
-
-		// find all switch rocks and convert them to blanks
-		for (int y = 0; y < height; y++)
+		else
 		{
-			for (int x = 0; x < width; x++)
+			// set image of switch to down
+			gameObjects[switchIndex]->SetImage(g_pResources->getSwitchUp());
+
+			// find all switch rocks and convert them to blanks
+			for (int y = 0; y < height; y++)
 			{
-				if (gameObjects[x + width * y]->getId() == SWITCHROCKINVISIBLE)
+				for (int x = 0; x < width; x++)
 				{
-					gameObjects[x + width * y]->SetImage(g_pResources->getRock());
-					gameObjects[x + width * y]->setId(SWITCHROCK);
+					if (gameObjects[x + width * y]->getId() == SWITCHROCKINVISIBLE)
+					{
+						gameObjects[x + width * y]->SetImage(g_pResources->getRock());
+						gameObjects[x + width * y]->setId(SWITCHROCK);
+					}
 				}
 			}
+			switchPressed = false;
 		}
-		switchPressed = false;
+		onSwitch = false;
 	}
 }
 
@@ -506,6 +515,7 @@ void Grid::SetComplete(CTween* pTween)
 {
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setIsMoving(false);
+	game->updateSwitches();
 	g_pVibration->Vibrate();
 }
 

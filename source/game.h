@@ -44,6 +44,8 @@ public:
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
 
+	void updateSwitches();
+
 private:
 	// Member variables
 	Grid* grid;
