@@ -341,7 +341,7 @@ void LevelSelect::LevelStars()
 			star->m_AnchorY = y;
 			star->m_ScaleX = game->getGraphicsScale();
 			star->m_ScaleY = game->getGraphicsScale();
-			AddChild(star);
+			this->AddChild(star);
 			hasStars = true;
 		}
 		if ((levelNo % 4) == 0)

@@ -489,10 +489,12 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	x_pos = (float)IwGxGetScreenWidth() / 1.05;
 	y_pos = (float)IwGxGetScreenHeight() / 15;
 	star = new CSprite();
-	if (fileNumber == 1){
+	if (fileNumber == 1)
+	{
 		star->SetImage(g_pResources->getStar());
 	}
-	else {
+	else
+	{
 		star->SetImage(g_pResources->getHoloStar());
 	}
 	star->m_X = x_pos;
@@ -503,7 +505,7 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	star->m_AnchorY = 1;
 	star->m_ScaleX = getGraphicsScale();
 	star->m_ScaleY = getGraphicsScale();
-	AddChild(star);
+	this->AddChild(star);
 
 	currentState = INPROGRESS;
 	hasMoved = false;

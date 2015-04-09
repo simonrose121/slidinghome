@@ -56,7 +56,6 @@ private:
 	CSprite* downButton;
 	CSprite* leftButton;
 	CSprite* star;
-	CSprite* holostar;
 	CSprite* nextText;
 	CSprite* levelComplete;
 	CSprite* allText;
