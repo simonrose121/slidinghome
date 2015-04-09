@@ -110,6 +110,7 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 			case PLAYER:
 				playerX = x;
 				playerY = y;
+				initialIndex = x + width*y;
 				break;
 
 			case HOME:
@@ -470,6 +471,32 @@ void Grid::SwitchPressed(int switchIndex)
 		}
 		switchPressed = false;
 	}
+}
+
+void Grid::ResetPlayer()
+{
+	// return player to original position
+
+	/*
+	gameObjects[playerX + width*playerY]->Init((float)playerX * gameObjectSize + gridOriginX, gridOriginY + (float)playerY * gameObjectSize, g_pResources->getPlayerDownAtlas());
+	gameObjects[playerX + width*playerY]->m_ScaleX = gem_scale;
+	gameObjects[playerX + width*playerY]->m_ScaleY = gem_scale;
+	gameObjects[playerX + width*playerY]->setId(PLAYER);
+	player = gameObjects[playerX + width*playerY];
+	playerIndex = playerX + width * playerY;
+	game->AddChild(gameObjects[playerX + width*playerY]);
+	*/
+
+	// remove player from scene
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	int index = getIndex();
+	game->RemoveChild(gameObjects[index]);
+
+	// get index
+
+	// set x and y to that
+	gameObjects[initialIndex]->setId(PLAYER);
+
 }
 
 void Grid::PrintGrid()

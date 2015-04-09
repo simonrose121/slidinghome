@@ -29,6 +29,7 @@ public:
 	void MovePlayerDown();
 	void GenerateLevel(std::string levelId, int num_columns, int num_rows, int grid_width, float graphicsScale);
 	void ClearLevel();
+	void ResetPlayer();
 	
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
@@ -57,6 +58,7 @@ private:
 	int playerIndex;
 	int	width;
 	int height;
+	int initialIndex;
 	int	gridOriginX;
 	int	gridOriginY;
 	int	gameObjectSize;

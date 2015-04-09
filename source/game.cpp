@@ -249,8 +249,7 @@ void Game::Update(float deltaTime, float alphaMul)
 			{
 				if (hasMoved)
 				{
-					EndGame();
-					NewGame(levelNum, 12, 14);
+					//grid->ResetPlayer();
 					g_pInput->Reset();
 				}
 			}
