@@ -305,6 +305,5 @@ void Settings::ResetGame()
 
 	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
 	// Update completed level stars
-	level_select->RemoveLevelStars();
 	level_select->LevelStars();
 }

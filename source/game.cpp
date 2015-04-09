@@ -276,40 +276,38 @@ void Game::Update(float deltaTime, float alphaMul)
 
 			if (currentState == COMPLETE)
 			{
-				if (levelNum != "12")
-				{
-					if (nextText->HitTest(g_pInput->m_X, g_pInput->m_Y))
-					{
-						IwTrace(APP, ("hit next"));
-						EndGame();
-						CleanLevelCompletePopup();
-
-						// convert string to int
-						int lNum = atoi(levelNum.c_str());
-
-						// increment 
-						lNum++;
-
-						// convert back
-						std::ostringstream convert;
-						convert << lNum;
-						levelNum = convert.str();
-
-						// start new game for that level
-						NewGame(levelNum, 12, 14);
-					}
-				}
-
-				else if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
 					EndGame();
 					CleanLevelCompletePopup();
 
 					LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
-					// Update completed level stars
-					level_select->RemoveLevelStars();
-					level_select->LevelStars();
 					g_pSceneManager->SwitchTo(level_select);
+				}
+				else 
+				{
+					if (levelNum != "12")
+					{
+						if (nextText->HitTest(g_pInput->m_X, g_pInput->m_Y))
+						{
+							EndGame();
+							CleanLevelCompletePopup();
+
+							// convert string to int
+							int lNum = atoi(levelNum.c_str());
+
+							// increment 
+							lNum++;
+
+							// convert back
+							std::ostringstream convert;
+							convert << lNum;
+							levelNum = convert.str();
+
+							// start new game for that level
+							NewGame(levelNum, 12, 14);
+						}
+					}
 				}
 			}
 
@@ -548,6 +546,5 @@ void Game::EndGame()
 
 	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
 	// Update completed level stars
-	level_select->RemoveLevelStars();
 	level_select->LevelStars();
 }

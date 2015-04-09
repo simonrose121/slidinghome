@@ -308,6 +308,7 @@ void LevelSelect::MoveToMainMenu()
 
 void LevelSelect::LevelStars()
 {
+	RemoveLevelStars();
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	// keep track of row to fix y values
 	int row = 0;
@@ -356,5 +357,6 @@ void LevelSelect::RemoveLevelStars()
 	{
 		this->RemoveChild(star);
 		delete star;
+		hasStars = false;
 	}
 }
