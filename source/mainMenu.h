@@ -3,6 +3,9 @@
 
 #include "scene.h"
 
+/*
+	Main menu scene
+*/
 class MainMenu : public Scene
 {
 public:
@@ -20,13 +23,14 @@ public:
 	void SetSound();
 	void SetMusic();
 
+	// Getters
 	float getGraphicsScale() { return graphicsScale; }
 	bool getHighContrastMode() { return changeToHighContrast; }
-
-	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
-
 	CSprite* getSoundButtonHome() { return soundButtonHome; }
 	CSprite* getMusicButtonHome() { return musicButtonHome; }
+
+	// Setters
+	void setHighContrastMode(bool highContrastMode) { changeToHighContrast = highContrastMode; }
 
 private:
 	// Member variables

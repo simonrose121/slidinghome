@@ -3,6 +3,10 @@
 
 #include "scene.h"
 
+/*
+	Settings scene to allow the player to change
+	in game settings
+*/
 class Settings : public Scene
 {
 public:

@@ -14,6 +14,7 @@ Sound::~Sound()
 
 void Sound::SoundFunc()
 {
+	// play movement sound
 	if (changeSound)
 	{
 		g_pAudio->PlaySound("audio/ice_skating_2.wav");
@@ -22,6 +23,7 @@ void Sound::SoundFunc()
 
 void Sound::StartMusic()
 {
+	// play in game music
 	g_pAudio->PlayMusic("audio/in_game.mp3", true);
 }
 

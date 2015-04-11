@@ -13,6 +13,7 @@ Vibration::~Vibration()
 
 void Vibration::Vibrate()
 {
+	// vibrate if option is set
 	if (changeVibration)
 	{
 		s3eVibraVibrate(intensity, time);

@@ -17,13 +17,6 @@
 
 SceneManager* g_pSceneManager = 0;
 
-
-//
-//
-// Scene class
-//
-//
-
 Scene::Scene() : m_NameHash(0), m_IsActive(true), m_IsInputActive(false)
 {
 	m_X = -(float)IwGxGetScreenWidth();

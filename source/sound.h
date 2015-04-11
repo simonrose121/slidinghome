@@ -3,6 +3,10 @@
 
 #include "scene.h"
 
+/*
+	Sound class to handle all music and sound
+	effects in game
+*/
 class Sound
 {
 public:

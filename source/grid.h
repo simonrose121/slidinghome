@@ -8,6 +8,10 @@
 using namespace Iw2DSceneGraphCore;
 using namespace Iw2DSceneGraph;
 
+/*
+	Grid is used by the game to show the assets and 
+	figure out player movement
+*/
 class Grid
 {
 public:
@@ -31,6 +35,7 @@ public:
 	void ClearLevel();
 	void SwitchPressed();
 	
+	// Getters
 	int	getWidth() const { return width; }
 	int	getHeight() const { return height; }
 	int	getGridOriginX() const { return gridOriginX; }

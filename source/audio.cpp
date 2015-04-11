@@ -36,9 +36,6 @@ bool AudioSound::Load(const char* filename)
     return true;
 }
 
-//
-// Audio class
-//
 Audio::Audio()
 {
     // Initialise IwSound

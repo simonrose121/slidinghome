@@ -6,6 +6,10 @@
 
 #define GRAPHIC_DESIGN_WIDTH	768
 
+/*
+	Game class is a scene runs the gameplay
+	Holds an instance of the grid
+*/
 class Game : public Scene 
 {
 public:
@@ -35,12 +39,14 @@ public:
 	void CleanupInstructions();
 	void UpdateSwitches();
 
+	// Getters
 	float getGraphicsScale() { return graphicsScale; }
 	bool getIsMoving() { return isMoving; }
 	bool getShowOnScreenButtons() { return showOnScreenButtons; }
 	bool getHighContrastMode() { return changeToHighContrast; }
 	std::string getLevelNum() { return levelNum; }
 
+	// Setters
 	void setIsMoving(bool moving) { isMoving = moving; }
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }

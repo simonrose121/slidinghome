@@ -42,8 +42,6 @@ void GameObject::setGridCoords(int x, int y)
 {
 	gridX = x;
 	gridY = y;
-
-	IwTrace(APP, ("i have been set to %d, %d", gridX, gridY));
 }
 
 std::pair<int, int> GameObject::getCoords()

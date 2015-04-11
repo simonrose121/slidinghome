@@ -7,15 +7,8 @@
 
 using namespace Iw2DSceneGraph;
 
-/**
-* @class Resources
-*
-* @brief Resources class
-*
-* The that manages the lifetime of the following types of resources:
-* - Images
-* - Fonts
-* - Atlases
+/*
+	Holds all resources for the app
 */
 class Resources
 {
@@ -24,16 +17,14 @@ public:
 	Resources();
 	~Resources();
 
-	// Member functions
+	// Getters
 	CIw2DImage*	getMainMenuBG()	{ return mainMenuBG; }
 	CIw2DImage* getMainMenuBGHC(){ return mainMenuBGHC; }
 	CIw2DImage*	getEndScreenBG()	{ return endScreenBG; }
 	CIw2DImage*	getPauseMenuBG()	{ return pauseMenuBG; }
 	CIw2DImage* getPauseMenuBGHC(){ return pauseMenuBGHC; }
 	CIw2DImage*	getGameBG() { return gameBG; }
-
 	CIw2DImage* getGameBGHC() { return gameBGHC; }
-
 	CIw2DImage*	getPlayButton() { return playButton; }
 	CIw2DImage* getPlayButtonHC(){ return playButtonHC; }
 	CIw2DImage*	getExitButton() { return exitButton; }
@@ -42,10 +33,8 @@ public:
 	CIw2DImage* getSettingsButton() { return settingsButton; }
 	CIw2DImage* getSettingsButtonHC() { return settingsButtonHC; }
 	CIw2DImage* getBackButton() { return backButton; }
-
 	CIw2DImage* getStar() { return star; }
 	CIw2DImage* getHoloStar() { return holoStar; }
-
 	CIw2DImage*	getPlayer() { return player; }
 	CIw2DImage*	getPlayerLeft() { return playerLeft; }
 	CIw2DImage* getPlayerRight() { return playerRight; }
@@ -60,7 +49,6 @@ public:
 	CIw2DImage* getRockUpdated() { return rockUpdated; }
 	CIw2DImage* getSwitchUp() { return switchUp; }
 	CIw2DImage* getSwitchDown() { return switchDown; }
-
 	CIw2DImage* getLevel1() { return level1; }
 	CIw2DImage* getLevel2() { return level2; }
 	CIw2DImage* getLevel3() { return level3; }
@@ -73,12 +61,10 @@ public:
 	CIw2DImage* getLevel10() { return level10; }
 	CIw2DImage* getLevel11() { return level11; }
 	CIw2DImage* getLevel12() { return level12; }
-
 	CIw2DImage* getUpButton() { return upButton; }
 	CIw2DImage* getRightButton() { return rightButton; }
 	CIw2DImage* getDownButton() { return downButton; }
 	CIw2DImage* getLeftButton() { return leftButton; }
-
 	CIw2DImage* getOnScreenSettingButton() { return onScreenSettingButton; }
 	CIw2DImage* getOnScreenSettingButtonSelected() { return onScreenSettingButtonSelected; }
 	CIw2DImage* getHighContrastSettingButton() { return highContrastButton; }
@@ -86,19 +72,15 @@ public:
 	CIw2DImage* getVibrationSettingButton() { return vibrationButton; }
 	CIw2DImage* getVibrationSettingButtonSelected() { return vibrationButtonSelected; }
 	CIw2DImage* getResetLevels() { return resetLevels; }
-
 	CIw2DImage* getSoundButton(){ return soundButton; }
 	CIw2DImage* getMusicButton(){ return musicButton; }
 	CIw2DImage* getSoundButtonOff(){ return soundButtonOff; }
 	CIw2DImage* getMusicButtonOff(){ return musicButtonOff; }
-
 	CIw2DImage* getPopup() { return popup; }
 	CIw2DImage* getAllText() { return allText; }
 	CIw2DImage* getNextText() { return nextText; }
-
 	CIw2DImage* getLevelInfo() { return levelInfo; }
 	CIw2DImage* getInstructions() { return instructions; }
-
 	CAtlas* getPlayerLeftAtlas() { return playerLeftAtlas; }
 	CAtlas* getPlayerRightAtlas() { return playerRightAtlas; }
 	CAtlas* getPlayerUpAtlas() { return playerUpAtlas; }

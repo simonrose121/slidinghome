@@ -22,7 +22,6 @@ files
 	gameObject.cpp
 	grid.cpp
 	input.cpp
-	level.cpp
 	levelSelect.cpp
 	main.cpp
 	mainMenu.cpp
@@ -38,7 +37,6 @@ files
 	gameObject.h
 	grid.h
 	input.h
-	level.h
 	levelSelect.h
 	main.h
 	mainMenu.h

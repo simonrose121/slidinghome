@@ -3,6 +3,9 @@
 
 #include "scene.h"
 
+/*
+	Vibration class to manage vibration
+*/
 class Vibration
 {
 public:

@@ -23,7 +23,7 @@ void MainMenu::Init()
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
-	// Create menu background
+	// create menu background
 	background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
 	background->m_Y = (float)IwGxGetScreenHeight() / 2;
@@ -32,12 +32,11 @@ void MainMenu::Init()
 	background->m_H = background->GetImage()->GetHeight();
 	background->m_AnchorX = 0.5;
 	background->m_AnchorY = 0.5;
-	// Fit background to screen size
+	// fit background to screen size
 	background->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	// Create Start Game button
 	playButton = new CSprite();
 	playButton->SetImage(g_pResources->getPlayButtonHC());
 	playButton->m_X = (float)IwGxGetScreenWidth() / 1.3;
@@ -50,7 +49,6 @@ void MainMenu::Init()
 	playButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(playButton);
 
-	// Create settings
 	settingsButton = new CSprite();
 	settingsButton->SetImage(g_pResources->getSettingsButtonHC());
 	settingsButton->m_X = (float)IwGxGetScreenWidth() / 1.42;
@@ -63,7 +61,6 @@ void MainMenu::Init()
 	settingsButton->m_ScaleY = game->getGraphicsScale();
 	AddChild(settingsButton);
 
-	// Create Sound Button
 	soundButtonHome = new CSprite();
 	soundButtonHome->SetImage(g_pResources->getSoundButton());
 	soundButtonHome->m_X = (float)IwGxGetScreenWidth() / 1.55;
@@ -76,7 +73,6 @@ void MainMenu::Init()
 	soundButtonHome->m_ScaleY = game->getGraphicsScale();
 	AddChild(soundButtonHome);
 
-	// Create Music Button
 	musicButtonHome = new CSprite();
 	musicButtonHome->SetImage(g_pResources->getMusicButton());
 	musicButtonHome->m_X = (float)IwGxGetScreenWidth() / 2.05;
@@ -88,40 +84,49 @@ void MainMenu::Init()
 	musicButtonHome->m_ScaleX = game->getGraphicsScale();
 	musicButtonHome->m_ScaleY = game->getGraphicsScale();
 	AddChild(musicButtonHome);
-
 	
+	// check if sound enabled previously and set accordingly
 	std::ifstream soundfile("sound.txt");
 	int sound = 0;
 	soundfile >> sound;
 	soundfile.close();
-	if (sound == 1){
+	if (sound == 1)
+	{
 		soundButtonHome->SetImage(g_pResources->getSoundButton());
 		g_pSound->setSoundMode(true);
 	}
-	else{
+	else
+	{
 		soundButtonHome->SetImage(g_pResources->getSoundButtonOff());
 		g_pSound->setSoundMode(false);
 	}
 	
+	// check if music enabled previously and set accordingly
 	std::ifstream musicfile("music.txt");
 	int music = 0;
 	musicfile >> music;
 	musicfile.close();
-	if (music == 1){
+	if (music == 1)
+	{
 		musicButtonHome->SetImage(g_pResources->getMusicButton());
 		g_pSound->setMusicMode(true);
 	}
-	else{
+	else
+	{
 		musicButtonHome->SetImage(g_pResources->getMusicButtonOff());
 		g_pSound->setMusicMode(false);
 	}
 }
 
-void MainMenu::ChangeBackground(){
-	if (changeToHighContrast){
+void MainMenu::ChangeBackground()
+{
+	// set high contrast mode
+	if (changeToHighContrast)
+	{
 		background->SetImage(g_pResources->getMainMenuBGHC());
 	}
-	else{
+	else
+	{
 		background->SetImage(g_pResources->getMainMenuBG());
 	}
 }
@@ -133,7 +138,7 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 
 	Scene::Update(deltaTime, alphaMul);
 
-	// Detect screen tap
+	// detect screen tap
 	if (m_IsInputActive && m_Manager->getCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
 	{
 		g_pInput->Reset();
@@ -141,8 +146,6 @@ void MainMenu::Update(float deltaTime, float alphaMul)
 		{
 			MoveToLevelSelect();
 			g_pVibration->Vibrate();
-			// Start playing game music here
-			//Audio::PlayMusic("audio/in_game.mp3", true);
 		}
 		else if (settingsButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
@@ -179,7 +182,9 @@ void MainMenu::MoveToSettings()
 	g_pSceneManager->SwitchTo(settings);
 }
 
-void MainMenu::SetSound(){
+void MainMenu::SetSound()
+{
+	// update sound file
 	std::ofstream soundfile;
 	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pauseMenu");
 
@@ -205,7 +210,9 @@ void MainMenu::SetSound(){
 	}
 }
 
-void MainMenu::SetMusic(){
+void MainMenu::SetMusic()
+{
+	// update music file
 	std::ofstream musicfile;
 	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pauseMenu");
 

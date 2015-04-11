@@ -5,6 +5,10 @@
 
 #define LEVEL_COUNT 12
 
+/*
+	Level select scene which allows the player to select
+	a level and shows completed levels with stars on
+*/
 class LevelSelect : public Scene
 {
 public:

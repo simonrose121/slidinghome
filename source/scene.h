@@ -23,6 +23,10 @@ using namespace IwTween;
 
 class SceneManager;
 
+/*
+	Scene class used for all instances of different scenes
+	in the app
+*/
 class Scene : public CNode
 {
 public:

@@ -3,6 +3,10 @@
 
 #include "scene.h"
 
+/*
+	Pause menu screen which allows the player
+	to go back to the game of exit to main menu
+*/
 class PauseMenu : public Scene
 {
 public:

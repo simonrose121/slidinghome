@@ -6,6 +6,9 @@
 using namespace Iw2DSceneGraphCore;
 using namespace Iw2DSceneGraph;
 
+/*
+	GameObjects are used in the grid to represent all game assets
+*/
 class GameObject : public CSprite
 {
 public:

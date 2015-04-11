@@ -25,8 +25,10 @@ void Game::Init()
 {
 	Scene::Init();
 
+	// set graphics scale for all assets
 	graphicsScale = (float)IwGxGetScreenWidth() / GRAPHIC_DESIGN_WIDTH;
 
+	// initialise background
 	background = new CSprite();
 	background->m_X = IwGxGetScreenWidth() / 2;
 	background->m_Y = IwGxGetScreenHeight() / 2;
@@ -39,6 +41,7 @@ void Game::Init()
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
+	// set initial boolean values
 	isMoving = false;
 	minimumSwipe = 100 * graphicsScale;
 	swipeOffset = 200 * graphicsScale;
@@ -181,13 +184,13 @@ void Game::CleanupOnScreenButtons()
 {
 	if (showOnScreenButtons) 
 	{
-		// Remove children from scene
+		// remove children from scene
 		RemoveChild(upButton);
 		RemoveChild(rightButton);
 		RemoveChild(downButton);
 		RemoveChild(leftButton);
 
-		// Cleanup buttons so they can be reinitialised
+		// cleanup buttons so they can be reinitialised
 		delete rightButton;
 		delete downButton;
 		delete upButton;
@@ -197,13 +200,16 @@ void Game::CleanupOnScreenButtons()
 
 void Game::CleanLevelCompletePopup()
 {
+	// delete level popup
 	this->RemoveChild(levelComplete);
 	this->RemoveChild(allText);
 	delete levelComplete;
 	delete allText;
 
+	// if its not the last level
 	if (levelNum != "12")
 	{
+		// remove text
 		this->RemoveChild(nextText);
 		delete nextText;
 	}
@@ -220,6 +226,7 @@ void Game::CleanLevelCompletePopup()
 
 void Game::CleanupInstructions()
 {
+	// delete instructions
 	this->RemoveChild(instructions);
 	delete instructions;
 	instructionsOn = false;
@@ -232,12 +239,13 @@ void Game::Update(float deltaTime, float alphaMul)
 
 	Scene::Update(deltaTime, alphaMul);
 
-	// Detect screen tap
+	// detect screen tap
 	if (m_IsInputActive && m_Manager->getCurrent() == this)
 	{
-		// Check if player has pressed and lifted off
+		// check if user has pressed and lifted off
 		if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 		{
+			// these can't be pressed if game is complete
 			if (currentState != COMPLETE)
 			{
 				if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -258,6 +266,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				}
 			}
 
+			// level info only active on level 1
 			if (levelNum == "1")
 			{
 				if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -277,13 +286,16 @@ void Game::Update(float deltaTime, float alphaMul)
 				}
 			}
 
+			// these can only be pressed if level is complete
 			if (currentState == COMPLETE)
 			{
 				if (allText->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
+					// end the game
 					EndGame();
 					CleanLevelCompletePopup();
 
+					// move to level select
 					LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
 					g_pSceneManager->SwitchTo(level_select);
 				}
@@ -314,11 +326,11 @@ void Game::Update(float deltaTime, float alphaMul)
 				}
 			}
 
+			// if on screen buttons active
 			if (showOnScreenButtons)
 			{
 				if (upButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					IwTrace(APP, ("move up button"));
 					if (!isMoving)
 					{
 						grid->MovePlayerUp();
@@ -327,7 +339,6 @@ void Game::Update(float deltaTime, float alphaMul)
 				}
 				else if (rightButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					IwTrace(APP, ("move right button"));
 					if (!isMoving)
 					{
 						grid->MovePlayerRight();
@@ -336,7 +347,6 @@ void Game::Update(float deltaTime, float alphaMul)
 				}
 				else if (downButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					IwTrace(APP, ("move down button"));
 					if (!isMoving)
 					{
 						grid->MovePlayerDown();
@@ -345,7 +355,6 @@ void Game::Update(float deltaTime, float alphaMul)
 				}
 				else if (leftButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					IwTrace(APP, ("move left button"));
 					if (!isMoving)
 					{
 						grid->MovePlayerLeft();
@@ -356,11 +365,12 @@ void Game::Update(float deltaTime, float alphaMul)
 			}
 		}
 
-		// If input is in grid
+		// swipe movement
 		if (g_pInput->m_Y >= grid->getGridOriginY())
 		{
 			if (!showOnScreenButtons)
 			{
+				// when user first presses down
 				if (g_pInput->m_Touched && !g_pInput->m_PrevTouched)
 				{
 					if (!pressedDown)
@@ -369,59 +379,46 @@ void Game::Update(float deltaTime, float alphaMul)
 						start_x = g_pInput->m_X;
 						start_y = g_pInput->m_Y;
 						pressedDown = true;
-
-						IwTrace(APP, ("pressed down is %d", pressedDown));
 					}
-
-					IwTrace(APP, ("currently pressing down"));
-
-					IwTrace(APP, ("start x,y = %d,%d current x,y = %d,%d", start_x, start_y, g_pInput->m_X, g_pInput->m_Y));
 				}
+				// when user lifts off
 				else if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 				{
 					// Check current input is smaller than start touch position minus min swipe
 					if (g_pInput->m_X < start_x - minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
 					{
-						IwTrace(APP, ("move left"));
 						if (!isMoving)
 						{
 							hasMoved = true;
 							grid->MovePlayerLeft();
 							g_pSound->SoundFunc();
-							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 						}
 					}
 					if (g_pInput->m_Y < start_y - minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
 					{
-						IwTrace(APP, ("move up"));
 						if (!isMoving)
 						{
 							hasMoved = true;
 							grid->MovePlayerUp();
 							g_pSound->SoundFunc();
-							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 						}
 					}
 					if (g_pInput->m_X > start_x + minimumSwipe && g_pInput->m_Y < start_y + swipeOffset && g_pInput->m_Y > start_y - swipeOffset)
 					{
-						IwTrace(APP, ("move right"));
 						if (!isMoving)
 						{
 							hasMoved = true;
 							grid->MovePlayerRight();
 							g_pSound->SoundFunc();
-							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 						}
 					}
 					if (g_pInput->m_Y > start_y + minimumSwipe && g_pInput->m_X < start_x + swipeOffset && g_pInput->m_X > start_x - swipeOffset)
 					{
-						IwTrace(APP, ("move down"));
 						if (!isMoving)
 						{
 							hasMoved = true;
 							grid->MovePlayerDown();
 							g_pSound->SoundFunc();
-							//g_pAudio->PlaySound("audio/ice_skating_2.wav");
 						}
 					}
 					pressedDown = false;
@@ -450,10 +447,10 @@ void Game::MoveToPauseMenu()
 
 void Game::NewGame(std::string levelNo, int width, int height)
 {
+	// generate a new grid
 	grid = new Grid(this);
 	grid->GenerateLevel(levelNo, width, height, IwGxGetScreenWidth(), graphicsScale);
 
-	// Create Pause Button
 	float x_pos = (float)IwGxGetScreenWidth() / 8;
 	float y_pos = (float)IwGxGetScreenHeight() / 15;
 	pauseButton = new CSprite();
@@ -468,7 +465,6 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	pauseButton->m_ScaleY = getGraphicsScale();
 	AddChild(pauseButton);
 
-	// Create Reset button
 	resetButton = new CSprite();
 	resetButton->SetImage(g_pResources->getResetButton());
 	resetButton->m_X = (float)IwGxGetScreenWidth() / 4;
@@ -481,7 +477,7 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	resetButton->m_ScaleY = getGraphicsScale();
 	AddChild(resetButton);
 
-	//Create Star file
+	// get and set star dependant on if level is previously complete
 	levelNum = levelNo;
 	std::string filename = "star" + levelNum;
 	filename += ".txt";
@@ -508,11 +504,13 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	star->m_ScaleY = getGraphicsScale();
 	this->AddChild(star);
 
+	// set variables for start a round
 	currentState = INPROGRESS;
 	hasMoved = false;
 	instructionsOn = false; 
 
-	if (levelNum == "1")	{ //or other levels with info
+	// create level info sign on level 1
+	if (levelNum == "1")	{
 		levelInfo = new CSprite();
 		levelInfo->SetImage(g_pResources->getLevelInfo());
 		levelInfo->m_X = (float)IwGxGetScreenWidth() / 1.2;
@@ -533,13 +531,13 @@ void Game::EndGame()
 	currentState = COMPLETE;
 
 	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
-	// Update completed level stars
+	// update completed level stars
 	level_select->LevelStars();
 
 	isMoving = false;
 	CleanupOnScreenButtons();
-	//cleaup this line
-	//grid = new Grid(this);
+
+	// cleanup grid
 	delete grid;
 
 	// clean up star after each level

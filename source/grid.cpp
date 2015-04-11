@@ -13,6 +13,7 @@
 #include <fstream>
 #include <string>
 
+// macros to increase readability
 #define SIZEY 15
 #define SIZEX 11
 #define GRID_OFFSET_X 20
@@ -33,24 +34,24 @@ Grid::~Grid()
 {
 	if (gameObjects != 0)
 	{
+		// delete each gameobject seperately
 		for (int y = 0; y < width; y++)
 		{
 			for (int x = 0; x < height; x++)
 			{
+				// ensure it is removed from scene
 				game->RemoveChild(gameObjects[x * width + y]);
-				//cleanup this line 
-				//gameObjects[x + width*y] = new GameObject();
+				// and deleted from the heap
 				delete gameObjects[x * width + y];
 			}
 		}
-		//cleanup this line 
-		//gameObjects = new GameObject*[num_columns * num_rows];
 		delete[] gameObjects;
 	}
 }
 
 void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int grid_width, float graphicsScale)
 {
+	// read in the level file
 	std::string filename = "maps/level" + levelNo;
 	filename += ".txt";
 	std::ifstream file(filename.c_str());
@@ -66,22 +67,31 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 		}
 		if (!file) break;
 	}
+
+	// set width and height
 	width = num_columns;
 	height = num_rows;
 	gameObjects = new GameObject*[num_columns * num_rows];
 
+	// set member variables
 	int bm_width = (int)g_pResources->getRock()->GetWidth();
 	gameObjectSize = (IwGxGetScreenWidth() * bm_width) / GRAPHIC_DESIGN_WIDTH;
 	speedVal = 8.0;
-
 	float gem_scale = (float)gameObjectSize / bm_width;
 
+	// set grid origins
 	gridOriginX = (int)(GRID_OFFSET_X * graphicsScale);
 	gridOriginY = IwGxGetScreenHeight() - (num_rows * gameObjectSize) - (int)(GRID_OFFSET_Y * graphicsScale);
 
+	// set initial player position
 	int playerX = 0;
 	int playerY = 0;
 
+	onSnowPatch = false;
+	switchPressed = false;
+	onSwitch = false;
+
+	// initialise map depending on id read in from file
 	for (int y = 0; y < num_rows; y++)
 	{
 		for (int x = 0; x < num_columns; x++)
@@ -144,7 +154,7 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 		}
 	}
 
-	// Initialise player last so appears on top of snowpatches / switches
+	// initialise player last so appears on top of snowpatches / switches
 	gameObjects[playerX + width*playerY]->Init((float)playerX * gameObjectSize + gridOriginX, gridOriginY + (float)playerY * gameObjectSize, g_pResources->getPlayerDownAtlas());
 	gameObjects[playerX + width*playerY]->m_ScaleX = gem_scale;
 	gameObjects[playerX + width*playerY]->m_ScaleY = gem_scale;
@@ -153,15 +163,12 @@ void Grid::GenerateLevel(std::string levelNo, int num_columns, int num_rows, int
 	playerIndex = playerX + width * playerY;
 	game->AddChild(gameObjects[playerX + width*playerY]);
 
-	// Initialise on screen buttons
+	// initialise on screen buttons
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->InitOnScreenButtons();
 
-	onSnowPatch = false;
-	switchPressed = false;
-	onSwitch = false;
-
-	PrintGrid();
+	// check if grid is initialised correctly
+	//PrintGrid();
 }
 
 void Grid::MovePlayerLeft()
@@ -216,9 +223,13 @@ void Grid::MovePlayer(Direction dir, float newPos, int distance)
 {
 	float speed = distance / speedVal;
 
+	// update player position on grid behind
 	UpdatePosition(distance, dir);
+
+	// check if player is hitting home
 	bool hasWon = TestMap(dir);
 
+	// if player is about to win then call different callback
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	if (dir == DOWN || dir == UP)
 	{
@@ -262,6 +273,7 @@ void Grid::MovePlayer(Direction dir, float newPos, int distance)
 
 void Grid::UpdatePosition(int distance, Direction dir)
 {
+	// get current coordinates of player
 	std::pair<int, int> coords = gameObjects[playerIndex]->getCoords();
 	int x = coords.first;
 	int y = coords.second;
@@ -312,7 +324,7 @@ void Grid::UpdatePosition(int distance, Direction dir)
 		break;
 	}
 
-	PrintGrid();
+	//PrintGrid();
 }
 
 void Grid::CheckIfOnSnowpatch() 
@@ -331,6 +343,7 @@ void Grid::CheckIfOnSnowpatch()
 
 int Grid::getIndex()
 {
+	// get player index
 	int index = 0;
 
 	for (int y = 0; y < height; y++)
@@ -344,8 +357,6 @@ int Grid::getIndex()
 		}
 	}
 
-	IwTrace(APP, ("player found at %d", index));
-
 	return index;
 }
 
@@ -357,17 +368,16 @@ int Grid::getDistance(Direction dir)
 	int x = coords.first;
 	int y = coords.second;
 
-	IwTrace(APP, ("i am at %d, %d", x, y));
-
 	switch (dir)
 	{
 	case LEFT:
+		// while player can move
 		while (CHECKLEFTID == BLANK || CHECKLEFTID == SWITCH || CHECKLEFTID == SNOWPATCH || CHECKLEFTID == SWITCHROCKINVISIBLE)
 		{
-			// Check for snowpatch
+			// check for snowpatch
 			if (CHECKLEFTID == SNOWPATCH)
 			{
-				// Ensure player is on snowpatch
+				// ensure player is on snowpatch
 				distance++;
 				break;
 			}
@@ -460,10 +470,10 @@ void Grid::SwitchPressed()
 		}
 		else
 		{ 
-			// set image of switch to down
+			// set image of switch to up
 			gameObjects[switchIndex]->SetImage(g_pResources->getSwitchUp());
 
-			// find all switch rocks and convert them to blanks
+			// find all switch rocks and convert them to back
 			for (int y = 0; y < height; y++)
 			{
 				for (int x = 0; x < width; x++)
@@ -483,6 +493,7 @@ void Grid::SwitchPressed()
 
 void Grid::PrintGrid()
 {
+	// print grid to console for debugging purposes
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
@@ -513,6 +524,7 @@ void Grid::WinningState(CTween* pTween)
 
 void Grid::SetComplete(CTween* pTween)
 {
+	// called after every move that isn't to win
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	game->setIsMoving(false);
 	game->UpdateSwitches();
@@ -521,10 +533,12 @@ void Grid::SetComplete(CTween* pTween)
 
 bool Grid::TestMap(Direction dir)
 {
+	// get player position
 	std::pair<int, int> coords = gameObjects[playerIndex]->getCoords();
 	int x = coords.first;
 	int y = coords.second;
 
+	// check if hitting home
 	switch (dir)
 	{
 	case LEFT:

@@ -26,7 +26,6 @@ void Settings::Init()
 
 	Game* game = (Game*)g_pSceneManager->Find("game");
 
-	// Create menu background
 	CSprite* background = new CSprite();
 	background->m_X = (float)IwGxGetScreenWidth() / 2;
 	background->m_Y = (float)IwGxGetScreenHeight() / 2;
@@ -35,12 +34,10 @@ void Settings::Init()
 	background->m_H = background->GetImage()->GetHeight();
 	background->m_AnchorX = 0.5;
 	background->m_AnchorY = 0.5;
-	// Fit background to screen size
 	background->m_ScaleX = (float)IwGxGetScreenWidth() / background->GetImage()->GetWidth();
 	background->m_ScaleY = (float)IwGxGetScreenHeight() / background->GetImage()->GetHeight();
 	AddChild(background);
 
-	// Add on screen buttons button
 	showOnScreenButtons = new CSprite();
 	showOnScreenButtons->m_X = IwGxGetScreenWidth() / 2;
 	showOnScreenButtons->m_Y = IwGxGetScreenHeight() / 5;
@@ -53,10 +50,9 @@ void Settings::Init()
 	showOnScreenButtons->m_ScaleY = game->getGraphicsScale();
 	AddChild(showOnScreenButtons);
 
-	// Add High Contrast Mode Button
 	showHighContrastMode = new CSprite();
 	showHighContrastMode->m_X = IwGxGetScreenWidth() / 2;
-	showHighContrastMode->m_Y = IwGxGetScreenHeight() / 3;
+	showHighContrastMode->m_Y = IwGxGetScreenHeight() / 2.85;
 	showHighContrastMode->SetImage(g_pResources->getHighContrastSettingButton());
 	showHighContrastMode->m_W = showHighContrastMode->GetImage()->GetWidth();
 	showHighContrastMode->m_H = showHighContrastMode->GetImage()->GetHeight();
@@ -66,7 +62,6 @@ void Settings::Init()
 	showHighContrastMode->m_ScaleY = game->getGraphicsScale();
 	AddChild(showHighContrastMode);
 
-	// Add Vibration On Button
 	showVibration = new CSprite();
 	showVibration->m_X = IwGxGetScreenWidth() / 2;
 	showVibration->m_Y = IwGxGetScreenHeight() / 2;
@@ -103,9 +98,8 @@ void Settings::Init()
 	reset->m_ScaleY = game->getGraphicsScale();
 	AddChild(reset);
 
-	// Checks if the option was selected since the last time the game has been played
+	// checks if the option was selected since the last time the game has been played
 	game->setShowOnScreenButtons(false);
-
 	std::ifstream screenbuttonfile("screenbuttons.txt");
 	int screenbuttons = 0;
 	screenbuttonfile >> screenbuttons;
@@ -116,10 +110,10 @@ void Settings::Init()
 		game->setShowOnScreenButtons(true);
 	}
 
+	// check high contrast mode
 	game->setHighContrastMode(false);
 	MainMenu* menu = (MainMenu*)g_pSceneManager->Find("mainMenu");
 	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pauseMenu");
-
 	std::ifstream highcontrastfile("highcontrastmode.txt");
 	int highcontrast = 0;
 	highcontrastfile >> highcontrast;
@@ -134,8 +128,8 @@ void Settings::Init()
 		pause->ChangeBackground();
 	}
 
+	// check vibration mode
 	g_pVibration->setVibrationMode(false);
-
 	std::ifstream vibrationfile("vibration.txt");
 	int vibration = 0;
 	vibrationfile >> vibration;
@@ -153,10 +147,9 @@ void Settings::Update(float deltaTime, float alphaMul)
 
 	Scene::Update(deltaTime, alphaMul);
 
-	// Detect screen tap
+	// detect screen tap
 	if (m_IsInputActive && m_Manager->getCurrent() == this)
 	{
-		// Check if player has pressed and lifted off
 		if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 		{
 			if (backButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -191,6 +184,7 @@ void Settings::Update(float deltaTime, float alphaMul)
 
 void Settings::SetOnScreenButtons()
 {
+	// set on screen buttons setting
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	std::ofstream file;
 
@@ -214,11 +208,12 @@ void Settings::SetOnScreenButtons()
 	}
 }
 
-void Settings::SetHighContrastMode(){
+void Settings::SetHighContrastMode()
+{
+	// set high contrast setting
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	MainMenu* menu = (MainMenu*)g_pSceneManager->Find("mainMenu");
 	PauseMenu* pause = (PauseMenu*)g_pSceneManager->Find("pauseMenu");
-
 
 	if (!game->getHighContrastMode())
 	{
@@ -254,7 +249,9 @@ void Settings::SetHighContrastMode(){
 	}
 }
 
-void Settings::SetVibrationOn(){
+void Settings::SetVibrationOn()
+{
+	// set vibration setting
 	if (!g_pVibration->getVibration())
 	{
 		std::ofstream fileVibrationWrite;
@@ -292,6 +289,7 @@ void Settings::MoveToMainMenu()
 
 void Settings::ResetGame()
 {
+	// reset all levels to not complete
 	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
 	{
 		std::string levelNoVal;
@@ -308,6 +306,6 @@ void Settings::ResetGame()
 	}
 
 	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
-	// Update completed level stars
+	// update completed level stars
 	level_select->LevelStars();
 }
