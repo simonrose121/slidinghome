@@ -90,11 +90,11 @@ int main()
 
 	delete g_pAudio;
 	delete g_pInput;
-	delete g_pSceneManager;
 	delete g_pTweener;
 	delete g_pResources;
 	delete g_pVibration;
 	delete g_pSound;
+	delete g_pSceneManager;
 	Iw2DTerminate();
 
 	return 0;

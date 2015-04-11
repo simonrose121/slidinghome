@@ -238,20 +238,23 @@ void Game::Update(float deltaTime, float alphaMul)
 		// Check if player has pressed and lifted off
 		if (!g_pInput->m_Touched && g_pInput->m_PrevTouched)
 		{
-			if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+			if (currentState != COMPLETE)
 			{
-				currentState = PAUSED;
-				MoveToPauseMenu();
-				g_pInput->Reset();
-			}
-
-			if (resetButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
-			{
-				if (hasMoved)
+				if (pauseButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
-					EndGame();
-					NewGame(levelNum, 12, 14);
+					currentState = PAUSED;
+					MoveToPauseMenu();
 					g_pInput->Reset();
+				}
+
+				if (resetButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
+				{
+					if (hasMoved)
+					{
+						EndGame();
+						NewGame(levelNum, 12, 14);
+						g_pInput->Reset();
+					}
 				}
 			}
 
@@ -486,8 +489,6 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	int fileNumber = 0;
 	file >> fileNumber;
 	file.close();
-	x_pos = (float)IwGxGetScreenWidth() / 1.05;
-	y_pos = (float)IwGxGetScreenHeight() / 15;
 	star = new CSprite();
 	if (fileNumber == 1)
 	{
@@ -497,8 +498,8 @@ void Game::NewGame(std::string levelNo, int width, int height)
 	{
 		star->SetImage(g_pResources->getHoloStar());
 	}
-	star->m_X = x_pos;
-	star->m_Y = y_pos;
+	star->m_X = (float)IwGxGetScreenWidth() / 1.05;;
+	star->m_Y = (float)IwGxGetScreenHeight() / 15;
 	star->m_W = star->GetImage()->GetWidth();
 	star->m_H = star->GetImage()->GetHeight();
 	star->m_AnchorX = 1;
@@ -528,6 +529,13 @@ void Game::NewGame(std::string levelNo, int width, int height)
 
 void Game::EndGame()
 {
+	// set the state to complete so the grid isn't attempted to be deleted on close
+	currentState = COMPLETE;
+
+	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+	// Update completed level stars
+	level_select->LevelStars();
+
 	isMoving = false;
 	CleanupOnScreenButtons();
 	//cleaup this line
@@ -550,8 +558,4 @@ void Game::EndGame()
 			instructionsOn = false;
 		}
 	}
-
-	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
-	// Update completed level stars
-	level_select->LevelStars();
 }

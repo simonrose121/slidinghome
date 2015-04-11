@@ -95,11 +95,13 @@ void PauseMenu::Init()
 	int sound = 0;
 	soundfile >> sound;
 	soundfile.close();
-	if (sound == 1){
+	if (sound == 1)
+	{
 		soundButtonPause->SetImage(g_pResources->getSoundButton());
 		g_pSound->setSoundMode(true);
 	}
-	else{
+	else
+	{
 		soundButtonPause->SetImage(g_pResources->getSoundButtonOff());
 		g_pSound->setSoundMode(false);
 	}
@@ -108,20 +110,24 @@ void PauseMenu::Init()
 	int music = 0;
 	musicfile >> music;
 	musicfile.close();
-	if (music == 1){
+	if (music == 1)
+	{
 		musicButtonPause->SetImage(g_pResources->getMusicButton());
 		g_pSound->setMusicMode(true);
 	}
-	else{
+	else
+	{
 		musicButtonPause->SetImage(g_pResources->getMusicButtonOff());
 		g_pSound->setMusicMode(false);
 	}
 }
 void PauseMenu::ChangeBackground(){
-	if (changeToHighContrast){
+	if (changeToHighContrast)
+	{
 		background->SetImage(g_pResources->getPauseMenuBGHC());
 	}
-	else{
+	else
+	{
 		background->SetImage(g_pResources->getPauseMenuBG());
 	}
 }
@@ -136,12 +142,9 @@ void PauseMenu::Update(float deltaTime, float alphaMul)
 	// Detect screen tap
 	if (m_IsInputActive && m_Manager->getCurrent() == this && !g_pInput->m_Touched && g_pInput->m_PrevTouched)
 	{
-		g_pInput->Reset();
 		if (exitButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
 		{
 			g_pVibration->Vibrate();
-			Game* game = (Game*)g_pSceneManager->Find("game");
-			game->EndGame();
 			mainMenu();
 		}
 		if (playButton->HitTest(g_pInput->m_X, g_pInput->m_Y))
@@ -159,6 +162,7 @@ void PauseMenu::Update(float deltaTime, float alphaMul)
 			SetMusic();
 			g_pVibration->Vibrate();
 		}
+		g_pInput->Reset();
 	}
 }
 
@@ -176,8 +180,10 @@ void PauseMenu::StartGame()
 void PauseMenu::mainMenu()
 {
 	MainMenu* mainmenu = (MainMenu*)g_pSceneManager->Find("mainmenu");
+	Game* game = (Game*)g_pSceneManager->Find("game");
+	
+	game->EndGame();
 	g_pSceneManager->SwitchTo(mainmenu);
-
 }
 
 void PauseMenu::SetSound(){

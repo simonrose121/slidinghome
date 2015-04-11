@@ -25,9 +25,6 @@ public:
 
 	CSprite* getSoundButtonPause() { return soundButtonPause; }
 	CSprite* getMusicButtonPause() { return musicButtonPause; }
-	
-
-	// Button callbacks
 
 private:
 	// UI components

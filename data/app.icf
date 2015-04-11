@@ -17,8 +17,8 @@
 # S3E documentation for details.
 
 [S3E]
-MemSize=40000000
-MemSizeDebug=40000000
+MemSize=50000000
+MemSizeDebug=50000000
 SysGlesVersion=2
 WinPosX=64
 WinPosY=16
@@ -38,4 +38,3 @@ DataCacheSize=105536
 MaxChannels=16
 
 [UTIL] 
-
