@@ -15,6 +15,8 @@
 
 LevelSelect::~LevelSelect()
 {
+	RemoveLevelStars();
+	IwTrace(APP, ("removed stars in dest"));
 }
 
 void LevelSelect::Init()
@@ -285,11 +287,7 @@ void LevelSelect::Update(float deltaTime, float alphaMul)
 
 void LevelSelect::Render()
 {
-	//s3eVideoPlay("videos/intromovie.mp4", 1, 0, 0, 200, 150);
-	//if (s3eVideoIsPlaying() == S3E_FALSE)
-	//{
-		Scene::Render();
-	//}
+	Scene::Render();
 }
 
 void LevelSelect::StartGame(std::string levelNo)
@@ -312,6 +310,7 @@ void LevelSelect::LevelStars()
 	Game* game = (Game*)g_pSceneManager->Find("game");
 	// keep track of row to fix y values
 	int row = 0;
+	stars = new GameObject*[LEVEL_COUNT];
 	for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
 	{
 		std::string levelNoVal;
@@ -319,44 +318,58 @@ void LevelSelect::LevelStars()
 		convert << levelNo;
 		levelNoVal = convert.str();
 
-		//Star complete
+		// check if level complete
 		std::string filename = "star" + levelNoVal;
 		filename += ".txt";
 		std::ifstream file(filename.c_str());
 		int fileNumber = 0;
 		file >> fileNumber;
 		file.close();
+		
+		// add star
+		stars[levelNo] = new GameObject();
 		if (fileNumber == 1)
 		{
-			star = new CSprite();
-			star->SetImage(g_pResources->getStar());
-			star->m_X = (float)IwGxGetScreenWidth();
-			star->m_Y = (float)IwGxGetScreenHeight();
-			star->m_W = star->GetImage()->GetWidth();
-			star->m_H = star->GetImage()->GetHeight();
-			float x = 11 - (((levelNo - 1) % 4) * 3);
-			float y = 16.5 - ((4 * row) / 1.35);
-			IwTrace(APP, ("level %d, position %f, %f", levelNo, x, y));
-			star->m_AnchorX = x;
-			star->m_AnchorY = y;
-			star->m_ScaleX = game->getGraphicsScale();
-			star->m_ScaleY = game->getGraphicsScale();
-			this->AddChild(star);
-			hasStars = true;
+			stars[levelNo]->SetImage(g_pResources->getStar());
 		}
+		else 
+		{
+			stars[levelNo]->SetImage(g_pResources->getBlank());
+		}
+		stars[levelNo]->m_X = (float)IwGxGetScreenWidth();
+		stars[levelNo]->m_Y = (float)IwGxGetScreenHeight();
+		stars[levelNo]->m_W = stars[levelNo]->GetImage()->GetWidth();
+		stars[levelNo]->m_H = stars[levelNo]->GetImage()->GetHeight();
+		float x = 11 - (((levelNo - 1) % 4) * 3);
+		float y = 16.5 - ((4 * row) / 1.35);
+		stars[levelNo]->m_AnchorX = x;
+		stars[levelNo]->m_AnchorY = y;
+		stars[levelNo]->m_ScaleX = game->getGraphicsScale();
+		stars[levelNo]->m_ScaleY = game->getGraphicsScale();
+		this->AddChild(stars[levelNo]);
+		
+		
+		// check if end of row
 		if ((levelNo % 4) == 0)
 		{
 			row++;
 		}
 	}
+
+	hasStars = true;
 }
 
 void LevelSelect::RemoveLevelStars()
 {
 	if (hasStars) 
 	{
-		this->RemoveChild(star);
-		delete star;
+		for (int levelNo(1); levelNo <= LEVEL_COUNT; levelNo++)
+		{
+			this->RemoveChild(stars[levelNo]);
+			delete stars[levelNo];
+		}
+		delete[] stars;
 		hasStars = false;
+		IwTrace(APP, ("removed stars"));
 	}
 }

@@ -2,6 +2,7 @@
 #define __LEVEL_SELECT_H_
 
 #include "scene.h"
+#include "gameObject.h"
 
 #define LEVEL_COUNT 12
 
@@ -48,7 +49,7 @@ private:
 	CSprite* level12;
 	CSprite* playText;
 	CSprite* backButton;
-	CSprite* star;
+	GameObject** stars;
 	bool hasStars;
 };
 

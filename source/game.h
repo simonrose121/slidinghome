@@ -38,6 +38,7 @@ public:
 	void InitInstructions();
 	void CleanupInstructions();
 	void UpdateSwitches();
+	bool IsComplete();
 
 	// Getters
 	float getGraphicsScale() { return graphicsScale; }
@@ -50,6 +51,7 @@ public:
 	void setIsMoving(bool moving) { isMoving = moving; }
 	void setShowOnScreenButtons(bool onScreenButtons) { showOnScreenButtons = onScreenButtons; }
 	void setHighContrastMode(bool highContrastMode){ changeToHighContrast = highContrastMode; }
+	
 
 private:
 	// Member variables

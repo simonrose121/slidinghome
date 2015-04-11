@@ -557,3 +557,8 @@ void Game::EndGame()
 		}
 	}
 }
+
+bool Game::IsComplete()
+{
+	return currentState == COMPLETE;
+}
