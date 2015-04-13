@@ -333,6 +333,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					if (!isMoving)
 					{
+						hasMoved = true;
 						grid->MovePlayerUp();
 						g_pSound->SoundFunc();
 					}
@@ -341,6 +342,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					if (!isMoving)
 					{
+						hasMoved = true;
 						grid->MovePlayerRight();
 						g_pSound->SoundFunc();
 					}
@@ -349,6 +351,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					if (!isMoving)
 					{
+						hasMoved = true;
 						grid->MovePlayerDown();
 						g_pSound->SoundFunc();
 					}
@@ -357,6 +360,7 @@ void Game::Update(float deltaTime, float alphaMul)
 				{
 					if (!isMoving)
 					{
+						hasMoved = true;
 						grid->MovePlayerLeft();
 						g_pSound->SoundFunc();
 					}
@@ -556,9 +560,4 @@ void Game::EndGame()
 			instructionsOn = false;
 		}
 	}
-}
-
-bool Game::IsComplete()
-{
-	return currentState == COMPLETE;
 }

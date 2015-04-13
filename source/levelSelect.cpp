@@ -370,6 +370,5 @@ void LevelSelect::RemoveLevelStars()
 		}
 		delete[] stars;
 		hasStars = false;
-		IwTrace(APP, ("removed stars"));
 	}
 }

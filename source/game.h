@@ -38,7 +38,6 @@ public:
 	void InitInstructions();
 	void CleanupInstructions();
 	void UpdateSwitches();
-	bool IsComplete();
 
 	// Getters
 	float getGraphicsScale() { return graphicsScale; }
