@@ -260,6 +260,7 @@ void Game::Update(float deltaTime, float alphaMul)
 					if (hasMoved)
 					{
 						EndGame();
+						g_pInput->Reset();
 						NewGame(levelNum, 12, 14);
 						g_pInput->Reset();
 					}
@@ -272,15 +273,12 @@ void Game::Update(float deltaTime, float alphaMul)
 				if (levelInfo->HitTest(g_pInput->m_X, g_pInput->m_Y))
 				{
 					InitInstructions();
-					IwTrace(APP, ("instructions on"));
-					//g_pInput->Reset();
 				}
 				if (instructionsOn)
 				{
 					if (instructions->HitTest(g_pInput->m_X, g_pInput->m_Y))
 					{
 						CleanupInstructions();
-						IwTrace(APP, ("instructions off"));
 						g_pInput->Reset();
 					}
 				}
