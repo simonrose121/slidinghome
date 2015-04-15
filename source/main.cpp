@@ -57,6 +57,7 @@ int main()
 	g_pSceneManager->Add(settings);
 
 	g_pSceneManager->SwitchTo(main_menu);
+	level_select->LevelStars();
 
 	if (g_pSound->getMusic())
 	{

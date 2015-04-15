@@ -295,6 +295,8 @@ void Game::Update(float deltaTime, float alphaMul)
 
 					// move to level select
 					LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+					// update completed level stars
+					level_select->LevelStars();
 					g_pSceneManager->SwitchTo(level_select);
 				}
 				else 
@@ -532,10 +534,6 @@ void Game::EndGame()
 	// set the state to complete so the grid isn't attempted to be deleted on close
 	currentState = COMPLETE;
 
-	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
-	// update completed level stars
-	level_select->LevelStars();
-
 	isMoving = false;
 	CleanupOnScreenButtons();
 
@@ -545,6 +543,13 @@ void Game::EndGame()
 	// clean up star after each level
 	this->RemoveChild(star);
 	delete star;
+
+	// clean up pause and reset
+	this->RemoveChild(pauseButton);
+	delete pauseButton;
+
+	this->RemoveChild(resetButton);
+	delete resetButton;
 
 	// clean up info sign if there
 	if (levelNum == "1")

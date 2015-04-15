@@ -5,6 +5,7 @@
 #include "resources.h"
 #include "game.h"
 #include "mainMenu.h"
+#include "levelSelect.h"
 #include "main.h"
 #include "vibration.h"
 #include "sound.h"
@@ -181,7 +182,9 @@ void PauseMenu::mainMenu()
 	// end game and move to main menu
 	MainMenu* mainmenu = (MainMenu*)g_pSceneManager->Find("mainmenu");
 	Game* game = (Game*)g_pSceneManager->Find("game");
-	
+	LevelSelect* level_select = (LevelSelect*)g_pSceneManager->Find("levelselect");
+	// update completed level stars
+	level_select->LevelStars();
 	game->EndGame();
 	g_pSceneManager->SwitchTo(mainmenu);
 }
